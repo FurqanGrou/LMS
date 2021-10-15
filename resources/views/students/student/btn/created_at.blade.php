@@ -1,0 +1,1 @@
+{{ customFormatDate($created_at) }}
