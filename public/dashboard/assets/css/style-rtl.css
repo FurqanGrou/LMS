@@ -1,0 +1,40 @@
+/*================================================================================
+	Item Name: Modern Admin - Clean Bootstrap 4 Dashboard HTML Template
+	Version: 1.0
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+A FILE FOR RTL SUPPORT RELATED ONLY
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap');
+
+html, body, h1, h2, h3, h4, h5, h6, input, a, span, div, p {
+    font-family: 'Cairo', Sans-Serif !important;
+}
+
+.select2-selection--single {
+    min-width: 300px !important;
+    max-width: 300px !important;
+}
+
+.select2.select2-container {
+    width: auto !important;
+}
+
+button .fa-spinner {
+    display: none;
+}
+
+#select2--results li.select2-results__option:first-child {
+    height: 30px !important;
+    background: #c9c977 !important;
+}
+
+.custom-bg-gray {
+    background: #BAB9B9 !important;
+}

@@ -1,0 +1,28 @@
+.container {
+    width: 1140px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: auto;
+}
+
+#top-header {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+#top-header .first-imgs,
+.last-imgs {
+    width: 25% !important;
+}
+
+#top-header img {
+    width: 500px !important;
+}
+
+#top-header .text-center {
+    width: 50% !important;
+    text-align: center;
+    color: red;
+}
