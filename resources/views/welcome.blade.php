@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    يا مسهل
+                    مجموعةالفرقان لتعليم القرآن الكريم
                 </div>
 
                 <div class="links">
