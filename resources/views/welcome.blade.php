@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    مجموعةالفرقان لتعليم القرآن الكريم
+                    توكلنا على الله
                 </div>
 
                 <div class="links">
