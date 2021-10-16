@@ -41,7 +41,7 @@ jobs:
         with:
           command: |
             cd
-            ./deploy-dev.sh
+            ./deploy-stage.sh
           host: ${{ secrets.HOST }}
           user: reports
           key: ${{ secrets.PRIVATE_KEY}}
