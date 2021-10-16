@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    مركز الفرقان لتعليم القرآن
+                    بسم الله الرحمن الرحيم
                 </div>
 
                 <div class="links">
