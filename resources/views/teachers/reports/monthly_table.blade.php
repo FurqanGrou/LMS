@@ -526,6 +526,7 @@
             };
 
             $('#lessons').enableCellNavigation();
+            $('#grades').enableCellNavigation();
 
             setTimeout(function() {
                 if($('html').hasClass('loaded')){
