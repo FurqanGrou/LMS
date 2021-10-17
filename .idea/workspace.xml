@@ -23,11 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/AbsenceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/AbsenceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/absences/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/absences/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exports/ReportsExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/ReportsExport.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,19 +179,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="B:\LMS\staging\lms_3_staging\public" />
-      <recent name="B:\LMS\staging\lms_3_staging\storage\app\public" />
-      <recent name="B:\LMS\staging\lms_3_staging\public\dashboard\excel_files" />
-      <recent name="B:\LMS\staging\lms_3\resources" />
-      <recent name="F:\laragon\www\lms\resources\views\teachers" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="B:\LMS\lms_hatim\app\Exports" />
       <recent name="B:\LMS\staging\lms_3_staging\public\dashboard\assets\js" />
       <recent name="B:\LMS\staging\lms_3_staging\resources\views\admins" />
       <recent name="B:\LMS\staging\lms_3_staging\resources\views\admins\import_export" />
       <recent name="B:\LMS\staging\lms_3_staging\resources\views\admins\reports" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="B:\LMS\staging\lms_3_staging\public" />
+      <recent name="B:\LMS\staging\lms_3_staging\storage\app\public" />
+      <recent name="B:\LMS\staging\lms_3_staging\public\dashboard\excel_files" />
+      <recent name="B:\LMS\staging\lms_3\resources" />
+      <recent name="F:\laragon\www\lms\resources\views\teachers" />
     </key>
   </component>
   <component name="RunManager">
@@ -300,7 +297,7 @@
       <workItem from="1633441159795" duration="1879000" />
       <workItem from="1634192264868" duration="19224000" />
       <workItem from="1634469152013" duration="1554000" />
-      <workItem from="1634470995445" duration="5358000" />
+      <workItem from="1634470995445" duration="7873000" />
     </task>
     <servers />
   </component>
@@ -344,10 +341,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1634211489924" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1634478122426">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1634491443221">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1634478122426" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1634491443221" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
