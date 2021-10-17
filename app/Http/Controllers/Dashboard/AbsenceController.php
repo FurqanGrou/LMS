@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\DataTables\AbsenceDatatable;
+use App\Exports\AbsencesExport;
 use App\Http\Controllers\Controller;
 use App\Report;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AbsenceController extends Controller
 {
@@ -37,6 +39,19 @@ class AbsenceController extends Controller
 
         return $request->report_id;
         return response()->json(['status' => 'success'], 200);
+    }
+
+    public function export(Request $request)
+    {
+        $request->validate([
+            'date_from' => 'required|date',
+            'date_to' => 'required|date',
+        ]);
+
+        if (!isset($request->absence_status)){
+            $request->absence_status = -1;
+        }
+        return Excel::download(new AbsencesExport($request->date_from, $request->date_to, $request->absence_status), 'reports.xlsx');
     }
 
 }
