@@ -66,7 +66,6 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">قائمة غيابات الطلاب اليومية</h4>
                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
@@ -81,21 +80,83 @@
 
                 <div class="card-content collapse show">
                     <div class="card-body card-dashboard">
-                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 container">
 
-                            <div class="box-body">
+                            <div class="box-body row">
                                 <div class="col-4">
                                     <form action="">
                                         <fieldset class="form-group">
-                                            <input type="date" class="form-control" id="month_report" name="date_filter" value="{{ request()->date_filter }}">
+
+                                            <h4 class="form-section">
+                                                <i class="fa fa-chalkboard-teacher"></i>
+                                                قائمة غيابات الطلاب اليومية
+                                            </h4>
+
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">عرض حسب التاريخ</span>
+                                                </div>
+                                                <input type="date" class="form-control" id="month_report" name="date_filter" value="{{ request()->date_filter }}" aria-label="التاريخ من">
+                                            </div>
                                         </fieldset>
                                     </form>
                                 </div>
+                                <div class="col-8">
+                                    <form class="form" method="POST" action="{{ route('admins.absence.export') }}" enctype="multipart/form-data">
+
+                                        @csrf
+                                        @method('POST')
+
+                                        <div class="form-body">
+                                            <h4 class="form-section">
+                                                <i class="la la-file-excel-o"></i>
+                                                تصدير تقرير شامل بالغياب حسب التاريخ
+                                            </h4>
+
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon1">من</span>
+                                                        </div>
+                                                        <input type="date" class="form-control" name="date_from" aria-label="التاريخ من" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon1">إلى</span>
+                                                        </div>
+                                                        <input type="date" class="form-control" name="date_to" aria-label="التاريخ إلى" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon1">حالة الغياب</span>
+                                                        </div>
+                                                        <select name="absence_status" id="" class="form-control">
+                                                            <option value="">الكل</option>
+                                                            <option value="-2">بعذر</option>
+                                                            <option value="-5">بدون عذر</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="la la-file"></i>
+                                                تصدير
+                                            </button>
+
+                                        </div>
+
+                                    </form>
+                                </div>
                             </div>
+
                             <div class="box-body">
-                                {!! Form::open(['id' => 'form_data_delete', 'url' => route('admins.admins.deleteAll'), 'method' => 'delete']) !!}
                                 {!! $dataTable->table(['class' => 'table table-striped table-bordered dataTable', 'id' => 'DataTables_Table_4', 'style' => 'width:100%']) !!}
-                                {!! Form::close() !!}
                             </div>
 
                         </div>
