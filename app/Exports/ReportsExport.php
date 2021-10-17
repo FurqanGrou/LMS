@@ -9,8 +9,9 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ReportsExport implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize
+class ReportsExport implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize, ShouldQueue
 {
     protected $date_from;
     protected $date_to;
