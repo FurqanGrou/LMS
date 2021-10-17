@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    مجموعة الفرقان لتعليم القرآن الكريم
+                   بسم الله
                 </div>
 
                 <div class="links">
