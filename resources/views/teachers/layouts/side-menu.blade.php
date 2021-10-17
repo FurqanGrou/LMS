@@ -10,7 +10,22 @@
                     </li>
                 </ul>
             </li>
-
+            <li class=" nav-item"><a href="#"><i class="la la-question"></i><span class="menu-title" data-i18n="nav.templates.main">المساعدة</span></a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{ route('teachers.teacher.index') }}" data-i18n="nav.templates.vert.classic_menu">كيف تقوم بـ٢</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('teachers.teacher.index') }}" data-i18n="nav.templates.vert.classic_menu">كيف تقوم بـ٣</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('teachers.teacher.index') }}" data-i18n="nav.templates.vert.classic_menu">كيف تقوم بـ٤</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('teachers.teacher.index') }}" data-i18n="nav.templates.vert.classic_menu">كيف تقوم بـ٥</a>
+                    </li>
+                </ul>
+            </li>
 
             {{--            <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title" data-i18n="nav.templates.main">Templates</span></a>--}}
 {{--                <ul class="menu-content">--}}

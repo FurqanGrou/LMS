@@ -27,6 +27,7 @@
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/AbsenceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/AbsenceController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admins/absences/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/absences/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/ReportsExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/ReportsExport.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
