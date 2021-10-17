@@ -61,6 +61,7 @@ class ReportsExport implements FromCollection, WithHeadings, WithStyles, ShouldA
                     ->join('classes', 'classes.class_number', '=', 'reports.class_number')
                     ->join('classes_teachers', 'reports.class_number', '=', 'classes_teachers.class_number')
                     ->join('teachers', 'teachers.email', '=', 'classes_teachers.teacher_email')
+                    ->where('classes_teachers.role', '=', 'main')
                     ->whereBetween('reports.created_at', [$this->date_from, $this->date_to]);
 
         if($this->mail_status != 2){
