@@ -74,6 +74,7 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
 
     Route::get('absences', 'AbsenceController@index')->name('absences.index');
     Route::get('absence_type', 'AbsenceController@absenceType')->name('absence.type');
+    Route::post('absences', 'AbsenceController@export')->name('absence.export');
 
     Route::get('/report/table/{student_id}', 'ReportController@reportTable')->name('report.table');
     Route::post('/report/table/{student_id}', 'ReportController@reportTableStore')->name('report.table');
