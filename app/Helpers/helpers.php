@@ -213,6 +213,10 @@ function disableRecord($date, $day)
         $tomorrow->addDays(2);
     }
 
+    if(str_contains($tomorrow->format('l') ,'Saturday')){
+        $tomorrow->addDays(1);
+    }
+
     if(Auth::guard('admin_web')->check()){
         if(
             (($date->year <= $today->year) && ($date->month <= $today->month) && ($day <= $today->day))
@@ -249,7 +253,6 @@ function disableRecord($date, $day)
     }
 
     return $status ? '' : 'disabled';
-//    return $class_number;
 }
 
 function disableRecordGrade($date, $day)
@@ -260,6 +263,10 @@ function disableRecordGrade($date, $day)
 
     if(str_contains($tomorrow->format('l') ,'Friday')){
         $tomorrow->addDays(2);
+    }
+
+    if(str_contains($tomorrow->format('l') ,'Saturday')){
+        $tomorrow->addDays(1);
     }
 
     if(
