@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Classes;
+use App\Teacher;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -30,7 +31,20 @@ class ClassesDataTable extends DataTable
                 'period',
                 'title',
                 'students_count',
-            ]);
+            ])->filterColumn('roles', function ($query, $keyword) {
+                if (stristr('Editor', $keyword))
+                    $query->whereHas('roles', function (Builder $query) {
+                        $query->where('name', 'Editor');
+                    });
+                elseif (stristr('User', $keyword))
+                    $query->whereHas('roles', function (Builder $query) {
+                        $query->where('name', 'User');
+                    });
+                elseif (stristr('Admin', $keyword))
+                    $query->whereHas('roles', function (Builder $query) {
+                        $query->where('name', 'Admin');
+                    });
+            });
     }
 
     /**
@@ -41,6 +55,7 @@ class ClassesDataTable extends DataTable
      */
     public function query()
     {
+
         $classes = Classes::join('classes_teachers', 'classes.class_number', '=', 'classes_teachers.class_number')
             ->join('teachers', 'teachers.email', '=', 'classes_teachers.teacher_email')
 //            ->where('teachers.section', '=', auth()->user()->section)
@@ -91,7 +106,7 @@ class ClassesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('title')
+            Column::make('classes.title')
                 ->data('title')
                 ->title('اسم الحلقة'),
             Column::make('zoom_link')
@@ -106,7 +121,7 @@ class ClassesDataTable extends DataTable
             Column::make('period')
                 ->data('period')
                 ->title('الفترة'),
-            Column::make('teacher_name')
+            Column::make('teachers.name')
                 ->data('teacher_name')
                 ->title('اسم المعلم'),
         ];
