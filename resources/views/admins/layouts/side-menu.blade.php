@@ -48,6 +48,12 @@
                     <span class="menu-title" data-i18n="nav.templates.main">غياب الطلاب</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('log-viewer::logs.list') }}">
+                    <i class="fa fa-bug"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">اخطاء النظام</span>
+                </a>
+            </li>
 
         </ul>
 
