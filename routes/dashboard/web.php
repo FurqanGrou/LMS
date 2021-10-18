@@ -61,6 +61,8 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
     // classes
     Route::get('classes', 'ClassesController@index')->name('classes.index');
     Route::get('/class_students/{class_number}', 'ClassesController@classStudents')->name('classes.students');
+    Route::get('/join_requests', 'ClassesController@joinRequests')->name('classes.join_requests');
+    Route::get('/respond_request', 'ClassesController@respondRequest')->name('classes.respond_request');
 
     // students
     Route::get('students', 'UserController@index')->name('student.index');

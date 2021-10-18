@@ -3,14 +3,13 @@
 namespace App\DataTables;
 
 use App\Classes;
-use App\Teacher;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ClassesDataTable extends DataTable
+class AllClassesDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,29 +21,32 @@ class ClassesDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('zoom_link', 'admins.classes.btn.zoom_link')
-            ->addColumn('period', 'admins.classes.btn.period')
-            ->addColumn('title', 'admins.classes.btn.title')
-            ->addColumn('students_count', 'admins.classes.btn.students_count')
+            ->addColumn('zoom_link', 'teachers.classes.btn.zoom_link')
+            ->addColumn('period', 'teachers.classes.btn.period')
+            ->addColumn('students_count', 'teachers.classes.btn.students_count')
+            ->addColumn('join_request', 'teachers.classes.btn.join_request')
             ->rawColumns([
                 'zoom_link',
                 'period',
-                'title',
                 'students_count',
+                'join_request',
             ]);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\App\ClassesDataTable $model
+     * @param \App\App\AllClassesDatatable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query()
+    public function query(AllClassesDatatable $model)
     {
         $classes = Classes::join('classes_teachers', 'classes.class_number', '=', 'classes_teachers.class_number')
             ->join('teachers', 'teachers.email', '=', 'classes_teachers.teacher_email')
-            ->select(['classes.class_number', 'classes.title', 'classes.zoom_link', 'classes.path', 'classes.period', 'teachers.name as teacher_name']);
+            ->leftJoin('join_requests', 'join_requests.class_number', 'classes_teachers.class_number')
+            ->select(['join_requests.class_number as request_class' ,'classes.class_number', 'classes.title', 'classes.zoom_link', 'classes.path', 'classes.period', 'teachers.name as teacher_name'])
+            ->where('classes_teachers.role', '=', 'main')
+            ->where('classes_teachers.teacher_email', '!=', auth()->user()->email);
 
         return $classes;
     }
@@ -80,7 +82,6 @@ class ClassesDataTable extends DataTable
             ->buttons([
 //                        Button::make('csv'),
             ]);
-
     }
 
     /**
@@ -94,12 +95,10 @@ class ClassesDataTable extends DataTable
             Column::make('classes.title')
                 ->data('title')
                 ->title('اسم الحلقة'),
-            Column::make('zoom_link')
-                ->data('zoom_link')
-                ->title('رابط الحلقة'),
             Column::make('students_count')
                 ->data('students_count')
-                ->title('عدد الطلاب'),
+                ->title('عدد الطلاب')
+                ->orderable(false),
             Column::make('path')
                 ->data('path')
                 ->title('المسار'),
@@ -109,6 +108,11 @@ class ClassesDataTable extends DataTable
             Column::make('teachers.name')
                 ->data('teacher_name')
                 ->title('اسم المعلم'),
+            Column::make('join_request')
+                ->data('join_request')
+                ->title('الانضمام')
+                ->orderable(false)
+                ->searchable(false),
         ];
     }
 
@@ -119,6 +123,6 @@ class ClassesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Classes_' . date('YmdHis');
+        return 'AllClasses_' . date('YmdHis');
     }
 }

@@ -3,14 +3,14 @@
 namespace App\DataTables;
 
 use App\Classes;
-use App\Teacher;
+use App\JoinRequest;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class ClassesDataTable extends DataTable
+class JoinRequestsDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,29 +22,28 @@ class ClassesDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('zoom_link', 'admins.classes.btn.zoom_link')
-            ->addColumn('period', 'admins.classes.btn.period')
-            ->addColumn('title', 'admins.classes.btn.title')
             ->addColumn('students_count', 'admins.classes.btn.students_count')
+            ->addColumn('respond_request', 'admins.classes.btn.respond_request')
             ->rawColumns([
-                'zoom_link',
-                'period',
-                'title',
                 'students_count',
+                'respond_request',
             ]);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\App\ClassesDataTable $model
+     * @param \App\App\JoinRequestsDatatable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query()
+    public function query(JoinRequestsDatatable $model)
     {
         $classes = Classes::join('classes_teachers', 'classes.class_number', '=', 'classes_teachers.class_number')
-            ->join('teachers', 'teachers.email', '=', 'classes_teachers.teacher_email')
-            ->select(['classes.class_number', 'classes.title', 'classes.zoom_link', 'classes.path', 'classes.period', 'teachers.name as teacher_name']);
+                ->join('teachers as main_teachers', 'main_teachers.email', '=', 'classes_teachers.teacher_email')
+                ->join('join_requests', 'join_requests.class_number', '=', 'classes_teachers.class_number')
+                ->join('teachers as spare_teachers', 'spare_teachers.email', '=', 'join_requests.teacher_email')
+                ->select(['classes.class_number', 'classes.title', 'main_teachers.name as teacher_name', 'main_teachers.email as teacher_email', 'spare_teachers.name as spare_teacher_name', 'spare_teachers.email as spare_teacher_email'])
+                ->where('classes_teachers.role', '=', 'main');
 
         return $classes;
     }
@@ -80,7 +79,6 @@ class ClassesDataTable extends DataTable
             ->buttons([
 //                        Button::make('csv'),
             ]);
-
     }
 
     /**
@@ -94,21 +92,21 @@ class ClassesDataTable extends DataTable
             Column::make('classes.title')
                 ->data('title')
                 ->title('اسم الحلقة'),
-            Column::make('zoom_link')
-                ->data('zoom_link')
-                ->title('رابط الحلقة'),
-            Column::make('students_count')
-                ->data('students_count')
-                ->title('عدد الطلاب'),
-            Column::make('path')
-                ->data('path')
-                ->title('المسار'),
-            Column::make('period')
-                ->data('period')
-                ->title('الفترة'),
             Column::make('teachers.name')
                 ->data('teacher_name')
                 ->title('اسم المعلم'),
+            Column::make('students_count')
+                ->data('students_count')
+                ->title('عدد الطلاب')
+                ->orderable(false),
+            Column::make('spare_teachers.spare_teacher_name')
+                ->data('spare_teacher_name')
+                ->title('مقدم الطلب'),
+            Column::make('respond_request')
+                ->data('respond_request')
+                ->title('الاستجابة للطلب')
+                ->orderable(false)
+                ->searchable(false),
         ];
     }
 
@@ -119,6 +117,6 @@ class ClassesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Classes_' . date('YmdHis');
+        return 'JoinRequests_' . date('YmdHis');
     }
 }
