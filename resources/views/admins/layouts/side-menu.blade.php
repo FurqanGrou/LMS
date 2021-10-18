@@ -24,11 +24,24 @@
                     </li>
                 </ul>
             </li>
+
             <li class="nav-item">
-                <a href="{{ route('admins.classes.index') }}">
-                    <i class="fa fa-users"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">جميع الحلقات</span>
+                <a href="#">
+                    <i class="la la-cogs"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">الحلقات الدراسية</span>
                 </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{ route('admins.classes.index') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="fa fa-users"></i>
+                            جميع الحلقات
+                        </a>
+                        <a class="menu-item" href="{{ route('admins.classes.join_requests') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="fa fa-users"></i>
+                            طلبات الانضمام للحلقات
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a href="{{ route('admins.student.index') }}">
