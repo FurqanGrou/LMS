@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Exports\AbsencesExport;
+use App\Exports\AttendanceExport;
+use App\Exports\ReportsExport;
 use App\Http\Controllers\Controller;
 use App\Attendance;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Ramsey\Uuid\Type\Time;
 
 class AttendanceController extends Controller
@@ -82,4 +86,23 @@ class AttendanceController extends Controller
 
         return redirect()->back();
     }
+
+    public function exportIndex()
+    {
+        return view('admins.import_export.export_attendance');
+    }
+
+    public function export(Request $request)
+    {
+        $request->validate([
+            'date_from' => 'required|date',
+            'date_to' => 'required|date',
+        ]);
+
+        if (!isset($request->type)){
+            $request->mail_status = -1;
+        }
+        return Excel::download(new AttendanceExport($request->date_from, $request->date_to, $request->type), 'attendances.xlsx');
+    }
+
 }

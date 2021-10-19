@@ -86,4 +86,8 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
     Route::get('/attendance', 'AttendanceController@create')->name('attendance.index');
     Route::post('/attendance', 'AttendanceController@store')->name('attendance.store');
 
+    // attendance export
+    Route::get('attendance-export', 'AttendanceController@exportIndex')->name('attendance.export_index');
+    Route::post('attendance-export', 'AttendanceController@export')->name('attendance.export');
+
 });
