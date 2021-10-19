@@ -27,6 +27,26 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
+                        <label for="email">رقم الموظف</label>
+                        <input type="text" id="employee_number" class="form-control" placeholder="رقم الموظف" name="employee_number" value="{{ old('employee_number') }}" required>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="email">اخر 4 ارقام من الهوية</label>
+                        <input type="text" id="last_4_id" class="form-control" placeholder="اخر 4 ارقام من الهوية" name="last_4_id" value="{{ old('last_4_id') }}" required>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <select name="section" id="section">
+                            <option value="male">بنين</option>
+                            <option value="female">بنات</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
                         <label for="password">كلمة المرور</label>
                         <input type="password" id="password" class="form-control" placeholder="كلمة المرور" name="password" required>
                     </div>
