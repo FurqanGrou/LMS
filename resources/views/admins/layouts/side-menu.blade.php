@@ -61,12 +61,26 @@
                     <span class="menu-title" data-i18n="nav.templates.main">غياب الطلاب</span>
                 </a>
             </li>
+
             <li class="nav-item">
-                <a href="{{ route('admins.attendance.index') }}">
+                <a href="#">
                     <i class="ft-log-in"></i>
                     <span class="menu-title" data-i18n="nav.templates.main">الحضور والانصراف</span>
                 </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{ route('admins.attendance.index') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="ft-log-in"></i>
+                            تسجيل الحضور والانصراف
+                        </a>
+                        <a class="menu-item" href="{{ route('admins.attendance.export') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="ft-file-text"></i>
+                            تصدير تقرير الحضور والانصراف
+                        </a>
+                    </li>
+                </ul>
             </li>
+
             <li class="nav-item">
                 <a href="{{ route('log-viewer::logs.list') }}">
                     <i class="fa fa-bug"></i>
