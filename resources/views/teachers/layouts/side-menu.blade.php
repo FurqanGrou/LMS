@@ -13,6 +13,13 @@
                 </ul>
             </li>
 
+            <li class="nav-item">
+                <a href="{{ route('teachers.attendance.index') }}">
+                    <i class="ft-log-in"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">الحضور والانصراف</span>
+                </a>
+            </li>
+
             <li class=" nav-item"><a href="#"><i class="la la-question"></i><span class="menu-title" data-i18n="nav.templates.main">المساعدة</span></a>
                 <ul class="menu-content">
                     <li>

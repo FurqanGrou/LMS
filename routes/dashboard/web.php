@@ -82,4 +82,8 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
     Route::post('/report/table/{student_id}', 'ReportController@reportTableStore')->name('report.table');
     Route::post('/report/send/{student_id}', 'ReportController@sendReportTable')->name('send.report');
 
+    // attendance
+    Route::get('/attendance', 'AttendanceController@create')->name('attendance.index');
+    Route::post('/attendance', 'AttendanceController@store')->name('attendance.store');
+
 });

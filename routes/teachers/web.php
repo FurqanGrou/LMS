@@ -45,6 +45,10 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     Route::get('/teachers/{teacher}/change-password', 'TeacherController@changePasswordView')->name('change_password.view');
     Route::put('/teachers/{teacher}/change-password', 'TeacherController@changePassword')->name('change_password.post');
 
+    // attendance
+    Route::get('/attendance', 'AttendanceController@create')->name('attendance.index');
+    Route::post('/attendance', 'AttendanceController@store')->name('attendance.store');
+
 });
 
 Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Controllers\Auth'], function (){

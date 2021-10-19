@@ -62,6 +62,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('admins.attendance.index') }}">
+                    <i class="ft-log-in"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">الحضور والانصراف</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('log-viewer::logs.list') }}">
                     <i class="fa fa-bug"></i>
                     <span class="menu-title" data-i18n="nav.templates.main">اخطاء النظام</span>
