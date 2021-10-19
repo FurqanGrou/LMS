@@ -44,6 +44,9 @@ class AdminController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:admins',
             'password' => 'required|min:6',
+            'employee_number' => 'required|unique:admins',
+            'last_4_id' => 'required|unique:admins',
+            'section'   => 'required',
         ];
 
         $messages = [
@@ -54,6 +57,11 @@ class AdminController extends Controller
             'email.unique' => 'البريد الإلكتروني المدخل مستخدم مسبقا',
             'password.required' => 'يجب التأكد من إدخال كلمة المرور',
             'password.min' => 'يجب أن تكون كلمة المرور 6 حروف على الأقل ',
+            'employee_number.required' => 'يجب التأكد من إدخال رقم الموظف',
+            'employee_number.unique' => 'رقم الموظف المدخل مستخدم مسبقا',
+            'last_4_id.unique' => 'يجب التأكد من إدخال أخر 4 ارقام من الهوية',
+            'last_4_id.required' => 'رقم الهوية المدخل مستخدم مسبقا',
+            'section.required' => 'يجب التأكد من إدخال القسم',
         ];
 
         $adminData = $this->validate($request, $rule, $messages);

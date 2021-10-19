@@ -11,7 +11,9 @@ use App\Teacher;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
@@ -42,5 +44,34 @@ class TeacherController extends Controller
 
         return $classStudents->with('class_number', request()->class_number)->render('teachers.class_students.index', ['remaining' => $remaining]);
     }
+
+    public function changePasswordView(Teacher $teacher)
+    {
+        return view('teachers.account.change_password', ['teacher' => $teacher]);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required',
+        ]);
+
+        $user = Auth::guard('teacher_web')->user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            session()->flash('error', 'يرجى التأكد من كلمة المرور الحالية');
+            return redirect()->back();
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        session()->flash('success', 'تم تحديث كلمة المرور بنجاح');
+
+        return redirect()->back();
+    }
+
 
 }

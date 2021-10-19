@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Classes;
+use App\Teacher;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -43,7 +44,6 @@ class ClassesDataTable extends DataTable
     {
         $classes = Classes::join('classes_teachers', 'classes.class_number', '=', 'classes_teachers.class_number')
             ->join('teachers', 'teachers.email', '=', 'classes_teachers.teacher_email')
-//            ->where('teachers.section', '=', auth()->user()->section)
             ->select(['classes.class_number', 'classes.title', 'classes.zoom_link', 'classes.path', 'classes.period', 'teachers.name as teacher_name']);
 
         return $classes;
@@ -91,7 +91,7 @@ class ClassesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('title')
+            Column::make('classes.title')
                 ->data('title')
                 ->title('اسم الحلقة'),
             Column::make('zoom_link')
@@ -106,7 +106,7 @@ class ClassesDataTable extends DataTable
             Column::make('period')
                 ->data('period')
                 ->title('الفترة'),
-            Column::make('teacher_name')
+            Column::make('teachers.name')
                 ->data('teacher_name')
                 ->title('اسم المعلم'),
         ];
