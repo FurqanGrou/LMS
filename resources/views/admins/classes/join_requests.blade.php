@@ -58,7 +58,7 @@
                                 closeModal: false,
                             },
                             confirm: {
-                                text: "نعم، ارسال!",
+                                text: "نعم، موافقة!",
                                 value: true,
                                 visible: true,
                                 className: "btn-success",
@@ -67,9 +67,10 @@
                         }
                     }).then((isConfirm) => {
                         let tr = $(this).closest('tr');
+                        let class_number = $(this).data('class-number');
+                        let teacher_email = $(this).data('teacher-email');
+
                         if (isConfirm) {
-                            let class_number = $(this).data('class-number');
-                            let teacher_email = $(this).data('teacher-email');
                             $.ajax({
                                 type: "GET",
                                 dataType: "json",
@@ -84,6 +85,7 @@
                             });
                             swal("تتم الموافقة...!", "تتم حالياً عملية الموافقة", "info");
                         } else {
+                            $(this).prop('checked', false);
                             swal("يتم الإلغاء!", "تم إلغاء عملية الموافقة", "error");
                         }
                     });
