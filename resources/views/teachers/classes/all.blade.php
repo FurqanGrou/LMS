@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">حلقاتي</h4>
+                    <h4 class="card-title">جميع الحلقات</h4>
                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
@@ -35,9 +35,28 @@
     </div>
 
     @push('js')
-
         {!! $dataTable->scripts() !!}
 
+        <script>
+            $(function() {
+                $(document).on('change', '.toggle-join-request', function() {
+                    let class_number = $(this).data('class-number');
+                    var request_status = $(this).data('request-status');
+                    $.ajax({
+                        type: "GET",
+                        dataType: "json",
+                        url: '{{ route('teachers.classes.join_request') }}',
+                        data: {
+                                'class_number': class_number,
+                                'request_status': request_status,
+                        },
+                        success: function(data){
+                            // console.log(data.status);
+                        }
+                    });
+                })
+            })
+        </script>
     @endpush
 
 @endsection

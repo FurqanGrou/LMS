@@ -38,6 +38,17 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     Route::post('/report/table/{student_id}', 'ReportController@reportTableStore')->name('report.table');
     Route::post('/report/send/{student_id}', 'ReportController@sendReportTable')->name('send.report');
 
+    Route::get('/classes', 'ClassesController@index')->name('classes.index');
+    Route::get('/join_request', 'ClassesController@joinRequest')->name('classes.join_request');
+
+    // change password
+    Route::get('/teachers/{teacher}/change-password', 'TeacherController@changePasswordView')->name('change_password.view');
+    Route::put('/teachers/{teacher}/change-password', 'TeacherController@changePassword')->name('change_password.post');
+
+    // attendance
+    Route::get('/attendance', 'AttendanceController@create')->name('attendance.index');
+    Route::post('/attendance', 'AttendanceController@store')->name('attendance.store');
+
 });
 
 Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Controllers\Auth'], function (){

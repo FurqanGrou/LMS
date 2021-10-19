@@ -24,11 +24,24 @@
                     </li>
                 </ul>
             </li>
+
             <li class="nav-item">
-                <a href="{{ route('admins.classes.index') }}">
-                    <i class="fa fa-users"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">جميع الحلقات</span>
+                <a href="#">
+                    <i class="la la-cogs"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">الحلقات الدراسية</span>
                 </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{ route('admins.classes.index') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="fa fa-users"></i>
+                            جميع الحلقات
+                        </a>
+                        <a class="menu-item" href="{{ route('admins.classes.join_requests') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="fa fa-users"></i>
+                            طلبات الانضمام للحلقات
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a href="{{ route('admins.student.index') }}">
@@ -46,6 +59,32 @@
                 <a href="{{ route('admins.absences.index') }}">
                     <i class="fa fa-chalkboard-teacher"></i>
                     <span class="menu-title" data-i18n="nav.templates.main">غياب الطلاب</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#">
+                    <i class="ft-log-in"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">الحضور والانصراف</span>
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{ route('admins.attendance.index') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="ft-log-in"></i>
+                            تسجيل الحضور والانصراف
+                        </a>
+                        <a class="menu-item" href="{{ route('admins.attendance.export') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="ft-file-text"></i>
+                            تصدير تقرير الحضور والانصراف
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('log-viewer::logs.list') }}">
+                    <i class="fa fa-bug"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">اخطاء النظام</span>
                 </a>
             </li>
 
