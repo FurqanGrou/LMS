@@ -24,15 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/ClassesDataTable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/ClassesDataTable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/TeachertDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/TeachertDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ClassesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ClassesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/students/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/students/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/classes/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/classes/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/layouts/head-links.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/layouts/head-links.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/layouts/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/layouts/side-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/TeacherController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/TeacherController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/teachers/layouts/header-navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/layouts/header-navbar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/teachers/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/teachers/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -183,24 +176,24 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admins/classes/btn" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/teachers/account" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\LMS\lms_hatim\resources\views\teachers\account" />
+      <recent name="B:\LMS\lms_hatim\resources\views\admins\classes\btn" />
+      <recent name="B:\LMS\lms_hatim\resources\views\admins\classes" />
+      <recent name="B:\LMS\lms_hatim\resources\views\teachers\classes" />
+      <recent name="B:\LMS\lms_hatim\app\Exports" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="B:\LMS\lms_hatim\app\Http\Controllers\Teachers" />
       <recent name="B:\LMS\staging\lms_3_staging\public" />
       <recent name="B:\LMS\staging\lms_3_staging\storage\app\public" />
       <recent name="B:\LMS\staging\lms_3_staging\public\dashboard\excel_files" />
       <recent name="B:\LMS\staging\lms_3\resources" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="B:\LMS\lms_hatim\resources\views\admins\classes\btn" />
-      <recent name="B:\LMS\lms_hatim\resources\views\admins\classes" />
-      <recent name="B:\LMS\lms_hatim\resources\views\teachers\classes" />
-      <recent name="B:\LMS\lms_hatim\app\Exports" />
-      <recent name="B:\LMS\staging\lms_3_staging\public\dashboard\assets\js" />
     </key>
   </component>
   <component name="RunManager">
@@ -307,7 +300,8 @@
       <workItem from="1634192264868" duration="19224000" />
       <workItem from="1634469152013" duration="1554000" />
       <workItem from="1634470995445" duration="7873000" />
-      <workItem from="1634562926254" duration="24175000" />
+      <workItem from="1634562926254" duration="24747000" />
+      <workItem from="1634620397811" duration="2931000" />
     </task>
     <servers />
   </component>
@@ -351,10 +345,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1634211489924" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1634596675578">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1634623313660">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1634596675578" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1634623313660" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
