@@ -2,19 +2,25 @@
 
 namespace App\Http\Controllers\Teachers;
 use App\Chapter;
+use App\Classes;
+use App\ClassesTeachers;
 use App\Http\Controllers\Controller;
-
+use App\Jobs\TeacherNotify;
 use App\Lesson;
 use App\Mail\ReportMail;
 use App\NoteParent;
+use App\Notifications\TecherReport;
 use App\Report;
+use App\Teacher;
 use App\User;
 use App\Year;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use PDF;
+use Illuminate\Support\Facades\Notification;
 
 class ReportController extends Controller
 {
@@ -992,4 +998,24 @@ class ReportController extends Controller
         }
         return redirect()->route('teachers.report.table', $request->student_id);
     }
+
+    public static function checkReportNotSent()
+    {
+        $ids= Report::where("mail_status","<>",1)->orderBy("id","desc")->limit(10)->get('class_number');
+        $calses = ClassesTeachers::whereIn("class_number",$ids)->get();
+           foreach ($calses as $class) {
+                $classids=  Report::where("class_number",$class->class_number)->get('student_id');
+                $classids=  user::whereIn('student_number',$classids)->pluck('student_number')->toArray();
+                TeacherNotify::dispatch(["email" =>$class->teacher_email,"ids"=>$classids]);
+           }
+    }
+
+    public static function notifyTeacherFildReport($class)
+    {
+        $ids = implode(',',$class["ids"]);
+        $teacher=Teacher::where("email",$class["email"])->first();
+        Notification::send($teacher, new TecherReport($ids));
+        Log::alert('sssss' . $ids);
+    }
+    
 }
