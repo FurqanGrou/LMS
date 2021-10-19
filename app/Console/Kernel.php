@@ -25,6 +25,11 @@ class Kernel extends ConsoleKernel
     {
 //         $schedule->command('inspire')->hourly();
 
+            $schedule->command('teacher:notify')->twiceDaily(4, 10);
+            $schedule->command('teacher:notify')->twiceDaily(14, 18);
+            $schedule->command('teacher:notify')->twiceDaily(21);
+            // $schedule->command('teacher:notify')->everyMinute();
+
         // this command will execution daily by (Cron Job)
 //         $schedule->exec('php artisan expired:ads');
     }
