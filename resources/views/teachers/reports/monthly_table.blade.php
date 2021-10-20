@@ -152,7 +152,7 @@
             <div class="col-4">
                 <form action="">
                     <fieldset class="form-group">
-                        <input type="month" class="form-control" id="month_report" name="date_filter" value="{{ request()->date_filter }}">
+                        <input type="month" class="form-control" style="cursor: pointer" id="month_report" name="date_filter" value="{{ request()->date_filter ?? \Carbon\Carbon::today()->year . '-' . \Carbon\Carbon::today()->month }}">
                     </fieldset>
                 </form>
             </div>
@@ -206,7 +206,7 @@
                     {{-- Lessons--}}
                     <td style="border: none; width: 70%">
                         <table style="width: 98%;" id="lessons">
-                                                     
+
                         <tr style="min-height: 45px;height: 45px;max-height: 45px;background: #C6E0B4;font-weight: bold">
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold" >التاريخ</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold">اليوم</th>
@@ -222,7 +222,7 @@
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 40px;">عدد الصفحات</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 20px">اسم المستمع</th>
                             </tr>
-                         
+
                             @for($day=1; $day < \Carbon\Carbon::create()->month($month)->daysInMonth + 1; ++$day)
                                 <tr style="min-height: 45px;height: 45px;max-height: 45px;" class="{{ str_contains(\Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l') ,'Friday') ? 'custom-border' : ''  }} {{ getCurrentDayClass($now, $day) . ' ' .getTodayMailStatusClass($now, $day, request()->student_id) }}">
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;padding-left: 5px;padding-right: 5px;font-weight: bold">{{ $day }}</td>
@@ -283,7 +283,7 @@
                     {{-- Grades--}}
                     <td style="border: none; width: 30%">
                         <table style="width: 100%;" id="grades">
-                               
+
                         <tr style="min-height: 45px;height: 45px;max-height: 45px; background: #C6E0B4; font-weight: bold">
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold;width: 60px;">الدرس</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold">اخر 5 صفحات</th>
@@ -292,7 +292,7 @@
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold">المجموع</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold;">ملاحظات المعلم لولي الأمر</th>
                             </tr>
-                            
+
                             <tbody>
                             @for($day=1; $day < \Carbon\Carbon::create()->year(2021)->month($month)->daysInMonth + 1; ++$day)
                                 <tr style="min-height: 45px;height: 45px;max-height: 45px;" class="{{ str_contains(\Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l') ,'Friday') ? 'custom-border' : '' }}">
