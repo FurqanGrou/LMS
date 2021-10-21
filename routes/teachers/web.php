@@ -49,6 +49,9 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     Route::get('/attendance', 'AttendanceController@create')->name('attendance.index');
     Route::post('/attendance', 'AttendanceController@store')->name('attendance.store');
 
+    // request services
+    Route::get('/request-services', 'RequestServiceController@create')->name('request_services.index');
+
 });
 
 Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Controllers\Auth'], function (){

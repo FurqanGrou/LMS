@@ -98,7 +98,8 @@
             align-items: center;
         }
 
-        select[name="notes_to_parent[]"] + .select2 .select2-selection--single {
+        select[name="notes_to_parent[]"] + .select2 .select2-selection--single,
+        select[name="listener_name[]"] + .select2 .select2-selection--single {
             min-width: 140px !important;
             max-width: 140px !important;
             max-height: 45px !important;
@@ -109,7 +110,8 @@
             align-items: center;
         }
 
-        select[name="notes_to_parent[]"] + .select2 .select2-selection {
+        select[name="notes_to_parent[]"] + .select2 .select2-selection,
+        select[name="listener_name[]"] + .select2 .select2-selection {
             max-width: 140px !important;
             max-height: 45px !important;
             height: 45px !important;
@@ -271,7 +273,12 @@
                                         <input style="width: 100%;" type="text" name="number_pages[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
-                                        <input style="width: 100%;" type="text" name="listener_name[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
+                                        <select name="listener_name[]" {{ disableRecord($now, $day) }} id="listener_name" class="{{ getCurrentDayClass($now, $day) }} select2 js-select2-listener-name-tags" style="width: 100%;height: 100%">
+                                            <option value=""></option>
+                                            @foreach($listener_names as $listener_name)
+                                                <option value="{{ $listener_name }}">{{ $listener_name }}</option>
+                                            @endforeach
+                                        </select>
                                     </td>
                                 </tr>
                             @endfor
@@ -576,8 +583,14 @@
                 current_row.find('input[name="alert[]"]').attr('title', '{{ $report->alert }}');
                 current_row.find('input[name="number_pages[]"]').val('{{ $report->number_pages }}');
                 current_row.find('input[name="number_pages[]"]').attr('title', '{{ $report->number_pages }}');
-                current_row.find('input[name="listener_name[]"]').val('{{ $report->listener_name }}');
-                current_row.find('input[name="listener_name[]"]').attr('title', '{{ $report->listener_name }}');
+
+                var listener_name_data = {
+                    id: '{{ stripslashes($report->listener_name) }}',
+                    text: '{{ stripslashes($report->listener_name) }}',
+                };
+                var newOptionListenerMame = new Option(listener_name_data.text, listener_name_data.id, true, true);
+                current_row.find('.js-select2-listener-name-tags').prepend(newOptionListenerMame).trigger('change');
+
                 current_row.find('input[name="lesson_grade[]"]').val('{{ $report->lesson_grade }}');
                 current_row.find('input[name="lesson_grade[]"]').attr('title', '{{ $report->lesson_grade }}');
                 current_row.find('input[name="last_5_pages_grade[]"]').val('{{ $report->last_5_pages_grade }}');
@@ -640,18 +653,18 @@
                         mistake = current_row.find('input[name="mistake[]"]').val(),
                         alert = current_row.find('input[name="alert[]"]').val(),
                         number_pages = current_row.find('input[name="number_pages[]"]').val(),
-                        listener_name = current_row.find('input[name="listener_name[]"]').val();
+                        listener_name = current_row.find('select[name="listener_name[]"]').val();
 
                         current_row.find('input[name="new_lesson_from[]"]').attr('title', new_lesson_from);
                         current_row.find('input[name="new_lesson_to[]"]').attr('title', new_lesson_to);
                         current_row.find('input[name="last_5_pages[]"]').attr('title', last_5_pages);
-                        current_row.find('input[name="daily_revision[]"]').attr('title', daily_revision);
+                        current_row.find('input[select="daily_revision[]"]').attr('title', daily_revision);
                         current_row.find('input[name="daily_revision_from[]"]').attr('title', daily_revision_from);
                         current_row.find('input[name="daily_revision_to[]"]').attr('title', daily_revision_to);
                         current_row.find('input[name="mistake[]"]').attr('title', mistake);
                         current_row.find('input[name="alert[]"]').attr('title', alert);
                         current_row.find('input[name="number_pages[]"]').attr('title', number_pages);
-                        current_row.find('input[name="listener_name[]"]').attr('title', listener_name);
+                        current_row.find('input[select="listener_name[]"]').attr('title', listener_name);
 
                         $.ajax({
                         type: "POST",

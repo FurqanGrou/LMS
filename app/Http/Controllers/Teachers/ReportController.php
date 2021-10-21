@@ -8,6 +8,7 @@ use App\Lesson;
 use App\Mail\ReportMail;
 use App\NoteParent;
 use App\Report;
+use App\Teacher;
 use App\User;
 use App\Year;
 use Carbon\Carbon;
@@ -677,7 +678,20 @@ class ReportController extends Controller
         $class_number = User::query()->where('id', '=', request()->student_id)->first()->class_number;
         $students = User::query()->where('class_number', '=', $class_number)->orderBy('student_number', 'ASC')->get();
 
-        return view('teachers.reports.monthly_table', ['now' => $now, 'month' => $month, 'reports' => $reports, 'notes' => $notes, 'students' => $students, 'new_lessons' => $new_lessons, 'daily_revision' => $daily_revision]);
+        $students_listener_names = User::query()
+                                        ->where('users.class_number', '=', $class_number)
+                                        ->select('name')
+                                        ->get()->pluck('name')->toArray();
+
+        $teachers_listener_names = Teacher::query()
+                                            ->join('classes_teachers', 'classes_teachers.teacher_email', '=', 'teachers.email')
+                                            ->where('classes_teachers.class_number', '=', $class_number)
+                                            ->select('teachers.name')
+                                            ->get()->pluck('name')->toArray();
+
+        $listener_names = array_merge($students_listener_names, $teachers_listener_names);
+
+        return view('teachers.reports.monthly_table', ['now' => $now, 'month' => $month, 'reports' => $reports, 'notes' => $notes, 'students' => $students, 'new_lessons' => $new_lessons, 'daily_revision' => $daily_revision, 'listener_names' => $listener_names]);
     }
 
     public function reportTableStore(Request $request)
