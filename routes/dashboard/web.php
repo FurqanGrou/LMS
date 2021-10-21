@@ -37,6 +37,8 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
     Route::get('/admins/create', 'AdminController@create')->name('admins.create');
     Route::post('/admins/store', 'AdminController@store')->name('admins.store');
 
+    Route::get('/admins/audits', 'AuditController@index')->name('audits.index');
+
     // import students
     Route::get('importStudents', 'ImportExportController@importStudentsView')->name('import.students.view');
     Route::post('importStudents', 'ImportExportController@importStudents')->name('import.students.store');
