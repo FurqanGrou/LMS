@@ -90,4 +90,12 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
     Route::get('attendance-export', 'AttendanceController@exportIndex')->name('attendance.export_index');
     Route::post('attendance-export', 'AttendanceController@export')->name('attendance.export');
 
+    // request services
+    Route::get('/request-services', 'RequestServiceController@index')->name('request_services.index');
+    Route::get('/request-services/{service}', 'RequestServiceController@show')->name('request_services.show');
+    Route::put('/request-services/{service}/update', 'RequestServiceController@update')->name('request_services.update');
+
 });
+
+
+

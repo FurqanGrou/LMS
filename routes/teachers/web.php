@@ -51,6 +51,7 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
 
     // request services
     Route::get('/request-services', 'RequestServiceController@create')->name('request_services.index');
+    Route::post('/request-services', 'RequestServiceController@store')->name('request_services.store');
 
 });
 
