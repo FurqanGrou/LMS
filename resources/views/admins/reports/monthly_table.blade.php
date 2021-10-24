@@ -305,10 +305,13 @@
         </tr>
         <tr style="height: 40px">
             <td colspan="2" style="font-size: 14px">
-                عدد أيام الغياب بعذر / Number of absence days with excuse
+{{--                عدد أيام الغياب بعذر / Number of absence days with excuse--}}
+                عدد أيام الغياب  / Number of absence days
             </td>
             <td colspan="2" style="text-align: center">
-                {{ count($reports->where('absence', '=', -2)->pluck('absence')->toArray()) }}
+                {{ getAbsenceCount(request()->student_id) }}
+
+                {{--                {{ count($reports->where('absence', '=', -2)->pluck('absence')->toArray()) }}--}}
             </td>
         </tr>
         <tr style="height: 40px">
