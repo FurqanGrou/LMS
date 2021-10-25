@@ -26,7 +26,7 @@
         @method('PUT')
 
         <div class="form-body">
-            <h4 class="form-section"><i class="ft-lock"></i>طلب الخدمة - طلب اختبار</h4>
+            <h4 class="form-section"><i class="ft-lock"></i>{{ $request_type }}</h4>
             <div class="row">
 
                 <input type="hidden" name="form_title" value="طلب اختبار">
@@ -36,12 +36,12 @@
                     @foreach($values as $key => $value)
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="{{ $key }}">{{ __($key) }}</label>
+                                <label for="{{ $key }}">{{ __('services.' . $key) }}</label>
 
                                 @if(str_contains($key, "number_"))
-                                    <input type="number" min="0" max="7" id="{{ $key }}" class="form-control" placeholder="{{ __($key) }}" name="service[{{ $key }}]" value="{{ $value }}">
+                                    <input type="number" min="0" max="7" id="{{ $key }}" class="form-control" placeholder="{{ __('services.' . $key) }}" name="service[{{ $key }}]" value="{{ $value }}">
                                 @else
-                                    <input type="text" id="{{ $key }}" class="form-control" placeholder="{{ __($key) }}" value="{{ $value }}" disabled>
+                                    <input type="text" id="{{ $key }}" class="form-control" placeholder="{{ __('services.' . $key) }}" value="{{ $value }}" disabled>
                                 @endif
 
                             </div>

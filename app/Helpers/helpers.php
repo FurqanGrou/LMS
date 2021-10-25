@@ -62,7 +62,48 @@ function getMailStatus($student_id){
     return $mail_status;
 }
 
-function getAbsenceCount($student_id){
+//function getAbsenceCount($student_id){
+//
+//    $today = Carbon::tomorrow();
+//    $currentMonth = date('m');
+//    $currentYear = date('Y');
+//
+//    if(request()->date_filter) {
+//        $currentMonth = substr(request()->date_filter, -2);
+//        $currentYear = substr(request()->date_filter, 0, 4);
+//    }
+//
+//    $absence_times = Report::query()
+//        ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+//        ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+//        ->whereDate('created_at', '<', $today)
+//        ->where('date', 'not like', '%Saturday%')
+//        ->where('date', 'not like', '%Friday%')
+//        ->where('student_id', '=', $student_id)
+//        ->where('absence', '!=', 0)
+//        ->count();
+//
+////    return $absence_times;
+//        if(checkThirdCondition($student_id)){
+//            $sat_frid = Report::query()
+//                ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+//                ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+//                ->whereDate('created_at', '<', $today)
+//                ->where(function ($query){
+//                    $query->where('date', 'like', '%Saturday%');
+//                    $query->orWhere('date', 'like', '%Friday%');
+//                })
+//                ->where('student_id', '=', $student_id)
+//                ->where('absence', '=', '0')
+//                ->count();
+//
+//            return max($absence_times - $sat_frid, 0);
+//        }
+//
+//    return $absence_times;
+//}
+
+function getAbsenceCount($student_id, $type){
 
     $today = Carbon::tomorrow();
     $currentMonth = date('m');
@@ -80,25 +121,8 @@ function getAbsenceCount($student_id){
         ->where('date', 'not like', '%Saturday%')
         ->where('date', 'not like', '%Friday%')
         ->where('student_id', '=', $student_id)
-        ->where('absence', '!=', 0)
+        ->where('absence', '=', $type)
         ->count();
-
-//    return $absence_times;
-        if(checkThirdCondition($student_id)){
-            $sat_frid = Report::query()
-                ->whereRaw('YEAR(created_at) = ?', [$currentYear])
-                ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-                ->whereDate('created_at', '<', $today)
-                ->where(function ($query){
-                    $query->where('date', 'like', '%Saturday%');
-                    $query->orWhere('date', 'like', '%Friday%');
-                })
-                ->where('student_id', '=', $student_id)
-                ->where('absence', '=', '0')
-                ->count();
-
-            return max($absence_times - $sat_frid, 0);
-        }
 
     return $absence_times;
 }

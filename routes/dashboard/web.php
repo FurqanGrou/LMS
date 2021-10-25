@@ -68,8 +68,8 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
     Route::get('students', 'UserController@index')->name('student.index');
 
     // reports
-    Route::get('reports', 'ReportController@index')->name('report.index');
-    Route::post('reports', 'ReportController@export')->name('report.export');
+    Route::get('reports', 'ReportController@exportIndex')->name('report.index');
+    Route::post('reports', 'ReportController@exportStore')->name('report.export');
 
     // disable teachers login
     Route::get('disable_teachers_login', 'AdminController@disableTeachersLogin')->name('disable.teachers.login');
