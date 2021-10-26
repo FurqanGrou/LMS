@@ -20,12 +20,12 @@ use App\Exports\ReportsExport;
 class ReportController extends Controller
 {
 
-    public function index()
+    public function exportIndex()
     {
         return view('admins.import_export.export_reports');
     }
 
-    public function export(Request $request)
+    public function exportStore(Request $request)
     {
         $request->validate([
             'date_from' => 'required|date',
@@ -172,14 +172,6 @@ class ReportController extends Controller
         return redirect()->route('admins.report.table', $request->student_id);
     }
 
-    public function checkGrade($lesson_grade)
-    {
-        if (is_numeric($lesson_grade))
-            return $lesson_grade;
-
-        return 0;
-    }
-
     public function reportTable()
     {
         $now = Carbon::now();
@@ -310,7 +302,6 @@ class ReportController extends Controller
 
     public function getValidGrade($string, $col_name)
     {
-
         $tomorrow_string = Carbon::tomorrow();
         $today = Carbon::today()->format('Y-m-d');
         if(str_contains($tomorrow_string->format('l') ,'Friday')){
@@ -347,5 +338,14 @@ class ReportController extends Controller
         }
         return $total;
     }
+
+    // Old Features
+    //    public function checkGrade($lesson_grade)
+    //    {
+    //        if (is_numeric($lesson_grade))
+    //            return $lesson_grade;
+    //
+    //        return 0;
+    //    }
 
 }

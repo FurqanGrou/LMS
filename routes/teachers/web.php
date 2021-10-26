@@ -25,12 +25,13 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     Route::get('/home', 'TeacherController@index')->name('teacher.index');
     Route::get('/class_students/{class_number}', 'TeacherController@classStudents')->name('classStudents.index');
     Route::post('logout', '\App\Http\Controllers\Auth\TeacherLoginController@logout')->name('logout');
-    Route::get('/report/create/{id}', 'ReportController@create')->name('report.create');
-    Route::post('/report', 'ReportController@store')->name('report.store');
-    Route::get('/report/{report}/edit', 'ReportController@edit')->name('report.edit');
-    Route::put('/report/{id}/update', 'ReportController@update')->name('report.update');
-    Route::put('/report/{id}/updateTomorrow', 'ReportController@updateTomorrow')->name('report.updateTomorrow');
-    Route::get('/report/absence', 'ReportController@getReportAbsence')->name('report.absence');
+
+    //    Route::get('/report/create/{id}', 'ReportController@create')->name('report.create');
+//    Route::post('/report', 'ReportController@store')->name('report.store');
+//    Route::get('/report/{report}/edit', 'ReportController@edit')->name('report.edit');
+//    Route::put('/report/{id}/update', 'ReportController@update')->name('report.update');
+//    Route::put('/report/{id}/updateTomorrow', 'ReportController@updateTomorrow')->name('report.updateTomorrow');
+//    Route::get('/report/absence', 'ReportController@getReportAbsence')->name('report.absence');
 
     Route::get('send-mail', 'ReportController@sendReport')->name('report.send');
 
@@ -57,18 +58,4 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
 
 Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Controllers\Auth'], function (){
     Route::get('/login', 'TeacherLoginController@showLoginForm')->name('dashboard.login.form');
-
-//    Route::get('update_class_id', function (){
-//
-//        $reports = \App\Report::all();
-//        foreach ($reports as $report){
-//            $class = \App\Classes::where('id', $report->class_id)->first();
-//            \App\Report::where('class_id', $class->id)
-//                ->update(['class_id' => $class->class_number]);
-//        }
-//
-//        dd('Done!');
-//
-//    });
-
 });

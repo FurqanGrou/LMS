@@ -62,7 +62,48 @@ function getMailStatus($student_id){
     return $mail_status;
 }
 
-function getAbsenceCount($student_id){
+//function getAbsenceCount($student_id){
+//
+//    $today = Carbon::tomorrow();
+//    $currentMonth = date('m');
+//    $currentYear = date('Y');
+//
+//    if(request()->date_filter) {
+//        $currentMonth = substr(request()->date_filter, -2);
+//        $currentYear = substr(request()->date_filter, 0, 4);
+//    }
+//
+//    $absence_times = Report::query()
+//        ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+//        ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+//        ->whereDate('created_at', '<', $today)
+//        ->where('date', 'not like', '%Saturday%')
+//        ->where('date', 'not like', '%Friday%')
+//        ->where('student_id', '=', $student_id)
+//        ->where('absence', '!=', 0)
+//        ->count();
+//
+////    return $absence_times;
+//        if(checkThirdCondition($student_id)){
+//            $sat_frid = Report::query()
+//                ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+//                ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+//                ->whereDate('created_at', '<', $today)
+//                ->where(function ($query){
+//                    $query->where('date', 'like', '%Saturday%');
+//                    $query->orWhere('date', 'like', '%Friday%');
+//                })
+//                ->where('student_id', '=', $student_id)
+//                ->where('absence', '=', '0')
+//                ->count();
+//
+//            return max($absence_times - $sat_frid, 0);
+//        }
+//
+//    return $absence_times;
+//}
+
+function getAbsenceCount($student_id, $type){
 
     $today = Carbon::tomorrow();
     $currentMonth = date('m');
@@ -80,24 +121,8 @@ function getAbsenceCount($student_id){
         ->where('date', 'not like', '%Saturday%')
         ->where('date', 'not like', '%Friday%')
         ->where('student_id', '=', $student_id)
-        ->where('absence', '!=', 0)
+        ->where('absence', '=', $type)
         ->count();
-
-        if(checkThirdCondition($student_id)){
-            $sat_frid = Report::query()
-                ->whereRaw('YEAR(created_at) = ?', [$currentYear])
-                ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-                ->whereDate('created_at', '<', $today)
-                ->where(function ($query){
-                    $query->where('date', 'like', '%Saturday%');
-                    $query->orWhere('date', 'like', '%Friday%');
-                })
-                ->where('student_id', '=', $student_id)
-                ->where('absence', '=', '0')
-                ->count();
-
-            return max($absence_times - $sat_frid, 0);
-        }
 
     return $absence_times;
 }
@@ -154,12 +179,6 @@ function checkThirdCondition($student_id){
 
 function getLessonsNotListenedCount($student_id){
 
-    // درجة الدرس الجديد الافتراضية
-    $default = 1;
-
-    // عدد المرات الي صار فيها الحصول على درجاات زيادة في الدرس الجديد
-    $over_count = 1;
-
     $today = Carbon::tomorrow();
     $currentMonth = date('m');
     $currentYear = date('Y');
@@ -185,7 +204,7 @@ function getLessonsNotListenedCount($student_id){
                     })->where('absence', '=', 0)
                       ->count();
 
-    $clonedQuery = $clonedQuery->where('lesson_grade', '>', $default)
+    $clonedQuery = $clonedQuery->where('lesson_grade', '>', 1)
                     ->where('last_5_pages_grade', '>=', 1)
                     ->where('daily_revision_grade', '>=', 2)
                     ->where('behavior_grade', '>=', 1);
@@ -238,7 +257,7 @@ function getLessonsNotListenedCount($student_id){
                                 ->take($absence_times)
                                 ->sum('lesson_grade');
 
-        return max($normal_count - ($over_count_total - ($default * $over_count)), 0) ;
+        return max($normal_count - ($over_count_total - (1 * $over_count)), 0) ;
     }
 
     // يومي الجمعة والسبت لازم يكون درجة الدرس الجديد أكبر من صفر فقط ولا يشترط أن تكون أكبر من الافتراضي
@@ -256,7 +275,7 @@ function getLessonsNotListenedCount($student_id){
 
     // يومي الجمعة والسبت لا يشترط ان تكون جميع الدرجات فيه مكتملة انما كل درجة تقابلها تعوبض درجة من يوم أخر
 
-    return max($normal_count - ( ($over_count_total - ($default * $over_count)) + $over_count_total_sat ), 0) ;
+    return max($normal_count - ( ($over_count_total - (1 * $over_count)) + $over_count_total_sat ), 0) ;
 }
 
 function getLastFivePagesNotListenedCount($student_id){
@@ -277,10 +296,85 @@ function getLastFivePagesNotListenedCount($student_id){
         ->where('date', 'not like', '%Friday%')
         ->where('student_id', '=', $student_id);
 
-    return $monthly_report_statistics->where(function ($query){
-        $query->where('last_5_pages_grade', '=', '0');
-        $query->orWhere('last_5_pages_grade', '=', ' ');
-    })->where('absence', '=', 0)->count();
+    $clonedQuery = clone $monthly_report_statistics;
+
+    $normal_count = $monthly_report_statistics->where(function ($query){
+                                $query->where('last_5_pages_grade', '=', '0');
+                                $query->orWhere('last_5_pages_grade', '=', ' ');
+                            })->where('absence', '=', 0)->count();
+
+    $clonedQuery = $clonedQuery->where('lesson_grade', '>', 1)
+                                ->where('last_5_pages_grade', '>=', 1)
+                                ->where('daily_revision_grade', '>=', 2)
+                                ->where('behavior_grade', '>=', 1);
+
+    $over_count = clone $clonedQuery;
+    $over_count = $over_count->count();
+    $over_count_total = $clonedQuery->sum('last_5_pages_grade');
+
+    // Third condition from PDF of absence rules
+    // 1- have absence
+    // 2- incomplete default grades count
+
+    if(checkThirdCondition($student_id)){
+
+        $absence_times = Report::query()
+            ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+            ->whereDate('created_at', '<', $today)
+            ->where('date', 'not like', '%Saturday%')
+            ->where('date', 'not like', '%Friday%')
+            ->where('student_id', '=', $student_id)
+            ->where('absence', '!=', 0)
+            ->count();
+
+        // number of over lesson grade
+        $over_count = Report::query()
+            ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+            ->whereDate('created_at', '<', $today)
+            ->where(function ($query){
+                $query->where('date', 'like', '%Friday%');
+                $query->orWhere('date', 'like', '%Saturday%');
+            })
+            ->where('student_id', '=', $student_id)
+            ->orderBy('created_at', 'desc')
+            ->take($absence_times)
+            ->count();
+
+        // total of lesson grades in Saturday and Friday
+        $over_count_total = Report::query()
+            ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+            ->whereDate('created_at', '<', $today)
+            ->where(function ($query){
+                $query->where('date', 'like', '%Friday%');
+                $query->orWhere('date', 'like', '%Saturday%');
+            })
+            ->where('student_id', '=', $student_id)
+            ->orderBy('created_at', 'desc')
+            ->take($absence_times)
+            ->sum('last_5_pages_grade');
+
+        return max($normal_count - ($over_count_total - (1 * $over_count)), 0) ;
+    }
+
+    // يومي الجمعة والسبت لازم يكون درجة الدرس الجديد أكبر من صفر فقط ولا يشترط أن تكون أكبر من الافتراضي
+    $over_count_total_sat = Report::query()
+        ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+        ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+        ->whereDate('created_at', '<', $today)
+        ->where(function ($query){
+            $query->where('date', 'like', '%Friday%');
+            $query->orWhere('date', 'like', '%Saturday%');
+        })
+        ->where('student_id', '=', $student_id)
+        ->where('last_5_pages_grade', '>', 0)
+        ->sum('last_5_pages_grade');
+
+    // يومي الجمعة والسبت لا يشترط ان تكون جميع الدرجات فيه مكتملة انما كل درجة تقابلها تعوبض درجة من يوم أخر
+
+    return max($normal_count - ( ($over_count_total - (1 * $over_count)) + $over_count_total_sat ), 0) ;
 }
 
 function getDailyRevisionNotListenedCount($student_id){
@@ -302,10 +396,86 @@ function getDailyRevisionNotListenedCount($student_id){
         ->where('date', 'not like', '%Friday%')
         ->where('student_id', '=', $student_id);
 
-    return $monthly_report_statistics->where(function ($query){
-        $query->where('daily_revision_grade', '=', '0');
-        $query->orWhere('daily_revision_grade', '=', ' ');
-    })->where('absence', '=', 0)->count();
+    $clonedQuery = clone $monthly_report_statistics;
+
+    $normal_count = $monthly_report_statistics->where(function ($query){
+                                        $query->where('daily_revision_grade', '=', '0');
+                                        $query->orWhere('daily_revision_grade', '=', ' ');
+                                        $query->orWhereNull('daily_revision_grade');
+                                    })->where('absence', '=', 0)->count();
+
+    $clonedQuery = $clonedQuery->where('lesson_grade', '>', 1)
+                                ->where('last_5_pages_grade', '>=', 1)
+                                ->where('daily_revision_grade', '>=', 2)
+                                ->where('behavior_grade', '>=', 1);
+
+    $over_count = clone $clonedQuery;
+    $over_count = $over_count->count();
+    $over_count_total = $clonedQuery->sum('daily_revision_grade');
+
+    // Third condition from PDF of absence rules
+    // 1- have absence
+    // 2- incomplete default grades count
+
+    if(checkThirdCondition($student_id)){
+
+        $absence_times = Report::query()
+            ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+            ->whereDate('created_at', '<', $today)
+            ->where('date', 'not like', '%Saturday%')
+            ->where('date', 'not like', '%Friday%')
+            ->where('student_id', '=', $student_id)
+            ->where('absence', '!=', 0)
+            ->count();
+
+        // number of over lesson grade
+        $over_count = Report::query()
+            ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+            ->whereDate('created_at', '<', $today)
+            ->where(function ($query){
+                $query->where('date', 'like', '%Friday%');
+                $query->orWhere('date', 'like', '%Saturday%');
+            })
+            ->where('student_id', '=', $student_id)
+            ->orderBy('created_at', 'desc')
+            ->take($absence_times)
+            ->count();
+
+        // total of lesson grades in Saturday and Friday
+        $over_count_total = Report::query()
+            ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+            ->whereDate('created_at', '<', $today)
+            ->where(function ($query){
+                $query->where('date', 'like', '%Friday%');
+                $query->orWhere('date', 'like', '%Saturday%');
+            })
+            ->where('student_id', '=', $student_id)
+            ->orderBy('created_at', 'desc')
+            ->take($absence_times)
+            ->sum('daily_revision_grade');
+
+        return max($normal_count - ($over_count_total - (2 * $over_count)), 0) ;
+    }
+
+    // يومي الجمعة والسبت لازم يكون درجة الدرس الجديد أكبر من صفر فقط ولا يشترط أن تكون أكبر من الافتراضي
+    $over_count_total_sat = Report::query()
+        ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+        ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+        ->whereDate('created_at', '<', $today)
+        ->where(function ($query){
+            $query->where('date', 'like', '%Friday%');
+            $query->orWhere('date', 'like', '%Saturday%');
+        })
+        ->where('student_id', '=', $student_id)
+        ->where('daily_revision_grade', '>', 0)
+        ->sum('daily_revision_grade');
+
+    // يومي الجمعة والسبت لا يشترط ان تكون جميع الدرجات فيه مكتملة انما كل درجة تقابلها تعوبض درجة من يوم أخر
+
+    return max($normal_count - ( ($over_count_total - (2 * $over_count)) + $over_count_total_sat ), 0) ;
 }
 
 function getStudentDetails($student_id){
@@ -315,17 +485,16 @@ function getStudentDetails($student_id){
 function getRate($percentage, $lang){
 
     $message = [];
-    switch ($percentage){
-        case $percentage >= 90: $message = ['ar' => 'ممتاز', 'en' => 'Excellent'];
-            break;
-        case $percentage >= 80: $message = ['ar' => 'جيد جداً', 'en' => 'Very Good'];
-            break;
-        case $percentage >= 70: $message = ['ar' => 'جيد', 'en' => 'Good'];
-            break;
-        case $percentage >= 50: $message = ['ar' => 'مقبول', 'en' => 'Pass'];
-            break;
-        case $percentage < 50: $message = ['ar' => 'ضعيف', 'en' => 'Low'];
-            break;
+    if($percentage >= 90){
+        $message = ['ar' => 'ممتاز', 'en' => 'Excellent'];
+    }elseif ($percentage >= 80){
+        $message = ['ar' => 'جيد جداً', 'en' => 'Very Good'];
+    }elseif ($percentage >= 70){
+        $message = ['ar' => 'جيد', 'en' => 'Good'];
+    }elseif ($percentage >= 50){
+        $message = $message = ['ar' => 'مقبول', 'en' => 'Pass'];
+    }elseif ($percentage < 50){
+        $message = $message = ['ar' => 'ضعيف', 'en' => 'Low'];
     }
     return $message[$lang];
 }

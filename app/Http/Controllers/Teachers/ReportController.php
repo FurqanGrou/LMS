@@ -24,644 +24,545 @@ use Illuminate\Support\Facades\Notification;
 
 class ReportController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
+     * Old Features
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
-    {
-        $today_date = Carbon::today();
-        $tomorrow_date = Carbon::tomorrow();
-        $tomorrow_date_check = Carbon::tomorrow();
-
-        $user = User::where('id', '=', $id)->first();
-
-        $notes = NoteParent::where('gender', $user->section)->latest()->get();
-
-        $currentMonth = date('m');
-        $monthReports = Report::whereRaw('MONTH(created_at) = ?', [$currentMonth])->where('student_id', '=', $id)->whereNotNull('new_lesson')->whereNotNull('lesson_grade')->get();
-
-//        if(str_contains($today_date->format('l') ,'Friday')) {
+//    public function create($id)
+//    {
+//        $today_date = Carbon::today();
+//        $tomorrow_date = Carbon::tomorrow();
+//        $tomorrow_date_check = Carbon::tomorrow();
 //
-//            return view('teachers.reports.create_has_report', ['hasReportYesterday' => hasReportYesterday, 'notes' => $notes, 'lastGrades' => $lastGrades, 'monthReports' => $monthReports, 'user' => $user]);
+//        $user = User::where('id', '=', $id)->first();
+//
+//        $notes = NoteParent::where('gender', $user->section)->latest()->get();
+//
+//        $currentMonth = date('m');
+//        $monthReports = Report::whereRaw('MONTH(created_at) = ?', [$currentMonth])->where('student_id', '=', $id)->whereNotNull('new_lesson')->whereNotNull('lesson_grade')->get();
+//
+////        if(str_contains($today_date->format('l') ,'Friday')) {
+////
+////            return view('teachers.reports.create_has_report', ['hasReportYesterday' => hasReportYesterday, 'notes' => $notes, 'lastGrades' => $lastGrades, 'monthReports' => $monthReports, 'user' => $user]);
+////        }
+//
+//        if(str_contains($tomorrow_date->format('l') ,'Friday')){
+//            $tomorrow_date->addDays(2);
+//            $tomorrow_date_check = $tomorrow_date_check->addDays(2);
 //        }
-
-        if(str_contains($tomorrow_date->format('l') ,'Friday')){
-            $tomorrow_date->addDays(2);
-            $tomorrow_date_check = $tomorrow_date_check->addDays(2);
-        }
-        $tomorrow_date = Carbon::createFromDate($tomorrow_date->year, $tomorrow_date->month, $tomorrow_date->day)->format('l d-m-Y');
-
-        // check if this user is not has any report (new student)
-        $is_new_student = Report::where('student_id', '=', $id)->whereNull('lesson_grade')->latest()->first();
-        $is_new_student = empty($is_new_student);
-
-        if($is_new_student){
-            return view('teachers.reports.create_new_student', ['is_new_student' => $is_new_student, 'notes' => $notes, 'tomorrow_date' => $tomorrow_date, 'user' => $user]);
-        }
-        //end chek
-
-        // check if this user is has any report for tomorrow or not
-        $hasReportTomorrow = Report::where('student_id', '=', $id)->whereNull('lesson_grade')->whereDate('created_at', '=', $tomorrow_date_check)->latest()->first();
-
-        $is_friday = str_contains($today_date->format('l') ,'Friday');
-        if(!empty($hasReportTomorrow) || $is_friday){
-
-            if($is_friday){
-                $tomorrow_date_check = $today_date->addDays(2);
-                $hasReportTomorrow = Report::where('student_id', '=', $id)->whereNull('lesson_grade')->whereDate('created_at', '=', $tomorrow_date_check)->latest()->first();
-            }
-
-            $lastGrades = Report::where('student_id', '=', $id)->whereNotNull('lesson_grade')->whereDate('created_at', '<', $tomorrow_date_check)->latest()->first();
-
-            if(!User::where('id', '=', $lastGrades->student_id)->first()->class_number){
-                session()->flash('success', 'تمت حفظ البيانات ونقل الطالب !!');
-                return redirect(route('teachers.teacher.index'));
-            }
-
-            return view('teachers.reports.create_has_report', ['hasReportTomorrow' => $hasReportTomorrow, 'notes' => $notes, 'lastGrades' => $lastGrades, 'monthReports' => $monthReports, 'user' => $user]);
-        }
-        //end chek
-
-        $user_report = Report::where('student_id', '=', $id)->whereNull('lesson_grade')->latest()->first();
-
-        return view('teachers.reports.create', ['user' => $user, 'tomorrow_date' => $tomorrow_date, 'notes' => $notes, 'user_report' => $user_report, 'monthReports' => $monthReports]);
-    }
-
-    public function getReportAbsence(Request $request)
-    {
-        $report = Report::where('student_id', '=', $request->student_id)->whereNotNull('new_lesson')->latest()->first();
-        return response()->json(['report' => $report], 200);
-    }
+//        $tomorrow_date = Carbon::createFromDate($tomorrow_date->year, $tomorrow_date->month, $tomorrow_date->day)->format('l d-m-Y');
+//
+//        // check if this user is not has any report (new student)
+//        $is_new_student = Report::where('student_id', '=', $id)->whereNull('lesson_grade')->latest()->first();
+//        $is_new_student = empty($is_new_student);
+//
+//        if($is_new_student){
+//            return view('teachers.reports.create_new_student', ['is_new_student' => $is_new_student, 'notes' => $notes, 'tomorrow_date' => $tomorrow_date, 'user' => $user]);
+//        }
+//        //end chek
+//
+//        // check if this user is has any report for tomorrow or not
+//        $hasReportTomorrow = Report::where('student_id', '=', $id)->whereNull('lesson_grade')->whereDate('created_at', '=', $tomorrow_date_check)->latest()->first();
+//
+//        $is_friday = str_contains($today_date->format('l') ,'Friday');
+//        if(!empty($hasReportTomorrow) || $is_friday){
+//
+//            if($is_friday){
+//                $tomorrow_date_check = $today_date->addDays(2);
+//                $hasReportTomorrow = Report::where('student_id', '=', $id)->whereNull('lesson_grade')->whereDate('created_at', '=', $tomorrow_date_check)->latest()->first();
+//            }
+//
+//            $lastGrades = Report::where('student_id', '=', $id)->whereNotNull('lesson_grade')->whereDate('created_at', '<', $tomorrow_date_check)->latest()->first();
+//
+//            if(!User::where('id', '=', $lastGrades->student_id)->first()->class_number){
+//                session()->flash('success', 'تمت حفظ البيانات ونقل الطالب !!');
+//                return redirect(route('teachers.teacher.index'));
+//            }
+//
+//            return view('teachers.reports.create_has_report', ['hasReportTomorrow' => $hasReportTomorrow, 'notes' => $notes, 'lastGrades' => $lastGrades, 'monthReports' => $monthReports, 'user' => $user]);
+//        }
+//        //end chek
+//
+//        $user_report = Report::where('student_id', '=', $id)->whereNull('lesson_grade')->latest()->first();
+//
+//        return view('teachers.reports.create', ['user' => $user, 'tomorrow_date' => $tomorrow_date, 'notes' => $notes, 'user_report' => $user_report, 'monthReports' => $monthReports]);
+//    }
 
     /**
+     * Old Features
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-
-        $request['lesson_grade'] = $request['lesson_grade'] ?? 0;
-
-        $tomorrow = Carbon::tomorrow();
-
-        if(str_contains($tomorrow->format('l') ,'Friday')){
-            $tomorrow->addDays(2);
-        }
-
-        $tomorrow_created_at = Carbon::createFromDate($tomorrow->year, $tomorrow->month, $tomorrow->day)->format('Y-m-d H:i:s');
-        $request['created_at'] = $tomorrow_created_at;
-
-        $rules = [
-            'date'       => 'required',
-            'class_number' => 'required',
-            'student_id' => 'required',
-            'created_at' => 'required',
-            'new_lesson' => 'nullable|string',
-            'new_lesson_from'=> 'nullable',
-            'new_lesson_to'  => 'nullable',
-            'last_5_pages'   => 'nullable',
-            'daily_revision' => 'nullable',
-            'daily_revision_from' => 'nullable',
-            'daily_revision_to'   => 'nullable',
-            'number_pages'   => 'nullable',
-        ];
-        if(!$request->has('absence')) {
-            $rules = [
-                'date'       => 'required',
-                'class_number' => 'required',
-                'student_id' => 'required',
-                'created_at' => 'required',
-                'new_lesson' => 'nullable|string',
-                'new_lesson_from'=> 'nullable',
-                'new_lesson_to'  => 'nullable',
-                'last_5_pages'   => 'nullable',
-                'daily_revision' => 'nullable',
-                'daily_revision_from' => 'nullable',
-                'daily_revision_to'   => 'nullable',
-                'number_pages'   => 'nullable',
-                'lesson_grade' => 'nullable|numeric',
-                'last_5_pages_grade' => 'nullable|numeric',
-                'daily_revision_grade' => 'nullable|numeric',
-                'behavior_grade' => 'nullable|numeric',
-                'alert' => 'nullable|numeric',
-                'mistake' => 'nullable|numeric',
-                'listener_name' => 'nullable|string',
-                'notes_to_parent' => 'nullable|string',
-            ];
-        }
-
-        $messages = [
-            'date.required'       => 'يجب إدخال التاريخ',
-            'class_number.required'       => 'يجب إدخال رقم الحلقة',
-            'student_id.required'       => 'يجب إدخال رقم الطالب',
-            'created_at.required'       => 'يجب إدخال تاريخ الادخال',
-            'new_lesson.string'       => 'يجب إدخال قيمة صحيحة في الدرس الجديد',
-            'lesson_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة الدرس',
-            'last_5_pages_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة اخر 5 صفحات',
-            'daily_revision_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة المراجعة اليومية',
-            'behavior_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة السلوك',
-            'alert.numeric' => 'يجب إدخال قيمة رقمية في التنبيه',
-            'mistake.numeric' => 'يجب إدخال قيمة رقمية في الاخطاء',
-            'listener_name.string' => 'يجب إدخال قيمة صحيحة للمستمع',
-            'notes_to_parent.string' => 'يجب إدخال قيمة صحيحة لملاحظات الوالدين',
-        ];
-        $report = $request->validate($rules, $messages);
-        $today_date_report = Carbon::today();
-        $today_created_at = Carbon::createFromDate($today_date_report->year, $today_date_report->month, $today_date_report->day)->format('Y-m-d H:i:s');
-        $today_day = Carbon::createFromDate($today_date_report->year, $today_date_report->month, $today_date_report->day)->format('l d-m-Y');
-
-        $absence_grade = is_null($request->absence) ? 0 : $request->absence;
-
-        $total = ($request->behavior_grade + $request->daily_revision_grade + $request->last_5_pages_grade + $request->lesson_grade);
-
-        $report_grades = Report::updateOrCreate(
-            ['student_id' => $request->student_id,
-                'created_at' => Report::where('created_at', 'LIKE', $today_date_report->format('Y-m-d') . ' %')->first()->created_at ?? null
-            ],
-            [
-                'date' => $today_day,
-                'lesson_grade' => $request->lesson_grade,
-                'mistake' => $request->mistake,
-                'alert' => $request->alert,
-                'listener_name' => $request->listener_name,
-                'last_5_pages_grade' => $request->last_5_pages_grade,
-                'daily_revision_grade' => $request->daily_revision_grade,
-                'behavior_grade' => $request->behavior_grade,
-                'notes_to_parent' => $request->notes_to_parent,
-                'absence' => $absence_grade,
-                'total' => $total,
-                'class_number' => $request->class_number,
-                'created_at' => $today_created_at,
-            ]
-        );
-
-        $newReport = Report::create([
-            'date'       => $request->date,
-            'class_number'       => $request->class_number,
-            'student_id'       => $request->student_id,
-            'created_at'       => $request->created_at,
-            'new_lesson'       => $request->new_lesson,
-            'new_lesson_from'=> $request->new_lesson_from,
-            'new_lesson_to'  => $request->new_lesson_to,
-            'last_5_pages'   => $request->last_5_pages,
-            'daily_revision' => $request->daily_revision,
-            'daily_revision_from' => $request->daily_revision_from,
-            'daily_revision_to'   => $request->daily_revision_to,
-            'number_pages'   => $request->number_pages,
-        ]);
-
-//        $this->sendReport($report_grades, $newReport);
-
-        session()->flash('success', 'تمت اضافة التقرير بنجاح');
-
-        return redirect(route('teachers.report.create', $request->student_id));
-    }
+//    public function store(Request $request)
+//    {
+//
+//        $request['lesson_grade'] = $request['lesson_grade'] ?? 0;
+//
+//        $tomorrow = Carbon::tomorrow();
+//
+//        if(str_contains($tomorrow->format('l') ,'Friday')){
+//            $tomorrow->addDays(2);
+//        }
+//
+//        $tomorrow_created_at = Carbon::createFromDate($tomorrow->year, $tomorrow->month, $tomorrow->day)->format('Y-m-d H:i:s');
+//        $request['created_at'] = $tomorrow_created_at;
+//
+//        $rules = [
+//            'date'       => 'required',
+//            'class_number' => 'required',
+//            'student_id' => 'required',
+//            'created_at' => 'required',
+//            'new_lesson' => 'nullable|string',
+//            'new_lesson_from'=> 'nullable',
+//            'new_lesson_to'  => 'nullable',
+//            'last_5_pages'   => 'nullable',
+//            'daily_revision' => 'nullable',
+//            'daily_revision_from' => 'nullable',
+//            'daily_revision_to'   => 'nullable',
+//            'number_pages'   => 'nullable',
+//        ];
+//        if(!$request->has('absence')) {
+//            $rules = [
+//                'date'       => 'required',
+//                'class_number' => 'required',
+//                'student_id' => 'required',
+//                'created_at' => 'required',
+//                'new_lesson' => 'nullable|string',
+//                'new_lesson_from'=> 'nullable',
+//                'new_lesson_to'  => 'nullable',
+//                'last_5_pages'   => 'nullable',
+//                'daily_revision' => 'nullable',
+//                'daily_revision_from' => 'nullable',
+//                'daily_revision_to'   => 'nullable',
+//                'number_pages'   => 'nullable',
+//                'lesson_grade' => 'nullable|numeric',
+//                'last_5_pages_grade' => 'nullable|numeric',
+//                'daily_revision_grade' => 'nullable|numeric',
+//                'behavior_grade' => 'nullable|numeric',
+//                'alert' => 'nullable|numeric',
+//                'mistake' => 'nullable|numeric',
+//                'listener_name' => 'nullable|string',
+//                'notes_to_parent' => 'nullable|string',
+//            ];
+//        }
+//
+//        $messages = [
+//            'date.required'       => 'يجب إدخال التاريخ',
+//            'class_number.required'       => 'يجب إدخال رقم الحلقة',
+//            'student_id.required'       => 'يجب إدخال رقم الطالب',
+//            'created_at.required'       => 'يجب إدخال تاريخ الادخال',
+//            'new_lesson.string'       => 'يجب إدخال قيمة صحيحة في الدرس الجديد',
+//            'lesson_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة الدرس',
+//            'last_5_pages_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة اخر 5 صفحات',
+//            'daily_revision_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة المراجعة اليومية',
+//            'behavior_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة السلوك',
+//            'alert.numeric' => 'يجب إدخال قيمة رقمية في التنبيه',
+//            'mistake.numeric' => 'يجب إدخال قيمة رقمية في الاخطاء',
+//            'listener_name.string' => 'يجب إدخال قيمة صحيحة للمستمع',
+//            'notes_to_parent.string' => 'يجب إدخال قيمة صحيحة لملاحظات الوالدين',
+//        ];
+//        $report = $request->validate($rules, $messages);
+//        $today_date_report = Carbon::today();
+//        $today_created_at = Carbon::createFromDate($today_date_report->year, $today_date_report->month, $today_date_report->day)->format('Y-m-d H:i:s');
+//        $today_day = Carbon::createFromDate($today_date_report->year, $today_date_report->month, $today_date_report->day)->format('l d-m-Y');
+//
+//        $absence_grade = is_null($request->absence) ? 0 : $request->absence;
+//
+//        $total = ($request->behavior_grade + $request->daily_revision_grade + $request->last_5_pages_grade + $request->lesson_grade);
+//
+//        $report_grades = Report::updateOrCreate(
+//            ['student_id' => $request->student_id,
+//                'created_at' => Report::where('created_at', 'LIKE', $today_date_report->format('Y-m-d') . ' %')->first()->created_at ?? null
+//            ],
+//            [
+//                'date' => $today_day,
+//                'lesson_grade' => $request->lesson_grade,
+//                'mistake' => $request->mistake,
+//                'alert' => $request->alert,
+//                'listener_name' => $request->listener_name,
+//                'last_5_pages_grade' => $request->last_5_pages_grade,
+//                'daily_revision_grade' => $request->daily_revision_grade,
+//                'behavior_grade' => $request->behavior_grade,
+//                'notes_to_parent' => $request->notes_to_parent,
+//                'absence' => $absence_grade,
+//                'total' => $total,
+//                'class_number' => $request->class_number,
+//                'created_at' => $today_created_at,
+//            ]
+//        );
+//
+//        $newReport = Report::create([
+//            'date'       => $request->date,
+//            'class_number'       => $request->class_number,
+//            'student_id'       => $request->student_id,
+//            'created_at'       => $request->created_at,
+//            'new_lesson'       => $request->new_lesson,
+//            'new_lesson_from'=> $request->new_lesson_from,
+//            'new_lesson_to'  => $request->new_lesson_to,
+//            'last_5_pages'   => $request->last_5_pages,
+//            'daily_revision' => $request->daily_revision,
+//            'daily_revision_from' => $request->daily_revision_from,
+//            'daily_revision_to'   => $request->daily_revision_to,
+//            'number_pages'   => $request->number_pages,
+//        ]);
+//
+////        $this->sendReport($report_grades, $newReport);
+//
+//        session()->flash('success', 'تمت اضافة التقرير بنجاح');
+//
+//        return redirect(route('teachers.report.create', $request->student_id));
+//    }
 
     /**
+     * Old Features
      * Show the form for editing the specified resource.
      *
      * @param  \App\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-
-        $report = Report::find($id);
-        $is_new_student = Report::where('student_id', '=', $report->student_id)->whereNotNull('lesson_grade')->first();
-        $is_new_student = !empty($is_new_student);
-
-        $notes = NoteParent::where('gender', User::where('id', '=', $report->student_id)->first()->section)->latest()->get();
-        $user = User::where('id', '=', $report->student_id)->first();
-
-        return view('teachers.reports.edit', ['report' => $report, 'is_new_student' => $is_new_student, 'notes' => $notes, 'user' => $user]);
-    }
+//    public function edit($id)
+//    {
+//
+//        $report = Report::find($id);
+//        $is_new_student = Report::where('student_id', '=', $report->student_id)->whereNotNull('lesson_grade')->first();
+//        $is_new_student = !empty($is_new_student);
+//
+//        $notes = NoteParent::where('gender', User::where('id', '=', $report->student_id)->first()->section)->latest()->get();
+//        $user = User::where('id', '=', $report->student_id)->first();
+//
+//        return view('teachers.reports.edit', ['report' => $report, 'is_new_student' => $is_new_student, 'notes' => $notes, 'user' => $user]);
+//    }
 
     /**
+     * Old Features
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-
-//        dd($request->all());
-        if($request->updateType == 'normal') {
-            DB::beginTransaction();
-            try {
-
-                $user_report = Report::where('id', '=', $id)->first();
-
-                if(!is_null($user_report->lesson_grade)){
-                    $rules = [
-                        'lesson_grade' => 'nullable|numeric',
-                        'last_5_pages_grade' => 'nullable|numeric',
-                        'daily_revision_grade' => 'nullable|numeric',
-                        'behavior_grade' => 'nullable|numeric',
-                        'alert' => 'nullable|numeric',
-                        'mistake' => 'nullable|numeric',
-                        'notes_to_parent' => 'nullable|string',
-                        'listener_name' => 'nullable|string',
-                    ];
-
-                    $messages = [
-                        'new_lesson.string'       => 'يجب إدخال قيمة صحيحة في الدرس الجديد',
-                        'lesson_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة الدرس',
-                        'last_5_pages_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة اخر 5 صفحات',
-                        'daily_revision_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة المراجعة اليومية',
-                        'behavior_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة السلوك',
-                        'alert.numeric' => 'يجب إدخال قيمة رقمية في التنبيه',
-                        'mistake.numeric' => 'يجب إدخال قيمة رقمية في الاخطاء',
-                        'listener_name.string' => 'يجب إدخال قيمة صحيحة للمستمع',
-                        'notes_to_parent.string' => 'يجب إدخال قيمة صحيحة لملاحظات الوالدين',
-                    ];
-
-                    $request->validate($rules, $messages);
-
-                    $request['lesson_grade'] = $request['lesson_grade'] ?? 0;
-
-                    $total = ($request->behavior_grade + $request->daily_revision_grade + $request->last_5_pages_grade + $request->lesson_grade);
-                    $user_report->update([
-                        'lesson_grade' => $request->lesson_grade,
-                        'mistake' => $request->mistake,
-                        'alert' => $request->alert,
-                        'listener_name' => $request->listener_name,
-                        'last_5_pages_grade' => $request->last_5_pages_grade,
-                        'daily_revision_grade' => $request->daily_revision_grade,
-                        'behavior_grade' => $request->behavior_grade,
-                        'total' => $total,
-                        'notes_to_parent' => $request->notes_to_parent,
-                    ]);
-                }
-
-                $rules = [
-                    'new_lesson' => 'nullable|string',
-                    'new_lesson_from' => 'nullable',
-                    'new_lesson_to' => 'nullable',
-                    'last_5_pages' => 'nullable',
-                    'daily_revision' => 'nullable',
-                    'daily_revision_from' => 'nullable',
-                    'daily_revision_to' => 'nullable',
-                    'number_pages' => 'nullable',
-                ];
-
-                $request->validate($rules);
-
-                $oldReport = Report::find($id);
-                $oldReport->update([
-                    'new_lesson' => $request->new_lesson,
-                    'new_lesson_from' => $request->new_lesson_from,
-                    'new_lesson_to' => $request->new_lesson_to,
-                    'last_5_pages' => $request->last_5_pages,
-                    'daily_revision' => $request->daily_revision,
-                    'daily_revision_from' => $request->daily_revision_from,
-                    'daily_revision_to' => $request->daily_revision_to,
-                    'number_pages' => $request->number_pages,
-                ]);
-                session()->flash('success', 'تمت تحديث البيانات بنجاح');
-                DB::commit();
-//                $this->sendReport($user_report, $oldReport);
-                return redirect(route('teachers.report.edit', $id));
-            }catch (Throwable $e) {
-                DB::rollBack();
-                throw $e;
-            }
-        }else {
-
-            DB::beginTransaction();
-            try {
-
-                $user_report = Report::where('id', '=', $id)->latest()->first();
-
-                if($request->has('absence')){
-                    $user_report->update([
-                        'lesson_grade' => 'غ',
-                        'mistake' => ' ',
-                        'alert' => ' ',
-                        'listener_name' => ' ',
-                        'last_5_pages_grade' => ' ',
-                        'daily_revision_grade' => ' ',
-                        'behavior_grade' => ' ',
-                        'total' => 0,
-                        'notes_to_parent' => 'الطالب غائب',
-                        'absence' => $request->absence,
-                    ]);
-                }else{
-                    $rules = [
-                        'lesson_grade' => 'nullable|numeric',
-                        'last_5_pages_grade' => 'nullable|numeric',
-                        'daily_revision_grade' => 'nullable|numeric',
-                        'behavior_grade' => 'nullable|numeric',
-                        'alert' => 'nullable|numeric',
-                        'mistake' => 'nullable|numeric',
-                        'listener_name' => 'nullable|string',
-                        'notes_to_parent' => 'nullable|string',
-                    ];
-
-                    $messages = [
-                        'lesson_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة الدرس',
-                        'last_5_pages_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة اخر 5 صفحات',
-                        'daily_revision_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة المراجعة اليومية',
-                        'behavior_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة السلوك',
-                        'alert.numeric' => 'يجب إدخال قيمة رقمية في التنبيه',
-                        'mistake.numeric' => 'يجب إدخال قيمة رقمية في الاخطاء',
-                        'listener_name.string' => 'يجب إدخال قيمة صحيحة للمستمع',
-                        'notes_to_parent.string' => 'يجب إدخال قيمة صحيحة لملاحظات الوالدين',
-                    ];
-
-                    $request->validate($rules, $messages);
-
-                    $total = ($request->behavior_grade + $request->daily_revision_grade + $request->last_5_pages_grade + $request->lesson_grade);
-
-                    $user_report->update([
-                        'lesson_grade' => $request->lesson_grade ?? 0,
-                        'mistake' => $request->mistake,
-                        'alert' => $request->alert,
-                        'last_5_pages_grade' => $request->last_5_pages_grade,
-                        'daily_revision_grade' => $request->daily_revision_grade,
-                        'behavior_grade' => $request->behavior_grade,
-                        'total' => $total,
-                        'listener_name' => $request->listener_name,
-                        'notes_to_parent' => $request->notes_to_parent,
-                    ]);
-
-                }
-
-                $tomorrow_date = Carbon::tomorrow();
-                $tomorrow_created_at = Carbon::createFromDate($tomorrow_date->year, $tomorrow_date->month, $tomorrow_date->day)->format('Y-m-d H:i:s');
-                if(str_contains($tomorrow_date->format('l') ,'Friday')){
-                    $tomorrow_created_at = $tomorrow_date->addDays(2);
-                }
-
-                $request['created_at'] = $tomorrow_created_at;
-                $rules = [
-                    'date' => 'required',
-                    'class_number' => 'required',
-                    'student_id' => 'required',
-                    'created_at' => 'required',
-                    'new_lesson' => 'nullable',
-                    'new_lesson_from' => 'nullable',
-                    'new_lesson_to' => 'nullable',
-                    'last_5_pages' => 'nullable',
-                    'daily_revision' => 'nullable',
-                    'daily_revision_from' => 'nullable',
-                    'daily_revision_to' => 'nullable',
-                    'number_pages' => 'nullable',
-                ];
-
-                $report = $request->validate($rules);
-
-                $newReport = Report::create($report);
-
-//                $this->sendReport($user_report, $newReport);
-
-                session()->flash('success', 'تم حفظ البيانات بنجاح');
-
-                DB::commit();
-            } catch (Throwable $e) {
-                DB::rollBack();
-                throw $e;
-            }
-        }
-
-        return redirect(route('teachers.report.create', $request->student_id));
-    }
-
-    public function updateTomorrow(Request $request, $id)
-    {
-
-        $request['lesson_grade'] = $request['lesson_grade'] ?? 0;
-
-        if($request->report_id != 'no' && !$request->has('absence')){
-            $grades_report = Report::where('id', '=', $request->report_id)->latest()->first();
-
-            $rules = [
-                'lesson_grade' => 'nullable|numeric',
-                'last_5_pages_grade' => 'nullable|numeric',
-                'daily_revision_grade' => 'nullable|numeric',
-                'behavior_grade' => 'nullable|numeric',
-                'alert' => 'nullable|numeric',
-                'mistake' => 'nullable|numeric',
-                'listener_name' => 'nullable|string',
-                'notes_to_parent' => 'nullable|string',
-            ];
-
-            $messages = [
-                'new_lesson.string'       => 'يجب إدخال قيمة صحيحة في الدرس الجديد',
-                'lesson_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة الدرس',
-                'last_5_pages_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة اخر 5 صفحات',
-                'daily_revision_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة المراجعة اليومية',
-                'behavior_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة السلوك',
-                'alert.numeric' => 'يجب إدخال قيمة رقمية في التنبيه',
-                'mistake.numeric' => 'يجب إدخال قيمة رقمية في الاخطاء',
-                'listener_name.string' => 'يجب إدخال قيمة صحيحة للمستمع',
-                'notes_to_parent.string' => 'يجب إدخال قيمة صحيحة لملاحظات الوالدين',
-            ];
-
-            $request->validate($rules, $messages);
-
-            $total = ($request->behavior_grade + $request->daily_revision_grade + $request->last_5_pages_grade + $request->lesson_grade);
-
-            $grades_report->update([
-                'lesson_grade' => $request->lesson_grade,
-                'mistake' => $request->mistake,
-                'alert' => $request->alert,
-                'listener_name' => $request->listener_name,
-                'last_5_pages_grade' => $request->last_5_pages_grade,
-                'daily_revision_grade' => $request->daily_revision_grade,
-                'behavior_grade' => $request->behavior_grade,
-                'total' => $total,
-                'notes_to_parent' => $request->notes_to_parent,
-                'absence' => 0,
-            ]);
-        }
-
-        if($request->report_id != 'no' && $request->has('absence')){
-            $grades_report = Report::where('id', '=', $request->report_id)->latest()->first();
-            $grades_report->update([
-                'lesson_grade' => 'غ',
-                'mistake' => ' ',
-                'alert' => ' ',
-                'listener_name' => ' ',
-                'last_5_pages_grade' => ' ',
-                'daily_revision_grade' => ' ',
-                'behavior_grade' => ' ',
-                'total' => 0,
-                'notes_to_parent' => 'الطالب غائب',
-                'absence' => $request->absence,
-            ]);
-
-            $request['lesson_grade'] = 'غ';
-            $request['mistake'] = ' ';
-            $request['alert'] = ' ';
-            $request['listener_name'] = ' ';
-            $request['last_5_pages_grade'] = ' ';
-            $request['daily_revision_grade'] = ' ';
-            $request['behavior_grade'] = ' ';
-            $request['notes_to_parent'] = 'الطالب غائب';
-        }
-
-        $user_report = Report::where('id', '=', $id)->latest()->first();
-
-        $rules = [
-            'new_lesson' => 'nullable|string',
-            'new_lesson_from'=> 'nullable',
-            'new_lesson_to'  => 'nullable',
-            'last_5_pages'   => 'nullable',
-            'daily_revision' => 'nullable',
-            'daily_revision_from' => 'nullable',
-            'daily_revision_to'   => 'nullable',
-            'number_pages'   => 'nullable',
-        ];
-
-        $request->validate($rules);
-
-        $user_report->update([
-            'new_lesson' => $request->new_lesson,
-            'new_lesson_from' => $request->new_lesson_from,
-            'new_lesson_to' => $request->new_lesson_to,
-            'last_5_pages' => $request->last_5_pages,
-            'daily_revision' => $request->daily_revision,
-            'daily_revision_from' => $request->daily_revision_from,
-            'daily_revision_to' => $request->daily_revision_to,
-            'number_pages' => $request->number_pages,
-        ]);
-
-        if(isset($request["update_and_send"]) && (!isset($request->lesson_grade) || !isset($request->last_5_pages_grade) || !isset($request->behavior_grade) || !isset($request->daily_revision_grade) || !isset($request->daily_revision) || !isset($request->daily_revision_from) || !isset($request->daily_revision_to) || !isset($request->new_lesson) || !isset($request->new_lesson_from) || !isset($request->new_lesson_to))){
-            session()->flash('error', 'لم يتم ارسال التقرير اليومي يرجى التأكد من إدخال جميع البيانات!!');
-            return redirect(route('teachers.report.create', $request->student_id));
-        }
-
-        if(isset($request["update_and_send"]) && isset($request->daily_revision) && isset($request->lesson_grade)){
-            if(!isset($grades_report)){
-                $this->sendReport(null, $user_report);
-            }else{
-                $this->sendReport($grades_report, $user_report);
-            }
-            session()->flash('success', 'تم تحديث وارسال التقرير اليومي بنجاح');
-        }else{
-            session()->flash('success', 'تم تحديث التقرير اليومي بنجاح');
-        }
-
-        return redirect(route('teachers.report.create', $request->student_id));
-    }
-
-    public function sendReport($grades = null, $assignment){
-
-        if(is_null($grades)){
-            $student = User::where('id', '=', $assignment->student_id)->first();
-            $to_mails = [];
-
-            if(filter_var($student->father_mail, FILTER_VALIDATE_EMAIL)){
-                $to_mails[] = $student->father_mail;
-            }
-
-            if(filter_var($student->mother_mail, FILTER_VALIDATE_EMAIL) && !in_array($student->mother_mail, $to_mails)){
-                $to_mails[] = $student->mother_mail;
-            }
-
-            $nameTitle = $student->section == 'male' ? '' : 'ة';
-
-            $details = [
-                'title' => 'التقرير اليومي للطالب' . $nameTitle . ' ' . $student->name . ' - ' . $student->student_number . ' Daily Report',
-                'subject' => 'التقرير اليومي للطالب' . $nameTitle . ' ' . $student->name . ' - ' . $student->student_number . ' Daily Report',
-                'grades' => $grades,
-                'assignment' => $assignment,
-                'student_info' => $student,
-            ];
-            Mail::to($to_mails)
-                ->bcc(['lmsfurqan1@gmail.com'])
-                ->send(new ReportMail($details));
-
-            if(empty(Mail::failures())) {
-                $report = Report::where('id', '=', $grades->id)->first();
-                $report->update(['mail_status' => 1]);
-                return 1;
-            }
-
-            return 0;
-        }else{
-            $student = User::where('id', '=', $grades->student_id)->first();
-            $to_mails = [];
-
-            if(filter_var($student->father_mail, FILTER_VALIDATE_EMAIL)){
-                $to_mails[] = $student->father_mail;
-            }
-
-            if(filter_var($student->mother_mail, FILTER_VALIDATE_EMAIL) && !in_array($student->mother_mail, $to_mails)){
-                $to_mails[] = $student->mother_mail;
-            }
-
-            $nameTitle = $student->section == 'male' ? '' : 'ة';
-            $details = [
-                'title' => 'التقرير اليومي للطالب' . $nameTitle . ' ' . $student->name . ' - ' . $student->student_number . ' Daily Report',
-                'subject' => 'التقرير اليومي للطالب' . $nameTitle . ' ' . $student->name . ' - ' . $student->student_number . ' Daily Report',
-                'grades' => $grades,
-                'assignment' => $assignment,
-                'student_info' => $student,
-            ];
-        }
-
-        $currentMonth = date('m');
-
-        $monthly_report_statistics = Report::query()
-                                            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-                                            ->where('student_id', '=', $assignment->student_id);
-
-        $monthly_report = $monthly_report_statistics->get();
-
-        $now = Carbon::now();
-        $month = $now->month;
-
-            $pdf = PDF::loadView('teachers.emails.monthly_report',
-                [
-                    'student_id' => $assignment->student_id,
-                    'month' => $currentMonth,
-                    'monthly_report' => $monthly_report,
-                    'monthly_report_statistics' => $monthly_report_statistics,
-                    'now' => $now,
-                    'month' => $month,
-                ], [], [
-                    'format' => 'A2'
-                ]);
-
-//        return $pdf->stream('document.pdf');
-
-        Mail::to($to_mails)
-            ->bcc(['lmsfurqan1@gmail.com'])
-            ->send(new ReportMail($details, $pdf));
-
-        if(empty(Mail::failures())) {
-            $report = Report::where('id', '=', $grades->id)->first();
-            $report->update(['mail_status' => 1]);
-            return 1;
-        }
-
-        return 0;
-    }
-
-    public function checkGrade($lesson_grade)
-    {
-        if (is_numeric($lesson_grade))
-            return $lesson_grade;
-
-        return 0;
-    }
+//    public function update(Request $request, $id)
+//    {
+//
+////        dd($request->all());
+//        if($request->updateType == 'normal') {
+//            DB::beginTransaction();
+//            try {
+//
+//                $user_report = Report::where('id', '=', $id)->first();
+//
+//                if(!is_null($user_report->lesson_grade)){
+//                    $rules = [
+//                        'lesson_grade' => 'nullable|numeric',
+//                        'last_5_pages_grade' => 'nullable|numeric',
+//                        'daily_revision_grade' => 'nullable|numeric',
+//                        'behavior_grade' => 'nullable|numeric',
+//                        'alert' => 'nullable|numeric',
+//                        'mistake' => 'nullable|numeric',
+//                        'notes_to_parent' => 'nullable|string',
+//                        'listener_name' => 'nullable|string',
+//                    ];
+//
+//                    $messages = [
+//                        'new_lesson.string'       => 'يجب إدخال قيمة صحيحة في الدرس الجديد',
+//                        'lesson_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة الدرس',
+//                        'last_5_pages_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة اخر 5 صفحات',
+//                        'daily_revision_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة المراجعة اليومية',
+//                        'behavior_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة السلوك',
+//                        'alert.numeric' => 'يجب إدخال قيمة رقمية في التنبيه',
+//                        'mistake.numeric' => 'يجب إدخال قيمة رقمية في الاخطاء',
+//                        'listener_name.string' => 'يجب إدخال قيمة صحيحة للمستمع',
+//                        'notes_to_parent.string' => 'يجب إدخال قيمة صحيحة لملاحظات الوالدين',
+//                    ];
+//
+//                    $request->validate($rules, $messages);
+//
+//                    $request['lesson_grade'] = $request['lesson_grade'] ?? 0;
+//
+//                    $total = ($request->behavior_grade + $request->daily_revision_grade + $request->last_5_pages_grade + $request->lesson_grade);
+//                    $user_report->update([
+//                        'lesson_grade' => $request->lesson_grade,
+//                        'mistake' => $request->mistake,
+//                        'alert' => $request->alert,
+//                        'listener_name' => $request->listener_name,
+//                        'last_5_pages_grade' => $request->last_5_pages_grade,
+//                        'daily_revision_grade' => $request->daily_revision_grade,
+//                        'behavior_grade' => $request->behavior_grade,
+//                        'total' => $total,
+//                        'notes_to_parent' => $request->notes_to_parent,
+//                    ]);
+//                }
+//
+//                $rules = [
+//                    'new_lesson' => 'nullable|string',
+//                    'new_lesson_from' => 'nullable',
+//                    'new_lesson_to' => 'nullable',
+//                    'last_5_pages' => 'nullable',
+//                    'daily_revision' => 'nullable',
+//                    'daily_revision_from' => 'nullable',
+//                    'daily_revision_to' => 'nullable',
+//                    'number_pages' => 'nullable',
+//                ];
+//
+//                $request->validate($rules);
+//
+//                $oldReport = Report::find($id);
+//                $oldReport->update([
+//                    'new_lesson' => $request->new_lesson,
+//                    'new_lesson_from' => $request->new_lesson_from,
+//                    'new_lesson_to' => $request->new_lesson_to,
+//                    'last_5_pages' => $request->last_5_pages,
+//                    'daily_revision' => $request->daily_revision,
+//                    'daily_revision_from' => $request->daily_revision_from,
+//                    'daily_revision_to' => $request->daily_revision_to,
+//                    'number_pages' => $request->number_pages,
+//                ]);
+//                session()->flash('success', 'تمت تحديث البيانات بنجاح');
+//                DB::commit();
+////                $this->sendReport($user_report, $oldReport);
+//                return redirect(route('teachers.report.edit', $id));
+//            }catch (Throwable $e) {
+//                DB::rollBack();
+//                throw $e;
+//            }
+//        }else {
+//
+//            DB::beginTransaction();
+//            try {
+//
+//                $user_report = Report::where('id', '=', $id)->latest()->first();
+//
+//                if($request->has('absence')){
+//                    $user_report->update([
+//                        'lesson_grade' => 'غ',
+//                        'mistake' => ' ',
+//                        'alert' => ' ',
+//                        'listener_name' => ' ',
+//                        'last_5_pages_grade' => ' ',
+//                        'daily_revision_grade' => ' ',
+//                        'behavior_grade' => ' ',
+//                        'total' => 0,
+//                        'notes_to_parent' => 'الطالب غائب',
+//                        'absence' => $request->absence,
+//                    ]);
+//                }else{
+//                    $rules = [
+//                        'lesson_grade' => 'nullable|numeric',
+//                        'last_5_pages_grade' => 'nullable|numeric',
+//                        'daily_revision_grade' => 'nullable|numeric',
+//                        'behavior_grade' => 'nullable|numeric',
+//                        'alert' => 'nullable|numeric',
+//                        'mistake' => 'nullable|numeric',
+//                        'listener_name' => 'nullable|string',
+//                        'notes_to_parent' => 'nullable|string',
+//                    ];
+//
+//                    $messages = [
+//                        'lesson_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة الدرس',
+//                        'last_5_pages_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة اخر 5 صفحات',
+//                        'daily_revision_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة المراجعة اليومية',
+//                        'behavior_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة السلوك',
+//                        'alert.numeric' => 'يجب إدخال قيمة رقمية في التنبيه',
+//                        'mistake.numeric' => 'يجب إدخال قيمة رقمية في الاخطاء',
+//                        'listener_name.string' => 'يجب إدخال قيمة صحيحة للمستمع',
+//                        'notes_to_parent.string' => 'يجب إدخال قيمة صحيحة لملاحظات الوالدين',
+//                    ];
+//
+//                    $request->validate($rules, $messages);
+//
+//                    $total = ($request->behavior_grade + $request->daily_revision_grade + $request->last_5_pages_grade + $request->lesson_grade);
+//
+//                    $user_report->update([
+//                        'lesson_grade' => $request->lesson_grade ?? 0,
+//                        'mistake' => $request->mistake,
+//                        'alert' => $request->alert,
+//                        'last_5_pages_grade' => $request->last_5_pages_grade,
+//                        'daily_revision_grade' => $request->daily_revision_grade,
+//                        'behavior_grade' => $request->behavior_grade,
+//                        'total' => $total,
+//                        'listener_name' => $request->listener_name,
+//                        'notes_to_parent' => $request->notes_to_parent,
+//                    ]);
+//
+//                }
+//
+//                $tomorrow_date = Carbon::tomorrow();
+//                $tomorrow_created_at = Carbon::createFromDate($tomorrow_date->year, $tomorrow_date->month, $tomorrow_date->day)->format('Y-m-d H:i:s');
+//                if(str_contains($tomorrow_date->format('l') ,'Friday')){
+//                    $tomorrow_created_at = $tomorrow_date->addDays(2);
+//                }
+//
+//                $request['created_at'] = $tomorrow_created_at;
+//                $rules = [
+//                    'date' => 'required',
+//                    'class_number' => 'required',
+//                    'student_id' => 'required',
+//                    'created_at' => 'required',
+//                    'new_lesson' => 'nullable',
+//                    'new_lesson_from' => 'nullable',
+//                    'new_lesson_to' => 'nullable',
+//                    'last_5_pages' => 'nullable',
+//                    'daily_revision' => 'nullable',
+//                    'daily_revision_from' => 'nullable',
+//                    'daily_revision_to' => 'nullable',
+//                    'number_pages' => 'nullable',
+//                ];
+//
+//                $report = $request->validate($rules);
+//
+//                $newReport = Report::create($report);
+//
+////                $this->sendReport($user_report, $newReport);
+//
+//                session()->flash('success', 'تم حفظ البيانات بنجاح');
+//
+//                DB::commit();
+//            } catch (Throwable $e) {
+//                DB::rollBack();
+//                throw $e;
+//            }
+//        }
+//
+//        return redirect(route('teachers.report.create', $request->student_id));
+//    }
+//
+//    public function updateTomorrow(Request $request, $id)
+//    {
+//
+//        $request['lesson_grade'] = $request['lesson_grade'] ?? 0;
+//
+//        if($request->report_id != 'no' && !$request->has('absence')){
+//            $grades_report = Report::where('id', '=', $request->report_id)->latest()->first();
+//
+//            $rules = [
+//                'lesson_grade' => 'nullable|numeric',
+//                'last_5_pages_grade' => 'nullable|numeric',
+//                'daily_revision_grade' => 'nullable|numeric',
+//                'behavior_grade' => 'nullable|numeric',
+//                'alert' => 'nullable|numeric',
+//                'mistake' => 'nullable|numeric',
+//                'listener_name' => 'nullable|string',
+//                'notes_to_parent' => 'nullable|string',
+//            ];
+//
+//            $messages = [
+//                'new_lesson.string'       => 'يجب إدخال قيمة صحيحة في الدرس الجديد',
+//                'lesson_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة الدرس',
+//                'last_5_pages_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة اخر 5 صفحات',
+//                'daily_revision_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة المراجعة اليومية',
+//                'behavior_grade.numeric' => 'يجب إدخال قيمة رقمية في درجة السلوك',
+//                'alert.numeric' => 'يجب إدخال قيمة رقمية في التنبيه',
+//                'mistake.numeric' => 'يجب إدخال قيمة رقمية في الاخطاء',
+//                'listener_name.string' => 'يجب إدخال قيمة صحيحة للمستمع',
+//                'notes_to_parent.string' => 'يجب إدخال قيمة صحيحة لملاحظات الوالدين',
+//            ];
+//
+//            $request->validate($rules, $messages);
+//
+//            $total = ($request->behavior_grade + $request->daily_revision_grade + $request->last_5_pages_grade + $request->lesson_grade);
+//
+//            $grades_report->update([
+//                'lesson_grade' => $request->lesson_grade,
+//                'mistake' => $request->mistake,
+//                'alert' => $request->alert,
+//                'listener_name' => $request->listener_name,
+//                'last_5_pages_grade' => $request->last_5_pages_grade,
+//                'daily_revision_grade' => $request->daily_revision_grade,
+//                'behavior_grade' => $request->behavior_grade,
+//                'total' => $total,
+//                'notes_to_parent' => $request->notes_to_parent,
+//                'absence' => 0,
+//            ]);
+//        }
+//
+//        if($request->report_id != 'no' && $request->has('absence')){
+//            $grades_report = Report::where('id', '=', $request->report_id)->latest()->first();
+//            $grades_report->update([
+//                'lesson_grade' => 'غ',
+//                'mistake' => ' ',
+//                'alert' => ' ',
+//                'listener_name' => ' ',
+//                'last_5_pages_grade' => ' ',
+//                'daily_revision_grade' => ' ',
+//                'behavior_grade' => ' ',
+//                'total' => 0,
+//                'notes_to_parent' => 'الطالب غائب',
+//                'absence' => $request->absence,
+//            ]);
+//
+//            $request['lesson_grade'] = 'غ';
+//            $request['mistake'] = ' ';
+//            $request['alert'] = ' ';
+//            $request['listener_name'] = ' ';
+//            $request['last_5_pages_grade'] = ' ';
+//            $request['daily_revision_grade'] = ' ';
+//            $request['behavior_grade'] = ' ';
+//            $request['notes_to_parent'] = 'الطالب غائب';
+//        }
+//
+//        $user_report = Report::where('id', '=', $id)->latest()->first();
+//
+//        $rules = [
+//            'new_lesson' => 'nullable|string',
+//            'new_lesson_from'=> 'nullable',
+//            'new_lesson_to'  => 'nullable',
+//            'last_5_pages'   => 'nullable',
+//            'daily_revision' => 'nullable',
+//            'daily_revision_from' => 'nullable',
+//            'daily_revision_to'   => 'nullable',
+//            'number_pages'   => 'nullable',
+//        ];
+//
+//        $request->validate($rules);
+//
+//        $user_report->update([
+//            'new_lesson' => $request->new_lesson,
+//            'new_lesson_from' => $request->new_lesson_from,
+//            'new_lesson_to' => $request->new_lesson_to,
+//            'last_5_pages' => $request->last_5_pages,
+//            'daily_revision' => $request->daily_revision,
+//            'daily_revision_from' => $request->daily_revision_from,
+//            'daily_revision_to' => $request->daily_revision_to,
+//            'number_pages' => $request->number_pages,
+//        ]);
+//
+//        if(isset($request["update_and_send"]) && (!isset($request->lesson_grade) || !isset($request->last_5_pages_grade) || !isset($request->behavior_grade) || !isset($request->daily_revision_grade) || !isset($request->daily_revision) || !isset($request->daily_revision_from) || !isset($request->daily_revision_to) || !isset($request->new_lesson) || !isset($request->new_lesson_from) || !isset($request->new_lesson_to))){
+//            session()->flash('error', 'لم يتم ارسال التقرير اليومي يرجى التأكد من إدخال جميع البيانات!!');
+//            return redirect(route('teachers.report.create', $request->student_id));
+//        }
+//
+//        if(isset($request["update_and_send"]) && isset($request->daily_revision) && isset($request->lesson_grade)){
+//            if(!isset($grades_report)){
+//                $this->sendReport(null, $user_report);
+//            }else{
+//                $this->sendReport($grades_report, $user_report);
+//            }
+//            session()->flash('success', 'تم تحديث وارسال التقرير اليومي بنجاح');
+//        }else{
+//            session()->flash('success', 'تم تحديث التقرير اليومي بنجاح');
+//        }
+//
+//        return redirect(route('teachers.report.create', $request->student_id));
+//    }
+
+//    public function checkGrade($lesson_grade)
+//    {
+//        if (is_numeric($lesson_grade))
+//            return $lesson_grade;
+//
+//        return 0;
+//    }
+
+//    public function getReportAbsence(Request $request)
+//    {
+//        $report = Report::where('student_id', '=', $request->student_id)->whereNotNull('new_lesson')->latest()->first();
+//        return response()->json(['report' => $report], 200);
+//    }
 
     public function reportTable()
     {
@@ -819,74 +720,6 @@ class ReportController extends Controller
         return response()->json(['report' => $report], 200);
     }
 
-    public function sumTotal($values)
-    {
-        $total = 0;
-        foreach ($values as $value){
-            if(is_numeric($value)){
-                $total+=$value;
-            }
-        }
-        return $total;
-    }
-
-    public function getValidData($string, $col_name)
-    {
-        $tomorrow_string = Carbon::tomorrow();
-        $today = Carbon::today()->format('Y-m-d');
-        if(str_contains($tomorrow_string->format('l') ,'Friday')){
-            $tomorrow_string->addDays(2);
-        }
-        $tomorrow = $tomorrow_string->format('Y-m-d');
-
-        $today_mail_status = Report::query()->where('student_id', '=', request()->student_id)->where('created_at', 'LIKE', $today . ' %')->first()->mail_status ?? 0;
-
-        if($today_mail_status){
-            if($tomorrow == request()->created_at){
-                if(isset($string) && !is_null($string)){
-                    return $string;
-                }
-                return Report::query()->where('student_id', '=', request()->student_id)->where('created_at', 'LIKE', request()->created_at . ' %')->first()->$col_name ?? '';
-            }
-
-            if(isset($string) && !is_null($string)){
-                return $string;
-            }
-            return Report::query()->where('student_id', '=', request()->student_id)->where('created_at', 'LIKE', $today . ' %')->first()->$col_name ?? '';
-        }
-
-        return $string;
-    }
-
-    public function getValidGrade($string, $col_name)
-    {
-
-        $tomorrow_string = Carbon::tomorrow();
-        $today = Carbon::today()->format('Y-m-d');
-        if(str_contains($tomorrow_string->format('l') ,'Friday')){
-            $tomorrow_string->addDays(2);
-        }
-        $tomorrow = $tomorrow_string->format('Y-m-d');
-
-        $today_mail_status = Report::query()->where('student_id', '=', request()->student_id)->where('created_at', 'LIKE', $today . ' %')->first()->mail_status ?? 0;
-
-        if($today_mail_status){
-            if($tomorrow == request()->created_at){
-                if(isset($string) && !is_null($string)){
-                    return $string;
-                }
-                return Report::query()->where('student_id', '=', request()->student_id)->where('created_at', 'LIKE', request()->created_at . '%')->first()->$col_name ?? '';
-            }
-
-            if(is_numeric($string)){
-                return $string;
-            }
-            return Report::query()->where('student_id', '=', request()->student_id)->where('created_at', 'LIKE', request()->created_at . '%')->first()->$col_name ?? '';
-        }
-
-        return $string;
-    }
-
     public function sendReportTable(Request $request)
     {
         $notes_to_parents = request()->notes_to_parent[0];
@@ -1011,6 +844,168 @@ class ReportController extends Controller
         }
         return redirect()->route('teachers.report.table', $request->student_id);
     }
+  
+    public function sendReport($grades = null, $assignment){
+
+        if(is_null($grades)){
+            $student = User::where('id', '=', $assignment->student_id)->first();
+            $to_mails = [];
+
+            if(filter_var($student->father_mail, FILTER_VALIDATE_EMAIL)){
+                $to_mails[] = $student->father_mail;
+            }
+
+            if(filter_var($student->mother_mail, FILTER_VALIDATE_EMAIL) && !in_array($student->mother_mail, $to_mails)){
+                $to_mails[] = $student->mother_mail;
+            }
+
+            $nameTitle = $student->section == 'male' ? '' : 'ة';
+
+            $details = [
+                'title' => 'التقرير اليومي للطالب' . $nameTitle . ' ' . $student->name . ' - ' . $student->student_number . ' Daily Report',
+                'subject' => 'التقرير اليومي للطالب' . $nameTitle . ' ' . $student->name . ' - ' . $student->student_number . ' Daily Report',
+                'grades' => $grades,
+                'assignment' => $assignment,
+                'student_info' => $student,
+            ];
+            Mail::to($to_mails)
+                ->bcc(['lmsfurqan1@gmail.com'])
+                ->send(new ReportMail($details));
+
+            if(empty(Mail::failures())) {
+                $report = Report::where('id', '=', $grades->id)->first();
+                $report->update(['mail_status' => 1]);
+                return 1;
+            }
+
+            return 0;
+        }else{
+            $student = User::where('id', '=', $grades->student_id)->first();
+            $to_mails = [];
+
+            if(filter_var($student->father_mail, FILTER_VALIDATE_EMAIL)){
+                $to_mails[] = $student->father_mail;
+            }
+
+            if(filter_var($student->mother_mail, FILTER_VALIDATE_EMAIL) && !in_array($student->mother_mail, $to_mails)){
+                $to_mails[] = $student->mother_mail;
+            }
+
+            $nameTitle = $student->section == 'male' ? '' : 'ة';
+            $details = [
+                'title' => 'التقرير اليومي للطالب' . $nameTitle . ' ' . $student->name . ' - ' . $student->student_number . ' Daily Report',
+                'subject' => 'التقرير اليومي للطالب' . $nameTitle . ' ' . $student->name . ' - ' . $student->student_number . ' Daily Report',
+                'grades' => $grades,
+                'assignment' => $assignment,
+                'student_info' => $student,
+            ];
+        }
+
+        $currentMonth = date('m');
+
+        $monthly_report_statistics = Report::query()
+            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+            ->where('student_id', '=', $assignment->student_id);
+
+        $monthly_report = $monthly_report_statistics->get();
+
+        $now = Carbon::now();
+        $month = $now->month;
+
+        $pdf = PDF::loadView('teachers.emails.monthly_report',
+            [
+                'student_id' => $assignment->student_id,
+                'month' => $currentMonth,
+                'monthly_report' => $monthly_report,
+                'monthly_report_statistics' => $monthly_report_statistics,
+                'now' => $now,
+                'month' => $month,
+            ], [], [
+                'format' => 'A2'
+            ]);
+
+//        return $pdf->stream('document.pdf');
+
+        Mail::to($to_mails)
+            ->bcc(['lmsfurqan1@gmail.com'])
+            ->send(new ReportMail($details, $pdf));
+
+        if(empty(Mail::failures())) {
+            $report = Report::where('id', '=', $grades->id)->first();
+            $report->update(['mail_status' => 1]);
+            return 1;
+        }
+
+        return 0;
+    }
+
+    public function sumTotal($values)
+    {
+        $total = 0;
+        foreach ($values as $value){
+            if(is_numeric($value)){
+                $total+=$value;
+            }
+        }
+        return $total;
+    }
+
+    public function getValidData($string, $col_name)
+    {
+        $tomorrow_string = Carbon::tomorrow();
+        $today = Carbon::today()->format('Y-m-d');
+        if(str_contains($tomorrow_string->format('l') ,'Friday')){
+            $tomorrow_string->addDays(2);
+        }
+        $tomorrow = $tomorrow_string->format('Y-m-d');
+
+        $today_mail_status = Report::query()->where('student_id', '=', request()->student_id)->where('created_at', 'LIKE', $today . ' %')->first()->mail_status ?? 0;
+
+        if($today_mail_status){
+            if($tomorrow == request()->created_at){
+                if(isset($string) && !is_null($string)){
+                    return $string;
+                }
+                return Report::query()->where('student_id', '=', request()->student_id)->where('created_at', 'LIKE', request()->created_at . ' %')->first()->$col_name ?? '';
+            }
+
+            if(isset($string) && !is_null($string)){
+                return $string;
+            }
+            return Report::query()->where('student_id', '=', request()->student_id)->where('created_at', 'LIKE', $today . ' %')->first()->$col_name ?? '';
+        }
+
+        return $string;
+    }
+
+    public function getValidGrade($string, $col_name)
+    {
+
+        $tomorrow_string = Carbon::tomorrow();
+        $today = Carbon::today()->format('Y-m-d');
+        if(str_contains($tomorrow_string->format('l') ,'Friday')){
+            $tomorrow_string->addDays(2);
+        }
+        $tomorrow = $tomorrow_string->format('Y-m-d');
+
+        $today_mail_status = Report::query()->where('student_id', '=', request()->student_id)->where('created_at', 'LIKE', $today . ' %')->first()->mail_status ?? 0;
+
+        if($today_mail_status){
+            if($tomorrow == request()->created_at){
+                if(isset($string) && !is_null($string)){
+                    return $string;
+                }
+                return Report::query()->where('student_id', '=', request()->student_id)->where('created_at', 'LIKE', request()->created_at . '%')->first()->$col_name ?? '';
+            }
+
+            if(is_numeric($string)){
+                return $string;
+            }
+            return Report::query()->where('student_id', '=', request()->student_id)->where('created_at', 'LIKE', request()->created_at . '%')->first()->$col_name ?? '';
+        }
+
+        return $string;
+    }
 
     public static function checkReportNotSent()
     {
@@ -1030,5 +1025,5 @@ class ReportController extends Controller
         Notification::send($teacher, new TecherReport($ids));
         Log::alert('sssss' . $ids);
     }
-    
+
 }
