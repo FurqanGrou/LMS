@@ -88,6 +88,13 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a href="{{ route('admins.audits.index') }}">
+                    <i class="fa fa-server"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">فاعليات المستخدم</span>
+                </a>
+            </li>
+
         </ul>
 
     </div>
