@@ -192,11 +192,14 @@
 
     </div>
 
-    <form id="monthly_report" method="POST" action="{{ route('teachers.send.report', request()->student_id . '?date_filter=' . request()->date_filter) }}">
-        @csrf
-
-        <input type="submit" style="z-index: 1001; position: fixed; top: 50%; right: -2%;transform: translate(-50%, 0);" class="btn btn-danger" id="btn-send-report" value="ارسال">
-
+    <input type="submit" style="display:none; z-index: 1001; position: fixed; top: 40%; right: -43px;transform: translate(-50%, 0);" class="btn btn-info month-rep" id="btn-send-report-month" value="شهري">
+<br>
+<form id="monthly_report" method="POST" action="{{ route('teachers.send.report', request()->student_id . '?date_filter=' . request()->date_filter) }}">
+    @csrf
+    
+    <input type="submit" style="z-index: 1001; position: fixed; top: 50%; right: -2%;transform: translate(-50%, 0);" class="btn btn-danger" id="btn-send-report" value="ارسال">
+        
+        <input type="hiddn" value="0" id="monthly-report-val" name="monthly">
         <input type="hidden" id="student_id" name="student_id" value="{{ request()->student_id }}">
         <div class="table-box">
         <table id="tables" style="pointer-events:none; display: flex;
@@ -465,6 +468,19 @@
     <script>
         $(document).ready(function() {
 
+            var todaysDate = new Date();
+ 
+
+            if(todaysDate.getDate() <= 31 && todaysDate.getDate() >=29) { 
+                $('#btn-send-report-month').css('display','unset');
+            };
+
+            $('.month-rep').on('click',function(){
+                if(confirm("ارسال التقرير الشهري؟")){
+                    $('#monthly-report-val').attr('value','1');
+                    $('#monthly_report').submit();
+                }
+            });
             $('#edit-repo').on('click',function(){
                 $('#tables').css('pointer-events','unset');
             });
