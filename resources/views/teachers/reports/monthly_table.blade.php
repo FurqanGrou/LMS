@@ -385,7 +385,14 @@
                     عدد أيام الغياب بعذر / Number of absence days with excuse
                 </td>
                 <td colspan="2" style="text-align: center">
-                    {{ count($reports->where('absence', '=', -2)->pluck('absence')->toArray()) }}
+                <?php $absence = count($reports->where('absence', '=', -2)->pluck('absence')->toArray());
+                      $path =\App\Classes::where('class_number',$reports[0]->class_number)->first('path')['path']
+                ?>
+                @if ($path=='قسم التلاوة')
+                    @if((8+$absence) >=0)  {{$absence}} @else 0 @endif
+                @else
+                    {{$absence}}
+                @endif
                 </td>
             </tr>
             <tr style="height: 40px">
