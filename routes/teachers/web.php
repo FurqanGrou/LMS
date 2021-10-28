@@ -47,12 +47,20 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     Route::put('/teachers/{teacher}/change-password', 'TeacherController@changePassword')->name('change_password.post');
 
     // attendance
+    Route::get('/attendance/list', 'AttendanceController@index')->name('attendance.list');
     Route::get('/attendance', 'AttendanceController@create')->name('attendance.index');
     Route::post('/attendance', 'AttendanceController@store')->name('attendance.store');
 
     // request services
-    Route::get('/request-services', 'RequestServiceController@create')->name('request_services.index');
-    Route::post('/request-services', 'RequestServiceController@store')->name('request_services.store');
+//    Route::get('/request-services/{form}', 'RequestServiceController@createExamRequest')->name('request_services.form');
+//    Route::post('/request-services', 'RequestServiceController@store')->name('request_services.store');
+//
+//    Route::get('/request-services/exams', 'RequestServiceController@exam')->name('request_services.form');
+//    Route::get('/request-services/exams/show/{service}', 'RequestServiceController@showExam')->name('request_services.show_exam');
+
+    Route::get('/request-services/excuse', 'SuggestComplaintBoxController@index')->name('request_services.index');
+    Route::get('/request-services/excuse/create', 'SuggestComplaintBoxController@create')->name('request_services.create');
+    Route::post('/request-services/excuse', 'SuggestComplaintBoxController@store')->name('request_services.store');
 
 });
 

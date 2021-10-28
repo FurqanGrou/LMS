@@ -187,7 +187,7 @@
             <span style="color:#C65911;">الشهر / Month:</span>
         </p>
         <p>
-            <a href="#" id="edit-repo" class="btn btn-info"> تعديل</a>    
+            <a href="#" id="edit-repo" class="btn btn-info"> تعديل</a>
         </p>
 
     </div>
@@ -219,7 +219,7 @@
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">من</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">إلى</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 50px;">اخر 5 صفحات</th>
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 120;">المراجعة اليومية</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 120px;">المراجعة اليومية</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">من</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">إلى</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">خطأ</th>
@@ -452,8 +452,6 @@
 @endsection
 
 @push('js')
-
-
 
     <script>
         $(document).ready(function() {

@@ -21,6 +21,8 @@ class CreateAttendancesTable extends Migration
             $table->enum('section', ['male', 'female']);
             $table->enum('type', ['login', 'logout']);
             $table->string('period');
+            $table->integer('teacher_id');
+            $table->string('action_code')->unique();
             $table->timestamps();
         });
     }
