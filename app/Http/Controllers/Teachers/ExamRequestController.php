@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Teachers;
 
 use App\Chapter;
 use App\ExamRequest;
+use App\Part;
 use App\Teacher;
 use App\User;
 use Illuminate\Http\Request;
@@ -11,16 +12,17 @@ use App\Http\Controllers\Controller;
 
 class ExamRequestController extends Controller
 {
+
     public function index()
     {
-
+        return '';
     }
 
     public function create()
     {
         $students = User::all();
         $teachers = Teacher::all();
-        $chapters = Chapter::all();
+        $chapters = Part::all();
 
         return view('teachers.request_services.exams.create', ['students' => $students, 'teachers' => $teachers, 'chapters' => $chapters]);
     }

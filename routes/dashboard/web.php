@@ -46,6 +46,7 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
     // import lessons and chapters
     Route::get('importLessons', 'ImportExportController@importLessons')->name('import.lessons');
     Route::get('importChapters', 'ImportExportController@importChapters')->name('import.chapters');
+    Route::get('importParts', 'ImportExportController@importParts')->name('import.parts');
 
     // import classes
 //    Route::get('importClasses', 'ImportExportController@importClassesView')->name('import.classes.view');
@@ -90,12 +91,13 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
 
     // attendance export
     Route::get('attendance-export', 'AttendanceController@exportIndex')->name('attendance.export_index');
-    Route::post('attendance-export', 'AttendanceController@export')->name('attendance.export');
+    Route::post('attendance-export', 'ImportExportController@export')->name('attendance.export');
 
     // request services
-    Route::get('/request-services', 'RequestServiceController@index')->name('request_services.index');
-    Route::get('/request-services/{service}', 'RequestServiceController@show')->name('request_services.show');
-    Route::put('/request-services/{service}/update', 'RequestServiceController@update')->name('request_services.update');
+//    Route::get('/request-services', 'RequestServiceController@index')->name('request_services.index');
+//    Route::get('/request-services/{service}', 'RequestServiceController@show')->name('request_services.show');
+//    Route::put('/request-services/{service}/update', 'RequestServiceController@update')->name('request_services.update');
+    Route::get('request-services/export', 'ImportExportController@exportExamsRequests')->name('request_services.exams.export');
 
 });
 
