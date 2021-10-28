@@ -62,6 +62,10 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     Route::get('/request-services/excuse/create', 'SuggestComplaintBoxController@create')->name('request_services.create');
     Route::post('/request-services/excuse', 'SuggestComplaintBoxController@store')->name('request_services.store');
 
+    Route::get('/request-services/exam', 'ExamRequestController@index')->name('request_services.exam.index');
+    Route::get('/request-services/exam/create', 'ExamRequestController@create')->name('request_services.exam.create');
+    Route::post('/request-services/exam', 'ExamRequestController@store')->name('request_services.exam.store');
+
 });
 
 Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Controllers\Auth'], function (){

@@ -56,5 +56,10 @@ class Teacher extends Authenticatable implements Auditable
         return $this->hasMany(SuggestComplaintBox::class, 'teacher_id');
     }
 
+    public function examRequests()
+    {
+        return $this->hasMany(ExamRequest::class, 'teacher_id');
+    }
+
 
 }
