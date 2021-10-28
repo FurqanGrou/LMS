@@ -35,9 +35,6 @@
                     </div>
                 @endif
 
-                <div style="width: 100px; margin: auto; max-width: 100px; display: flex; justify-content: center;">
-                    <x-request-service-form></x-request-service-form>
-                </div>
                 <ul class="nav navbar-nav float-right">
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
