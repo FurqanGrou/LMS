@@ -30,15 +30,14 @@ class AbsencesExport implements FromCollection, WithHeadings, WithStyles, Should
     {
         $reports = DB::table('reports')
                     ->select('reports.date',
-                        'users.name as student_name',
                         'users.student_number as student_number',
                         DB::raw('(CASE
-                        WHEN users.section = "male" THEN "بنين"
-                        ELSE "بنات"
+                        WHEN users.section = "male" THEN "1"
+                        ELSE "2"
                         END) AS user_section'),
                         DB::raw('(CASE
-                        WHEN reports.absence = "-2" THEN "بعذر"
-                        ELSE "بدون عذر"
+                        WHEN reports.absence = "-2" THEN "-2"
+                        ELSE "-5"
                         END) AS absence')
                     )
                     ->join('users', 'users.id', '=', 'reports.student_id')
@@ -56,11 +55,10 @@ class AbsencesExport implements FromCollection, WithHeadings, WithStyles, Should
     public function headings(): array
     {
         return [
-            'اليوم والتاريخ',
-            'اسم الطالب',
-            'رقم الطالب',
-            'القسم',
-            'نوع الغياب',
+            'date',
+            'student_number',
+            'section',
+            'absenteeism_type',
         ];
     }
 
