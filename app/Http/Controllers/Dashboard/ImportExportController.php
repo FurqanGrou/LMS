@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Exports\ExamRequestsExport;
 use App\Http\Controllers\Controller;
 use App\Imports\ChapterImport;
 use App\Imports\ClassesTeachersImport;
 use App\Imports\LessonImport;
+use App\Imports\PartImport;
 use App\Report;
 use App\Teacher;
 use App\User;
@@ -57,6 +59,22 @@ class ImportExportController extends Controller
     {
         Excel::import(new ChapterImport(), 'chapters.xlsx');
         return 'Done';
+    }
+
+    public function importParts()
+    {
+        Excel::import(new PartImport(), 'parts.xlsx');
+        return 'Done';
+    }
+
+    public function exportExamsRequests(Request $request)
+    {
+//        $request->validate([
+//            'date_from' => 'required|date',
+//            'date_to' => 'required|date',
+//        ]);
+
+        return Excel::download(new ExamRequestsExport($request->date_from, $request->date_to), 'reports.xlsx');
     }
 
 }
