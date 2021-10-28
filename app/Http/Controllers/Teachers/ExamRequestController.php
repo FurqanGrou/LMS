@@ -13,7 +13,7 @@ class ExamRequestController extends Controller
 {
     public function index()
     {
-        
+
     }
 
     public function create()
