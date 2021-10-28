@@ -12,7 +12,6 @@ use App\Http\Controllers\Controller;
 
 class ExamRequestController extends Controller
 {
-
     public function index()
     {
         return '';
