@@ -82,6 +82,21 @@
             </li>
 
             <li class="nav-item">
+                <a href="#">
+                    <i class="ft-folder"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">تصدير طلبات الاختبارات</span>
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{ route('admins.request_services.exams.export') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="ft-folder"></i>
+                            تصدير طلبات الاختبارات
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
                 <a href="{{ route('log-viewer::logs.list') }}">
                     <i class="fa fa-bug"></i>
                     <span class="menu-title" data-i18n="nav.templates.main">اخطاء النظام</span>
