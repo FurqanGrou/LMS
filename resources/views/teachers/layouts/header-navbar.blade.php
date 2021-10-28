@@ -30,7 +30,7 @@
                 </ul>
 
                 @if(\Route::currentRouteName() == 'teachers.teacher.index')
-                    <div style="width: 100px; margin: auto; margin-top: 20px; max-width: 100px; display: flex; justify-content: center;">
+                    <div style="width: 320px; margin: auto; margin-top: 20px; max-width: 320px; display: flex; justify-content: center;">
                         <x-attendance></x-attendance>
                     </div>
                 @endif
