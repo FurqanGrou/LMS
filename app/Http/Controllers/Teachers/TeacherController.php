@@ -20,10 +20,6 @@ class TeacherController extends Controller
 
     public function index(TeachertDatatable $teacher)
     {
-
-//        $time = Carbon::now();
-//        dd($time->format('g:i A'));
-
         return $teacher->render('teachers.classes.index');
     }
 

@@ -58,4 +58,14 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function (){
+            $(document).on('change', '#request_form_type', function(){
+                if ($(this).val()){
+                    window.location.href = $(this).val();
+                }
+            });
+        });
+    </script>
+
     @stack('js')

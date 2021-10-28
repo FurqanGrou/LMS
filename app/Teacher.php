@@ -46,5 +46,15 @@ class Teacher extends Authenticatable implements Auditable
         return $this->belongsToMany(Classes::class, 'classes_teachers');
     }
 
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'teacher_id');
+    }
+
+    public function suggestsComplaints()
+    {
+        return $this->hasMany(SuggestComplaintBox::class, 'teacher_id');
+    }
+
 
 }

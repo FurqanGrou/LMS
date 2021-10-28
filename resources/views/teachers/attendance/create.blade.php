@@ -30,20 +30,4 @@
 @endsection
 
 @push('js')
-{{--    <script>--}}
-{{--        $(function() {--}}
-{{--            $('.toggle-status').change(function() {--}}
-{{--                var status = $(this).prop('checked') == true ? 0 : 1;--}}
-{{--                $.ajax({--}}
-{{--                    type: "GET",--}}
-{{--                    dataType: "json",--}}
-{{--                    url: '{{ route('teachers.disable.teachers.login') }}',--}}
-{{--                    data: {'status': status},--}}
-{{--                    success: function(data){--}}
-{{--                        // console.log(data.status);--}}
-{{--                    }--}}
-{{--                });--}}
-{{--            })--}}
-{{--        })--}}
-{{--    </script>--}}
 @endpush

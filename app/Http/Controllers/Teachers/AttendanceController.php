@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Teachers;
 
+use App\DataTables\AttendanceTeachersDatatable;
 use App\Http\Controllers\Controller;
 use App\Attendance;
+use App\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -72,6 +74,8 @@ class AttendanceController extends Controller
             'section' => auth()->guard('teacher_web')->user()->section,
             'type' => $type,
             'period' => $period,
+            'teacher_id' => auth()->user()->id,
+            'action_code' => uniqid(),
         ]);
 
         if (!$status){
@@ -80,5 +84,11 @@ class AttendanceController extends Controller
         }
 
         return redirect()->back();
+    }
+
+
+    public function index(AttendanceTeachersDatatable $attendanceTeachersDatatable)
+    {
+        return $attendanceTeachersDatatable->render('teachers.attendance.index');
     }
 }
