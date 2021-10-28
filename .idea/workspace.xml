@@ -24,9 +24,9 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/attendance.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/attendance.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/layouts/header-navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/layouts/header-navbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/layouts/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/layouts/side-menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/SuggestComplaintBox.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/SuggestComplaintBox.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Teacher.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Teacher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/teachers/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/teachers/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +177,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/teachers/request_services/excuse" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/teachers/request_services/exams" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -190,9 +190,9 @@
       <recent name="B:\LMS\staging\lms_3_staging\public\dashboard\excel_files" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\LMS\lms_hatim\resources\views\teachers\request_services\exams" />
       <recent name="B:\LMS\lms_hatim\resources\views\teachers\request_services\excuse" />
       <recent name="B:\LMS\lms_hatim\app\DataTables" />
-      <recent name="B:\LMS\lms_hatim\resources\views\teachers\request_services\exams" />
       <recent name="B:\LMS\lms_hatim\resources\views\teachers\request_services" />
       <recent name="B:\LMS\lms_hatim\resources\views\teachers\attendance" />
     </key>
@@ -313,7 +313,7 @@
       <workItem from="1635166571223" duration="15444000" />
       <workItem from="1635195598731" duration="832000" />
       <workItem from="1635253034604" duration="16204000" />
-      <workItem from="1635337010218" duration="33450000" />
+      <workItem from="1635337010218" duration="36785000" />
     </task>
     <servers />
   </component>
@@ -337,10 +337,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1635193954898" />
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1635413772581">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1635418878459">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1635413772581" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1635418878459" />
     <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1635195595194">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -353,14 +353,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1635260767590" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1635413933537">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1635416113093">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1635413933537" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1635415775359">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1635416113093" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1635416272756">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1635415775359" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1635416272756" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
