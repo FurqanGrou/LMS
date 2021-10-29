@@ -12,14 +12,7 @@ class Attendance extends Model
 
     public function getCreatedAtAttribute($value)
     {
-        return $this->asDateTime($value)->format('Y-m-d H:i:s');
-    }
-
-    protected static function booted()
-    {
-        static::creating(function (Attendance $attendance) {
-            $attendance->created_at = Carbon::now()->addHours(8);
-        });
+        return $this->asDateTime($value)->timezone('Asia/Riyadh')->format('Y-m-d H:i:s');
     }
 
     public function teacher()
