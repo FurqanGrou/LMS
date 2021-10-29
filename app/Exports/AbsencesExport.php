@@ -29,7 +29,7 @@ class AbsencesExport implements FromCollection, WithHeadings, WithStyles, Should
     public function collection()
     {
         $reports = DB::table('reports')
-                    ->select('reports.date',
+                    ->select(DB::raw('substr(reports.date, -10)'),
                         'users.student_number as student_number',
                         DB::raw('(CASE
                         WHEN users.section = "male" THEN "1"
