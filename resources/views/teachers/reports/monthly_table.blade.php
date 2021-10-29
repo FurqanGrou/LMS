@@ -40,7 +40,7 @@
         }
 
         th{
-            z-index: 999999;
+            z-index: 100;
             background-color: #C6E0B4;
             position: sticky;
                     top: 0;
