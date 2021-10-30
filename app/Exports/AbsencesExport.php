@@ -29,7 +29,7 @@ class AbsencesExport implements FromCollection, WithHeadings, WithStyles, Should
     public function collection()
     {
         $reports = DB::table('reports')
-                    ->select('reports.date',
+                    ->select(DB::raw('substr(reports.date, -10)'),
                         'users.student_number as student_number',
                         DB::raw('(CASE
                         WHEN users.section = "male" THEN "1"
@@ -39,7 +39,7 @@ class AbsencesExport implements FromCollection, WithHeadings, WithStyles, Should
                         WHEN reports.absence = "-2" THEN "-2"
                         ELSE "-5"
                         END) AS absence')
-                    )
+                    ) 
                     ->join('users', 'users.id', '=', 'reports.student_id')
                     ->whereBetween('reports.created_at', [$this->date_from, $this->date_to]);
 

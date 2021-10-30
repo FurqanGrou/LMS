@@ -91,7 +91,7 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
 
     // attendance export
     Route::get('attendance-export', 'AttendanceController@exportIndex')->name('attendance.export_index');
-    Route::post('attendance-export', 'ImportExportController@export')->name('attendance.export');
+    Route::post('attendance-export', 'AttendanceController@export')->name('attendance.export');
 
     // request services
 //    Route::get('/request-services', 'RequestServiceController@index')->name('request_services.index');
