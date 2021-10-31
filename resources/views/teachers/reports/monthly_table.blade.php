@@ -199,7 +199,7 @@
     
     <input type="submit" style="z-index: 1001; position: fixed; top: 50%; right: -2%;transform: translate(-50%, 0);" class="btn btn-danger" id="btn-send-report" value="ارسال">
         
-        <input type="hiddn" value="0" id="monthly-report-val" name="monthly">
+        <input type="hidden" value="0" id="monthly-report-val" name="monthly">
         <input type="hidden" id="student_id" name="student_id" value="{{ request()->student_id }}">
         <div class="table-box">
         <table id="tables" style="pointer-events:none; display: flex;
