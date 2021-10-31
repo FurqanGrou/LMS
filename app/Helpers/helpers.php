@@ -582,9 +582,9 @@ function getRate($percentage, $lang){
         $message = ['ar' => 'جيد جداً', 'en' => 'Very Good'];
     }elseif ($percentage >= 70){
         $message = ['ar' => 'جيد', 'en' => 'Good'];
-    }elseif ($percentage >= 50){
+    }elseif ($percentage >= 60){
         $message = $message = ['ar' => 'مقبول', 'en' => 'Pass'];
-    }elseif ($percentage < 50){
+    }elseif ($percentage < 60){
         $message = $message = ['ar' => 'ضعيف', 'en' => 'Low'];
     }
     return $message[$lang];
