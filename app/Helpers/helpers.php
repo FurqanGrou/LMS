@@ -185,9 +185,9 @@ function isAchievedDefaultGrades($student_id){
 
     $student_path = getStudentPath($student_id);
     $default_new_lesson_grade = getPathDefaultGrade($student_path, 'new_lesson');
-    $default_daily_revision_grade = getPathDefaultGrade($student_path, 'new_lesson');
-    $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'new_lesson');
-    $default_behavior_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_daily_revision_grade = getPathDefaultGrade($student_path, 'daily_revision');
+    $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'last_5_pages');
+    $default_behavior_grade = getPathDefaultGrade($student_path, 'behavior');
 
     $result = Report::query()
         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
@@ -245,9 +245,9 @@ function getLessonsNotListenedCount($student_id){
 
     $student_path = getStudentPath($student_id);
     $default_new_lesson_grade = getPathDefaultGrade($student_path, 'new_lesson');
-    $default_daily_revision_grade = getPathDefaultGrade($student_path, 'new_lesson');
-    $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'new_lesson');
-    $default_behavior_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_daily_revision_grade = getPathDefaultGrade($student_path, 'daily_revision');
+    $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'last_5_pages');
+    $default_behavior_grade = getPathDefaultGrade($student_path, 'behavior');
 
     $monthly_report_statistics = Report::query()
         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
@@ -352,9 +352,9 @@ function getLastFivePagesNotListenedCount($student_id){
 
     $student_path = getStudentPath($student_id);
     $default_new_lesson_grade = getPathDefaultGrade($student_path, 'new_lesson');
-    $default_daily_revision_grade = getPathDefaultGrade($student_path, 'new_lesson');
-    $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'new_lesson');
-    $default_behavior_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_daily_revision_grade = getPathDefaultGrade($student_path, 'daily_revision');
+    $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'last_5_pages');
+    $default_behavior_grade = getPathDefaultGrade($student_path, 'behavior');
 
     $monthly_report_statistics = Report::query()
         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
@@ -458,9 +458,9 @@ function getDailyRevisionNotListenedCount($student_id){
 
     $student_path = getStudentPath($student_id);
     $default_new_lesson_grade = getPathDefaultGrade($student_path, 'new_lesson');
-    $default_daily_revision_grade = getPathDefaultGrade($student_path, 'new_lesson');
-    $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'new_lesson');
-    $default_behavior_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_daily_revision_grade = getPathDefaultGrade($student_path, 'daily_revision');
+    $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'last_5_pages');
+    $default_behavior_grade = getPathDefaultGrade($student_path, 'behavior');
     // get summation of grades less than default and greater than zero in daily_revision_grade column
     // get count of records that daily_revision_grade column is zero, empty or null
 
