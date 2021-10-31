@@ -75,7 +75,137 @@ function getAbsenceCount($student_id, $type){
         ->where('absence', '=', $type)
         ->count();
 
+    // معندوش اي نقص باي يوم عن الدرجات الافتراضية True
+    // يكون عنده ايام غياب True
+    if (isAchievedDefaultGrades($student_id) && $absence_times){
+        // يتم التعويض من خلال ايام الجمعة والسبت بدل ايام الغياب بعذر
+        // ومن ثم الغياب بدون عذر بحيث تكون الاولوية للغياب بعذر في التعويض
+
+        // هنجيب عدد ايام الحضور التعويضي
+        $compensation_days = Report::query()
+            ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+            ->whereDate('created_at', '<', $today)
+            ->where(function ($query){
+                $query->where('date', 'like', '%Friday%');
+                $query->orWhere('date', 'like', '%Saturday%');
+            })->where('student_id', '=', $student_id)
+            ->count();
+
+        // لازم نجيب عدد ايام الغياب بعذر
+        $excuse_days = Report::query()
+            ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+            ->whereDate('created_at', '<', $today)
+            ->where('date', 'not like', '%Saturday%')
+            ->where('date', 'not like', '%Friday%')
+            ->where('student_id', '=', $student_id)
+            ->where('absence', '=', -2)
+            ->count();
+
+        $remainder_compensation_days = max($compensation_days - $excuse_days, 0);
+        // لو كان عدد ايام الحضور التعويضي اقل من او يساوي الغياب بعذر
+        // ننتهي هنا ولا نتوجه للتعويض في البدون عذر
+        if($type == -2){
+            return max($excuse_days - $compensation_days, 0);
+        }
+
+        if($type == -5) {
+            // غير كدا هنروح نجيب ما تبقي من عدد ايام الحضور التعويضي ونطرحه من عدد ايام الغياب بدون عذر
+            // الناتج النهائي من هذه المعادالات نستخدمه في السطر التالي
+            $unexcused_days = Report::query()
+                ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+                ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+                ->whereDate('created_at', '<', $today)
+                ->where('date', 'not like', '%Saturday%')
+                ->where('date', 'not like', '%Friday%')
+                ->where('student_id', '=', $student_id)
+                ->where('absence', '=', -5)
+                ->count();
+
+            // هنروح نجيب عدد ايام الحضور في السبت والجمعة ونعمللها طرح - من عدد ايام الغياب
+            return max($unexcused_days - $remainder_compensation_days, 0);
+        }
+    }
+
     return $absence_times;
+}
+
+function getStudentPath($student_id){
+    return \App\User::find($student_id)->path;
+}
+
+function getPathDefaultGrade($path, $grade){
+    if($path == "قسم الحفظ" || $path == "قسم الهجاء" || $path == "قسم التأسيس"){
+        switch ($grade){
+            case "new_lesson":
+                return 1;
+            case "last_5_pages":
+                return 1;
+            case "daily_revision":
+                return 2;
+            case "behavior":
+                return 1;
+        }
+    }elseif ($path == "قسم التلاوة"){
+        switch ($grade){
+            case "new_lesson":
+                return 2;
+            case "last_5_pages":
+                return 1;
+            case "daily_revision":
+                return 1;
+            case "behavior":
+                return 1;
+        }
+    }elseif ($path == "تمكين"){
+        switch ($grade){
+            case "new_lesson":
+                return 3;
+            case "last_5_pages":
+                return 1;
+            case "daily_revision":
+                return 1;
+            case "behavior":
+                return 1;
+        }
+    }
+}
+
+function isAchievedDefaultGrades($student_id){
+
+    $today = Carbon::tomorrow();
+    $currentMonth = date('m');
+    $currentYear = date('Y');
+
+    if(request()->date_filter) {
+        $currentMonth = substr(request()->date_filter, -2);
+        $currentYear = substr(request()->date_filter, 0, 4);
+    }
+
+    $student_path = getStudentPath($student_id);
+    $default_new_lesson_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_daily_revision_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_behavior_grade = getPathDefaultGrade($student_path, 'new_lesson');
+
+    $result = Report::query()
+        ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+        ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+        ->whereDate('created_at', '<', $today)
+        ->where('date', 'not like', '%Saturday%')
+        ->where('date', 'not like', '%Friday%')
+        ->where('student_id', '=', $student_id)
+        ->where(function ($query) use ($default_new_lesson_grade, $default_last_5_pages_grade, $default_daily_revision_grade, $default_behavior_grade){
+            $query->where('lesson_grade', '<', $default_new_lesson_grade);
+            $query->orWhere('last_5_pages_grade', '<', $default_last_5_pages_grade);
+            $query->orWhere('daily_revision_grade', '<', $default_daily_revision_grade);
+            $query->orWhere('behavior_grade', '<', $default_behavior_grade);
+        })
+        ->where('absence', '=', '0')
+        ->count();
+
+    return $result > 0 ? false : true;
 }
 
 function checkThirdCondition($student_id){

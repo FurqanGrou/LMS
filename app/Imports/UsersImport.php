@@ -73,6 +73,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
 
             $father_email = str_replace(' ', '', $row['bryd_alab']);
             $mother_email = str_replace(' ', '', $row['bryd_alam']);
+            $path = trim($row['almsar']);
 
             //if exists is true update current student data
             if($exists_student){
@@ -83,7 +84,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'login_time'      => $row['okt_aldkhol'],
                     'father_mail'     => $father_email,
                     'mother_mail'     => $mother_email,
-                    'path'            => $row['almsar'],
+                    'path'            => $path,
                     'status'          => $row['odaa_altalb'],
                 ]);
 
@@ -101,7 +102,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'status'          => $row['odaa_altalb'],
                     'section'         => $row['alksm'] == 'بنات' ? 'female' : 'male' ,
                     'login_time'      => $row['okt_aldkhol'],
-                    'path'            => $row['almsar'],
+                    'path'            => $path,
                     'password'        => \Hash::make('12345'),
                     'class_number'    => $row['rkm_alhlk'],
                 ]);
