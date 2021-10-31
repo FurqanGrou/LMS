@@ -409,16 +409,16 @@
                         General Score
                     </div>
                     <div style="border: 1px solid black;width: 50%">
-                        {{ getRate(100 + ( (getLessonsNotListenedCount(request()->student_id) * getPathDefaultGrade(getStudentPath($student_id), 'new_lesson')) +
-                                    (getLastFivePagesNotListenedCount(request()->student_id) * getPathDefaultGrade(getStudentPath($student_id), 'last_5_pages')) +
-                                    (getDailyRevisionNotListenedCount(request()->student_id) * getPathDefaultGrade(getStudentPath($student_id), 'daily_revision')) +
+                        {{ getRate(100 + ( (getLessonsNotListenedCount(request()->student_id) * getPathDefaultGrade(getStudentPath(request()->student_id), 'new_lesson')) +
+                                    (getLastFivePagesNotListenedCount(request()->student_id) * getPathDefaultGrade(getStudentPath(request()->student_id), 'last_5_pages')) +
+                                    (getDailyRevisionNotListenedCount(request()->student_id) * getPathDefaultGrade(getStudentPath(request()->student_id), 'daily_revision')) +
                                     (getAbsenceCount(request()->student_id, -2)) +
                                     (getAbsenceCount(request()->student_id, -5))
                                     ), 'ar') }}
                         <br>
-                        {{ getRate(100 + ( (getLessonsNotListenedCount(request()->student_id) * getPathDefaultGrade(getStudentPath($student_id), 'new_lesson')) +
-                                    (getLastFivePagesNotListenedCount(request()->student_id) * getPathDefaultGrade(getStudentPath($student_id), 'last_5_pages')) +
-                                    (getDailyRevisionNotListenedCount(request()->student_id) * getPathDefaultGrade(getStudentPath($student_id), 'daily_revision')) +
+                        {{ getRate(100 + ( (getLessonsNotListenedCount(request()->student_id) * getPathDefaultGrade(getStudentPath(request()->student_id), 'new_lesson')) +
+                                    (getLastFivePagesNotListenedCount(request()->student_id) * getPathDefaultGrade(getStudentPath(request()->student_id), 'last_5_pages')) +
+                                    (getDailyRevisionNotListenedCount(request()->student_id) * getPathDefaultGrade(getStudentPath(request()->student_id), 'daily_revision')) +
                                     (getAbsenceCount(request()->student_id, -2)) +
                                     (getAbsenceCount(request()->student_id, -5))
                                     ), 'en') }}
