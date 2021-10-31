@@ -119,13 +119,16 @@
             <span style="color:#C65911;">الشهر / Month:</span>
         </p>
 
+        <p>
+            <a href="#" id="edit-repo" class="btn btn-info"> تعديل</a>    
+        </p>
     </div>
 
     <form id="monthly_report" action="#">
         @csrf
         <input type="hidden" id="student_id" name="student_id" value="{{ request()->student_id }}">
 
-        <table id="tables" style="display: flex;
+        <table id="tables" style="pointer-events:none;display: flex;
             justify-content: space-between;
             margin-bottom: 50px;
             border: none;
@@ -336,6 +339,7 @@
                     General Score
                 </div>
                 <div style="border: 1px solid black;width: 50%">
+
                     {{ getRate(100 + (
                                     (getLessonsNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'new_lesson')) +
                                     (getLastFivePagesNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'last_5_pages')) +
@@ -352,6 +356,7 @@
                                     (getAbsenceCount(request()->student_id, -2) * -2) +
                                     (getAbsenceCount(request()->student_id, -5) * -5)
                                 ), 'en') }}
+
                 </div>
 
             </td>
@@ -360,6 +365,7 @@
                 <br>
                 Percentage
             </td>
+
             <td style="text-align: center; padding: 5px 15px">
                 {{
                     100 + (
@@ -370,6 +376,7 @@
                             (getAbsenceCount(request()->student_id, -5) * -5)
                           )
                 }}
+
             </td>
         </tr>
         </tbody>
@@ -383,6 +390,11 @@
 
     <script>
         $(document).ready(function(){
+
+            $('#edit-repo').on('click',function(){
+                $('#tables').css('pointer-events','unset');
+            });
+
 
             setTimeout(function() {
                 if($('html').hasClass('loaded')){

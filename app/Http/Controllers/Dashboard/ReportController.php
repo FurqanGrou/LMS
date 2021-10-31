@@ -117,12 +117,17 @@ class ReportController extends Controller
             $tomorrow->addDays(2);
         }
 
+        
+
+
         $grades_report = Report::query()
             ->where('student_id', '=', $request->student_id)
-            ->whereMonth('created_at', '=', $today->month)
-            ->whereDay('created_at', '=', $today->day)
-            ->whereYear('created_at', '=', $today->year)
-            ->whereNotNull('lesson_grade')
+            ->whereMonth('created_at', '=', $today->month);
+            if (!$request->monthly) {
+                $grades_report= $grades_report->whereDay('created_at', '=', $today->day)
+                ->whereYear('created_at', '=', $today->year);
+            }
+            $grades_report= $grades_report->whereNotNull('lesson_grade')
             ->where('lesson_grade', '!=', '')
             ->whereNotNull('last_5_pages_grade')
 //                        ->where('last_5_pages_grade', '!=', '')
@@ -140,10 +145,12 @@ class ReportController extends Controller
 
         $lessons_report = Report::query()
             ->where('student_id', '=', $request->student_id)
-            ->whereMonth('created_at', '=', $tomorrow->month)
-            ->whereDay('created_at', '=', $tomorrow->day)
-            ->whereYear('created_at', '=', $tomorrow->year)
-            ->whereNotNull('new_lesson')
+            ->whereMonth('created_at', '=', $tomorrow->month);
+            if (!$request->monthly) {
+                $lessons_report=$lessons_report->whereDay('created_at', '=', $tomorrow->day)
+                    ->whereYear('created_at', '=', $tomorrow->year);
+            }
+            $lessons_report=$lessons_report->whereNotNull('new_lesson')
             ->where('new_lesson', '!=', '')
             ->whereNotNull('new_lesson_from')
             ->where('new_lesson_from', '!=', '')
@@ -160,12 +167,12 @@ class ReportController extends Controller
             ->first();
 
         if(is_null($grades_report) || is_null($lessons_report)){
-            session()->flash('error', 'لم يتم ارسال التقرير اليومي يرجى التأكد من إدخال جميع البيانات!!');
+            session()->flash('error', 'لم يتم ارسال التقرير يرجى التأكد من إدخال جميع البيانات!!');
             return redirect()->route('admins.report.table', $request->student_id);
         }
 
         $this->sendReport($grades_report, $lessons_report);
-        session()->flash('success', 'تم ارسال التقرير اليومي بنجاح');
+        session()->flash('success', 'تم ارسال التقرير بنجاح');
         if(request()->date_filter) {
             return redirect()->route('admins.report.table', $request->student_id . '?date_filter=' . request()->date_filter);
         }

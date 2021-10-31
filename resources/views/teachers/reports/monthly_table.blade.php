@@ -40,7 +40,7 @@
         }
 
         th{
-            z-index: 999999;
+            z-index: 100;
             background-color: #C6E0B4;
             position: sticky;
                     top: 0;
@@ -186,20 +186,20 @@
             &nbsp; {{ \Carbon\Carbon::create()->year(2021)->month($month)->format('F') . ' ' . date('Y') }}
             <span style="color:#C65911;">الشهر / Month:</span>
         </p>
-        <p>
-            <a href="#" id="edit-repo" class="btn btn-info"> تعديل</a>
-        </p>
 
     </div>
 
-    <form id="monthly_report" method="POST" action="{{ route('teachers.send.report', request()->student_id . '?date_filter=' . request()->date_filter) }}">
-        @csrf
-
-        <input type="submit" style="z-index: 1001; position: fixed; top: 50%; right: -2%;transform: translate(-50%, 0);" class="btn btn-danger" id="btn-send-report" value="ارسال">
-
+    <input type="submit" style="display:none; z-index: 1001; position: fixed; top: 40%; right: -43px;transform: translate(-50%, 0);" class="btn btn-info month-rep" id="btn-send-report-month" value="شهري">
+<br>
+<form id="monthly_report" method="POST" action="{{ route('teachers.send.report', request()->student_id . '?date_filter=' . request()->date_filter) }}">
+    @csrf
+    
+    <input type="submit" style="z-index: 1001; position: fixed; top: 50%; right: -2%;transform: translate(-50%, 0);" class="btn btn-danger" id="btn-send-report" value="ارسال">
+        
+        <input type="hiddn" value="0" id="monthly-report-val" name="monthly">
         <input type="hidden" id="student_id" name="student_id" value="{{ request()->student_id }}">
         <div class="table-box">
-        <table id="tables" style="pointer-events:none; display: flex;
+        <table id="tables" style="display: flex;
             justify-content: space-between;
             margin-bottom: 50px;
             border: none;
@@ -385,7 +385,14 @@
                     عدد أيام الغياب بعذر / Number of absence days with excuse
                 </td>
                 <td colspan="2" style="text-align: center">
-                    {{ count($reports->where('absence', '=', -2)->pluck('absence')->toArray()) }}
+                <?php $absence = count($reports->where('absence', '=', -2)->pluck('absence')->toArray());
+                      $path =\App\Classes::where('class_number',$reports[0]->class_number)->first('path')['path']
+                ?>
+                @if ($path=='قسم التلاوة')
+                    @if((8+$absence) >=0)  {{$absence}} @else 0 @endif
+                @else
+                    {{$absence}}
+                @endif
                 </td>
             </tr>
             <tr style="height: 40px">
@@ -458,11 +465,7 @@
 @push('js')
 
     <script>
-        $(document).ready(function() {
-
-            $('#edit-repo').on('click',function(){
-                $('#tables').css('pointer-events','unset');
-            });
+        $(document).ready(function(){
 
             $.fn.enableCellNavigation = function () {
 
