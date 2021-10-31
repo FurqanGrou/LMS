@@ -205,7 +205,7 @@ function isAchievedDefaultGrades($student_id){
         ->where('absence', '=', '0')
         ->count();
 
-    return $result > 0 ? false : true;
+    return !($result > 0);
 }
 
 function checkThirdCondition($student_id){
@@ -229,33 +229,7 @@ function checkThirdCondition($student_id){
         ->where('absence', '!=', 0)
         ->count();
 
-    // by default is ok, all grades completed
-    $incomplete_default_grades_count = 0;
-    $status = false;
-
-    if($absence_times > 0){
-        $incomplete_default_grades_count = Report::query()
-            ->whereRaw('YEAR(created_at) = ?', [$currentYear])
-            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '<', $today)
-            ->where('date', 'not like', '%Saturday%')
-            ->where('date', 'not like', '%Friday%')
-            ->where('student_id', '=', $student_id)
-            ->where(function ($query){
-                $query->where('lesson_grade', '<', 1);
-                $query->orWhere('last_5_pages_grade', '<', 1);
-                $query->orWhere('daily_revision_grade', '<', 2);
-                $query->orWhere('behavior_grade', '<', 1);
-            })
-            ->where('absence', '=', '0')
-            ->count();
-    }
-
-    if($incomplete_default_grades_count == 0 && $absence_times > 0){
-        $status = true;
-    }
-
-    return $status;
+    return (isAchievedDefaultGrades($student_id) && $absence_times > 0);
 }
 
 function getLessonsNotListenedCount($student_id){
@@ -268,6 +242,12 @@ function getLessonsNotListenedCount($student_id){
         $currentMonth = substr(request()->date_filter, -2);
         $currentYear = substr(request()->date_filter, 0, 4);
     }
+
+    $student_path = getStudentPath($student_id);
+    $default_new_lesson_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_daily_revision_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_behavior_grade = getPathDefaultGrade($student_path, 'new_lesson');
 
     $monthly_report_statistics = Report::query()
         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
@@ -285,10 +265,10 @@ function getLessonsNotListenedCount($student_id){
                     })->where('absence', '=', 0)
                       ->count();
 
-    $clonedQuery = $clonedQuery->where('lesson_grade', '>', 1)
-                    ->where('last_5_pages_grade', '>=', 1)
-                    ->where('daily_revision_grade', '>=', 2)
-                    ->where('behavior_grade', '>=', 1);
+    $clonedQuery = $clonedQuery->where('lesson_grade', '>', $default_new_lesson_grade)
+                    ->where('last_5_pages_grade', '>=', $default_last_5_pages_grade)
+                    ->where('daily_revision_grade', '>=', $default_daily_revision_grade)
+                    ->where('behavior_grade', '>=', $default_behavior_grade);
 
     $over_count = clone $clonedQuery;
     $over_count = $over_count->count();
@@ -369,6 +349,13 @@ function getLastFivePagesNotListenedCount($student_id){
         $currentMonth = substr(request()->date_filter, -2);
         $currentYear = substr(request()->date_filter, 0, 4);
     }
+
+    $student_path = getStudentPath($student_id);
+    $default_new_lesson_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_daily_revision_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_behavior_grade = getPathDefaultGrade($student_path, 'new_lesson');
+
     $monthly_report_statistics = Report::query()
         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
         ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
@@ -384,10 +371,10 @@ function getLastFivePagesNotListenedCount($student_id){
                                 $query->orWhere('last_5_pages_grade', '=', ' ');
                             })->where('absence', '=', 0)->count();
 
-    $clonedQuery = $clonedQuery->where('lesson_grade', '>', 1)
-                                ->where('last_5_pages_grade', '>=', 1)
-                                ->where('daily_revision_grade', '>=', 2)
-                                ->where('behavior_grade', '>=', 1);
+    $clonedQuery = $clonedQuery->where('lesson_grade', '>', $default_new_lesson_grade)
+                                ->where('last_5_pages_grade', '>=', $default_last_5_pages_grade)
+                                ->where('daily_revision_grade', '>=', $default_daily_revision_grade)
+                                ->where('behavior_grade', '>=', $default_behavior_grade);
 
     $over_count = clone $clonedQuery;
     $over_count = $over_count->count();
@@ -469,7 +456,11 @@ function getDailyRevisionNotListenedCount($student_id){
         $currentYear = substr(request()->date_filter, 0, 4);
     }
 
-    $default_grade = 2;
+    $student_path = getStudentPath($student_id);
+    $default_new_lesson_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_daily_revision_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'new_lesson');
+    $default_behavior_grade = getPathDefaultGrade($student_path, 'new_lesson');
     // get summation of grades less than default and greater than zero in daily_revision_grade column
     // get count of records that daily_revision_grade column is zero, empty or null
 
@@ -495,16 +486,16 @@ function getDailyRevisionNotListenedCount($student_id){
                                         ->count();
 
     $summation = $clonedSummationQuery->where('daily_revision_grade', '>', '0')
-                                            ->where('daily_revision_grade', '<', $default_grade)
+                                            ->where('daily_revision_grade', '<', $default_daily_revision_grade)
                                             ->where('absence', '=', 0)
-                                            ->sum('daily_revision_grade')/$default_grade;
+                                            ->sum('daily_revision_grade')/$default_daily_revision_grade;
 
     $normal_count +=$summation;
 
-    $clonedQuery = $clonedQuery->where('lesson_grade', '>', 1)
-                                ->where('last_5_pages_grade', '>=', 1)
-                                ->where('daily_revision_grade', '>=', 2)
-                                ->where('behavior_grade', '>=', 1);
+    $clonedQuery = $clonedQuery->where('lesson_grade', '>', $default_new_lesson_grade)
+                                ->where('last_5_pages_grade', '>=', $default_last_5_pages_grade)
+                                ->where('daily_revision_grade', '>=', $default_daily_revision_grade)
+                                ->where('behavior_grade', '>=', $default_behavior_grade);
 
     $over_count = clone $clonedQuery;
     $over_count = $over_count->count();
@@ -556,23 +547,6 @@ function getDailyRevisionNotListenedCount($student_id){
             ->orderBy('created_at', 'desc')
             ->take($absence_times)
             ->sum('daily_revision_grade');
-
-//        return $absence_times;
-
-//        $over_count_total += Report::query()
-//            ->whereRaw('YEAR(created_at) = ?', [$currentYear])
-//            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-//            ->whereDate('created_at', '<', $today)
-//            ->where(function ($query){
-//                $query->where('date', 'like', '%Friday%');
-//                $query->orWhere('date', 'like', '%Saturday%');
-//            })->where('student_id', '=', $student_id)
-//            ->where('daily_revision_grade', '>', '0')
-//            ->where('daily_revision_grade', '<', $default_grade)
-//            ->orderBy('created_at', 'desc')
-//            ->take($absence_times)
-//            ->sum('daily_revision_grade')/$default_grade;
-
 
         return max($normal_count - ($over_count_total - (2 * $over_count)), 0) ;
     }
