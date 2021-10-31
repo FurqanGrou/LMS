@@ -412,18 +412,18 @@
                         General Score
                     </div>
                     <div style="border: 1px solid black;width: 50%">
-                            {{ getRate(100 + ( (getLessonsNotListenedCount(request()->student_id) * -1) +
-                                        (getLastFivePagesNotListenedCount(request()->student_id) * -1) +
-                                        (getDailyRevisionNotListenedCount(request()->student_id) * -2) +
-                                        (count($reports->where('absence', '=', -2)->pluck('absence')->toArray()) * -2) +
-                                        (count($reports->where('absence', '=', -5)->pluck('absence')->toArray()) * -5)
-                                        ), 'ar') }}
+                        {{ getRate(100 + ( (getLessonsNotListenedCount(request()->student_id) * -1) +
+                                    (getLastFivePagesNotListenedCount(request()->student_id) * -1) +
+                                    (getDailyRevisionNotListenedCount(request()->student_id) * -2) +
+                                    (getAbsenceCount(request()->student_id, -2)) +
+                                    (getAbsenceCount(request()->student_id, -5))
+                                    ), 'ar') }}
                         <br>
                             {{ getRate(100 + ( (getLessonsNotListenedCount(request()->student_id) * -1) +
                                         (getLastFivePagesNotListenedCount(request()->student_id) * -1) +
                                         (getDailyRevisionNotListenedCount(request()->student_id) * -2) +
-                                        (count($reports->where('absence', '=', -2)->pluck('absence')->toArray()) * -2) +
-                                        (count($reports->where('absence', '=', -5)->pluck('absence')->toArray()) * -5)
+                                        (getAbsenceCount(request()->student_id, -2)) +
+                                        (getAbsenceCount(request()->student_id, -5))
                                         ), 'en') }}
                     </div>
 
