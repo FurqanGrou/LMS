@@ -339,19 +339,19 @@
                     General Score
                 </div>
                 <div style="border: 1px solid black;width: 50%">
-                        {{ getRate(100 + ( (getLessonsNotListenedCount(request()->student_id) * -1) +
-                                    (getLastFivePagesNotListenedCount(request()->student_id) * -1) +
-                                    (getDailyRevisionNotListenedCount(request()->student_id) * -2) +
-                                    (count($reports->where('absence', '=', -2)->pluck('absence')->toArray()) * -2) +
-                                    (count($reports->where('absence', '=', -5)->pluck('absence')->toArray()) * -5)
-                                    ), 'ar') }}
+                    {{ getRate(100 + ( (getLessonsNotListenedCount(request()->student_id) * -1) +
+                                (getLastFivePagesNotListenedCount(request()->student_id) * -1) +
+                                (getDailyRevisionNotListenedCount(request()->student_id) * -2) +
+                                (getAbsenceCount(request()->student_id, -2)) +
+                                (getAbsenceCount(request()->student_id, -5))
+                                ), 'ar') }}
                     <br>
-                        {{ getRate(100 + ( (getLessonsNotListenedCount(request()->student_id) * -1) +
-                                    (getLastFivePagesNotListenedCount(request()->student_id) * -1) +
-                                    (getDailyRevisionNotListenedCount(request()->student_id) * -2) +
-                                    (count($reports->where('absence', '=', -2)->pluck('absence')->toArray()) * -2) +
-                                    (count($reports->where('absence', '=', -5)->pluck('absence')->toArray()) * -5)
-                                    ), 'en') }}
+                    {{ getRate(100 + ( (getLessonsNotListenedCount(request()->student_id) * -1) +
+                                (getLastFivePagesNotListenedCount(request()->student_id) * -1) +
+                                (getDailyRevisionNotListenedCount(request()->student_id) * -2) +
+                                (getAbsenceCount(request()->student_id, -2)) +
+                                (getAbsenceCount(request()->student_id, -5))
+                                ), 'en') }}
                 </div>
 
             </td>
@@ -360,15 +360,15 @@
                 <br>
                 Percentage
             </td>
-            <td style="text-align: center">
-                    {{
-                        100 + ( (getLessonsNotListenedCount(request()->student_id) * -1) +
-                                (getLastFivePagesNotListenedCount(request()->student_id) * -1) +
-                                (getDailyRevisionNotListenedCount(request()->student_id) * -2) +
-                                (count($reports->where('absence', '=', -2)->pluck('absence')->toArray()) * -2) +
-                                (count($reports->where('absence', '=', -5)->pluck('absence')->toArray()) * -5)
-                               )
-                    }}
+            <td style="text-align: center; padding: 5px 15px">
+                {{
+                    100 + ( (getLessonsNotListenedCount(request()->student_id) * -1) +
+                            (getLastFivePagesNotListenedCount(request()->student_id) * -1) +
+                            (getDailyRevisionNotListenedCount(request()->student_id) * -2) +
+                            (count($reports->where('absence', '=', -2)->pluck('absence')->toArray()) * -2) +
+                            (count($reports->where('absence', '=', -5)->pluck('absence')->toArray()) * -5)
+                           )
+                }}
             </td>
         </tr>
         </tbody>
