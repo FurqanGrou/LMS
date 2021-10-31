@@ -189,11 +189,14 @@
 
     </div>
 
-    <form id="monthly_report" method="POST" action="{{ route('teachers.send.report', request()->student_id . '?date_filter=' . request()->date_filter) }}">
-        @csrf
-
-        <input type="submit" style="z-index: 1001; position: fixed; top: 50%; right: -2%;transform: translate(-50%, 0);" class="btn btn-danger" id="btn-send-report" value="ارسال">
-
+    <input type="submit" style="display:none; z-index: 1001; position: fixed; top: 40%; right: -43px;transform: translate(-50%, 0);" class="btn btn-info month-rep" id="btn-send-report-month" value="شهري">
+<br>
+<form id="monthly_report" method="POST" action="{{ route('teachers.send.report', request()->student_id . '?date_filter=' . request()->date_filter) }}">
+    @csrf
+    
+    <input type="submit" style="z-index: 1001; position: fixed; top: 50%; right: -2%;transform: translate(-50%, 0);" class="btn btn-danger" id="btn-send-report" value="ارسال">
+        
+        <input type="hiddn" value="0" id="monthly-report-val" name="monthly">
         <input type="hidden" id="student_id" name="student_id" value="{{ request()->student_id }}">
         <div class="table-box">
         <table id="tables" style="display: flex;
@@ -382,7 +385,14 @@
                     عدد أيام الغياب بعذر / Number of absence days with excuse
                 </td>
                 <td colspan="2" style="text-align: center">
-                    {{ count($reports->where('absence', '=', -2)->pluck('absence')->toArray()) }}
+                <?php $absence = count($reports->where('absence', '=', -2)->pluck('absence')->toArray());
+                      $path =\App\Classes::where('class_number',$reports[0]->class_number)->first('path')['path']
+                ?>
+                @if ($path=='قسم التلاوة')
+                    @if((8+$absence) >=0)  {{$absence}} @else 0 @endif
+                @else
+                    {{$absence}}
+                @endif
                 </td>
             </tr>
             <tr style="height: 40px">
