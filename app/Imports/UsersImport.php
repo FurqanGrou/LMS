@@ -74,12 +74,14 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
             $father_email = str_replace(' ', '', $row['bryd_alab']);
             $mother_email = str_replace(' ', '', $row['bryd_alam']);
             $path = trim($row['almsar']);
+            $name = trim($row['altalb']);
 
             //if exists is true update current student data
             if($exists_student){
 
                 $exists_student->update([
                     'class_number'    => $row['rkm_alhlk'],
+                    'name'    => $name,
                     'section'         => $section,
                     'login_time'      => $row['okt_aldkhol'],
                     'father_mail'     => $father_email,
@@ -93,7 +95,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                 //if exists is false insert new student data
                 $user = User::create([
                     'student_number'  => $row['rkm_altalb'],
-                    'name'            => $row['altalb'],
+                    'name'            => $name,
                     'father_phone'    => $row['goal_alab'],
                     'mother_phone'    => $row['goal_alam'],
                     'father_mail'     => $father_email,
@@ -117,13 +119,13 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
             //check if this teacher is exists or not
             $email = str_replace(' ', '', $row['bryd_almaalm']);
             $exists_teacher = Teacher::where('email', '=', $email)->first();
-
+            $teacher_name = trim($row['almaalm']);
             //if exists is true update current teacher data
             if($exists_teacher){
 
                 $exists_teacher->update([
-                    'name'    => $row['almaalm'],
-                    'section'         => $row['alksm'] == 'بنات' ? 'female' : 'male',
+                    'name'      => $teacher_name,
+                    'section'   => $row['alksm'] == 'بنات' ? 'female' : 'male',
                 ]);
 
             }else{
@@ -131,7 +133,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                 //if exists is false insert new teacher data
                 $teacher = Teacher::create([
                     'teacher_number'    => $row['rkm_almaalm'],
-                    'name'              => $row['almaalm'],
+                    'name'      => $teacher_name,
                     'email'             => $email,
                     'password'          => \Hash::make('12345'),
                     'section'           => $row['alksm'] == 'بنات' ? 'female' : 'male',
