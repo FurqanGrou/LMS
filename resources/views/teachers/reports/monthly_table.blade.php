@@ -184,9 +184,6 @@
             &nbsp; {{ \Carbon\Carbon::create()->year(2021)->month($month)->format('F') . ' ' . date('Y') }}
             <span style="color:#C65911;">الشهر / Month:</span>
         </p>
-        <p>
-            <a href="#" id="edit-repo" class="btn btn-info"> تعديل</a>    
-        </p>
 
     </div>
 
@@ -197,7 +194,7 @@
 
         <input type="hidden" id="student_id" name="student_id" value="{{ request()->student_id }}">
         <div class="table-box">
-        <table id="tables" style="pointer-events:none; display: flex;
+        <table id="tables" style="display: flex;
             justify-content: space-between;
             margin-bottom: 50px;
             border: none;
@@ -450,10 +447,6 @@
 
     <script>
         $(document).ready(function(){
-
-            $('#edit-repo').on('click',function(){
-                $('#tables').css('pointer-events','unset');
-            });
 
             $.fn.enableCellNavigation = function () {
 
