@@ -119,13 +119,16 @@
             <span style="color:#C65911;">الشهر / Month:</span>
         </p>
 
+        <p>
+            <a href="#" id="edit-repo" class="btn btn-info"> تعديل</a>    
+        </p>
     </div>
 
     <form id="monthly_report" action="#">
         @csrf
         <input type="hidden" id="student_id" name="student_id" value="{{ request()->student_id }}">
 
-        <table id="tables" style="display: flex;
+        <table id="tables" style="pointer-events:none;display: flex;
             justify-content: space-between;
             margin-bottom: 50px;
             border: none;
@@ -379,6 +382,11 @@
 
     <script>
         $(document).ready(function(){
+
+            $('#edit-repo').on('click',function(){
+                $('#tables').css('pointer-events','unset');
+            });
+
 
             setTimeout(function() {
                 if($('html').hasClass('loaded')){
