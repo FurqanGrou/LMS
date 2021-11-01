@@ -686,7 +686,8 @@ function disableRecord($date, $day)
 
     if(Auth::guard('admin_web')->check()){
         if(
-            (($date->year <= $today->year) && ($date->month <= $today->month) && ($day <= $today->day))
+//            (($date->year <= $today->year) && ($date->month <= $today->month) && ($day <= $today->day))
+            (($date->year <= $today->year) && ($date->month <= $today->month))
             || (($date->year == $tomorrow->year) && ($date->month == $tomorrow->month) && ($day == $tomorrow->day))
         ) {
             $status = true;
