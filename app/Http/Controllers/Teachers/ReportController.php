@@ -726,20 +726,12 @@ class ReportController extends Controller
     {
         $user =  User::find($request->student_id);
 
-        $currentMonth = date('m');
+//        return view('emails.user.monthly_report', ['student_id' => $request->student_id]);
+        Notification::route('mail', [$user->father_mail, $user->mother_mail])->notify(new userReportMonthlyNotification($user));
 
-        $monthly_report_statistics = Report::query()
-            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->where('student_id', '=', $request->student_id);
+        session()->flash('success', 'تم ارسال التقرير الشهري بنجاح');
 
-        $monthly_report = $monthly_report_statistics->get();
-
-        Notification::route('mail', $user->father_mail)->notify(new userReportMonthlyNotification($monthly_report,$request->student_id));
-
-            session()->flash('success', 'تم ارسال التقرير الشهري بنجاح');
-
-            return redirect()->route('teachers.report.table', $request->student_id);
-
+        return redirect()->route('teachers.report.table', $request->student_id);
     }
 
     public function sendReportTable(Request $request)
