@@ -54,15 +54,22 @@ function getMailStatus($student_id){
     return $mail_status;
 }
 
-function getAbsenceCount($student_id, $type){
+function getAbsenceCount($student_id, $type, $mail = false){
 
-    $today = Carbon::tomorrow();
-    $currentMonth = date('m');
-    $currentYear = date('Y');
+    if($mail){
+        $myDate = '11/01/2021';
+        $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
+        $currentMonth = 10;
+        $currentYear = 2021;
+    }else{
+        $today = Carbon::tomorrow();
+        $currentMonth = date('m');
+        $currentYear = date('Y');
 
-    if(request()->date_filter) {
-        $currentMonth = substr(request()->date_filter, -2);
-        $currentYear = substr(request()->date_filter, 0, 4);
+        if(request()->date_filter) {
+            $currentMonth = substr(request()->date_filter, -2);
+            $currentYear = substr(request()->date_filter, 0, 4);
+        }
     }
 
     $absence_times = Report::query()
@@ -172,15 +179,22 @@ function getPathDefaultGrade($path, $grade){
     }
 }
 
-function isAchievedDefaultGrades($student_id){
+function isAchievedDefaultGrades($student_id, $mail = false){
 
-    $today = Carbon::tomorrow();
-    $currentMonth = date('m');
-    $currentYear = date('Y');
+    if($mail){
+        $myDate = '11/01/2021';
+        $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
+        $currentMonth = 10;
+        $currentYear = 2021;
+    }else{
+        $today = Carbon::tomorrow();
+        $currentMonth = date('m');
+        $currentYear = date('Y');
 
-    if(request()->date_filter) {
-        $currentMonth = substr(request()->date_filter, -2);
-        $currentYear = substr(request()->date_filter, 0, 4);
+        if(request()->date_filter) {
+            $currentMonth = substr(request()->date_filter, -2);
+            $currentYear = substr(request()->date_filter, 0, 4);
+        }
     }
 
     $student_path = getStudentPath($student_id);
@@ -208,15 +222,22 @@ function isAchievedDefaultGrades($student_id){
     return !($result > 0);
 }
 
-function checkThirdCondition($student_id){
+function checkThirdCondition($student_id, $mail = false){
 
-    $today = Carbon::tomorrow();
-    $currentMonth = date('m');
-    $currentYear = date('Y');
+    if($mail){
+        $myDate = '11/01/2021';
+        $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
+        $currentMonth = 10;
+        $currentYear = 2021;
+    }else{
+        $today = Carbon::tomorrow();
+        $currentMonth = date('m');
+        $currentYear = date('Y');
 
-    if(request()->date_filter) {
-        $currentMonth = substr(request()->date_filter, -2);
-        $currentYear = substr(request()->date_filter, 0, 4);
+        if(request()->date_filter) {
+            $currentMonth = substr(request()->date_filter, -2);
+            $currentYear = substr(request()->date_filter, 0, 4);
+        }
     }
 
     $absence_times = Report::query()
@@ -232,15 +253,22 @@ function checkThirdCondition($student_id){
     return (isAchievedDefaultGrades($student_id) && $absence_times > 0);
 }
 
-function getLessonsNotListenedCount($student_id){
+function getLessonsNotListenedCount($student_id, $mail = false){
 
-    $today = Carbon::tomorrow();
-    $currentMonth = date('m');
-    $currentYear = date('Y');
+    if($mail){
+        $myDate = '11/01/2021';
+        $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
+        $currentMonth = 10;
+        $currentYear = 2021;
+    }else{
+        $today = Carbon::tomorrow();
+        $currentMonth = date('m');
+        $currentYear = date('Y');
 
-    if(request()->date_filter) {
-        $currentMonth = substr(request()->date_filter, -2);
-        $currentYear = substr(request()->date_filter, 0, 4);
+        if(request()->date_filter) {
+            $currentMonth = substr(request()->date_filter, -2);
+            $currentYear = substr(request()->date_filter, 0, 4);
+        }
     }
 
     $student_path = getStudentPath($student_id);
@@ -340,15 +368,22 @@ function getLessonsNotListenedCount($student_id){
     return max($normal_count - ( ($over_count_total - (1 * $over_count)) + $over_count_total_sat ), 0) ;
 }
 
-function getLastFivePagesNotListenedCount($student_id){
+function getLastFivePagesNotListenedCount($student_id, $mail = false){
 
-    $today = Carbon::tomorrow();
-    $currentMonth = date('m');
-    $currentYear = date('Y');
+    if($mail){
+        $myDate = '11/01/2021';
+        $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
+        $currentMonth = 10;
+        $currentYear = 2021;
+    }else{
+        $today = Carbon::tomorrow();
+        $currentMonth = date('m');
+        $currentYear = date('Y');
 
-    if(request()->date_filter) {
-        $currentMonth = substr(request()->date_filter, -2);
-        $currentYear = substr(request()->date_filter, 0, 4);
+        if(request()->date_filter) {
+            $currentMonth = substr(request()->date_filter, -2);
+            $currentYear = substr(request()->date_filter, 0, 4);
+        }
     }
 
     $student_path = getStudentPath($student_id);
@@ -447,15 +482,22 @@ function getLastFivePagesNotListenedCount($student_id){
     return max($normal_count - ( ($over_count_total - (1 * $over_count)) + $over_count_total_sat ), 0) ;
 }
 
-function getDailyRevisionNotListenedCount($student_id){
+function getDailyRevisionNotListenedCount($student_id, $mail = false){
 
-    $today = Carbon::tomorrow();
-    $currentMonth = date('m');
-    $currentYear = date('Y');
+    if($mail){
+        $myDate = '11/01/2021';
+        $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
+        $currentMonth = 10;
+        $currentYear = 2021;
+    }else{
+        $today = Carbon::tomorrow();
+        $currentMonth = date('m');
+        $currentYear = date('Y');
 
-    if(request()->date_filter) {
-        $currentMonth = substr(request()->date_filter, -2);
-        $currentYear = substr(request()->date_filter, 0, 4);
+        if(request()->date_filter) {
+            $currentMonth = substr(request()->date_filter, -2);
+            $currentYear = substr(request()->date_filter, 0, 4);
+        }
     }
 
     $student_path = getStudentPath($student_id);

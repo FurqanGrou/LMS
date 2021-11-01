@@ -11,18 +11,19 @@ class userReportMonthlyNotification extends Notification
 {
     use Queueable;
 
-    public $monthly_report;
     public $student_id;
+    public $student_name;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($monthly_report,$student_id)
+    public function __construct($student)
     {
-        $this->monthly_report=$monthly_report;
-        $this->student_id=$student_id;
+        $this->student_id   = $student->id;
+        $this->student_name = $student->name;
+        $this->student_number = $student->student_number;
     }
 
     /**
@@ -44,7 +45,8 @@ class userReportMonthlyNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->view('emails.user.monthly_report', ['monthly_report' => $this->monthly_report,'student_id'=>$this->student_id]);
+        $subject = "نتيجة شهر ". " اكتوبر " . date("Y") ." - الطالب/ة - " . $this->student_name . " ، " . $this->student_number . "";
+        return (new MailMessage)->subject($subject)->view('emails.user.monthly_report', ['student_id' => $this->student_id, "student_name" => $this->student_name]);
     }
 
     /**
