@@ -408,8 +408,8 @@ function getLastFivePagesNotListenedCount($student_id, $mail = false){
                                 $query->orWhereNull('last_5_pages_grade');
                             })->where('absence', '=', 0)->count();
 
-    $clonedQuery = $clonedQuery->where('lesson_grade', '>', $default_new_lesson_grade)
-                                ->where('last_5_pages_grade', '>=', $default_last_5_pages_grade)
+    $clonedQuery = $clonedQuery->where('lesson_grade', '>=', $default_new_lesson_grade)
+                                ->where('last_5_pages_grade', '>', $default_last_5_pages_grade)
                                 ->where('daily_revision_grade', '>=', $default_daily_revision_grade)
                                 ->where('behavior_grade', '>=', $default_behavior_grade);
 
