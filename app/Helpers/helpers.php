@@ -519,7 +519,6 @@ function getDailyRevisionNotListenedCount($student_id, $mail = false){
         ->where('date', 'not like', '%Friday%')
         ->where('student_id', '=', $student_id);
 
-
     $clonedQuery = clone $monthly_report_statistics;
     $clonedSummationQuery = clone $monthly_report_statistics;
 
@@ -537,9 +536,9 @@ function getDailyRevisionNotListenedCount($student_id, $mail = false){
 
     $normal_count +=$summation;
 
-    $clonedQuery = $clonedQuery->where('lesson_grade', '>', $default_new_lesson_grade)
+    $clonedQuery = $clonedQuery->where('lesson_grade', '>=', $default_new_lesson_grade)
                                 ->where('last_5_pages_grade', '>=', $default_last_5_pages_grade)
-                                ->where('daily_revision_grade', '>=', $default_daily_revision_grade)
+                                ->where('daily_revision_grade', '>', $default_daily_revision_grade)
                                 ->where('behavior_grade', '>=', $default_behavior_grade);
 
     $over_count = clone $clonedQuery;
