@@ -736,7 +736,13 @@ class ReportController extends Controller
 
     public function sendReportTable(Request $request)
     {
+        if (!request()->notes_to_parent){
+            session()->flash('error', 'لم يتم ارسال التقرير اليومي، يرجى التأكد من إدخال بيانات اليوم الحالي بشكل صحيح من صفحة الشهر!!');
+            return redirect()->route('teachers.report.table', $request->student_id);
+        }
+
         $notes_to_parents = request()->notes_to_parent[0];
+
 
         $request->validate([
             'new_lesson' => 'required|array',
