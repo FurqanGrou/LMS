@@ -261,6 +261,7 @@ function getLessonsNotListenedCount($student_id){
 
     $normal_count = $monthly_report_statistics->where(function ($query){
                         $query->where('lesson_grade', '=', '0');
+                        $query->where('lesson_grade', '=', ' ');
                         $query->orWhereNull('lesson_grade');
                     })->where('absence', '=', 0)
                       ->count();
@@ -369,6 +370,7 @@ function getLastFivePagesNotListenedCount($student_id){
     $normal_count = $monthly_report_statistics->where(function ($query){
                                 $query->where('last_5_pages_grade', '=', '0');
                                 $query->orWhere('last_5_pages_grade', '=', ' ');
+                                $query->orWhereNull('last_5_pages_grade');
                             })->where('absence', '=', 0)->count();
 
     $clonedQuery = $clonedQuery->where('lesson_grade', '>', $default_new_lesson_grade)
@@ -461,6 +463,7 @@ function getDailyRevisionNotListenedCount($student_id){
     $default_daily_revision_grade = getPathDefaultGrade($student_path, 'daily_revision');
     $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'last_5_pages');
     $default_behavior_grade = getPathDefaultGrade($student_path, 'behavior');
+
     // get summation of grades less than default and greater than zero in daily_revision_grade column
     // get count of records that daily_revision_grade column is zero, empty or null
 
