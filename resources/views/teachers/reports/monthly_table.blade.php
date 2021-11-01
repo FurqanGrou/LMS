@@ -190,7 +190,7 @@
     </div>
     <form method="POST" id="monthly_report-monthly" action="{{ route('teachers.send.report.monthly', request()->student_id . '?date_filter=' . request()->date_filter) }}">
     @csrf
-      
+
     <input type="submit" style="z-index: 1001; position: fixed; top: 40%; right: -2%;transform: translate(-50%, 0);" class="btn btn-info" id="btn-send-report-monthly" value="شهري">
     </form>
 
@@ -343,6 +343,7 @@
             </tbody>
         </table>
         </div>
+
         {{-- Totals--}}
         <table style="width: 100%; font-weight: bold">
             <tbody>
@@ -387,14 +388,7 @@
                     عدد أيام الغياب بعذر / Number of absence days with excuse
                 </td>
                 <td colspan="2" style="text-align: center">
-                <?php $absence = count($reports->where('absence', '=', -2)->pluck('absence')->toArray());
-                      $path =\App\Classes::where('class_number',$reports[0]->class_number)->first('path')['path']
-                ?>
-                @if ($path=='قسم التلاوة')
-                    @if((8+$absence) >=0)  {{$absence}} @else 0 @endif
-                @else
-                    {{$absence}}
-                @endif
+                    {{ getAbsenceCount(request()->student_id, -2) }}
                 </td>
             </tr>
             <tr style="height: 40px">
@@ -402,7 +396,7 @@
                     عدد أيام الغياب بدون بعذر / Number of absence days without excuse
                 </td>
                 <td colspan="2" style="text-align: center">
-                    {{ count($reports->where('absence', '=', -5)->pluck('absence')->toArray()) }}
+                    {{ getAbsenceCount(request()->student_id, -5) }}
                 </td>
             </tr>
             <tr style="height: 40px">
