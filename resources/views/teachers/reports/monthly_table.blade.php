@@ -188,15 +188,17 @@
         </p>
 
     </div>
-
-    <input type="submit" style="display:none; z-index: 1001; position: fixed; top: 40%; right: -43px;transform: translate(-50%, 0);" class="btn btn-info month-rep" id="btn-send-report-month" value="شهري">
-<br>
-<form id="monthly_report" method="POST" action="{{ route('teachers.send.report', request()->student_id . '?date_filter=' . request()->date_filter) }}">
+    <form method="POST" id="monthly_report-monthly" action="{{ route('teachers.send.report.monthly', request()->student_id . '?date_filter=' . request()->date_filter) }}">
     @csrf
-    
-    <input type="submit" style="z-index: 1001; position: fixed; top: 50%; right: -2%;transform: translate(-50%, 0);" class="btn btn-danger" id="btn-send-report" value="ارسال">
-        
-        <input type="hidden" value="0" id="monthly-report-val" name="monthly">
+      
+    <input type="submit" style="z-index: 1001; position: fixed; top: 40%; right: -2%;transform: translate(-50%, 0);" class="btn btn-info" id="btn-send-report-monthly" value="شهري">
+    </form>
+
+    <form id="monthly_report" method="POST" action="{{ route('teachers.send.report', request()->student_id . '?date_filter=' . request()->date_filter) }}">
+        @csrf
+
+        <input type="submit" style="z-index: 1001; position: fixed; top: 50%; right: -2%;transform: translate(-50%, 0);" class="btn btn-danger" id="btn-send-report" value="ارسال">
+
         <input type="hidden" id="student_id" name="student_id" value="{{ request()->student_id }}">
         <div class="table-box">
         <table id="tables" style="display: flex;
@@ -948,6 +950,40 @@
                 }).then((isConfirm) => {
                         if (isConfirm) {
                             $('form#monthly_report').submit();
+                            swal("يتم الارسال...!", "تتم حالياً عملية الارسال", "info");
+                        } else {
+                            swal("تم الإلغاء!", "تم إلغاء عملية الارسال", "error");
+                        }
+                    });
+            });
+
+            $(document).on('click', '#btn-send-report-monthly', function (e) {
+
+                e.preventDefault();
+
+                swal({
+                    title: "هل أنت متأكد من ارسال التقرير؟",
+                    text: "بعد الضغط على تأكيد لن يمكنك التراجع عن عملية الارسال!",
+                    icon: "warning",
+                    buttons: {
+                        cancel: {
+                            text: "لا، إلغاء!",
+                            value: null,
+                            visible: true,
+                            className: "btn-danger",
+                            closeModal: false,
+                        },
+                        confirm: {
+                            text: "نعم، ارسال!",
+                            value: true,
+                            visible: true,
+                            className: "btn-success",
+                            closeModal: false
+                        }
+                    }
+                }).then((isConfirm) => {
+                        if (isConfirm) {
+                            $('form#monthly_report-monthly').submit();
                             swal("يتم الارسال...!", "تتم حالياً عملية الارسال", "info");
                         } else {
                             swal("تم الإلغاء!", "تم إلغاء عملية الارسال", "error");

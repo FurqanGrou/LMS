@@ -38,6 +38,7 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     Route::get('/report/table/{student_id}', 'ReportController@reportTable')->name('report.table');
     Route::post('/report/table/{student_id}', 'ReportController@reportTableStore')->name('report.table');
     Route::post('/report/send/{student_id}', 'ReportController@sendReportTable')->name('send.report');
+    Route::post('/report/send-monthly/{student_id}', 'ReportController@sendReportTableMonthly')->name('send.report.monthly');
 
     Route::get('/classes', 'ClassesController@index')->name('classes.index');
     Route::get('/join_request', 'ClassesController@joinRequest')->name('classes.join_request');
