@@ -26,7 +26,7 @@
     <div style="border: 2px solid black; width: 70%; margin: 0 auto;">
         <div style="text-align: center;">
             <img src="/dashboard/assets/img/logo3.png" alt="">
-            <h1> {{date('m', strtotime(date('Y-m')." -1 month")).' - ' . \Carbon\Carbon::create()->month(date('m'))->format('F')}}  نتيجة شهر </h1>
+            <h1> {{date('Y').' - ' . \Carbon\Carbon::create()->month(date('m'))->subMonth()->format('F')}}  نتيجة شهر </h1>
         </div>
 
         <div style="text-align: right">

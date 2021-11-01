@@ -735,8 +735,8 @@ class ReportController extends Controller
 
         $monthly_report = $monthly_report_statistics->get();
 
-
-        Notification::route('mail', $user->father_mail)->route('mail', $user->mother_mail)->notify(new userReportMonthlyNotification($monthly_report,$request->student_id));
+        Notification::route('mail', $user->father_mail)->notify(new userReportMonthlyNotification($monthly_report,$request->student_id));
+        Notification::route('mail', $user->mother_mail)->notify(new userReportMonthlyNotification($monthly_report,$request->student_id));
             
             session()->flash('success', 'تم ارسال التقرير الشهري بنجاح');
 
