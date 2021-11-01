@@ -82,6 +82,11 @@ function getAbsenceCount($student_id, $type, $mail = false){
         ->where('absence', '=', $type)
         ->count();
 
+    $path = getStudentPath($student_id);
+    if($path == "قسم التلاوة"){
+        $absence_times = max($absence_times -8, 0);
+    }
+
     // معندوش اي نقص باي يوم عن الدرجات الافتراضية True
     // يكون عنده ايام غياب True
     if (isAchievedDefaultGrades($student_id) && $absence_times){
