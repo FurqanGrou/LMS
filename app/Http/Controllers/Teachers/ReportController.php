@@ -726,7 +726,8 @@ class ReportController extends Controller
     {
         $user =  User::find($request->student_id);
 
-        $currentMonth = date('m');
+        $currentMonth = date('m', strtotime(date('Y-m')." -1 month"));
+        // $currentMonth = date('m');
 
         $monthly_report_statistics = Report::query()
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
@@ -734,8 +735,9 @@ class ReportController extends Controller
 
         $monthly_report = $monthly_report_statistics->get();
 
-        Notification::route('mail', $user->father_mail)->notify(new userReportMonthlyNotification($monthly_report,$request->student_id));
 
+        Notification::route('mail', $user->father_mail)->route('mail', $user->mother_mail)->notify(new userReportMonthlyNotification($monthly_report,$request->student_id));
+            
             session()->flash('success', 'تم ارسال التقرير الشهري بنجاح');
 
             return redirect()->route('teachers.report.table', $request->student_id);
