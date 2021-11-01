@@ -726,7 +726,7 @@ class ReportController extends Controller
     {
         $user =  User::find($request->student_id);
 
-        $currentMonth = date('m', strtotime(date('Y-m')." -1 month"));
+        $currentMonth = \Carbon\Carbon::create()->month()->subMonth()->format('m');
         // $currentMonth = date('m');
 
         $monthly_report_statistics = Report::query()
