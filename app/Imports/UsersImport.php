@@ -126,6 +126,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                 $exists_teacher->update([
                     'name'      => $teacher_name,
                     'section'   => $row['alksm'] == 'بنات' ? 'female' : 'male',
+//                    'last_4_id'         => $row['last_4_id'],
                 ]);
 
             }else{
@@ -137,6 +138,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'email'             => $email,
                     'password'          => \Hash::make('12345'),
                     'section'           => $row['alksm'] == 'بنات' ? 'female' : 'male',
+//                    'last_4_id'         => $row['last_4_id'],
                 ]);
 
             }
