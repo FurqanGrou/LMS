@@ -735,9 +735,9 @@ class ReportController extends Controller
         $monthly_report = $monthly_report_statistics->get();
 
         Notification::route('mail', $user->father_mail)->notify(new userReportMonthlyNotification($monthly_report,$request->student_id));
-            
+
             session()->flash('success', 'تم ارسال التقرير الشهري بنجاح');
-          
+
             return redirect()->route('teachers.report.table', $request->student_id);
 
     }
@@ -866,7 +866,7 @@ class ReportController extends Controller
         }
         return redirect()->route('teachers.report.table', $request->student_id);
     }
-  
+
     public function sendReport($grades = null, $assignment){
 
         if(is_null($grades)){
@@ -891,7 +891,7 @@ class ReportController extends Controller
                 'student_info' => $student,
             ];
             Mail::to($to_mails)
-                ->bcc(['lmsfurqan1@gmail.com'])
+                ->bcc(['Alfurqantest20@gmail.com'])
                 ->send(new ReportMail($details));
 
             if(empty(Mail::failures())) {
@@ -949,7 +949,7 @@ class ReportController extends Controller
 //        return $pdf->stream('document.pdf');
 
         Mail::to($to_mails)
-            ->bcc(['lmsfurqan1@gmail.com'])
+            ->bcc(['Alfurqantest20@gmail.com'])
             ->send(new ReportMail($details, $pdf));
 
         if(empty(Mail::failures())) {
