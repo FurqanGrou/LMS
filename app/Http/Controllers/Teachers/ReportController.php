@@ -726,7 +726,7 @@ class ReportController extends Controller
     {
         $user =  User::find($request->student_id);
 
-//        return view('emails.user.monthly_report', ['student_id' => $request->student_id]);
+//      return view('emails.user.monthly_report', ['student_id' => $request->student_id]);
         Notification::route('mail', [$user->father_mail, $user->mother_mail])->notify(new userReportMonthlyNotification($user));
 
         session()->flash('success', 'تم ارسال التقرير الشهري بنجاح');
@@ -915,7 +915,7 @@ class ReportController extends Controller
             ];
         }
 
-        $currentMonth = date('m');
+        $currentMonth = \Carbon\Carbon::create()->month()->subMonth()->format('m');
 
         $monthly_report_statistics = Report::query()
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
