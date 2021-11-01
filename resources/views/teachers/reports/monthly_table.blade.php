@@ -191,6 +191,11 @@
         </p>
 
     </div>
+    <form method="POST" id="monthly_report-monthly" action="{{ route('teachers.send.report.monthly', request()->student_id . '?date_filter=' . request()->date_filter) }}">
+    @csrf
+      
+    <input type="submit" style="z-index: 1001; position: fixed; top: 40%; right: -2%;transform: translate(-50%, 0);" class="btn btn-info" id="btn-send-report-monthly" value="شهري">
+    </form>
 
     <form id="monthly_report" method="POST" action="{{ route('teachers.send.report', request()->student_id . '?date_filter=' . request()->date_filter) }}">
         @csrf
@@ -950,6 +955,40 @@
                 }).then((isConfirm) => {
                         if (isConfirm) {
                             $('form#monthly_report').submit();
+                            swal("يتم الارسال...!", "تتم حالياً عملية الارسال", "info");
+                        } else {
+                            swal("تم الإلغاء!", "تم إلغاء عملية الارسال", "error");
+                        }
+                    });
+            });
+
+            $(document).on('click', '#btn-send-report-monthly', function (e) {
+
+                e.preventDefault();
+
+                swal({
+                    title: "هل أنت متأكد من ارسال التقرير؟",
+                    text: "بعد الضغط على تأكيد لن يمكنك التراجع عن عملية الارسال!",
+                    icon: "warning",
+                    buttons: {
+                        cancel: {
+                            text: "لا، إلغاء!",
+                            value: null,
+                            visible: true,
+                            className: "btn-danger",
+                            closeModal: false,
+                        },
+                        confirm: {
+                            text: "نعم، ارسال!",
+                            value: true,
+                            visible: true,
+                            className: "btn-success",
+                            closeModal: false
+                        }
+                    }
+                }).then((isConfirm) => {
+                        if (isConfirm) {
+                            $('form#monthly_report-monthly').submit();
                             swal("يتم الارسال...!", "تتم حالياً عملية الارسال", "info");
                         } else {
                             swal("تم الإلغاء!", "تم إلغاء عملية الارسال", "error");

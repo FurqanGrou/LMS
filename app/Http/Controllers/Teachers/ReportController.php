@@ -10,6 +10,7 @@ use App\Lesson;
 use App\Mail\ReportMail;
 use App\NoteParent;
 use App\Notifications\TecherReport;
+use App\Notifications\userReportMonthlyNotification;
 use App\Report;
 use App\Teacher;
 use App\User;
@@ -718,6 +719,27 @@ class ReportController extends Controller
         }
 
         return response()->json(['report' => $report], 200);
+    }
+
+
+    public function sendReportTableMonthly(Request $request)
+    {
+        $user =  User::find($request->student_id);
+
+        $currentMonth = date('m');
+
+        $monthly_report_statistics = Report::query()
+            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+            ->where('student_id', '=', $request->student_id);
+
+        $monthly_report = $monthly_report_statistics->get();
+
+        Notification::route('mail', $user->father_mail)->notify(new userReportMonthlyNotification($monthly_report,$request->student_id));
+            
+            session()->flash('success', 'تم ارسال التقرير الشهري بنجاح');
+          
+            return redirect()->route('teachers.report.table', $request->student_id);
+
     }
 
     public function sendReportTable(Request $request)
