@@ -289,7 +289,7 @@ function getLessonsNotListenedCount($student_id, $mail = false){
 
     $normal_count = $monthly_report_statistics->where(function ($query){
                         $query->where('lesson_grade', '=', '0');
-                        $query->where('lesson_grade', '=', ' ');
+                        $query->orWhere('lesson_grade', '=', ' ');
                         $query->orWhereNull('lesson_grade');
                     })->where('absence', '=', 0)
                       ->count();
