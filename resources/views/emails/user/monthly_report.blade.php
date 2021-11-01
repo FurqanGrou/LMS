@@ -79,7 +79,7 @@
             عدد أيام الغياب بعذر / Number of absence days with excuse
         </td>
         <td style="text-align: center">
-            {{ count($monthly_report->where('absence', '=', -2)->pluck('absence')->toArray()) }}
+            {{ getAbsenceCount(request()->student_id, -2) }}
         </td>
     </tr>
     <tr style="height: 40px">
@@ -87,7 +87,7 @@
             عدد أيام الغياب بدون بعذر / Number of absence days without excuse
         </td>
         <td style="text-align: center">
-            {{ count($monthly_report->where('absence', '=', -5)->pluck('absence')->toArray()) }}
+            {{ getAbsenceCount(request()->student_id, -5) }}
         </td>
     </tr>
     <!-- <tr style="height: 40px">
@@ -100,39 +100,43 @@
     </tr> -->
     <tr>
         <td style="text-align: center; background: #C6E0B4">
-            <!-- التقدير العام -->
-            <!-- <br> -->
-            <!-- General Score -->
+            التقدير العام
+            <br>
+            General Score
         </td>
         <td style="text-align: center">
-{{--            {{ getRate(100 + ( (getLessonsNotListenedCount($student_id) * -1) +--}}
-{{--                        (getLastFivePagesNotListenedCount($student_id) * -1) +--}}
-{{--                        (getDailyRevisionNotListenedCount($student_id) * -2) +--}}
-{{--                        (count($monthly_report->where('absence', '=', -2)->pluck('absence')->toArray()) * -2) +--}}
-{{--                        (count($monthly_report->where('absence', '=', -5)->pluck('absence')->toArray()) * -5)--}}
-{{--                        ), 'ar') }}--}}
+            {{ getRate(100 + (
+                            (getLessonsNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'new_lesson')) +
+                            (getLastFivePagesNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'last_5_pages')) +
+                            (getDailyRevisionNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'daily_revision')) +
+                            (getAbsenceCount(request()->student_id, -2) * -2) +
+                            (getAbsenceCount(request()->student_id, -5) * -5)
+                        ), 'ar')
+            }}
             <br>
-{{--            {{ getRate(100 + ( (getLessonsNotListenedCount($student_id) * -1) +--}}
-{{--                        (getLastFivePagesNotListenedCount($student_id) * -1) +--}}
-{{--                        (getDailyRevisionNotListenedCount($student_id) * -2) +--}}
-{{--                        (count($monthly_report->where('absence', '=', -2)->pluck('absence')->toArray()) * -2) +--}}
-{{--                        (count($monthly_report->where('absence', '=', -5)->pluck('absence')->toArray()) * -5)--}}
-{{--                        ), 'en') }}--}}
+            {{ getRate(100 + (
+                            (getLessonsNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'new_lesson')) +
+                            (getLastFivePagesNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'last_5_pages')) +
+                            (getDailyRevisionNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'daily_revision')) +
+                            (getAbsenceCount(request()->student_id, -2) * -2) +
+                            (getAbsenceCount(request()->student_id, -5) * -5)
+                        ), 'en') }}
         </td>
         <td style="text-align: center; background: #C6E0B4">
-            <!-- نسبة -->
-            <!-- <br> -->
-            <!-- Percentage -->
+            نسبة
+            <br>
+            Percentage
         </td>
         <td style="text-align: center">
-{{--            {{--}}
-{{--                100 + ( (getLessonsNotListenedCount($student_id) * -1) +--}}
-{{--                        (getLastFivePagesNotListenedCount($student_id) * -1) +--}}
-{{--                        (getDailyRevisionNotListenedCount($student_id) * -2) +--}}
-{{--                        (count($monthly_report->where('absence', '=', -2)->pluck('absence')->toArray()) * -2) +--}}
-{{--                        (count($monthly_report->where('absence', '=', -5)->pluck('absence')->toArray()) * -5)--}}
-{{--                        )--}}
-{{--            }}--}}
+            {{
+                100 + (
+                        (getLessonsNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'new_lesson')) +
+                        (getLastFivePagesNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'last_5_pages')) +
+                        (getDailyRevisionNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'daily_revision')) +
+                        (getAbsenceCount(request()->student_id, -2) * -2) +
+                        (getAbsenceCount(request()->student_id, -5) * -5)
+                      )
+            }}
         </td>
     </tr>
     </tbody>
