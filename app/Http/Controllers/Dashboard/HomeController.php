@@ -27,7 +27,7 @@ class HomeController extends Controller
         $statistics['regular_students'] = User::query()->whereNotNull('class_number')->count();
         $statistics['classes'] = Classes::query()->count();
         $statistics['admins'] = Admin::query()->count();
-        $statistics['last_report'] = Report::query()->orderBy('updated_at', 'DESC')->first()->updated_at->diffForHumans();
+        $statistics['last_report'] = Report::query()->orderBy('updated_at', 'DESC')->first()->updated_at->timezone('Asia/Riyadh')->diffForHumans();
 
         $statistics['sent_messages'] = Report::query()
                                     ->where('mail_status', '=', '1')
