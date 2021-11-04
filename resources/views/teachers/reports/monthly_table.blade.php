@@ -15,7 +15,7 @@
             font-weight: bold;
         }
         .table-box{
-            height: 500;
+            height: 500px;
             overflow: scroll;
             margin-bottom: 20px;
             border-bottom: 1px solid black;
@@ -115,6 +115,13 @@
             max-width: 140px !important;
             max-height: 45px !important;
             height: 45px !important;
+        }
+
+        select#page_number + .select2 .select2-selection,
+        select#page_number + .select2 .select2-selection__rendered
+        {
+            min-width: 80px !important;
+            text-align: right !important;
         }
 
     </style>
@@ -364,7 +371,7 @@
                     عدد مرات عدم تسميع الدرس الجديد / Number of not recite the new lesson
                 </td>
                 <td colspan="2" style="text-align: center">
-                    {{ getLessonsNotListenedCount(request()->student_id) }}
+                    {{ $user_student->monthlyScores()->new_lessons_not_listened ?? 0 }}
                 </td>
             </tr>
             <tr style="height: 40px">
@@ -372,7 +379,7 @@
                     عدد مرات عدم تسميع اخر 5 صفحات / Number of not recite last 5 pages
                 </td>
                 <td colspan="2" style="text-align: center">
-                    {{ getLastFivePagesNotListenedCount(request()->student_id)  }}
+                    {{ $user_student->monthlyScores()->last_five_pages_not_listened ?? 0 }}
                 </td>
             </tr>
             <tr style="height: 40px">
@@ -380,7 +387,7 @@
                     عدد مرات عدم تسميع المراجعة / Number of not recite the review
                 </td>
                 <td colspan="2" style="text-align: center">
-                    {{ getDailyRevisionNotListenedCount(request()->student_id) }}
+                    {{ $user_student->monthlyScores()->daily_revision_not_listened ?? 0 }}
                 </td>
             </tr>
             <tr style="height: 40px">
@@ -388,7 +395,7 @@
                     عدد أيام الغياب بعذر / Number of absence days with excuse
                 </td>
                 <td colspan="2" style="text-align: center">
-                    {{ getAbsenceCount(request()->student_id, -2) }}
+                    {{ $user_student->monthlyScores()->absence_excuse_days ?? 0 }}
                 </td>
             </tr>
             <tr style="height: 40px">
@@ -396,7 +403,7 @@
                     عدد أيام الغياب بدون بعذر / Number of absence days without excuse
                 </td>
                 <td colspan="2" style="text-align: center">
-                    {{ getAbsenceCount(request()->student_id, -5) }}
+                    {{ $user_student->monthlyScores()->absence_unexcused_days ?? 0 }}
                 </td>
             </tr>
             <tr style="height: 40px">
@@ -404,7 +411,14 @@
                     رقم الصفحة / Page Number
                 </td>
                 <td colspan="2" style="text-align: center">
-                    -
+                    <select name="page_number" id="page_number">
+                        <option value=""></option>
+                        @foreach($lesson_pages as $lesson_page)
+                            <option value="{{ $lesson_page->id }}" {{ isset($user_student->monthlyScores()->lesson_page_id) && $user_student->monthlyScores()->lesson_page_id == $lesson_page->id ? 'selected' : ''}}>{{ $lesson_page->page_number }}</option>
+                        @endforeach
+                    </select>
+                    <br>
+                    <span id="lesson_name">{{ $user_student->monthlyScores()->lessonPage->lesson_title ?? '-' }}</span>
                 </td>
             </tr>
             <tr>
@@ -415,22 +429,9 @@
                         General Score
                     </div>
                     <div style="border: 1px solid black;width: 50%">
-                        {{ getRate(100 + (
-                                        (getLessonsNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'new_lesson')) +
-                                        (getLastFivePagesNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'last_5_pages')) +
-                                        (getDailyRevisionNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'daily_revision')) +
-                                        (getAbsenceCount(request()->student_id, -2) * -2) +
-                                        (getAbsenceCount(request()->student_id, -5) * -5)
-                                    ), 'ar')
-                        }}
+                        {{ getRate($user_student->monthlyScores()->avg ?? 100, 'ar') }}
                         <br>
-                        {{ getRate(100 + (
-                                        (getLessonsNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'new_lesson')) +
-                                        (getLastFivePagesNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'last_5_pages')) +
-                                        (getDailyRevisionNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'daily_revision')) +
-                                        (getAbsenceCount(request()->student_id, -2) * -2) +
-                                        (getAbsenceCount(request()->student_id, -5) * -5)
-                                    ), 'en') }}
+                        {{ getRate($user_student->monthlyScores()->avg ?? 100, 'en') }}
                     </div>
 
                 </td>
@@ -440,15 +441,7 @@
                     Percentage
                 </td>
                 <td style="text-align: center; padding: 5px 15px">
-                    {{
-                        100 + (
-                                (getLessonsNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'new_lesson')) +
-                                (getLastFivePagesNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'last_5_pages')) +
-                                (getDailyRevisionNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'daily_revision')) +
-                                (getAbsenceCount(request()->student_id, -2) * -2) +
-                                (getAbsenceCount(request()->student_id, -5) * -5)
-                              )
-                    }}
+                    {{ $user_student->monthlyScores()->avg ?? 100 }}
                 </td>
             </tr>
             </tbody>
@@ -903,23 +896,15 @@
             });
 
             $(document).on('change', 'form input#month_report', function (e) {
-
                 window.location.href = "{{ route('teachers.report.table', request()->student_id) }}?date_filter=" + $(this).val() + "";
-
             })
 
             $(document).on('change', 'form select#students_repors', function (e) {
-
                 var url = '{{ route("teachers.report.table", ":student_id") }}';
                 url = url.replace(':student_id', $(this).val());
 
                 window.location.href = url;
-
             })
-
-            $(document).on('submit', 'form#monthly_report', function (e) {
-                // e.preventDefault();
-            });
 
             $(document).on('click', '#btn-send-report', function (e) {
 
@@ -996,6 +981,26 @@
             $(".js-select2-daily-revision-tags").select2({
                 tags: true
             });
+
+            $(document).on('change', 'select#page_number', function (e) {
+                var student_id = $('#student_id').val();
+                var page_number_id = $('#page_number').val();
+                var month_year = '{{ isset(request()->date_filter) ? request()->date_filter : date('Y') . '-' . date('m') }}';
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: '{{ route('teachers.report.changePageNumber', request()->student_id) }}',
+                    data: {
+                        'student_id': student_id,
+                        'month_year': month_year,
+                        'page_number_id': page_number_id,
+                    },
+                    success: function (data, textStatus, xhr) {
+                        $('span#lesson_name').html(data.lesson_title);
+                    },
+                });
+            })
 
         });
     </script>

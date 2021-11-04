@@ -120,7 +120,7 @@
         </p>
 
         <p>
-            <a href="#" id="edit-repo" class="btn btn-info"> تعديل</a>    
+            <a href="#" id="edit-repo" class="btn btn-info"> تعديل</a>
         </p>
     </div>
 
@@ -328,7 +328,12 @@
                 رقم الصفحة / Page Number
             </td>
             <td colspan="2" style="text-align: center">
-                -
+                <select name="" id="" class="form-control">
+                    <option value=""></option>
+                    @foreach($lesson_pages as $lesson_page)
+                        <option value="{{ $lesson_page->id }}" {{ $user_student->monthlyScores()->page_number == $lesson_page->page_number ? 'selected' : ''}}>{{ $lesson_page->page_number }}</option>
+                    @endforeach
+                </select>
             </td>
         </tr>
         <tr>
@@ -640,6 +645,26 @@
             $(".js-select2-daily-revision-tags").select2({
                 tags: true
             });
+
+            $(document).on('change', 'select#page_number', function (e) {
+                var student_id = $('#student_id').val();
+                var page_number_id = $('#page_number').val();
+                var month_year = '{{ isset(request()->date_filter) ?? date('Y') . '-' . date('m') }}';
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: '{{ route('teachers.report.changePageNumber', request()->student_id) }}',
+                    data: {
+                        'student_id': student_id,
+                        'month_year': month_year,
+                        'page_number_id': page_number_id,
+                    },
+                    success: function (data, textStatus, xhr) {
+                        $('span#lesson_name').html(data.lesson_title);
+                    },
+                });
+            })
 
         });
     </script>

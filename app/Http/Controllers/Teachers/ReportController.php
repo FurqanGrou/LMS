@@ -7,6 +7,7 @@ use App\ClassesTeachers;
 use App\Http\Controllers\Controller;
 use App\Jobs\TeacherNotify;
 use App\Lesson;
+use App\LessonPage;
 use App\Mail\ReportMail;
 use App\NoteParent;
 use App\Notifications\TecherReport;
@@ -59,7 +60,10 @@ class ReportController extends Controller
 
         $listener_names = array_merge($students_listener_names, $teachers_listener_names);
 
-        return view('teachers.reports.monthly_table', ['now' => $now, 'month' => $month, 'reports' => $reports, 'notes' => $notes, 'students' => $students, 'new_lessons' => $new_lessons, 'daily_revision' => $daily_revision, 'listener_names' => $listener_names]);
+        $user_student = User::find(request()->student_id);
+        $lesson_pages = LessonPage::query()->get();
+
+        return view('teachers.reports.monthly_table', ['now' => $now, 'month' => $month, 'reports' => $reports, 'notes' => $notes, 'students' => $students, 'new_lessons' => $new_lessons, 'daily_revision' => $daily_revision, 'listener_names' => $listener_names, 'user_student' => $user_student, "lesson_pages" => $lesson_pages]);
     }
 
     public function reportTableStore(Request $request)
@@ -203,6 +207,20 @@ class ReportController extends Controller
         return response()->json(['report' => $report], 200);
     }
 
+    public function changePageNumber(Request $request){
+        $lesson = LessonPage::find($request->page_number_id);
+
+        DB::table('monthly_scores')->updateOrInsert(
+            [
+                'user_id' => $request->student_id,
+                'month_year' => $request->month_year,
+            ],
+            [
+                'lesson_page_id' => $request->page_number_id,
+            ]
+        );
+        return response()->json(['lesson_title' => $lesson->lesson_title], 201);
+    }
     public function sendReportTableMonthly(Request $request)
     {
         $user =  User::find($request->student_id);
