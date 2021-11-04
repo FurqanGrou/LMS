@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Exports\ExamRequestsExport;
+use App\Exports\MonthlyScoresExport;
 use App\Http\Controllers\Controller;
 use App\Imports\ChapterImport;
 use App\Imports\ClassesTeachersImport;
@@ -53,7 +54,7 @@ class ImportExportController extends Controller
 
     public function importLessons()
     {
-        Excel::import(new LessonImport(), 'lessons.xlsx');
+        Excel::import(new LessonImport(), 'lesson_pages.xlsx');
         return 'Done';
     }
 
@@ -79,4 +80,16 @@ class ImportExportController extends Controller
         return Excel::download(new ExamRequestsExport($request->date_from, $request->date_to), 'reports.xlsx');
     }
 
+//    public function exportMonthlyScoresIndex()
+//    {
+//        return view('admins.attendance.create');
+//    }
+    public function exportMonthlyScores(Request $request)
+    {
+        if (!isset($request->month_year)){
+//            $request['month_year'] = date("Y" . "-" . date('m'));
+            $request['month_year'] = "2021-10";
+        }
+        return Excel::download(new MonthlyScoresExport($request->month_year), 'monthly-scores.xlsx');
+    }
 }

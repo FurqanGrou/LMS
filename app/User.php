@@ -42,4 +42,10 @@ class User extends Authenticatable implements Auditable
         return $this->belongsTo(Classes::class, 'class_number');
     }
 
+    public function monthlyScores()
+    {
+        return $this->hasMany(MonthlyScore::class, 'user_id')->latest()->first();
+    }
+
+
 }

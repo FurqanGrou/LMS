@@ -84,6 +84,7 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
     Route::get('/report/table/{student_id}', 'ReportController@reportTable')->name('report.table');
     Route::post('/report/table/{student_id}', 'ReportController@reportTableStore')->name('report.table');
     Route::post('/report/send/{student_id}', 'ReportController@sendReportTable')->name('send.report');
+    Route::post('/report/change_page_number/{student_id}', 'ReportController@changePageNumber')->name('report.changePageNumber');
 
     // attendance
     Route::get('/attendance', 'AttendanceController@create')->name('attendance.index');
@@ -92,6 +93,10 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
     // attendance export
     Route::get('attendance-export', 'AttendanceController@exportIndex')->name('attendance.export_index');
     Route::post('attendance-export', 'AttendanceController@export')->name('attendance.export');
+
+    // monthly scores export
+//    Route::get('monthly-scores-export', 'ImportExportController@exportMonthlyScoresIndex')->name('monthly_scores.index');
+    Route::get('monthly-scores-export', 'ImportExportController@exportMonthlyScores')->name('monthly_scores.export');
 
     // request services
 //    Route::get('/request-services', 'RequestServiceController@index')->name('request_services.index');

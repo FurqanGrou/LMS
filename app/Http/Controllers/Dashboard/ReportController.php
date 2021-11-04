@@ -7,6 +7,7 @@ use App\Chapter;
 use App\DataTables\ReportDatatable;
 use App\Http\Controllers\Controller;
 use App\Lesson;
+use App\LessonPage;
 use App\Mail\ReportMail;
 use App\NoteParent;
 use App\Report;
@@ -192,7 +193,10 @@ class ReportController extends Controller
         $class_number = User::query()->where('id', '=', request()->student_id)->first()->class_number;
         $students = User::query()->where('class_number', '=', $class_number)->orderBy('student_number', 'ASC')->get();
 
-        return view('admins.reports.monthly_table', ['now' => $now, 'month' => $month, 'reports' => $reports, 'notes' => $notes, 'students' => $students, 'new_lessons' => $new_lessons, 'daily_revision' => $daily_revision]);
+        $user_student = User::find(request()->student_id);
+        $lesson_pages = LessonPage::query()->get();
+
+        return view('admins.reports.monthly_table', ['now' => $now, 'month' => $month, 'reports' => $reports, 'notes' => $notes, 'students' => $students, 'new_lessons' => $new_lessons, 'daily_revision' => $daily_revision, "user_student" => $user_student, "lesson_pages" => $lesson_pages]);
     }
 
     public function reportTableStore(Request $request)
