@@ -14,12 +14,116 @@ use App\Report;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ReportsExport;
 
 class ReportController extends Controller
 {
+
+    public function reportTable()
+    {
+        $now = Carbon::now();
+        $month = $now->month;
+        $year = $now->year;
+
+        if(request()->date_filter){
+            $month = substr(request()->date_filter, -2);
+            $year = substr(request()->date_filter, 0, 4);
+            $now = new Carbon($year . '-' . $month);
+        }
+
+        $reports = Report::query()->where('student_id', '=', request()->student_id)->whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month)->get();
+        $notes = NoteParent::query()->where('gender', '=', User::query()->where('id', '=', request()->student_id)->first()->section)->get();
+        $new_lessons = Lesson::query()->get();
+        $daily_revision = Chapter::query()->get();
+
+        $class_number = User::query()->where('id', '=', request()->student_id)->first()->class_number;
+        $students = User::query()->where('class_number', '=', $class_number)->orderBy('student_number', 'ASC')->get();
+
+        $user_student = User::find(request()->student_id);
+        $lesson_pages = LessonPage::query()->get();
+
+        return view('admins.reports.monthly_table', ['now' => $now, 'month' => $month, 'reports' => $reports, 'notes' => $notes, 'students' => $students, 'new_lessons' => $new_lessons, 'daily_revision' => $daily_revision, "user_student" => $user_student, "lesson_pages" => $lesson_pages]);
+    }
+
+    public function reportTableStore(Request $request)
+    {
+        if($request->type == 'lessons'){
+            $report = Report::updateOrCreate(
+                [
+                    'student_id' => $request->student_id,
+                    'date' => $request->date,
+                    'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
+                ],
+                [
+                    'new_lesson' => $this->getValidData($request->new_lesson, 'new_lesson'),
+                    'new_lesson_from' => $this->getValidData($request->new_lesson_from, 'new_lesson_from'),
+                    'new_lesson_to' => $this->getValidData($request->new_lesson_to, 'new_lesson_to'),
+                    'last_5_pages' => $this->getValidData($request->last_5_pages, 'last_5_pages'),
+                    'daily_revision' => $this->getValidData($request->daily_revision, 'daily_revision'),
+                    'daily_revision_from' => $this->getValidData($request->daily_revision_from, 'daily_revision_from'),
+                    'daily_revision_to' => $this->getValidData($request->daily_revision_to, 'daily_revision_to'),
+                    'mistake' => $this->getValidData($request->mistake, 'mistake'),
+                    'alert' => $this->getValidData($request->alert, 'alert'),
+                    'number_pages' => $this->getValidData($request->number_pages, 'number_pages'),
+                    'listener_name' => $this->getValidData($request->listener_name, 'listener_name'),
+                ]
+            );
+        }
+
+        if($request->type == 'grades'){
+
+            $total = 0;
+            if ($request->notes_to_parent == 'الطالب غائب'){
+                $report = Report::updateOrCreate(
+                    [
+                        'student_id' => $request->student_id,
+                        'date' => $request->date,
+                        'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
+                    ],
+                    [
+                        'lesson_grade' => 'غ',
+                        'last_5_pages_grade' => 0,
+                        'daily_revision_grade' => 0,
+                        'behavior_grade' => 0,
+                        'notes_to_parent' => $request->notes_to_parent,
+                        'absence' => -5,
+                        'total' => $total,
+                    ]
+                );
+            }else{
+                $request->absence = 0;
+                $total = $this->sumTotal([
+                    $request->lesson_grade,
+                    $request->last_5_pages_grade,
+                    $request->daily_revision_grade,
+                    $request->behavior_grade
+                ]);
+
+                $report = Report::updateOrCreate(
+                    [
+                        'student_id' => $request->student_id,
+                        'date' => $request->date,
+                        'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
+                    ],
+                    [
+                        'lesson_grade' => $this->getValidGrade($request->lesson_grade, 'lesson_grade') == 'غ' ? '' : $this->getValidGrade($request->lesson_grade, 'lesson_grade'),
+                        'last_5_pages_grade' => $this->getValidGrade($request->last_5_pages_grade, 'last_5_pages_grade'),
+                        'daily_revision_grade' => $this->getValidGrade($request->daily_revision_grade, 'daily_revision_grade'),
+                        'behavior_grade' => $this->getValidGrade($request->behavior_grade, 'behavior_grade'),
+                        'notes_to_parent' => $request->notes_to_parent,
+                        'absence' => $request->absence,
+                        'total' => $total,
+                    ]
+                );
+            }
+
+        }
+
+        return response()->json(['report' => $report], 200);
+    }
 
     public function exportIndex()
     {
@@ -173,107 +277,19 @@ class ReportController extends Controller
         return redirect()->route('admins.report.table', $request->student_id);
     }
 
-    public function reportTable()
-    {
-        $now = Carbon::now();
-        $month = $now->month;
-        $year = $now->year;
+    public function changePageNumber(Request $request){
+        $lesson = LessonPage::find($request->page_number_id);
 
-        if(request()->date_filter){
-            $month = substr(request()->date_filter, -2);
-            $year = substr(request()->date_filter, 0, 4);
-            $now = new Carbon($year . '-' . $month);
-        }
-
-        $reports = Report::query()->where('student_id', '=', request()->student_id)->whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month)->get();
-        $notes = NoteParent::query()->where('gender', '=', User::query()->where('id', '=', request()->student_id)->first()->section)->get();
-        $new_lessons = Lesson::query()->get();
-        $daily_revision = Chapter::query()->get();
-
-        $class_number = User::query()->where('id', '=', request()->student_id)->first()->class_number;
-        $students = User::query()->where('class_number', '=', $class_number)->orderBy('student_number', 'ASC')->get();
-
-        $user_student = User::find(request()->student_id);
-        $lesson_pages = LessonPage::query()->get();
-
-        return view('admins.reports.monthly_table', ['now' => $now, 'month' => $month, 'reports' => $reports, 'notes' => $notes, 'students' => $students, 'new_lessons' => $new_lessons, 'daily_revision' => $daily_revision, "user_student" => $user_student, "lesson_pages" => $lesson_pages]);
-    }
-
-    public function reportTableStore(Request $request)
-    {
-        if($request->type == 'lessons'){
-            $report = Report::updateOrCreate(
-                [
-                    'student_id' => $request->student_id,
-                    'date' => $request->date,
-                    'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
-                ],
-                [
-                    'new_lesson' => $this->getValidData($request->new_lesson, 'new_lesson'),
-                    'new_lesson_from' => $this->getValidData($request->new_lesson_from, 'new_lesson_from'),
-                    'new_lesson_to' => $this->getValidData($request->new_lesson_to, 'new_lesson_to'),
-                    'last_5_pages' => $this->getValidData($request->last_5_pages, 'last_5_pages'),
-                    'daily_revision' => $this->getValidData($request->daily_revision, 'daily_revision'),
-                    'daily_revision_from' => $this->getValidData($request->daily_revision_from, 'daily_revision_from'),
-                    'daily_revision_to' => $this->getValidData($request->daily_revision_to, 'daily_revision_to'),
-                    'mistake' => $this->getValidData($request->mistake, 'mistake'),
-                    'alert' => $this->getValidData($request->alert, 'alert'),
-                    'number_pages' => $this->getValidData($request->number_pages, 'number_pages'),
-                    'listener_name' => $this->getValidData($request->listener_name, 'listener_name'),
-                ]
-            );
-        }
-
-        if($request->type == 'grades'){
-
-            $total = 0;
-            if ($request->notes_to_parent == 'الطالب غائب'){
-                $report = Report::updateOrCreate(
-                    [
-                        'student_id' => $request->student_id,
-                        'date' => $request->date,
-                        'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
-                    ],
-                    [
-                        'lesson_grade' => 'غ',
-                        'last_5_pages_grade' => 0,
-                        'daily_revision_grade' => 0,
-                        'behavior_grade' => 0,
-                        'notes_to_parent' => $request->notes_to_parent,
-                        'absence' => -5,
-                        'total' => $total,
-                    ]
-                );
-            }else{
-                $request->absence = 0;
-                $total = $this->sumTotal([
-                    $request->lesson_grade,
-                    $request->last_5_pages_grade,
-                    $request->daily_revision_grade,
-                    $request->behavior_grade
-                ]);
-
-                $report = Report::updateOrCreate(
-                    [
-                        'student_id' => $request->student_id,
-                        'date' => $request->date,
-                        'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
-                    ],
-                    [
-                        'lesson_grade' => $this->getValidGrade($request->lesson_grade, 'lesson_grade') == 'غ' ? '' : $this->getValidGrade($request->lesson_grade, 'lesson_grade'),
-                        'last_5_pages_grade' => $this->getValidGrade($request->last_5_pages_grade, 'last_5_pages_grade'),
-                        'daily_revision_grade' => $this->getValidGrade($request->daily_revision_grade, 'daily_revision_grade'),
-                        'behavior_grade' => $this->getValidGrade($request->behavior_grade, 'behavior_grade'),
-                        'notes_to_parent' => $request->notes_to_parent,
-                        'absence' => $request->absence,
-                        'total' => $total,
-                    ]
-                );
-            }
-
-        }
-
-        return response()->json(['report' => $report], 200);
+        DB::table('monthly_scores')->updateOrInsert(
+            [
+                'user_id' => $request->student_id,
+                'month_year' => $request->month_year,
+            ],
+            [
+                'lesson_page_id' => $request->page_number_id,
+            ]
+        );
+        return response()->json(['lesson_title' => $lesson->lesson_title], 201);
     }
 
     public function getValidData($string, $col_name)
@@ -342,14 +358,5 @@ class ReportController extends Controller
         }
         return $total;
     }
-
-    // Old Features
-    //    public function checkGrade($lesson_grade)
-    //    {
-    //        if (is_numeric($lesson_grade))
-    //            return $lesson_grade;
-    //
-    //        return 0;
-    //    }
 
 }

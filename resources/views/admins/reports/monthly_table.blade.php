@@ -52,6 +52,14 @@
             min-width: 140px !important;
             max-width: 140px !important;
         }
+
+        select#page_number + .select2 .select2-selection,
+        select#page_number + .select2 .select2-selection__rendered
+        {
+            min-width: 80px !important;
+            text-align: right !important;
+        }
+
     </style>
 
     <div style="z-index: 1001; position: fixed; top: 50%; right: -2%;transform: translate(-50%, 0);">
@@ -328,12 +336,14 @@
                 رقم الصفحة / Page Number
             </td>
             <td colspan="2" style="text-align: center">
-                <select name="" id="" class="form-control">
+                <select name="page_number" id="page_number" class="select2">
                     <option value=""></option>
                     @foreach($lesson_pages as $lesson_page)
-                        <option value="{{ $lesson_page->id }}" {{ $user_student->monthlyScores()->page_number == $lesson_page->page_number ? 'selected' : ''}}>{{ $lesson_page->page_number }}</option>
+                        <option value="{{ $lesson_page->id }}" {{ isset($user_student->monthlyScores()->lesson_page_id) && $user_student->monthlyScores()->lesson_page_id == $lesson_page->id ? 'selected' : ''}}>{{ $lesson_page->page_number }}</option>
                     @endforeach
                 </select>
+                <br>
+                <span id="lesson_name">{{ $user_student->monthlyScores()->lessonPage->lesson_title ?? '-' }}</span>
             </td>
         </tr>
         <tr>
@@ -649,12 +659,12 @@
             $(document).on('change', 'select#page_number', function (e) {
                 var student_id = $('#student_id').val();
                 var page_number_id = $('#page_number').val();
-                var month_year = '{{ isset(request()->date_filter) ?? date('Y') . '-' . date('m') }}';
+                var month_year = '{{ isset(request()->date_filter) ? request()->date_filter : date('Y') . '-' . date('m') }}';
 
                 $.ajax({
                     type: "POST",
                     dataType: "json",
-                    url: '{{ route('teachers.report.changePageNumber', request()->student_id) }}',
+                    url: '{{ route('admins.report.changePageNumber', request()->student_id) }}',
                     data: {
                         'student_id': student_id,
                         'month_year': month_year,
