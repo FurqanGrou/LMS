@@ -95,8 +95,8 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
     Route::post('attendance-export', 'AttendanceController@export')->name('attendance.export');
 
     // monthly scores export
-//    Route::get('monthly-scores-export', 'ImportExportController@exportMonthlyScoresIndex')->name('monthly_scores.index');
-    Route::get('monthly-scores-export', 'ImportExportController@exportMonthlyScores')->name('monthly_scores.export');
+    Route::get('monthly-scores-export', 'ImportExportController@exportMonthlyScoresIndex')->name('monthly_scores.index');
+    Route::post('monthly-scores-export', 'ImportExportController@exportMonthlyScores')->name('monthly_scores.export');
 
     // request services
 //    Route::get('/request-services', 'RequestServiceController@index')->name('request_services.index');

@@ -80,15 +80,15 @@ class ImportExportController extends Controller
         return Excel::download(new ExamRequestsExport($request->date_from, $request->date_to), 'reports.xlsx');
     }
 
-//    public function exportMonthlyScoresIndex()
-//    {
-//        return view('admins.attendance.create');
-//    }
+    public function exportMonthlyScoresIndex()
+    {
+        return view('admins.import_export.export_monthly_scores');
+    }
+
     public function exportMonthlyScores(Request $request)
     {
         if (!isset($request->month_year)){
-//            $request['month_year'] = date("Y" . "-" . date('m'));
-            $request['month_year'] = "2021-10";
+            $request['month_year'] = date("Y" . "-" . date('m')); // 2021-10
         }
         return Excel::download(new MonthlyScoresExport($request->month_year), 'monthly-scores.xlsx');
     }

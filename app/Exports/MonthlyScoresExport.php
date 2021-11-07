@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize, ShouldQueue
+class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize, ShouldQueue, WithStrictNullComparison
 {
     protected $month_year;
 
@@ -34,7 +35,8 @@ class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, S
                 'daily_revision_not_listened',
                 'absence_excuse_days',
                 'absence_unexcused_days',
-                'page_number',
+                'lesson_pages.page_number',
+                'lesson_pages.lesson_title',
                 'avg',
                 DB::raw('(CASE
                         WHEN avg >= 90 THEN "Excellent - ممتاز"
@@ -46,6 +48,7 @@ class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, S
                         END) AS rate'),
                 ])
             ->join('users', 'users.id', '=', 'monthly_scores.user_id')
+            ->join('lesson_pages', 'lesson_pages.id', '=', 'monthly_scores.lesson_page_id')
             ->where('month_year', '=', $this->month_year);
 
         return $monthly_scores->get();
@@ -63,6 +66,7 @@ class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, S
             'عدد مرات الغياب بعذر',
             'عدد مرات الغياب بدون عذر',
             'رقم الصفحة',
+            'عنوان الدرس',
             'النتيجة',
             'التقدير',
         ];
