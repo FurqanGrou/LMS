@@ -26,7 +26,6 @@ class Report extends Model implements Auditable
                     'daily_revision_not_listened' => getDailyRevisionNotListenedCount($report->student_id),
                     'absence_excuse_days' => getAbsenceCount($report->student_id, -2),
                     'absence_unexcused_days' => getAbsenceCount($report->student_id, -5),
-                    'page_number' => 0,
                     'avg' => 100 + (
                             (getLessonsNotListenedCount($report->student_id) * -getPathDefaultGrade(getStudentPath($report->student_id), 'new_lesson')) +
                             (getLastFivePagesNotListenedCount($report->student_id) * -getPathDefaultGrade(getStudentPath($report->student_id), 'last_5_pages')) +
@@ -51,7 +50,6 @@ class Report extends Model implements Auditable
                     'daily_revision_not_listened' => getDailyRevisionNotListenedCount($report->student_id),
                     'absence_excuse_days' => getAbsenceCount($report->student_id, -2),
                     'absence_unexcused_days' => getAbsenceCount($report->student_id, -5),
-                    'page_number' => 0,
                     'avg' => 100 + (
                             (getLessonsNotListenedCount($report->student_id) * -getPathDefaultGrade(getStudentPath($report->student_id), 'new_lesson')) +
                             (getLastFivePagesNotListenedCount($report->student_id) * -getPathDefaultGrade(getStudentPath($report->student_id), 'last_5_pages')) +

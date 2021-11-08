@@ -103,7 +103,7 @@ class TeachertDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('title')
+            Column::make('classes.title')
                 ->data('title')
                 ->title('اسم الحلقة'),
             Column::make('role')

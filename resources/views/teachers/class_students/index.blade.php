@@ -1,5 +1,6 @@
 @extends('teachers.layouts.master')
 
+<title>{{ \App\Classes::where('class_number', '=', request('class_number'))->first()->title }}</title>
 @section('content')
 
     <div class="row">

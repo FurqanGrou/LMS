@@ -31,46 +31,47 @@ class ReportSeeder extends Seeder
 
 
         $students = \App\User::query()->get();
-//        foreach ($students as $student){
-//            $student->update([
-//                "path" => trim($student->path),
-//            ]);
-//        }
-
-        foreach ($students as $key => $student){
-            $report = \App\Report::where('student_id', '=', $student->id)
-//                ->whereMonth('created_at', '=', 11)
-                ->whereMonth('created_at', '=', 10)
-                ->whereYear('created_at', '=', 2021)
-                ->first();
-
-            if (!is_null($report)){
-                echo $student->id . "\n";
-
-                DB::table('monthly_scores')->updateOrInsert(
-                    [
-                        'user_id' => $student->id,
-//                        'month_year' => "2021-11",
-                        'month_year' => "2021-10",
-                    ],
-                    [
-                        'new_lessons_not_listened' => getLessonsNotListenedCount($student->id, true),
-                        'last_five_pages_not_listened' => getLastFivePagesNotListenedCount($student->id, true),
-                        'daily_revision_not_listened' => getDailyRevisionNotListenedCount($student->id, true),
-                        'absence_excuse_days' => getAbsenceCount($student->id, -2, true),
-                        'absence_unexcused_days' => getAbsenceCount($student->id, -5, true),
-                        'page_number' => 0,
-                        'avg' => 100 + (
-                                (getLessonsNotListenedCount($student->id, true) * -getPathDefaultGrade(getStudentPath($student->id), 'new_lesson')) +
-                                (getLastFivePagesNotListenedCount($student->id, true) * -getPathDefaultGrade(getStudentPath($student->id), 'last_5_pages')) +
-                                (getDailyRevisionNotListenedCount($student->id, true) * -getPathDefaultGrade(getStudentPath($student->id), 'daily_revision')) +
-                                (getAbsenceCount($student->id, -2, true) * -2) +
-                                (getAbsenceCount($student->id, -5, true) * -5)
-                            ),
-                    ]
-                );
-            }
+        foreach ($students as $student){
+            echo "1";
+            $student->update([
+                "path" => trim($student->path),
+            ]);
         }
+
+//        foreach ($students as $key => $student){
+//            $report = \App\Report::where('student_id', '=', $student->id)
+////                ->whereMonth('created_at', '=', 11)
+//                ->whereMonth('created_at', '=', 10)
+//                ->whereYear('created_at', '=', 2021)
+//                ->first();
+//
+//            if (!is_null($report)){
+//                echo $student->id . "\n";
+//
+//                DB::table('monthly_scores')->updateOrInsert(
+//                    [
+//                        'user_id' => $student->id,
+////                        'month_year' => "2021-11",
+//                        'month_year' => "2021-10",
+//                    ],
+//                    [
+//                        'new_lessons_not_listened' => getLessonsNotListenedCount($student->id, true),
+//                        'last_five_pages_not_listened' => getLastFivePagesNotListenedCount($student->id, true),
+//                        'daily_revision_not_listened' => getDailyRevisionNotListenedCount($student->id, true),
+//                        'absence_excuse_days' => getAbsenceCount($student->id, -2, true),
+//                        'absence_unexcused_days' => getAbsenceCount($student->id, -5, true),
+//                        'page_number' => 0,
+//                        'avg' => 100 + (
+//                                (getLessonsNotListenedCount($student->id, true) * -getPathDefaultGrade(getStudentPath($student->id), 'new_lesson')) +
+//                                (getLastFivePagesNotListenedCount($student->id, true) * -getPathDefaultGrade(getStudentPath($student->id), 'last_5_pages')) +
+//                                (getDailyRevisionNotListenedCount($student->id, true) * -getPathDefaultGrade(getStudentPath($student->id), 'daily_revision')) +
+//                                (getAbsenceCount($student->id, -2, true) * -2) +
+//                                (getAbsenceCount($student->id, -5, true) * -5)
+//                            ),
+//                    ]
+//                );
+//            }
+//        }
 
     }
 }
