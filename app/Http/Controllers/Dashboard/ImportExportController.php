@@ -92,6 +92,21 @@ class ImportExportController extends Controller
         if (!isset($request->month_year)){
             $request['month_year'] = date("Y" . "-" . date('m')); // 2021-10
         }
-        return Excel::download(new MonthlyScoresExport($request->month_year), 'monthly-scores.xlsx');
+        if (!isset($request->mail_status)){
+            $request['mail_status'] = -1;
+            $status = 'all';
+        }
+
+        if ($request->mail_status == 0){
+            $status = 'unsent';
+        }elseif($request->mail_status == 1){
+            $status = 'sent';
+        }else{
+            $status = 'all';
+        }
+
+        $file_name = "monthly-scores $status.xlsx";
+
+        return Excel::download(new MonthlyScoresExport($request->month_year, $request->mail_status), $file_name);
     }
 }

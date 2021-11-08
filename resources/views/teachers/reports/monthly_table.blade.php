@@ -371,7 +371,7 @@
                     عدد مرات عدم تسميع الدرس الجديد / Number of not recite the new lesson
                 </td>
                 <td colspan="2" style="text-align: center">
-                    {{ $user_student->monthlyScores()->new_lessons_not_listened ?? 0 }}
+                    {{ $user_student->monthlyScores(request()->date_filter)->new_lessons_not_listened ?? 0 }}
                 </td>
             </tr>
             <tr style="height: 40px">
@@ -379,7 +379,7 @@
                     عدد مرات عدم تسميع اخر 5 صفحات / Number of not recite last 5 pages
                 </td>
                 <td colspan="2" style="text-align: center">
-                    {{ $user_student->monthlyScores()->last_five_pages_not_listened ?? 0 }}
+                    {{ $user_student->monthlyScores(request()->date_filter)->last_five_pages_not_listened ?? 0 }}
                 </td>
             </tr>
             <tr style="height: 40px">
@@ -387,7 +387,7 @@
                     عدد مرات عدم تسميع المراجعة / Number of not recite the review
                 </td>
                 <td colspan="2" style="text-align: center">
-                    {{ $user_student->monthlyScores()->daily_revision_not_listened ?? 0 }}
+                    {{ $user_student->monthlyScores(request()->date_filter)->daily_revision_not_listened ?? 0 }}
                 </td>
             </tr>
             <tr style="height: 40px">
@@ -395,7 +395,7 @@
                     عدد أيام الغياب بعذر / Number of absence days with excuse
                 </td>
                 <td colspan="2" style="text-align: center">
-                    {{ $user_student->monthlyScores()->absence_excuse_days ?? 0 }}
+                    {{ $user_student->monthlyScores(request()->date_filter)->absence_excuse_days ?? 0 }}
                 </td>
             </tr>
             <tr style="height: 40px">
@@ -403,7 +403,7 @@
                     عدد أيام الغياب بدون بعذر / Number of absence days without excuse
                 </td>
                 <td colspan="2" style="text-align: center">
-                    {{ $user_student->monthlyScores()->absence_unexcused_days ?? 0 }}
+                    {{ $user_student->monthlyScores(request()->date_filter)->absence_unexcused_days ?? 0 }}
                 </td>
             </tr>
             <tr style="height: 40px">
@@ -414,11 +414,11 @@
                     <select name="page_number" id="page_number">
                         <option value=""></option>
                         @foreach($lesson_pages as $lesson_page)
-                            <option value="{{ $lesson_page->id }}" {{ isset($user_student->monthlyScores()->lesson_page_id) && $user_student->monthlyScores()->lesson_page_id == $lesson_page->id ? 'selected' : ''}}>{{ $lesson_page->page_number }}</option>
+                            <option value="{{ $lesson_page->id }}" {{ isset($user_student->monthlyScores(request()->date_filter)->lesson_page_id) && $user_student->monthlyScores(request()->date_filter)->lesson_page_id == $lesson_page->id ? 'selected' : ''}}>{{ $lesson_page->page_number }}</option>
                         @endforeach
                     </select>
                     <br>
-                    <span id="lesson_name">{{ $user_student->monthlyScores()->lessonPage->lesson_title ?? '-' }}</span>
+                    <span id="lesson_name">{{ $user_student->monthlyScores(request()->date_filter)->lessonPage->lesson_title ?? '-' }}</span>
                 </td>
             </tr>
             <tr>
@@ -429,9 +429,9 @@
                         General Score
                     </div>
                     <div style="border: 1px solid black;width: 50%">
-                        {{ getRate($user_student->monthlyScores()->avg ?? 100, 'ar') }}
+                        {{ getRate($user_student->monthlyScores(request()->date_filter)->avg ?? 100, 'ar') }}
                         <br>
-                        {{ getRate($user_student->monthlyScores()->avg ?? 100, 'en') }}
+                        {{ getRate($user_student->monthlyScores(request()->date_filter)->avg ?? 100, 'en') }}
                     </div>
 
                 </td>
@@ -441,7 +441,7 @@
                     Percentage
                 </td>
                 <td style="text-align: center; padding: 5px 15px">
-                    {{ $user_student->monthlyScores()->avg ?? 100 }}
+                    {{ $user_student->monthlyScores(request()->date_filter)->avg ?? 100 }}
                 </td>
             </tr>
             </tbody>
