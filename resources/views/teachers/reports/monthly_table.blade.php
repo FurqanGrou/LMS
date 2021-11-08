@@ -704,6 +704,7 @@
                         daily_revision_grade = current_row.find('input[name="daily_revision_grade[]"]').val(),
                         behavior_grade = current_row.find('input[name="behavior_grade[]"]').val(),
                         notes_to_parent = current_row.find('select[name="notes_to_parent[]"]').val();
+                    let input_field = $(this);
 
                     $.ajax({
                         type: "POST",
@@ -724,6 +725,9 @@
                         error: function(jqXHR, textStatus, errorThrown) {
                             if(jqXHR.status == 400){
                                 alert(jqXHR.responseJSON.error);
+                                input_field.val('');
+                                input_field.change();
+                                input_field.focus();
                             }
                         }
                     });
@@ -737,16 +741,18 @@
 
                     let sum = 0;
                     if(notes_to_parent != 'الطالب غائب'){
-                        grades.forEach(myFunction);
+                        grades.forEach(sumTotal);
                     }
-                    function myFunction(item) {
+                    function sumTotal(item) {
                         if (!isNaN(item)){
                             sum += item;
                         }
                     }
 
                     current_row.find(".total").html(sum);
+
                 })
+
             }, 2000);
 
             $(document).on("keypress", "table#grades input", function(e){

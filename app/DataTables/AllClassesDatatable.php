@@ -45,8 +45,7 @@ class AllClassesDatatable extends DataTable
             ->join('teachers', 'teachers.email', '=', 'classes_teachers.teacher_email')
             ->leftJoin('join_requests', 'join_requests.class_number', 'classes_teachers.class_number')
             ->select(['join_requests.class_number as request_class' ,'classes.class_number', 'classes.title', 'classes.zoom_link', 'classes.path', 'classes.period', 'teachers.name as teacher_name'])
-            ->where('classes_teachers.role', '=', 'main')
-            ->where('classes_teachers.teacher_email', '!=', auth()->user()->email);
+            ->where('classes_teachers.teacher_email', '!=', auth('teacher_web')->user()->email);
 
         return $classes;
     }
