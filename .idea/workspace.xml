@@ -22,16 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exports/MonthlyScoresExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/MonthlyScoresExport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notifications/userReportMonthlyNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/userReportMonthlyNotification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/import_export/export_monthly_scores.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/import_export/export_monthly_scores.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/emails/user/monthly_report.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/user/monthly_report.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -336,7 +327,7 @@
       <workItem from="1636125684157" duration="897000" />
       <workItem from="1636229816365" duration="676000" />
       <workItem from="1636290177494" duration="7888000" />
-      <workItem from="1636380900972" duration="12256000" />
+      <workItem from="1636380900972" duration="12713000" />
     </task>
     <servers />
   </component>
