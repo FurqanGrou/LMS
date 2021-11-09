@@ -42,9 +42,12 @@ class User extends Authenticatable implements Auditable
         return $this->belongsTo(Classes::class, 'class_number');
     }
 
-    public function monthlyScores()
+    public function monthlyScores($month_year = null)
     {
-        return $this->hasMany(MonthlyScore::class, 'user_id')->latest()->first();
+        if(is_null($month_year) || (!isset(request()->date_filter)) ){
+            $month_year = date('Y') . '-' . date('m');
+        }
+        return $this->hasMany(MonthlyScore::class, 'user_id')->where('month_year', '=', $month_year)->first();
     }
 
 

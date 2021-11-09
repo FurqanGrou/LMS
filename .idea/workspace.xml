@@ -22,18 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/AllClassesDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/AllClassesDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/JoinRequestsDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/JoinRequestsDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/TeachertDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/TeachertDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Report.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/ReportSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/ReportSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/class_students/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/class_students/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -338,7 +327,7 @@
       <workItem from="1636125684157" duration="897000" />
       <workItem from="1636229816365" duration="676000" />
       <workItem from="1636290177494" duration="7888000" />
-      <workItem from="1636380900972" duration="2676000" />
+      <workItem from="1636380900972" duration="12713000" />
     </task>
     <servers />
   </component>
@@ -386,13 +375,13 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1635947599538" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1635961795171">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1636393869307">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1635961795171" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1636384695628">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1636393869307" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1636404365164">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1636384695628" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1636404365164" />
   </component>
 </project>

@@ -17,12 +17,24 @@
             </h4>
 
             <div class="row">
-                <div class="col-4">
+                <div class="col-3">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">شهر - عام</span>
                         </div>
                         <input type="month" required class="form-control" name="month_year" value="{{ date("Y" . "-" . date('m')) }}" aria-label="شهر - عام">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">حالة التقرير</span>
+                        </div>
+                        <select name="mail_status" id="type" class="form-control">
+                            <option value="-1">الكل</option>
+                            <option value="1">مرسل</option>
+                            <option value="0">غير مرسل</option>
+                        </select>
                     </div>
                 </div>
             </div>
