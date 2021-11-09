@@ -79,7 +79,7 @@ class ImportExportController extends Controller
 //            'date_to' => 'required|date',
 //        ]);
 
-        return Excel::download(new ExamRequestsExport($request->date_from, $request->date_to), 'reports.xlsx');
+        return Excel::download(new ExamRequestsExport($request->date_from, $request->date_to), 'exams-requests.xlsx');
     }
 
     public function exportMonthlyScoresIndex()
