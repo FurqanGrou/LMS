@@ -20,6 +20,7 @@
                     <label>اسم الطالب:</label>
                     <br>
                     <select name="student_id" class="select2">
+                        <option>-</option>
                         @foreach($students as $student)
                             <option value="{{ $student->id }}">{{ $student->name }}</option>
                         @endforeach
@@ -31,7 +32,8 @@
                     <label>اسم الجزء:</label>
                     <br>
                     <select name="chapter_id" class="select2">
-                        @foreach($chapters as $chapter)
+                        <option>-</option>
+                    @foreach($chapters as $chapter)
                             <option value="{{ $chapter->id }}">{{ $chapter->name }}</option>
                         @endforeach
                     </select>
@@ -54,6 +56,7 @@
                     <label>اسم المعلم:</label>
                     <br>
                     <select name="teacher_name" class="select2">
+                        <option>-</option>
                         @foreach($teachers as $teacher)
                             <option value="{{ $teacher->name }}">{{ $teacher->name }}</option>
                         @endforeach
@@ -88,6 +91,18 @@
                     $('#complaint_type').toggleClass('d-none');
                     $('#complaint_type select').removeAttr('name');
                 }
+            });
+
+            $(document).on('change', '#start_date, #end_date', function (e) {
+                var CurrentDate = new Date().setHours(0,0,0,0);
+                var GivenDate = new Date($(this).val()).setHours(0,0,0,0);
+
+                if(GivenDate < CurrentDate){
+                    alert("يرجى إدخال تاريخ صحيح!");
+                    $(this).val('');
+                    $(this).focus();
+                }
+
             });
         });
     </script>
