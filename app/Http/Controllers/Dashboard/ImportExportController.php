@@ -56,7 +56,7 @@ class ImportExportController extends Controller
 
     public function importLessons()
     {
-        Excel::import(new LessonImport(), 'lesson_pages.xlsx');
+        Excel::import(new LessonImport(), 'noorania_pages.xlsx');
         return 'Done';
     }
 
