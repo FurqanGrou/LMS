@@ -9,6 +9,7 @@ use App\Jobs\TeacherNotify;
 use App\Lesson;
 use App\LessonPage;
 use App\Mail\ReportMail;
+use App\NooraniaPage;
 use App\NoteParent;
 use App\Notifications\TecherReport;
 use App\Notifications\userReportMonthlyNotification;
@@ -208,7 +209,14 @@ class ReportController extends Controller
     }
 
     public function changePageNumber(Request $request){
-        $lesson = LessonPage::find($request->page_number_id);
+
+        if(getStudentPath($request->student_id) == "قسم الهجاء"){
+            $is_hejaa = true;
+            $lesson = NooraniaPage::find($request->page_number_id);
+        }else{
+            $is_hejaa = false;
+            $lesson = LessonPage::find($request->page_number_id);
+        }
 
         DB::table('monthly_scores')->updateOrInsert(
             [
@@ -216,11 +224,13 @@ class ReportController extends Controller
                 'month_year' => $request->month_year,
             ],
             [
-                'lesson_page_id' => $request->page_number_id,
+                'lesson_page_id'   => $is_hejaa ? null : $request->page_number_id,
+                'noorania_page_id' => $is_hejaa ? $request->page_number_id : null,
             ]
         );
         return response()->json(['lesson_title' => $lesson->lesson_title], 201);
     }
+
     public function sendReportTableMonthly(Request $request)
     {
         $user =  User::find($request->student_id);

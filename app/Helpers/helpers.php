@@ -511,9 +511,6 @@ function getDailyRevisionNotListenedCount($student_id, $mail = false){
     $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'last_5_pages');
     $default_behavior_grade = getPathDefaultGrade($student_path, 'behavior');
 
-    // get summation of grades less than default and greater than zero in daily_revision_grade column
-    // get count of records that daily_revision_grade column is zero, empty or null
-
     // = count + summation
 
     $monthly_report_statistics = Report::query()
@@ -527,6 +524,7 @@ function getDailyRevisionNotListenedCount($student_id, $mail = false){
     $clonedQuery = clone $monthly_report_statistics;
     $clonedSummationQuery = clone $monthly_report_statistics;
 
+    // get count of records that daily_revision_grade column is zero, empty or null
     $normal_count = $monthly_report_statistics->where(function ($query){
                                             $query->where('daily_revision_grade', '=', '0');
                                             $query->orWhere('daily_revision_grade', '=', ' ');
@@ -534,6 +532,14 @@ function getDailyRevisionNotListenedCount($student_id, $mail = false){
                                         })->where('absence', '=', 0)
                                         ->count();
 
+    // get count of records that daily_revision_grade column is 0.5
+//    $half_grade_count = $monthly_report_statistics->where(function ($query){
+//                                                    $query->where('daily_revision_grade', '=', '0.5');
+//                                                })->where('absence', '=', 0)
+//                                                ->count();
+//    $result = ($half_grade_count/2) + $normal_count;
+
+    // get summation of grades less than default and greater than zero in daily_revision_grade column
     $summation = $clonedSummationQuery->where('daily_revision_grade', '>', '0')
                                             ->where('daily_revision_grade', '<', $default_daily_revision_grade)
                                             ->where('absence', '=', 0)
