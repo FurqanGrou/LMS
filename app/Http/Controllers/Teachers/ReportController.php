@@ -257,7 +257,7 @@ class ReportController extends Controller
             $holidaysCont += iterator_count($days);
         }
 
-        return $daysInMonth - $holidaysCont;;
+        return $daysInMonth - $holidaysCont;
     }
 
     public function checkMonthlyReportInfo($user, $month_year)
@@ -267,9 +267,9 @@ class ReportController extends Controller
         $year  = substr($month_year, 0, 4);
 
         if ($user->path == "قسم الهجاء"){
-            $pageNumber = $user->monthlyScores($month_year)->noorania_page_id;
+            $pageNumber = $user->monthlyScores($month_year)->noorania_page_id ?? false;
         }else{
-            $pageNumber = $user->monthlyScores($month_year)->lesson_page_id;
+            $pageNumber = $user->monthlyScores($month_year)->lesson_page_id ?? false;
         }
 
         $reportsCount = Report::query()
@@ -315,7 +315,7 @@ class ReportController extends Controller
         }
 
         try{
-            Notification::route('mail', [$user->father_mail, $user->mother_mail])->notify(new userReportMonthlyNotification($user));
+            Notification::route('mail', [$user->father_mail, $user->mother_mail])->notify(new userReportMonthlyNotification($user, $request->date_filter));
             $report = $user->monthlyScores($request->date_filter);
             $report->update(['mail_status' => 1]);
         }
@@ -331,12 +331,14 @@ class ReportController extends Controller
 
     public function sendReportTable(Request $request)
     {
+
         if (!request()->notes_to_parent){
             session()->flash('error', 'لم يتم ارسال التقرير اليومي، يرجى التأكد من إدخال بيانات اليوم الحالي بشكل صحيح من صفحة الشهر!!');
             return redirect()->route('teachers.report.table', $request->student_id);
         }
 
         $notes_to_parents = request()->notes_to_parent[0];
+
 
         $request->validate([
             'new_lesson' => 'required|array',

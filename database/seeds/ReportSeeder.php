@@ -12,7 +12,7 @@ class ReportSeeder extends Seeder
      */
     public function run()
     {
-        $month = 10;
+        $month = 11;
         $students = \App\User::query()->get();
 
         foreach ($students as $student){

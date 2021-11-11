@@ -18,7 +18,7 @@ class Report extends Model implements Auditable
             MonthlyScore::query()->updateOrCreate(
                 [
                     'user_id' => $report->student_id,
-                    'created_at' => $report->created_at->format('Y-m'),
+                    'month_year' => $report->created_at->format('Y-m'),
                 ],
                 [
                     'new_lessons_not_listened' => getLessonsNotListenedCount($report->student_id),

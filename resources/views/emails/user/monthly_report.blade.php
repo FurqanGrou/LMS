@@ -43,7 +43,7 @@
                         عدد مرات عدم تسميع الدرس الجديد / Number of not recite the new lesson
                     </td>
                     <td style="border: 1px solid gray;width: 30px; font-size: 16px; text-align: center;font-family: arial, sans-serif">
-                        {{ $student->monthlyScores(request()->date_filter)->new_lessons_not_listened ?? 0 }}
+                        {{ $student->monthlyScores($date_filter)->new_lessons_not_listened ?? 0 }}
                     </td>
                 </tr>
                 <tr style="height: 40px">
@@ -51,7 +51,7 @@
                         عدد مرات عدم تسميع اخر 5 صفحات / Number of not recite last 5 pages
                     </td>
                     <td style="border: 1px solid gray;width: 30px;font-size: 16px;text-align: center;font-family: arial, sans-serif">
-                        {{ $student->monthlyScores(request()->date_filter)->last_five_pages_not_listened ?? 0 }}
+                        {{ $student->monthlyScores($date_filter)->last_five_pages_not_listened ?? 0 }}
                     </td>
                 </tr>
                 <tr style="height: 40px">
@@ -59,7 +59,7 @@
                         عدد مرات عدم تسميع المراجعة / Number of not recite the review
                     </td>
                     <td style="border: 1px solid gray;width: 30px;font-size: 16px;text-align: center;font-family: arial, sans-serif">
-                        {{ $student->monthlyScores(request()->date_filter)->daily_revision_not_listened ?? 0 }}
+                        {{ $student->monthlyScores($date_filter)->daily_revision_not_listened ?? 0 }}
                     </td>
                 </tr>
                 <tr style="height: 40px">
@@ -67,7 +67,7 @@
                         عدد أيام الغياب بعذر / Number of absence days with excuse
                     </td>
                     <td style="border: 1px solid gray;width: 30px;font-size: 16px;text-align: center;font-family: arial, sans-serif">
-                        {{ $student->monthlyScores(request()->date_filter)->absence_excuse_days ?? 0 }}
+                        {{ $student->monthlyScores($date_filter)->absence_excuse_days ?? 0 }}
                     </td>
                 </tr>
                 <tr style="height: 40px">
@@ -75,7 +75,7 @@
                         عدد أيام الغياب بدون بعذر / Number of absence days without excuse
                     </td>
                     <td style="border: 1px solid gray;width: 30px;font-size: 16px;text-align: center;font-family: arial, sans-serif">
-                        {{ $student->monthlyScores(request()->date_filter)->absence_unexcused_days ?? 0 }}
+                        {{ $student->monthlyScores($date_filter)->absence_unexcused_days ?? 0 }}
                     </td>
                 </tr>
                 <tr style="height: 40px">
@@ -83,7 +83,7 @@
                         رقم الصفحة / Page Number
                     </td>
                     <td style="border: 1px solid gray;width: 30px; font-size: 16px; text-align: center;font-family: arial, sans-serif">
-                        {{ $student->monthlyScores(request()->date_filter)->lessonPage->page_number ?? '-' }}
+                        {{ $student->monthlyScores($date_filter)->lessonPage->page_number ?? '-' }}
                     </td>
                 </tr>
                 <tr style="height: 40px">
@@ -91,7 +91,7 @@
                         اسم السورة / Lesson Name
                     </td>
                     <td style="border: 1px solid gray;width: 30px; font-size: 16px; text-align: center;font-family: arial, sans-serif">
-                        {{ $student->monthlyScores(request()->date_filter)->lessonPage->lesson_title ?? '-' }}
+                        {{ $student->monthlyScores($date_filter)->lessonPage->lesson_title ?? '-' }}
                     </td>
                 </tr>
                 <tr>
@@ -101,9 +101,9 @@
                         General Score
                     </td>
                     <td style="font-size: 16px;text-align: center;font-family: arial, sans-serif">
-                        {{ getRate($student->monthlyScores(request()->date_filter)->avg ?? 100, 'ar') }}
+                        {{ getRate($student->monthlyScores($date_filter)->avg ?? 100, 'ar') }}
                         <br>
-                        {{ getRate($student->monthlyScores(request()->date_filter)->avg ?? 100, 'en') }}
+                        {{ getRate($student->monthlyScores($date_filter)->avg ?? 100, 'en') }}
                     </td>
                     <td style="font-size: 16px;text-align: center; background: #C6E0B4;font-family: arial, sans-serif">
                         نسبة
@@ -111,7 +111,7 @@
                         Percentage
                     </td>
                     <td style="font-size: 16px;text-align: center;font-family: arial, sans-serif">
-                        {{ $student->monthlyScores(request()->date_filter)->avg ?? 100 }}
+                        {{ $student->monthlyScores($date_filter)->avg ?? 100 }}
                     </td>
                 </tr>
                 </tbody>

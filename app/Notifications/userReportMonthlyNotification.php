@@ -15,18 +15,20 @@ class userReportMonthlyNotification extends Notification
     public $student_id;
     public $student_name;
     public $student_number;
+    public $date_filter;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($student)
+    public function __construct($student, $date_filter)
     {
         $this->student        = $student;
         $this->student_id     = $student->id;
         $this->student_name   = $student->name;
         $this->student_number = $student->student_number;
+        $this->date_filter = $date_filter;
     }
 
     /**
@@ -49,7 +51,7 @@ class userReportMonthlyNotification extends Notification
     public function toMail($notifiable)
     {
         $subject = "نتيجة شهر ". " اكتوبر " . date("Y") ." - الطالب/ة - " . $this->student_name . " ، " . $this->student_number . "";
-        return (new MailMessage)->subject($subject)->view('emails.user.monthly_report', ['student' => $this->student, 'student_id' => $this->student_id, "student_name" => $this->student_name]);
+        return (new MailMessage)->subject($subject)->view('emails.user.monthly_report', ['student' => $this->student, 'student_id' => $this->student_id, "student_name" => $this->student_name, 'date_filter' => $this->date_filter]);
     }
 
     /**

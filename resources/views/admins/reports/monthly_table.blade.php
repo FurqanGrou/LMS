@@ -62,14 +62,6 @@
 
     </style>
 
-    <div style="z-index: 1001; position: fixed; top: 50%; right: -2%;transform: translate(-50%, 0);">
-        <form action="{{ route('admins.send.report', request()->student_id) }}" id="form-report-send" method="POST">
-            @csrf
-            <input type="hidden" name="student_id" value="{{ request()->student_id }}">
-            <input type="submit" class="btn btn-danger" id="btn-send-report" value="ارسال">
-        </form>
-    </div>
-
     <table style="width: 100%; border: none;font-family: arial, sans-serif;">
         <thead>
             <tr style="border: none;">
@@ -93,10 +85,11 @@
             <div class="col-4">
                 <form action="">
                     <fieldset class="form-group">
-                        <input type="month" class="form-control" id="month_report" name="date_filter" value="{{ request()->date_filter }}">
+                        <input type="month" class="form-control" id="month_report" name="date_filter" value="{{ request()->date_filter ?? date('Y') . '-' . date('m') }}">
                     </fieldset>
                 </form>
             </div>
+
             <div class="col-4">
                 <form action="">
                     <fieldset class="form-group">
