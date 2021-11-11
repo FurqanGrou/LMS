@@ -54,12 +54,13 @@ function getMailStatus($student_id){
     return $mail_status;
 }
 
-function getAbsenceCount($student_id, $type, $mail = false){
+function getAbsenceCount($student_id, $type, $month = false){
 
-    if($mail){
-        $myDate = '11/01/2021';
+    if($month){
+        $nextMonth = $month + 1;
+        $myDate = $nextMonth . '/01/2021';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
-        $currentMonth = 10;
+        $currentMonth = $month;
         $currentYear = 2021;
     }else{
         $today = Carbon::tomorrow();
@@ -184,12 +185,13 @@ function getPathDefaultGrade($path, $grade){
     }
 }
 
-function isAchievedDefaultGrades($student_id, $mail = false){
+function isAchievedDefaultGrades($student_id, $month = false){
 
-    if($mail){
-        $myDate = '11/01/2021';
+    if($month){
+        $nextMonth = $month + 1;
+        $myDate = $nextMonth . '/01/2021';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
-        $currentMonth = 10;
+        $currentMonth = $month;
         $currentYear = 2021;
     }else{
         $today = Carbon::tomorrow();
@@ -227,12 +229,13 @@ function isAchievedDefaultGrades($student_id, $mail = false){
     return !($result > 0);
 }
 
-function checkThirdCondition($student_id, $mail = false){
+function checkThirdCondition($student_id, $month = false){
 
-    if($mail){
-        $myDate = '11/01/2021';
+    if($month){
+        $nextMonth = $month + 1;
+        $myDate = $nextMonth . '/01/2021';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
-        $currentMonth = 10;
+        $currentMonth = $month;
         $currentYear = 2021;
     }else{
         $today = Carbon::tomorrow();
@@ -258,12 +261,13 @@ function checkThirdCondition($student_id, $mail = false){
     return (isAchievedDefaultGrades($student_id) && $absence_times > 0);
 }
 
-function getLessonsNotListenedCount($student_id, $mail = false){
+function getLessonsNotListenedCount($student_id, $month = false){
 
-    if($mail){
-        $myDate = '11/01/2021';
+    if($month){
+        $nextMonth = $month + 1;
+        $myDate = $nextMonth . '/01/2021';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
-        $currentMonth = 10;
+        $currentMonth = $month;
         $currentYear = 2021;
     }else{
         $today = Carbon::tomorrow();
@@ -373,12 +377,13 @@ function getLessonsNotListenedCount($student_id, $mail = false){
     return max($normal_count - ( ($over_count_total - (1 * $over_count)) + $over_count_total_sat ), 0) ;
 }
 
-function getLastFivePagesNotListenedCount($student_id, $mail = false){
+function getLastFivePagesNotListenedCount($student_id, $month = false){
 
-    if($mail){
-        $myDate = '11/01/2021';
+    if($month){
+        $nextMonth = $month + 1;
+        $myDate = $nextMonth . '/01/2021';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
-        $currentMonth = 10;
+        $currentMonth = $month;
         $currentYear = 2021;
     }else{
         $today = Carbon::tomorrow();
@@ -487,12 +492,13 @@ function getLastFivePagesNotListenedCount($student_id, $mail = false){
     return max($normal_count - ( ($over_count_total - (1 * $over_count)) + $over_count_total_sat ), 0) ;
 }
 
-function getDailyRevisionNotListenedCount($student_id, $mail = false){
+function getDailyRevisionNotListenedCount($student_id, $month = false){
 
-    if($mail){
-        $myDate = '11/01/2021';
+    if($month){
+        $nextMonth = $month + 1;
+        $myDate = $nextMonth . '/01/2021';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
-        $currentMonth = 10;
+        $currentMonth = $month;
         $currentYear = 2021;
     }else{
         $today = Carbon::tomorrow();
