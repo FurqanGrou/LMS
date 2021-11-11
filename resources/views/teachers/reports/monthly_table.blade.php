@@ -126,14 +126,6 @@
 
     </style>
 
-{{--    <div style="z-index: 1001; position: fixed; top: 50%; right: -2%;transform: translate(-50%, 0);">--}}
-{{--        <form action="{{ route('teachers.send.report', request()->student_id . '?date_filter=' . request()->date_filter) }}" id="form-report-send" method="POST">--}}
-{{--            @csrf--}}
-{{--            <input type="hidden" name="student_id" value="{{ request()->student_id }}">--}}
-{{--            <input type="submit" class="btn btn-danger" id="btn-send-report" value="ارسال">--}}
-{{--        </form>--}}
-{{--    </div>--}}
-
     <table style="width: 100%; border: none;font-family: arial, sans-serif;">
         <thead>
             <tr style="border: none;">
@@ -161,7 +153,7 @@
             <div class="col-4">
                 <form action="">
                     <fieldset class="form-group">
-                        <input type="month" class="form-control" style="cursor: pointer" id="month_report" name="date_filter" value="{{ request()->date_filter ?? \Carbon\Carbon::today()->year . '-' . \Carbon\Carbon::today()->month }}">
+                        <input type="month" class="form-control" style="cursor: pointer" id="month_report" name="date_filter" value="{{ request()->date_filter ?? date('Y') . '-' . date('m') }}">
                     </fieldset>
                 </form>
             </div>
@@ -195,25 +187,18 @@
         </p>
 
     </div>
-    <form method="POST" id="monthly_report-monthly" action="{{ route('teachers.send.report.monthly', request()->student_id . '?date_filter=' . request()->date_filter) }}">
-    @csrf
 
-    <input type="submit" style="z-index: 1001; position: fixed; top: 40%; right: -2%;transform: translate(-50%, 0);" class="btn btn-info" id="btn-send-report-monthly" value="شهري">
-    </form>
-
-    <form id="monthly_report" method="POST" action="{{ route('teachers.send.report', request()->student_id . '?date_filter=' . request()->date_filter) }}">
+    <form id="monthly_report">
         @csrf
-
-        <input type="submit" style="z-index: 1001; position: fixed; top: 50%; right: -2%;transform: translate(-50%, 0);" class="btn btn-danger" id="btn-send-report" value="ارسال">
 
         <input type="hidden" id="student_id" name="student_id" value="{{ request()->student_id }}">
         <div class="table-box">
-        <table id="tables" style="display: flex;
+            <table id="tables" style="display: flex;
             justify-content: space-between;
             margin-bottom: 50px;
             border: none;
             width: 100%">
-            <tbody style="width: 100%;">
+                <tbody style="width: 100%;">
 
                 <tr style="border: none; display: flex;align-items: flex-start;" id="lessons-tables">
 
@@ -221,7 +206,7 @@
                     <td style="border: none; width: 70%">
                         <table style="width: 98%;" id="lessons">
 
-                        <tr style="min-height: 45px;height: 45px;max-height: 45px;background: #C6E0B4;font-weight: bold">
+                            <tr style="min-height: 45px;height: 45px;max-height: 45px;background: #C6E0B4;font-weight: bold">
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold" >التاريخ</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold">اليوم</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 120px">الدرس الجديد</th>
@@ -293,8 +278,8 @@
                                         </select>
                                     </td>
                                 </tr>
-                            @endfor
-                            </tbody>
+                                @endfor
+                                </tbody>
 
                         </table>
                     </td>
@@ -303,7 +288,7 @@
                     <td style="border: none; width: 30%">
                         <table style="width: 100%;" id="grades">
 
-                        <tr style="min-height: 45px;height: 45px;max-height: 45px; background: #C6E0B4; font-weight: bold">
+                            <tr style="min-height: 45px;height: 45px;max-height: 45px; background: #C6E0B4; font-weight: bold">
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold;width: 60px;">الدرس</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold">اخر 5 صفحات</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold">المراجعة اليومية</th>
@@ -347,8 +332,8 @@
                         </table>
                     </td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
         </div>
 
         {{-- Totals--}}
@@ -454,7 +439,6 @@
             </tr>
             </tbody>
         </table>
-
     </form>
 
 @endsection
@@ -946,7 +930,7 @@
                     }
                 }).then((isConfirm) => {
                         if (isConfirm) {
-                            $('form#monthly_report').submit();
+                            $('form#form-send-daily-report').submit();
                             swal("يتم الارسال...!", "تتم حالياً عملية الارسال", "info");
                         } else {
                             swal("تم الإلغاء!", "تم إلغاء عملية الارسال", "error");

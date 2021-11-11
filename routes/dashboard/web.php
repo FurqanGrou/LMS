@@ -86,6 +86,7 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
     Route::post('/report/table/{student_id}', 'ReportController@reportTableStore')->name('report.table');
     Route::post('/report/send/{student_id}', 'ReportController@sendReportTable')->name('send.report');
     Route::post('/report/change_page_number/{student_id}', 'ReportController@changePageNumber')->name('report.changePageNumber');
+    Route::post('/report/send-monthly/{student_id}', 'ReportController@sendReportTableMonthly')->name('send.report.monthly');
 
     // attendance
     Route::get('/attendance', 'AttendanceController@create')->name('attendance.index');
@@ -105,29 +106,7 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
 //    Route::put('/request-services/{service}/update', 'RequestServiceController@update')->name('request_services.update');
     Route::get('request-services/export', 'ImportExportController@exportExamsRequests')->name('request_services.exams.export');
 
-    Route::get('api-test', function (){
-        $client = new Client();
-        $url = "https://api.cloudflare.com/client/v4/zones/023e105f4ecef8ad9ca31a8372d0c353/settings/proxy_read_timeout";
-
-        $params = [
-            '"{\"value\":6000}"',
-            //If you have any Params Pass here
-        ];
-
-        $headers = [
-            'X-Auth-Email' => 'naazish@furqancenter.com',
-            'X-Auth-Key' => 'd50e1a758c5c627a03e562e9e1a4200c01506',
-            'Content-Type' => 'application/json',
-        ];
-
-        $response = $client->request('Patch', $url, [
-            'headers' => $headers,
-            'form_params' => $params,
-        ]);
-
-        $responseBody = json_decode($response->getBody());
-
-        dd($responseBody);
+    Route::get('test-fun', function (){
     });
 
 });

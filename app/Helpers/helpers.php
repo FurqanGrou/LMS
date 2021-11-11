@@ -765,3 +765,27 @@ function dateFormatMail($now, $day)
 {
     return \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l d-m-Y');
 }
+
+function isAvailableToSendMonthlyReport($month_year){
+
+    if(!is_null($month_year)){
+        $month = substr($month_year, -2);
+        $year  = substr($month_year, 0, 4);
+    }else{
+        $month = date('m');
+        $year  = date('Y');
+    }
+
+    $monthReport = Carbon::createFromDate($year, $month);
+    $monthPeriod = $monthReport->format('Y-m');
+    $first_day   = $monthReport->format('1');
+    $lastDay     = $monthReport->format('t');
+
+
+    $daysOfMonth = \Carbon\CarbonPeriod::between($monthPeriod.'-'.$first_day, $monthPeriod.'-'.$lastDay)->filter('isWeekday');
+
+    $currentDate    = Carbon::createFromDate(date('Y'), date('m'), date('d'))->format('Y-m-d'); // 30-11-2021
+    $lastWorkingDay = last($daysOfMonth->toArray())->format('Y-m-d'); // 30-11-201
+
+    return ($currentDate >= $lastWorkingDay && $currentDate <= $monthReport->format('Y-m-t'));
+}
