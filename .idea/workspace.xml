@@ -23,21 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/helpers.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/ReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notifications/userReportMonthlyNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/userReportMonthlyNotification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Report.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/ReportSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/ReportSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/layouts/header-navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/layouts/header-navbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/emails/user/monthly_report.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/user/monthly_report.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/layouts/header-navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/layouts/header-navbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -350,7 +336,7 @@
       <workItem from="1636380900972" duration="12713000" />
       <workItem from="1636465968559" duration="12342000" />
       <workItem from="1636496767238" duration="494000" />
-      <workItem from="1636557421611" duration="32092000" />
+      <workItem from="1636557421611" duration="36438000" />
     </task>
     <servers />
   </component>
@@ -402,9 +388,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1636490684767" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1636634191079">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1638285676252">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1636634191079" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1638285676252" />
   </component>
 </project>
