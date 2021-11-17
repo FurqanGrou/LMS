@@ -700,7 +700,7 @@ function disableRecord($date, $day)
         if( ($date->year == $today->year) && ($date->month < $today->month) && ($date->month <= $today->month) ) {
             $status = true;
         }elseif(($date->year == $today->year) && ($date->month == $today->month) && ($date->day <= $today->day)){
-//            $status = true;
+            $status = true;
         }
     }
 
@@ -780,7 +780,6 @@ function isAvailableToSendMonthlyReport($month_year){
     $monthPeriod = $monthReport->format('Y-m');
     $first_day   = $monthReport->format('1');
     $lastDay     = $monthReport->format('t');
-
 
     $daysOfMonth = \Carbon\CarbonPeriod::between($monthPeriod.'-'.$first_day, $monthPeriod.'-'.$lastDay)->filter('isWeekday');
 
