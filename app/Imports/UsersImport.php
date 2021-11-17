@@ -126,7 +126,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                 $exists_teacher->update([
                     'name'      => $teacher_name,
                     'section'   => $row['alksm'] == 'بنات' ? 'female' : 'male',
-//                    'last_4_id'         => $row['last_4_id'],
+                    'last_4_id'         => $row['akhr_4_arkam_mn_alhoy_llmaalm'] ?? '00',
                 ]);
 
             }else{
@@ -138,7 +138,39 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'email'             => $email,
                     'password'          => \Hash::make('12345'),
                     'section'           => $row['alksm'] == 'بنات' ? 'female' : 'male',
-//                    'last_4_id'         => $row['last_4_id'],
+                    'last_4_id'         => $row['akhr_4_arkam_mn_alhoy_llmaalm'] ?? '00',
+                ]);
+
+            }
+
+        }
+
+//Supervisors
+        if(!is_null($row['bryd_almshrf']) && !is_null($row['rkm_almshrf']) && !is_null($row['asm_almshrf'])){
+
+            //check if this supervisor is exists or not
+            $email = str_replace(' ', '', $row['bryd_almshrf']);
+            $exists_supervisor = Teacher::where('email', '=', $email)->first();
+            $supervisor_name = trim($row['asm_almshrf']);
+            //if exists is true update current supervisor data
+            if($exists_supervisor){
+
+                $exists_supervisor->update([
+                    'name'      => $supervisor_name,
+                    'section'   => $row['alksm'] == 'بنات' ? 'female' : 'male',
+                    'last_4_id'         => '00',
+                ]);
+
+            }else{
+
+                //if exists is false insert new supervisor data
+                $supervisor = Teacher::create([
+                    'teacher_number'    => $row['rkm_almshrf'],
+                    'name'      => $supervisor_name,
+                    'email'             => $email,
+                    'password'          => \Hash::make('12345'),
+                    'section'           => $row['alksm'] == 'بنات' ? 'female' : 'male',
+                    'last_4_id'         => '00',
                 ]);
 
             }
@@ -188,21 +220,44 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
             $type = ($row['alksm'] == 'بنات') ? 'female' : 'male';
 
             //check if this class_teacher is exists or not
-            $email = str_replace(' ', '', $row['bryd_almaalm']);
-            $exists_class_teacher = ClassesTeachers::where('class_number', '=', $row['rkm_alhlk'])->where('teacher_email', '=', $email)->first();
+            $teacher_email    = str_replace(' ', '', $row['bryd_almaalm']);
+            $supervisor_email = str_replace(' ', '', $row['bryd_almshrf']);
 
-            //if exists is true update current class_teacher data
+            $exists_class_teacher = ClassesTeachers::where('class_number', '=', $row['rkm_alhlk'])
+                ->where('teacher_email', '=', $teacher_email)
+                ->where('role', '=', 'main')
+                ->first();
+
+            //if exists is true update current class_teacher data (teacher class)
             if(!$exists_class_teacher){
 
                 //if exists is false insert new class_teacher data
                 $class_teacher = ClassesTeachers::create([
                     'class_number'  => $row['rkm_alhlk'],
-                    'teacher_email' => $email,
+                    'teacher_email' => $teacher_email,
                     'type'          => $type,
+                    'role'          => 'main',
                 ]);
 
             }
 
+            $exists_class_supervisor = ClassesTeachers::where('class_number', '=', $row['rkm_alhlk'])
+                ->where('teacher_email', '=', $supervisor_email)
+                ->where('role', '=', 'supervisor')
+                ->first();
+
+            //if exists is true update current class_teacher data (class supervisor)
+            if(!$exists_class_supervisor){
+
+                //if exists is false insert new class_teacher data
+                $class_teacher = ClassesTeachers::create([
+                    'class_number'  => $row['rkm_alhlk'],
+                    'teacher_email' => $supervisor_email,
+                    'type'          => $type,
+                    'role'          => 'supervisor',
+                ]);
+
+            }
         }
 
     }
