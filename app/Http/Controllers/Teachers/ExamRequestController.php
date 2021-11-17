@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Teachers;
 
-use App\Chapter;
 use App\ClassesTeachers;
 use App\ExamRequest;
 use App\Part;

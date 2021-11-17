@@ -93,16 +93,49 @@
                 }
             });
 
-            $(document).on('change', '#start_date, #end_date', function (e) {
-                var CurrentDate = new Date().setHours(0,0,0,0);
-                var GivenDate = new Date($(this).val()).setHours(0,0,0,0);
+            $(document).on('change', '#start_date', function (e) {
+                let today = new Date();
+                let CurrentDate1 = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                let CurrentDate = new Date(CurrentDate1).getTime();
+                let start_date  = new Date($(this).val()).getTime();
+                let end_date    = new Date($('#end_date').val()).getTime();
 
-                if(GivenDate < CurrentDate){
+                if(isNaN(end_date)){
+                    if(start_date >= CurrentDate){
+                        alert("يرجى إدخال تاريخ صحيح!");
+                        $(this).val('');
+                        $(this).focus();
+                    }
+                }else{
+                    if(end_date <= start_date || end_date > CurrentDate){
+                        alert("يرجى إدخال تاريخ صحيح!");
+                        $('#end_date').val('');
+                        $(this).val('');
+                        $(this).focus();
+                    }
+                }
+
+            });
+
+            $(document).on('change', '#end_date', function (e) {
+                let today = new Date();
+                let CurrentDate1 = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                let CurrentDate = new Date(CurrentDate1).getTime();
+                let start_date  = new Date($('#start_date').val()).getTime();
+                let end_date    = new Date($(this).val()).getTime();
+
+                if(end_date <= start_date || end_date > CurrentDate){
                     alert("يرجى إدخال تاريخ صحيح!");
                     $(this).val('');
                     $(this).focus();
                 }
 
+                if(isNaN(start_date)){
+                    alert("يرجى إدخال تاريخ بداية اولاً!");
+                    $(this).val('');
+                    $('#start_date').val('');
+                    $('#start_date').focus();
+                }
             });
         });
     </script>
