@@ -60,6 +60,7 @@
             border-radius: 50%;
         }
     </style>
+
 @section('content')
 
     <div class="row">

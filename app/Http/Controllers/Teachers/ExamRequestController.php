@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Teachers;
 
-use App\Chapter;
+use App\ClassesTeachers;
 use App\ExamRequest;
 use App\Part;
 use App\Teacher;
@@ -19,9 +19,11 @@ class ExamRequestController extends Controller
 
     public function create()
     {
-        $students = User::all();
-        $teachers = Teacher::all();
-        $chapters = Part::all();
+        $teacher_email   = auth()->guard('teacher_web')->user()->email;
+        $classes_numbers = ClassesTeachers::query()->select(['class_number'])->where('teacher_email', '=', $teacher_email)->get()->pluck('class_number')->toArray();
+        $students = User::query()->whereIn('class_number', $classes_numbers)->get();
+        $teachers = Teacher::query()->get();
+        $chapters = Part::query()->get();
 
         return view('teachers.request_services.exams.create', ['students' => $students, 'teachers' => $teachers, 'chapters' => $chapters]);
     }
