@@ -45,9 +45,9 @@
                     <span class="menu-title" data-i18n="nav.templates.main">طلبات الاختبارات</span>
                 </a>
                 <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="#" data-i18n="nav.templates.vert.classic_menu">عرض الطلبات المقدمة</a>
-                    </li>
+{{--                    <li>--}}
+{{--                        <a class="menu-item" href="#" data-i18n="nav.templates.vert.classic_menu">عرض الطلبات المقدمة</a>--}}
+{{--                    </li>--}}
                     <li>
                         <a class="menu-item" href="{{ route('teachers.request_services.exam.create') }}" data-i18n="nav.templates.vert.classic_menu">طلب اختبار</a>
                     </li>

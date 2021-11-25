@@ -58,7 +58,7 @@
         }
 
         .empty-input {
-            background: red !important;
+            background: #FF4961 !important;
             color: white !important;
         }
 

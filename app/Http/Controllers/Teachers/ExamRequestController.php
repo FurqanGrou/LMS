@@ -21,8 +21,9 @@ class ExamRequestController extends Controller
     {
         $teacher_email   = auth()->guard('teacher_web')->user()->email;
         $classes_numbers = ClassesTeachers::query()->select(['class_number'])->where('teacher_email', '=', $teacher_email)->get()->pluck('class_number')->toArray();
-        $students = User::query()->whereIn('class_number', $classes_numbers)->get();
-        $teachers = Teacher::query()->get();
+        $students = User::query()->whereIn('class_number', $classes_numbers)->orderBy('name')->get();
+
+        $teachers = Teacher::query()->orderBy('name')->get();
         $chapters = Part::query()->get();
 
         return view('teachers.request_services.exams.create', ['students' => $students, 'teachers' => $teachers, 'chapters' => $chapters]);
@@ -30,6 +31,25 @@ class ExamRequestController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'student_id' => 'required|exists:users,id',
+            'chapter_id' => 'required|exists:parts,id',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'teacher_name' => 'required|exists:teachers,name',
+        ], [
+            'student_id.required' => 'يجب إختيار طالب من القائمة',
+            'student_id.exists' => 'يجب إختيار طالب من القائمة',
+            'chapter_id.required' => 'يجب إختيار جزء من القائمة',
+            'chapter_id.exists' => 'يجب إختيار جزء من القائمة',
+            'start_date.required' => 'يجب إختيار تاريخ بداية صحيح',
+            'start_date.date' => 'يجب إختيار تاريخ بداية صحيح',
+            'end_date.required' => 'يجب إختيار تاريخ نهاية صحيح',
+            'end_date.date' => 'يجب إختيار تاريخ نهاية صحيح',
+            'teacher_name.date' => 'يجب إختيار اسم معلم من القائمة',
+            'teacher_name.exists' => 'يجب إختيار اسم معلم من القائمة',
+        ]);
+
         ExamRequest::create([
             'user_id' => $request->student_id,
             'chapter_id' => $request->chapter_id,

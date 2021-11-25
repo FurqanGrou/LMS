@@ -19,7 +19,7 @@
                 <div class="form-group" id="student_name">
                     <label>اسم الطالب:</label>
                     <br>
-                    <select name="student_id" class="select2">
+                    <select name="student_id" class="select2" required>
                         <option>-</option>
                         @foreach($students as $student)
                             <option value="{{ $student->id }}">{{ $student->name }}</option>
@@ -31,9 +31,9 @@
                 <div class="form-group">
                     <label>اسم الجزء:</label>
                     <br>
-                    <select name="chapter_id" class="select2">
+                    <select name="chapter_id" class="select2" required>
                         <option>-</option>
-                    @foreach($chapters as $chapter)
+                        @foreach($chapters as $chapter)
                             <option value="{{ $chapter->id }}">{{ $chapter->name }}</option>
                         @endforeach
                     </select>
@@ -42,20 +42,20 @@
                 {{-- start_date--}}
                 <div class="form-group">
                     <label for="start_date">تاريخ البداية:</label>
-                    <input type="date" name="start_date" class="form-control" id="start_date">
+                    <input type="date" name="start_date" class="form-control" value="{{ old('start_date') }}" id="start_date" required>
                 </div>
 
                 {{-- end_date--}}
                 <div class="form-group">
                     <label for="end_date">تاريخ النهاية:</label>
-                    <input type="date" name="end_date" class="form-control" id="end_date">
+                    <input type="date" name="end_date" class="form-control" value="{{ old('end_date') }}" id="end_date" required>
                 </div>
 
                 {{-- teacher_name--}}
                 <div class="form-group">
                     <label>اسم المعلم:</label>
                     <br>
-                    <select name="teacher_name" class="select2">
+                    <select name="teacher_name" class="select2" required>
                         <option>-</option>
                         @foreach($teachers as $teacher)
                             <option value="{{ $teacher->name }}">{{ $teacher->name }}</option>
@@ -83,6 +83,11 @@
 @push('js')
     <script>
         $(document).ready(function() {
+
+            $(document).on('click', 'form button[type="reset"]', function (e) {
+                $('form select.select2').val(null).trigger('change');
+            });
+
             $(document).on('change', 'select#request_type', function (e) {
                 if($(this).val() == 'complaint'){
                     $('#complaint_type').removeClass('d-none');
