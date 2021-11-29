@@ -268,127 +268,109 @@
         </tbody>
     </table>
 
-    {{-- Totals--}}
-    <table style="width: 100%; font-weight: bold">
-        <tbody>
-        <tr style="height: 40px">
-            <td rowspan="9" style="text-align: center; width: 40%;font-size: 15px">
+        {{-- Totals--}}
+        <table style="width: 100%; font-weight: bold">
+            <tbody>
+            <tr style="height: 40px">
+                <td rowspan="9" style="text-align: center; width: 40%;font-size: 15px">
 
-                <br>
-                <br>
-
-            </td>
-
-            <td colspan="4" style="text-align: center; background: #C6E0B4;">
-                جدول نهاية الشهر End of Month Table
-            </td>
-        </tr>
-        <tr style="height: 40px">
-            <td colspan="2" style="font-size: 14px">
-                عدد مرات عدم تسميع الدرس الجديد / Number of not recite the new lesson
-            </td>
-            <td colspan="2" style="text-align: center">
-                {{ getLessonsNotListenedCount(request()->student_id) }}
-            </td>
-        </tr>
-        <tr style="height: 40px">
-            <td colspan="2" style="font-size: 14px">
-                عدد مرات عدم تسميع اخر 5 صفحات / Number of not recite last 5 pages
-            </td>
-            <td colspan="2" style="text-align: center">
-                {{ getLastFivePagesNotListenedCount(request()->student_id)  }}
-            </td>
-        </tr>
-        <tr style="height: 40px">
-            <td colspan="2" style="font-size: 14px">
-                عدد مرات عدم تسميع المراجعة / Number of not recite the review
-            </td>
-            <td colspan="2" style="text-align: center">
-                {{ getDailyRevisionNotListenedCount(request()->student_id) }}
-            </td>
-        </tr>
-        <tr style="height: 40px">
-            <td colspan="2" style="font-size: 14px">
-                عدد أيام الغياب بعذر / Number of absence days with excuse
-{{--                عدد أيام الغياب  / Number of absence days--}}
-            </td>
-            <td colspan="2" style="text-align: center">
-                {{ getAbsenceCount(request()->student_id, -2) }}
-            </td>
-        </tr>
-        <tr style="height: 40px">
-            <td colspan="2" style="font-size: 14px">
-                عدد أيام الغياب بدون بعذر / Number of absence days without excuse
-            </td>
-            <td colspan="2" style="text-align: center">
-                {{ getAbsenceCount(request()->student_id, -5) }}
-            </td>
-        </tr>
-        <tr style="height: 40px">
-            <td colspan="2" style="font-size: 14px">
-                رقم الصفحة / Page Number
-            </td>
-            <td colspan="2" style="text-align: center">
-                <select name="page_number" id="page_number" class="select2">
-                    <option value=""></option>
-                    @foreach($lesson_pages as $lesson_page)
-                        <option value="{{ $lesson_page->id }}" {{ isset($user_student->monthlyScores()->lesson_page_id) && $user_student->monthlyScores()->lesson_page_id == $lesson_page->id ? 'selected' : ''}}>{{ $lesson_page->page_number }}</option>
-                    @endforeach
-                </select>
-                <br>
-                <span id="lesson_name">{{ $user_student->monthlyScores()->lessonPage->lesson_title ?? '-' }}</span>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="1" style="text-align: center; background: #C6E0B4; display: flex; justify-content: space-between">
-                <div style="border: 1px solid black;width: 50%">
-                    التقدير العام
                     <br>
-                    General Score
-                </div>
-                <div style="border: 1px solid black;width: 50%">
-
-                    {{ getRate(100 + (
-                                    (getLessonsNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'new_lesson')) +
-                                    (getLastFivePagesNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'last_5_pages')) +
-                                    (getDailyRevisionNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'daily_revision')) +
-                                    (getAbsenceCount(request()->student_id, -2) * -2) +
-                                    (getAbsenceCount(request()->student_id, -5) * -5)
-                                ), 'ar')
-                    }}
                     <br>
-                    {{ getRate(100 + (
-                                    (getLessonsNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'new_lesson')) +
-                                    (getLastFivePagesNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'last_5_pages')) +
-                                    (getDailyRevisionNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'daily_revision')) +
-                                    (getAbsenceCount(request()->student_id, -2) * -2) +
-                                    (getAbsenceCount(request()->student_id, -5) * -5)
-                                ), 'en') }}
 
-                </div>
+                </td>
 
-            </td>
-            <td style="text-align: center; background: #C6E0B4">
-                نسبة
-                <br>
-                Percentage
-            </td>
+                <td colspan="4" style="text-align: center; background: #C6E0B4;">
+                    جدول نهاية الشهر End of Month Table
+                </td>
+            </tr>
+            <tr style="height: 40px">
+                <td colspan="2" style="font-size: 14px">
+                    عدد مرات عدم تسميع الدرس الجديد / Number of not recite the new lesson
+                </td>
+                <td colspan="2" style="text-align: center">
+                    {{ $user_student->monthlyScores(request()->date_filter)->new_lessons_not_listened ?? 0 }}
+                </td>
+            </tr>
+            <tr style="height: 40px">
+                <td colspan="2" style="font-size: 14px">
+                    عدد مرات عدم تسميع اخر 5 صفحات / Number of not recite last 5 pages
+                </td>
+                <td colspan="2" style="text-align: center">
+                    {{ $user_student->monthlyScores(request()->date_filter)->last_five_pages_not_listened ?? 0 }}
+                </td>
+            </tr>
+            <tr style="height: 40px">
+                <td colspan="2" style="font-size: 14px">
+                    عدد مرات عدم تسميع المراجعة / Number of not recite the review
+                </td>
+                <td colspan="2" style="text-align: center">
+                    {{ $user_student->monthlyScores(request()->date_filter)->daily_revision_not_listened ?? 0 }}
+                </td>
+            </tr>
+            <tr style="height: 40px">
+                <td colspan="2" style="font-size: 14px">
+                    عدد أيام الغياب بعذر / Number of absence days with excuse
+                </td>
+                <td colspan="2" style="text-align: center">
+                    {{ $user_student->monthlyScores(request()->date_filter)->absence_excuse_days ?? 0 }}
+                </td>
+            </tr>
+            <tr style="height: 40px">
+                <td colspan="2" style="font-size: 14px">
+                    عدد أيام الغياب بدون بعذر / Number of absence days without excuse
+                </td>
+                <td colspan="2" style="text-align: center">
+                    {{ $user_student->monthlyScores(request()->date_filter)->absence_unexcused_days ?? 0 }}
+                </td>
+            </tr>
+            <tr style="height: 40px">
+                <td colspan="2" style="font-size: 14px">
+                    رقم الصفحة / Page Number
+                </td>
+                <td colspan="2" style="text-align: center">
+                    <select name="page_number" id="page_number">
+                        <option value=""></option>
 
-            <td style="text-align: center; padding: 5px 15px">
-                {{
-                    100 + (
-                            (getLessonsNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'new_lesson')) +
-                            (getLastFivePagesNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'last_5_pages')) +
-                            (getDailyRevisionNotListenedCount(request()->student_id) * -getPathDefaultGrade(getStudentPath(request()->student_id), 'daily_revision')) +
-                            (getAbsenceCount(request()->student_id, -2) * -2) +
-                            (getAbsenceCount(request()->student_id, -5) * -5)
-                          )
-                }}
+                        @if(getStudentPath(request()->student_id) == "قسم الهجاء")
+                            @foreach(\App\NooraniaPage::query()->get() as $lesson_page)
+                                <option value="{{ $lesson_page->id }}" {{ isset($user_student->monthlyScores(request()->date_filter)->noorania_page_id) && $user_student->monthlyScores(request()->date_filter)->noorania_page_id == $lesson_page->id ? 'selected' : ''}}>{{ $lesson_page->page_number }}</option>
+                            @endforeach
+                        @else
+                            @foreach($lesson_pages as $lesson_page)
+                                <option value="{{ $lesson_page->id }}" {{ isset($user_student->monthlyScores(request()->date_filter)->lesson_page_id) && $user_student->monthlyScores(request()->date_filter)->lesson_page_id == $lesson_page->id ? 'selected' : ''}}>{{ $lesson_page->page_number }}</option>
+                            @endforeach
+                        @endif
 
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                    </select>
+                    <br>
+                    <span id="lesson_name">{{ $user_student->monthlyScores(request()->date_filter)->lessonPage->lesson_title ?? '-' }}</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" style="text-align: center; background: #C6E0B4; display: flex; justify-content: space-between">
+                    <div style="border: 1px solid black;width: 50%">
+                        التقدير العام
+                        <br>
+                        General Score
+                    </div>
+                    <div style="border: 1px solid black;width: 50%">
+                        {{ getRate($user_student->monthlyScores(request()->date_filter)->avg ?? 100, 'ar') }}
+                        <br>
+                        {{ getRate($user_student->monthlyScores(request()->date_filter)->avg ?? 100, 'en') }}
+                    </div>
+
+                </td>
+                <td style="text-align: center; background: #C6E0B4">
+                    نسبة
+                    <br>
+                    Percentage
+                </td>
+                <td style="text-align: center; padding: 5px 15px">
+                    {{ $user_student->monthlyScores(request()->date_filter)->avg ?? 100 }}
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
     </form>
 

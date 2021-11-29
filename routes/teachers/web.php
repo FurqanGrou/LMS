@@ -1,6 +1,7 @@
 <?php
 
 use App\MonthlyScore;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -73,4 +74,10 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
 
 Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Controllers\Auth'], function (){
     Route::get('/login', 'TeacherLoginController@showLoginForm')->name('dashboard.login.form');
+});
+
+Route::get('test', function (){
+
+
+    dd(min(1-3, 0));
 });
