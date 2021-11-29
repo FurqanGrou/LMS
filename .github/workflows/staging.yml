@@ -40,7 +40,7 @@ jobs:
         with:
           command: |
             cd
-            ./deploy-staging_new.sh
+            ./deploy-staging_.sh
           host: ${{ secrets.HOST }}
           user: reports
           key: ${{ secrets.PRIVATE_KEY}}
