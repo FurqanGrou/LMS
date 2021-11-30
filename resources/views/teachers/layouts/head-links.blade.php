@@ -11,16 +11,12 @@
 
     <link rel="apple-touch-icon" href="{{ asset('dashboard/app-assets/images/ico/apple-icon-120.png') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dashboard/app-assets/images/ico/favicon.ico') }}">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/vendors/css/forms/toggle/bootstrap-switch.min.css')}}">
-
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/vendors/css/forms/toggle/switchery.min.css')}}">
-
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/vendors/css/tables/datatable/datatables.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/vendors/css/tables/datatable/select.dataTables.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/vendors/css/tables/extensions/keyTable.dataTables.min.css') }}">
@@ -28,23 +24,20 @@
 
     <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/css-rtl/vendors.css') }}">
-
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/vendors/css/tables/datatable/datatables.min.css') }}">
-
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/vendors/css/forms/toggle/bootstrap-switch.min.css')}}">
-
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/vendors/css/forms/toggle/switchery.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/vendors/css/forms/icheck/icheck.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/vendors/css/forms/icheck/custom.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/css/plugins/forms/checkboxes-radios.css')}}">
-
     <!-- END VENDOR CSS-->
-    <!-- BEGIN MODERN CSS-->
 
+    <!-- BEGIN MODERN CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/vendors/css/extensions/sweetalert.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/css-rtl/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/css-rtl/custom-rtl.css') }}">
     <!-- END MODERN CSS-->
+
     <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/css-rtl/core/menu/menu-types/vertical-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/css-rtl/core/colors/palette-gradient.css') }}">
@@ -54,6 +47,7 @@
 
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/assets/css/style-rtl.css') }}">
+
     <style>
         #DataTables_Table_4_wrapper .dt-buttons {
             top: 48px;

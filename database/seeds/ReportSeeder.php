@@ -12,7 +12,7 @@ class ReportSeeder extends Seeder
      */
     public function run()
     {
-        $month = 11;
+        $month = 10;
         $students = \App\User::query()->get();
 
         foreach ($students as $student){
@@ -36,6 +36,7 @@ class ReportSeeder extends Seeder
                         'month_year' => "2021-" . $month,
                     ],
                     [
+                        'path' => getStudentPath($student->id),
                         'new_lessons_not_listened' => getLessonsNotListenedCount($student->id, $month),
                         'last_five_pages_not_listened' => getLastFivePagesNotListenedCount($student->id, $month),
                         'daily_revision_not_listened' => getDailyRevisionNotListenedCount($student->id, $month),

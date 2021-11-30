@@ -1,11 +1,9 @@
     <!-- BEGIN VENDOR JS-->
-
     <script src="{{ asset('dashboard/app-assets/vendors/js/vendors.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('dashboard/app-assets/vendors/js/extensions/sweetalert.min.js') }}" type="text/javascript"></script>
 
     <script src="{{ asset('dashboard/app-assets/vendors/js/forms/toggle/bootstrap-switch.min.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('dashboard/app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js')}}"
-            type="text/javascript"></script>
+    <script src="{{ asset('dashboard/app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js')}}" type="text/javascript"></script>
 
     <script src="{{ asset('dashboard/app-assets/vendors/js/forms/toggle/switchery.min.js')}}" type="text/javascript"></script>
 
@@ -23,8 +21,8 @@
     <script src="{{ asset('dashboard/app-assets/vendors/js/tables/buttons.html5.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('dashboard/app-assets/vendors/js/tables/buttons.print.min.js') }}" type="text/javascript"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js" type="text/javascript"></script>
-
     <!-- BEGIN VENDOR JS-->
+
     <!-- BEGIN PAGE VENDOR JS-->
     <script src="{{ asset('dashboard/app-assets/vendors/js/charts/chart.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('dashboard/app-assets/vendors/js/charts/echarts/echarts.js') }}" type="text/javascript"></script>
@@ -40,7 +38,6 @@
 
     <script src="{{ asset('dashboard/app-assets/js/scripts/forms/checkbox-radio.js') }}" type="text/javascript"></script>
     <script src="{{ asset('dashboard/app-assets/js/scripts/extensions/sweet-alerts.js') }}" type="text/javascript"></script>
-
     <!-- END MODERN JS-->
 
     <!-- BEGIN PAGE LEVEL JS-->
