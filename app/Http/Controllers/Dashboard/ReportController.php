@@ -344,33 +344,79 @@ class ReportController extends Controller
             $pageNumber = $user->monthlyScores($month_year)->lesson_page_id ?? false;
         }
 
-        $reportsCount = Report::query()
-            ->whereMonth('created_at', '=', $month)
-            ->whereYear('created_at', '=', $year)
-            ->where('date', 'not like', '%Saturday%')
-            ->where('date', 'not like', '%Friday%')
+        $is_new_student = false;
+        $previous_date = Carbon::createFromDate($year, $month)->subMonth();
+        $previous_month      = $previous_date->month;
+        $previous_month_year = $previous_date->year;
+
+        $is_old_student = Report::query()
+            ->whereMonth('created_at', '=', $previous_month)
+            ->whereYear('created_at', '=', $previous_month_year)
             ->where('student_id', '=', $user->id)
-            ->where(function ($query){
-                $query ->where('lesson_grade', '>=', 0);
-                $query ->orWhere('lesson_grade', '=', '-');
-            })->where(function ($query){
-                $query ->where('last_5_pages_grade', '>=', 0);
-                $query ->orWhere('last_5_pages_grade', '=', '-');
-            })->where(function ($query){
-                $query ->where('daily_revision_grade', '>=', 0);
-                $query ->orWhere('daily_revision_grade', '=', '-');
-            })->whereIn('absence', [0, -2, -5])
             ->count();
 
-        $workingDays = $this->getWorkingDaysCount($month, $year);
+        if($is_old_student){
+            $reportsCount = Report::query()
+                ->whereMonth('created_at', '=', $month)
+                ->whereYear('created_at', '=', $year)
+                ->where('date', 'not like', '%Saturday%')
+                ->where('date', 'not like', '%Friday%')
+                ->where('student_id', '=', $user->id)
+                ->where(function ($query){
+                    $query ->where('lesson_grade', '>=', 0);
+                    $query ->orWhere('lesson_grade', '=', '-');
+                })->where(function ($query){
+                    $query ->where('last_5_pages_grade', '>=', 0);
+                    $query ->orWhere('last_5_pages_grade', '=', '-');
+                })->where(function ($query){
+                    $query ->where('daily_revision_grade', '>=', 0);
+                    $query ->orWhere('daily_revision_grade', '=', '-');
+                })->whereIn('absence', [0, -2, -5])
+                ->count();
 
-        if($reportsCount < $workingDays){
-            $workingDays = false;
+            $workingDays = $this->getWorkingDaysCount($month, $year);
         }else{
-            $workingDays = true;
+            $first_report_this_month = Report::query()
+                    ->whereMonth('created_at', '=', $month)
+                    ->whereYear('created_at', '=', $year)
+                    ->where('date', 'not like', '%Saturday%')
+                    ->where('date', 'not like', '%Friday%')
+                    ->where('student_id', '=', $user->id)
+                    ->first()->created_at ?? false;
+
+            if (!$first_report_this_month){
+                return false;
+            }
+
+            $reportsCount = Report::query()
+                ->whereMonth('created_at', '=', $month)
+                ->whereYear('created_at', '=', $year)
+                ->where('date', 'not like', '%Saturday%')
+                ->where('date', 'not like', '%Friday%')
+                ->where('student_id', '=', $user->id)
+                ->where(function ($query){
+                    $query ->where('lesson_grade', '>=', 0);
+                    $query ->orWhere('lesson_grade', '=', '-');
+                })->where(function ($query){
+                    $query ->where('last_5_pages_grade', '>=', 0);
+                    $query ->orWhere('last_5_pages_grade', '=', '-');
+                })->where(function ($query){
+                    $query ->where('daily_revision_grade', '>=', 0);
+                    $query ->orWhere('daily_revision_grade', '=', '-');
+                })->whereIn('absence', [0, -2, -5])
+                ->count();
+
+            $daysOfMonth = \Carbon\CarbonPeriod::between($first_report_this_month->year. '-' . $first_report_this_month->month . '-'.$first_report_this_month->day, $first_report_this_month->year. '-' . $first_report_this_month->month . '-' .$first_report_this_month->format('t'))->filter('isWeekday');
+            $workingDays = count($daysOfMonth->toArray()); // 14
         }
 
-        return ($pageNumber && $workingDays);
+        if($reportsCount < $workingDays){
+            $all_days_filled = false;
+        }else{
+            $all_days_filled = true;
+        }
+
+        return ($pageNumber && $all_days_filled);
     }
 
     public function sendReportTableMonthly(Request $request)
