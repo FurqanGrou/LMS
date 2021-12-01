@@ -88,50 +88,50 @@ function getAbsenceCount($student_id, $type, $month = false){
         ->where('absence', '=', $type)
         ->count();
 
-    if($path == "قسم التلاوة"){
+    // if($path == "قسم التلاوة"){
 
-        $unexcused_days = Report::query()
-            ->whereRaw('YEAR(created_at) = ?', [$currentYear])
-            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '<=', $today)
-            ->where('date', 'not like', '%Saturday%')
-            ->where('date', 'not like', '%Friday%')
-            ->where('student_id', '=', $student_id)
-            ->where('absence', '=', -5)
-            ->count();
+    //     $unexcused_days = Report::query()
+    //         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+    //         ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+    //         ->whereDate('created_at', '<=', $today)
+    //         ->where('date', 'not like', '%Saturday%')
+    //         ->where('date', 'not like', '%Friday%')
+    //         ->where('student_id', '=', $student_id)
+    //         ->where('absence', '=', -5)
+    //         ->count();
 
-        $excuse_days = Report::query()
-            ->whereRaw('YEAR(created_at) = ?', [$currentYear])
-            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '<=', $today)
-            ->where('date', 'not like', '%Saturday%')
-            ->where('date', 'not like', '%Friday%')
-            ->where('student_id', '=', $student_id)
-            ->where('absence', '=', -2)
-            ->count(); // 0
+    //     $excuse_days = Report::query()
+    //         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+    //         ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+    //         ->whereDate('created_at', '<=', $today)
+    //         ->where('date', 'not like', '%Saturday%')
+    //         ->where('date', 'not like', '%Friday%')
+    //         ->where('student_id', '=', $student_id)
+    //         ->where('absence', '=', -2)
+    //         ->count(); // 0
 
-        $compensation_days = Report::query()
-            ->whereRaw('YEAR(created_at) = ?', [$currentYear])
-            ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '<=', $today)
-            ->where(function ($query){
-                $query->where('date', 'like', '%Friday%');
-                $query->orWhere('date', 'like', '%Saturday%');
-            })->where('student_id', '=', $student_id)
-            ->count();
+    //     $compensation_days = Report::query()
+    //         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+    //         ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+    //         ->whereDate('created_at', '<=', $today)
+    //         ->where(function ($query){
+    //             $query->where('date', 'like', '%Friday%');
+    //             $query->orWhere('date', 'like', '%Saturday%');
+    //         })->where('student_id', '=', $student_id)
+    //         ->count();
 
-        $unexcused_absence = max($unexcused_days-$compensation_days-8, 0);
-        $remainderOf8 = min($unexcused_days-$compensation_days-8, 0)*-1;
-        $excuse_absence = max($excuse_days - $remainderOf8, 0);
+    //     $unexcused_absence = max($unexcused_days-$compensation_days-8, 0);
+    //     $remainderOf8 = min($unexcused_days-$compensation_days-8, 0)*-1;
+    //     $excuse_absence = max($excuse_days - $remainderOf8, 0);
 
-        if ($type == -2){
-            return $excuse_absence;
-        }
+    //     if ($type == -2){
+    //         return $excuse_absence;
+    //     }
 
-        if ($type = -5){
-            return $unexcused_absence;
-        }
-    }
+    //     if ($type = -5){
+    //         return $unexcused_absence;
+    //     }
+    // }
 
     // معندوش اي نقص باي يوم عن الدرجات الافتراضية True
     // يكون عنده ايام غياب True
@@ -275,7 +275,6 @@ function isAchievedDefaultGrades($student_id, $month = false){
             $query->orWhere('behavior_grade', '<', $default_behavior_grade);
         })
         ->where('absence', '=', '0')
-        ->where('notes_to_parent', 'not like', '%دوام 3 أيام%')
         ->count();
 
     return !($result > 0);
@@ -316,6 +315,7 @@ function checkThirdCondition($student_id, $month = false){
 function getLessonsNotListenedCount($student_id, $month = false){
 
     $student_path = getStudentPath($student_id);
+
     if($month){
         $nextMonth = $month + 1;
         $myDate = $nextMonth . '/01/2021';
@@ -323,7 +323,7 @@ function getLessonsNotListenedCount($student_id, $month = false){
         $currentMonth = $month;
         $currentYear = 2021;
         if (!empty(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path) && !is_null(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path)){
-            $path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
+            $student_path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
         }
     }else{
         $today = Carbon::tomorrow();
@@ -358,16 +358,13 @@ function getLessonsNotListenedCount($student_id, $month = false){
             $query->orWhereNull('lesson_grade');
             $query->orWhere('lesson_grade', '<', $default_new_lesson_grade);
         })->where('absence', '=', 0)
-            ->where('notes_to_parent', 'not like', '%دوام 3 أيام%')
             ->count();
     }else{
         $normal_count = $monthly_report_statistics->where(function ($query){
             $query->where('lesson_grade', '=', '0');
             $query->orWhere('lesson_grade', '=', ' ');
             $query->orWhereNull('lesson_grade');
-        })
-            ->where('absence', '=', 0)
-            ->where('notes_to_parent', 'not like', '%دوام 3 أيام%')
+        })->where('absence', '=', 0)
             ->count();
     }
 
@@ -457,7 +454,7 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
         $currentMonth = $month;
         $currentYear = 2021;
         if (!empty(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path) && !is_null(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path)){
-            $path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
+            $student_path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
         }
     }else{
         $today = Carbon::tomorrow();
@@ -490,7 +487,6 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
         $query->orWhere('last_5_pages_grade', '=', ' ');
         $query->orWhereNull('last_5_pages_grade');
     })->where('absence', '=', 0)
-        ->where('notes_to_parent', 'not like', '%دوام 3 أيام%')
         ->count();
 
     $clonedQuery = $clonedQuery->where('lesson_grade', '>=', $default_new_lesson_grade)
@@ -581,7 +577,7 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
         $currentMonth = $month;
         $currentYear = 2021;
         if (!empty(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path) && !is_null(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path)){
-            $path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
+            $student_path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
         }
     }else{
         $today = Carbon::tomorrow();
@@ -618,7 +614,6 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
         $query->orWhere('daily_revision_grade', '=', ' ');
         $query->orWhereNull('daily_revision_grade');
     })->where('absence', '=', 0)
-        ->where('notes_to_parent', 'not like', '%دوام 3 أيام%')
         ->count();
 
     // get count of records that daily_revision_grade column is 0.5
@@ -632,7 +627,6 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
     $summation = $clonedSummationQuery->where('daily_revision_grade', '>', '0')
             ->where('daily_revision_grade', '<', $default_daily_revision_grade)
             ->where('absence', '=', 0)
-            ->where('notes_to_parent', 'not like', '%دوام 3 أيام%')
             ->sum('daily_revision_grade')/$default_daily_revision_grade;
 
     $normal_count +=$summation;
