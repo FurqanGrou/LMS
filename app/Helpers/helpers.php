@@ -350,12 +350,22 @@ function getLessonsNotListenedCount($student_id, $month = false){
 
     $clonedQuery = clone $monthly_report_statistics;
 
-    $normal_count = $monthly_report_statistics->where(function ($query){
-        $query->where('lesson_grade', '=', '0');
-        $query->orWhere('lesson_grade', '=', ' ');
-        $query->orWhereNull('lesson_grade');
-    })->where('absence', '=', 0)
-        ->count();
+    if ($student_path != 'قسم التلاوة'){
+        $normal_count = $monthly_report_statistics->where(function ($query) use ($default_new_lesson_grade){
+            $query->where('lesson_grade', '=', '0');
+            $query->orWhere('lesson_grade', '=', ' ');
+            $query->orWhereNull('lesson_grade');
+            $query->orWhere('lesson_grade', '<', $default_new_lesson_grade);
+        })->where('absence', '=', 0)
+            ->count();
+    }else{
+        $normal_count = $monthly_report_statistics->where(function ($query){
+            $query->where('lesson_grade', '=', '0');
+            $query->orWhere('lesson_grade', '=', ' ');
+            $query->orWhereNull('lesson_grade');
+        })->where('absence', '=', 0)
+            ->count();
+    }
 
     $clonedQuery = $clonedQuery->where('lesson_grade', '>', $default_new_lesson_grade)
         ->where('last_5_pages_grade', '>=', $default_last_5_pages_grade)
