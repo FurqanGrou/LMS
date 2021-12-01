@@ -275,6 +275,7 @@ function isAchievedDefaultGrades($student_id, $month = false){
             $query->orWhere('behavior_grade', '<', $default_behavior_grade);
         })
         ->where('absence', '=', '0')
+        ->where('notes_to_parent', 'not like', '%دوام 3 أيام%')
         ->count();
 
     return !($result > 0);
@@ -357,13 +358,16 @@ function getLessonsNotListenedCount($student_id, $month = false){
             $query->orWhereNull('lesson_grade');
             $query->orWhere('lesson_grade', '<', $default_new_lesson_grade);
         })->where('absence', '=', 0)
+            ->where('notes_to_parent', 'not like', '%دوام 3 أيام%')
             ->count();
     }else{
         $normal_count = $monthly_report_statistics->where(function ($query){
             $query->where('lesson_grade', '=', '0');
             $query->orWhere('lesson_grade', '=', ' ');
             $query->orWhereNull('lesson_grade');
-        })->where('absence', '=', 0)
+        })
+            ->where('absence', '=', 0)
+            ->where('notes_to_parent', 'not like', '%دوام 3 أيام%')
             ->count();
     }
 
@@ -485,7 +489,9 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
         $query->where('last_5_pages_grade', '=', '0');
         $query->orWhere('last_5_pages_grade', '=', ' ');
         $query->orWhereNull('last_5_pages_grade');
-    })->where('absence', '=', 0)->count();
+    })->where('absence', '=', 0)
+        ->where('notes_to_parent', 'not like', '%دوام 3 أيام%')
+        ->count();
 
     $clonedQuery = $clonedQuery->where('lesson_grade', '>=', $default_new_lesson_grade)
         ->where('last_5_pages_grade', '>', $default_last_5_pages_grade)
@@ -612,6 +618,7 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
         $query->orWhere('daily_revision_grade', '=', ' ');
         $query->orWhereNull('daily_revision_grade');
     })->where('absence', '=', 0)
+        ->where('notes_to_parent', 'not like', '%دوام 3 أيام%')
         ->count();
 
     // get count of records that daily_revision_grade column is 0.5
@@ -625,6 +632,7 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
     $summation = $clonedSummationQuery->where('daily_revision_grade', '>', '0')
             ->where('daily_revision_grade', '<', $default_daily_revision_grade)
             ->where('absence', '=', 0)
+            ->where('notes_to_parent', 'not like', '%دوام 3 أيام%')
             ->sum('daily_revision_grade')/$default_daily_revision_grade;
 
     $normal_count +=$summation;

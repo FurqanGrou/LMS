@@ -534,9 +534,9 @@
 
                     let sum = 0;
                     if(notes_to_parent != 'الطالب غائب'){
-                        grades.forEach(myFunction);
+                        grades.forEach(sumTotal);
                     }
-                    function myFunction(item) {
+                    function sumTotal(item) {
                         if (!isNaN(item)){
                             sum += item;
                         }
@@ -544,24 +544,81 @@
 
                     current_row.find(".total").html(sum);
                 })
+
             }, 2000);
+
+
+            //=============================================================================================================================
 
             $(document).on('change', '[name="notes_to_parent"]', function (e) {
                 let current_row = $(this).closest('tr'),
-                notes_to_parent = current_row.find("select[name=notes_to_parent]").val(),
-                lesson_grade = current_row.find("input[name=lesson_grade]"),
-                last_5_pages_grade = current_row.find("input[name=last_5_pages_grade]"),
-                daily_revision_grade = current_row.find("input[name=daily_revision_grade]"),
-                behavior_grade = current_row.find("input[name=behavior_grade]"),
-                total = current_row.find(".total");
+                    notes_to_parent = current_row.find("select[name=notes_to_parent]").val(),
+                    lesson_grade = current_row.find("input[name=lesson_grade]"),
+                    last_5_pages_grade = current_row.find("input[name=last_5_pages_grade]"),
+                    daily_revision_grade = current_row.find("input[name=daily_revision_grade]"),
+                    behavior_grade = current_row.find("input[name=behavior_grade]"),
+                    total = current_row.find(".total");
 
-                if(notes_to_parent == 'الطالب غائب'){
+                if(notes_to_parent == 'الطالب غائب'
+                    || notes_to_parent == 'دوام 3 أيام'
+                    || notes_to_parent == 'نشاط لا صفي'
+                ){
                     current_row.find("input").attr('disabled', true);
-                    lesson_grade.val('غ');
-                    last_5_pages_grade.val('');
-                    daily_revision_grade.val('');
-                    behavior_grade.val('');
-                    total.parent().addClass('bg-danger');
+                    if(notes_to_parent == 'نشاط لا صفي') {
+                        lesson_grade.val(1);
+                        last_5_pages_grade.val(2);
+                        daily_revision_grade.val(1);
+                        behavior_grade.val(1);
+                    }else{
+                        lesson_grade.val('غ');
+                        last_5_pages_grade.val('');
+                        daily_revision_grade.val('');
+                        behavior_grade.val('');
+                        total.parent().addClass('bg-danger');
+                    }
+
+                    let date_row = current_row.find("input[name=date]").val(),
+                        lesson_date = $('form#monthly_report #lessons').find("input[value='"+ date_row +"']"),
+                        lesson_row  = lesson_date.closest('tr');
+
+                    let new_lesson = lesson_row.find('select[name="new_lesson"] :selected').text(),
+                        new_lesson_from = lesson_row.find('input[name="new_lesson_from"]').val(),
+                        new_lesson_to  = lesson_row.find('input[name="new_lesson_to"]').val(),
+                        last_5_pages   = lesson_row.find('input[name="last_5_pages"]').val(),
+                        daily_revision = lesson_row.find('select[name="daily_revision"] + .select2 #select2-daily_revision-container').attr('title'),
+                        daily_revision_from = lesson_row.find('input[name="daily_revision_from"]').val(),
+                        daily_revision_to   = lesson_row.find('input[name="daily_revision_to"]').val(),
+                        number_pages = lesson_row.find('input[name="number_pages"]').val();
+
+                    let next_lesson_row = lesson_row.next(),
+                        next_row_status = next_lesson_row.find('input[name="new_lesson_from"]').is(':disabled');
+                    if(next_row_status == true){
+                        next_lesson_row = lesson_row.next().next().next();
+                    }
+
+                    var data_new_lesson = {
+                        id: new_lesson,
+                        text: new_lesson,
+                    };
+                    var newOptionLesson = new Option(data_new_lesson.text, data_new_lesson.id, true, true);
+
+                    next_lesson_row.find('input[name="new_lesson_from"]').val(new_lesson_from);
+                    next_lesson_row.find('input[name="new_lesson_to"]').val(new_lesson_to);
+                    next_lesson_row.find('input[name="last_5_pages"]').val(last_5_pages);
+                    next_lesson_row.find('input[name="daily_revision_from"]').val(daily_revision_from);
+                    next_lesson_row.find('input[name="daily_revision_to"]').val(daily_revision_to);
+                    next_lesson_row.find('input[name="number_pages"]').val(number_pages);
+
+                    var data_revision = {
+                        id: daily_revision,
+                        text: daily_revision,
+                    };
+                    var newOptionRevision = new Option(data_revision.text, data_revision.id, true, true);
+                    next_lesson_row.find('.js-select2-daily-revision-tags').prepend(newOptionRevision).trigger('change');
+                    setTimeout(function (){
+                        next_lesson_row.find('.js-select2-tags').prepend(newOptionLesson).trigger('change');
+                    }, 1000);
+
                 }else{
                     current_row.find("input").attr('disabled', false);
                     if(isNaN(lesson_grade.val())){
@@ -570,6 +627,8 @@
                     total.parent().removeClass('bg-danger');
                 }
             });
+
+            //=============================================================================================================================
 
             $(document).on('change', 'form input#month_report', function (e) {
 

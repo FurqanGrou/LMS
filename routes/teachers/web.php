@@ -79,5 +79,4 @@ Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Contro
 Route::get('test', function (){
 
 
-    dd(min(1-3, 0));
 });
