@@ -109,6 +109,8 @@
     <div class="d-flex flex-row justify-content-around mt-5 black font-weight-bold">
         <p> <span style="color:#C65911;">اسم الطالب(ة) / Student Name:</span>
             {{ getStudentDetails(request()->student_id)->name }}
+            -
+            {{ getStudentPath(request()->student_id, request()->date_filter) }}
         </p>
         <p style="display: flex; flex-direction: row-reverse">
             &nbsp; {{ getStudentDetails(request()->student_id)->student_number }}

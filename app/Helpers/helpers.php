@@ -191,8 +191,18 @@ function getAbsenceCount($student_id, $type, $month = false){
     return $absence_times;
 }
 
-function getStudentPath($student_id){
-    return \App\User::find($student_id)->path;
+function getStudentPath($student_id, $month_year = null){
+
+    $path = \App\User::find($student_id)->path;
+    $current_month_year = Carbon::today()->format('Y-m');
+
+    if ( ($current_month_year != $month_year) && !is_null($month_year) ){
+        if (!empty(\App\MonthlyScore::query()->where('month_year', '=', $month_year)->where('user_id', '=', $student_id)->first()->path) && !is_null(\App\MonthlyScore::query()->where('month_year', '=', $month_year)->where('user_id', '=', $student_id)->first()->path)){
+            $path = \App\MonthlyScore::query()->where('month_year', '=', $month_year)->where('user_id', '=', $student_id)->first()->path;
+        }
+    }
+
+    return $path;
 }
 
 function getPathDefaultGrade($path, $grade){
