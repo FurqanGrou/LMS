@@ -110,7 +110,7 @@
         <p> <span style="color:#C65911;">اسم الطالب(ة) / Student Name:</span>
             {{ getStudentDetails(request()->student_id)->name }}
             -
-            {{ getStudentPath(request()->student_id, request()->date_filter) }}
+            <span class="badge badge-primary">{{ getStudentPath(request()->student_id, request()->date_filter) }}</span>
         </p>
         <p style="display: flex; flex-direction: row-reverse">
             &nbsp; {{ getStudentDetails(request()->student_id)->student_number }}
