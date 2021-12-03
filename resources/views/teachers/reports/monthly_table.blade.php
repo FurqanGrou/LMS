@@ -43,8 +43,8 @@
             z-index: 100;
             background-color: #C6E0B4;
             position: sticky;
-                    top: 0;
-                    color: black !important;
+            top: 0;
+            color: black !important;
             font-size: 11px;
         }
 
@@ -128,15 +128,15 @@
 
     <table style="width: 100%; border: none;font-family: arial, sans-serif;">
         <thead>
-            <tr style="border: none;">
+        <tr style="border: none;">
 
-                <td style="border: none;text-align: center; width: 80%;font-family: arial, sans-serif;">
-                        <h3 style="font-family: arial, sans-serif;font-weight: bold;">الدليل الشهري لسير ومتابعة
-                            {{ getStudentDetails(request()->student_id)->name }} في حلقات مركز الفرقان لتعليم القران الكريم</h3>
-                        <h4>Monthly report for Students in AlFurqan Center for Quran Education</h4>
-                </td>
+            <td style="border: none;text-align: center; width: 80%;font-family: arial, sans-serif;">
+                <h3 style="font-family: arial, sans-serif;font-weight: bold;">الدليل الشهري لسير ومتابعة
+                    {{ getStudentDetails(request()->student_id)->name }} في حلقات مركز الفرقان لتعليم القران الكريم</h3>
+                <h4>Monthly report for Students in AlFurqan Center for Quran Education</h4>
+            </td>
 
-            </tr>
+        </tr>
         </thead>
     </table>
 
@@ -190,10 +190,14 @@
 
     </div>
 
-    <form id="monthly_report">
+
+    <form id="monthly_report" method="POST" action="{{ route('teachers.send.report', request()->student_id . '?date_filter=' . request()->date_filter) }}">
         @csrf
 
+        <input type="submit" style="z-index: 1001; position: fixed; top: 50%; right: -2%;transform: translate(-50%, 0);" class="btn btn-danger" id="btn-send-report" value="ارسال">
+
         <input type="hidden" id="student_id" name="student_id" value="{{ request()->student_id }}">
+
         <div class="table-box">
             <table id="tables" style="display: flex;
             justify-content: space-between;
@@ -482,12 +486,12 @@
 
                         case arrow.left:
                         {
-                                moveTo = td.prev('td:has(input,textarea,select)');
+                            moveTo = td.prev('td:has(input,textarea,select)');
                             break;
                         }
                         case arrow.right:
                         {
-                                moveTo = td.next('td:has(input,textarea,select)');
+                            moveTo = td.next('td:has(input,textarea,select)');
                             break;
                         }
 
@@ -544,83 +548,83 @@
             },2000);
 
             @foreach($reports as $report)
-                var date = $(document).find("input[value='{{ $report->date }}']");
-                var current_row = date.closest('tr');
+            var date = $(document).find("input[value='{{ $report->date }}']");
+            var current_row = date.closest('tr');
 
-                var data = {
-                    id: '{{ stripslashes($report->new_lesson) }}',
-                    text: '{{ stripslashes($report->new_lesson) }}',
-                };
-                var newOption = new Option(data.text, data.id, true, true);
-                current_row.find('.js-select2-tags').prepend(newOption).trigger('change');
-                current_row.find('input[name="new_lesson_from[]"]').val('{{ $report->new_lesson_from }}');
-                current_row.find('input[name="new_lesson_from[]"]').attr('title', '{{ $report->new_lesson_from }}');
-                current_row.find('input[name="new_lesson_to[]"]').val('{{ $report->new_lesson_to }}');
-                current_row.find('input[name="new_lesson_to[]"]').attr('title', '{{ $report->new_lesson_to }}');
-                current_row.find('input[name="last_5_pages[]"]').val('{{ $report->last_5_pages }}');
-                current_row.find('input[name="last_5_pages[]"]').attr('title', '{{ $report->last_5_pages }}');
+            var data = {
+                id: '{{ stripslashes($report->new_lesson) }}',
+                text: '{{ stripslashes($report->new_lesson) }}',
+            };
+            var newOption = new Option(data.text, data.id, true, true);
+            current_row.find('.js-select2-tags').prepend(newOption).trigger('change');
+            current_row.find('input[name="new_lesson_from[]"]').val('{{ $report->new_lesson_from }}');
+            current_row.find('input[name="new_lesson_from[]"]').attr('title', '{{ $report->new_lesson_from }}');
+            current_row.find('input[name="new_lesson_to[]"]').val('{{ $report->new_lesson_to }}');
+            current_row.find('input[name="new_lesson_to[]"]').attr('title', '{{ $report->new_lesson_to }}');
+            current_row.find('input[name="last_5_pages[]"]').val('{{ $report->last_5_pages }}');
+            current_row.find('input[name="last_5_pages[]"]').attr('title', '{{ $report->last_5_pages }}');
 
-                var data = {
-                    id: '{{ stripslashes($report->daily_revision) }}',
-                    text: '{{ stripslashes($report->daily_revision) }}',
-                };
-                var newOption = new Option(data.text, data.id, true, true);
-                current_row.find('.js-select2-daily-revision-tags').prepend(newOption).trigger('change');
+            var data = {
+                id: '{{ stripslashes($report->daily_revision) }}',
+                text: '{{ stripslashes($report->daily_revision) }}',
+            };
+            var newOption = new Option(data.text, data.id, true, true);
+            current_row.find('.js-select2-daily-revision-tags').prepend(newOption).trigger('change');
 
-                current_row.find('input[name="daily_revision_from[]"]').val('{{ $report->daily_revision_from }}');
-                current_row.find('input[name="daily_revision_from[]"]').attr('title', '{{ $report->daily_revision_from }}');
-                current_row.find('input[name="daily_revision_to[]"]').val('{{ $report->daily_revision_to }}');
-                current_row.find('input[name="daily_revision_to[]"]').attr('title', '{{ $report->daily_revision_to }}');
+            current_row.find('input[name="daily_revision_from[]"]').val('{{ $report->daily_revision_from }}');
+            current_row.find('input[name="daily_revision_from[]"]').attr('title', '{{ $report->daily_revision_from }}');
+            current_row.find('input[name="daily_revision_to[]"]').val('{{ $report->daily_revision_to }}');
+            current_row.find('input[name="daily_revision_to[]"]').attr('title', '{{ $report->daily_revision_to }}');
 
-                current_row.find('input[name="mistake[]"]').val('{{ $report->mistake }}');
-                current_row.find('input[name="mistake[]"]').attr('title', '{{ $report->mistake }}');
-                current_row.find('input[name="alert[]"]').val('{{ $report->alert }}');
-                current_row.find('input[name="alert[]"]').attr('title', '{{ $report->alert }}');
-                current_row.find('input[name="number_pages[]"]').val('{{ $report->number_pages }}');
-                current_row.find('input[name="number_pages[]"]').attr('title', '{{ $report->number_pages }}');
+            current_row.find('input[name="mistake[]"]').val('{{ $report->mistake }}');
+            current_row.find('input[name="mistake[]"]').attr('title', '{{ $report->mistake }}');
+            current_row.find('input[name="alert[]"]').val('{{ $report->alert }}');
+            current_row.find('input[name="alert[]"]').attr('title', '{{ $report->alert }}');
+            current_row.find('input[name="number_pages[]"]').val('{{ $report->number_pages }}');
+            current_row.find('input[name="number_pages[]"]').attr('title', '{{ $report->number_pages }}');
 
-                var listener_name_data = {
-                    id: '{{ stripslashes($report->listener_name) }}',
-                    text: '{{ stripslashes($report->listener_name) }}',
-                };
-                var newOptionListenerMame = new Option(listener_name_data.text, listener_name_data.id, true, true);
-                current_row.find('.js-select2-listener-name-tags').prepend(newOptionListenerMame).trigger('change');
+            var listener_name_data = {
+                id: '{{ stripslashes($report->listener_name) }}',
+                text: '{{ stripslashes($report->listener_name) }}',
+            };
+            var newOptionListenerMame = new Option(listener_name_data.text, listener_name_data.id, true, true);
+            current_row.find('.js-select2-listener-name-tags').prepend(newOptionListenerMame).trigger('change');
 
-                current_row.find('input[name="lesson_grade[]"]').val('{{ $report->lesson_grade }}');
-                current_row.find('input[name="lesson_grade[]"]').attr('title', '{{ $report->lesson_grade }}');
-                current_row.find('input[name="last_5_pages_grade[]"]').val('{{ $report->last_5_pages_grade }}');
-                current_row.find('input[name="last_5_pages_grade[]"]').attr('title', '{{ $report->last_5_pages_grade }}');
-                current_row.find('input[name="daily_revision_grade[]"]').val('{{ $report->daily_revision_grade }}');
-                current_row.find('input[name="daily_revision_grade[]"]').attr('title', '{{ $report->daily_revision_grade }}');
-                current_row.find('input[name="behavior_grade[]"]').val('{{ $report->behavior_grade }}');
-                current_row.find('input[name="behavior_grade[]"]').attr('title', '{{ $report->behavior_grade }}');
-                current_row.find('select[name="notes_to_parent[]"]').val('{{ $report->notes_to_parent }}');
-                current_row.find('select[name="notes_to_parent[]"]').trigger('change');
-                current_row.find(".total").html('{{ $report->total }}');
+            current_row.find('input[name="lesson_grade[]"]').val('{{ $report->lesson_grade }}');
+            current_row.find('input[name="lesson_grade[]"]').attr('title', '{{ $report->lesson_grade }}');
+            current_row.find('input[name="last_5_pages_grade[]"]').val('{{ $report->last_5_pages_grade }}');
+            current_row.find('input[name="last_5_pages_grade[]"]').attr('title', '{{ $report->last_5_pages_grade }}');
+            current_row.find('input[name="daily_revision_grade[]"]').val('{{ $report->daily_revision_grade }}');
+            current_row.find('input[name="daily_revision_grade[]"]').attr('title', '{{ $report->daily_revision_grade }}');
+            current_row.find('input[name="behavior_grade[]"]').val('{{ $report->behavior_grade }}');
+            current_row.find('input[name="behavior_grade[]"]').attr('title', '{{ $report->behavior_grade }}');
+            current_row.find('select[name="notes_to_parent[]"]').val('{{ $report->notes_to_parent }}');
+            current_row.find('select[name="notes_to_parent[]"]').trigger('change');
+            current_row.find(".total").html('{{ $report->total }}');
 
-                if('{{$report->mail_status}}' != 1){
-                    current_row.find('td.day-name').addClass('bg-danger');
-                    current_row.find('td.day-name').removeClass('custom-bg-gray');
-                }
+            if('{{$report->mail_status}}' != 1){
+                current_row.find('td.day-name').addClass('bg-danger');
+                current_row.find('td.day-name').removeClass('custom-bg-gray');
+            }
 
-                if(current_row.find('select[name="notes_to_parent[]"]').val() == 'الطالب غائب'
-                        || current_row.find('select[name="notes_to_parent[]"]').val() == 'دوام 3 أيام'
-                        || current_row.find('select[name="notes_to_parent[]"]').val() == 'نشاط لا صفي'
-                    ){
+            if(current_row.find('select[name="notes_to_parent[]"]').val() == 'الطالب غائب'
+                || current_row.find('select[name="notes_to_parent[]"]').val() == 'دوام 3 أيام'
+                || current_row.find('select[name="notes_to_parent[]"]').val() == 'نشاط لا صفي'
+            ){
 
-                    let grades_row = date.closest('#grades tr'),
-                        total = grades_row.find('.total');
-                        grades_row.find("input").attr('disabled', true);
+                let grades_row = date.closest('#grades tr'),
+                    total = grades_row.find('.total');
+                grades_row.find("input").attr('disabled', true);
 
-                    if(current_row.find('select[name="notes_to_parent[]"]').val() != 'نشاط لا صفي') {
-                        if({{$report->absence}} == -2){
-                            total.parent().addClass('bg-success');
-                        }
-                        if({{$report->absence}} == -5){
-                            total.parent().addClass('bg-danger');
-                        }
+                if(current_row.find('select[name="notes_to_parent[]"]').val() != 'نشاط لا صفي') {
+                    if({{$report->absence}} == -2){
+                        total.parent().addClass('bg-success');
+                    }
+                    if({{$report->absence}} == -5){
+                        total.parent().addClass('bg-danger');
                     }
                 }
+            }
             @endforeach
 
             setTimeout(function() {
@@ -650,18 +654,18 @@
                         number_pages = current_row.find('input[name="number_pages[]"]').val(),
                         listener_name = current_row.find('select[name="listener_name[]"]').val();
 
-                        current_row.find('input[name="new_lesson_from[]"]').attr('title', new_lesson_from);
-                        current_row.find('input[name="new_lesson_to[]"]').attr('title', new_lesson_to);
-                        current_row.find('input[name="last_5_pages[]"]').attr('title', last_5_pages);
-                        current_row.find('input[select="daily_revision[]"]').attr('title', daily_revision);
-                        current_row.find('input[name="daily_revision_from[]"]').attr('title', daily_revision_from);
-                        current_row.find('input[name="daily_revision_to[]"]').attr('title', daily_revision_to);
-                        current_row.find('input[name="mistake[]"]').attr('title', mistake);
-                        current_row.find('input[name="alert[]"]').attr('title', alert);
-                        current_row.find('input[name="number_pages[]"]').attr('title', number_pages);
-                        current_row.find('input[select="listener_name[]"]').attr('title', listener_name);
+                    current_row.find('input[name="new_lesson_from[]"]').attr('title', new_lesson_from);
+                    current_row.find('input[name="new_lesson_to[]"]').attr('title', new_lesson_to);
+                    current_row.find('input[name="last_5_pages[]"]').attr('title', last_5_pages);
+                    current_row.find('input[select="daily_revision[]"]').attr('title', daily_revision);
+                    current_row.find('input[name="daily_revision_from[]"]').attr('title', daily_revision_from);
+                    current_row.find('input[name="daily_revision_to[]"]').attr('title', daily_revision_to);
+                    current_row.find('input[name="mistake[]"]').attr('title', mistake);
+                    current_row.find('input[name="alert[]"]').attr('title', alert);
+                    current_row.find('input[name="number_pages[]"]').attr('title', number_pages);
+                    current_row.find('input[select="listener_name[]"]').attr('title', listener_name);
 
-                        $.ajax({
+                    $.ajax({
                         type: "POST",
                         dataType: "json",
                         url: '{{ route('teachers.report.table', request()->student_id) }}?type=lessons',
@@ -717,14 +721,14 @@
                         success: function (data, textStatus, xhr) {
 
                         },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            if(jqXHR.status == 400){
-                                alert(jqXHR.responseJSON.error);
-                                input_field.val('');
-                                input_field.change();
-                                input_field.focus();
-                            }
-                        }
+                        // error: function(jqXHR, textStatus, errorThrown) {
+                        //     if(jqXHR.status == 400){
+                        //         alert(jqXHR.responseJSON.error);
+                        //         input_field.val('');
+                        //         input_field.change();
+                        //         input_field.focus();
+                        //     }
+                        // }
                     });
 
                     let grades = [
@@ -806,8 +810,8 @@
                     let new_lesson = lesson_row.find('select[name="new_lesson[]"]').val(),
                         new_lesson_from = lesson_row.find('input[name="new_lesson_from[]"]').val(),
                         new_lesson_to  = lesson_row.find('input[name="new_lesson_to[]"]').val();
-                        next_lesson_row.find('input[name="new_lesson_from[]"]').val(new_lesson_from);
-                        next_lesson_row.find('input[name="new_lesson_to[]"]').val(new_lesson_to);
+                    next_lesson_row.find('input[name="new_lesson_from[]"]').val(new_lesson_from);
+                    next_lesson_row.find('input[name="new_lesson_to[]"]').val(new_lesson_to);
 
                     let data_lesson_new = {
                         id: new_lesson,
@@ -820,12 +824,12 @@
 
             $(document).on('change', '[name="notes_to_parent[]"]', function (e) {
                 let current_row = $(this).closest('tr'),
-                notes_to_parent = current_row.find('select[name="notes_to_parent[]"]').val(),
-                lesson_grade = current_row.find('input[name="lesson_grade[]"]'),
-                last_5_pages_grade = current_row.find('input[name="last_5_pages_grade[]"]'),
-                daily_revision_grade = current_row.find('input[name="daily_revision_grade[]"]'),
-                behavior_grade = current_row.find('input[name="behavior_grade[]"]'),
-                total = current_row.find(".total");
+                    notes_to_parent = current_row.find('select[name="notes_to_parent[]"]').val(),
+                    lesson_grade = current_row.find('input[name="lesson_grade[]"]'),
+                    last_5_pages_grade = current_row.find('input[name="last_5_pages_grade[]"]'),
+                    daily_revision_grade = current_row.find('input[name="daily_revision_grade[]"]'),
+                    behavior_grade = current_row.find('input[name="behavior_grade[]"]'),
+                    total = current_row.find(".total");
 
                 if(notes_to_parent == 'الطالب غائب'
                     || notes_to_parent == 'دوام 3 أيام'
@@ -932,13 +936,13 @@
                         }
                     }
                 }).then((isConfirm) => {
-                        if (isConfirm) {
-                            $('form#form-send-daily-report').submit();
-                            swal("يتم الارسال...!", "تتم حالياً عملية الارسال", "info");
-                        } else {
-                            swal("تم الإلغاء!", "تم إلغاء عملية الارسال", "error");
-                        }
-                    });
+                    if (isConfirm) {
+                        $('form#monthly_report').submit();
+                        swal("يتم الارسال...!", "تتم حالياً عملية الارسال", "info");
+                    } else {
+                        swal("تم الإلغاء!", "تم إلغاء عملية الارسال", "error");
+                    }
+                });
             });
 
             $(document).on('click', '#btn-send-report-monthly', function (e) {
@@ -966,13 +970,13 @@
                         }
                     }
                 }).then((isConfirm) => {
-                        if (isConfirm) {
-                            $('form#monthly_report-monthly').submit();
-                            swal("يتم الارسال...!", "تتم حالياً عملية الارسال", "info");
-                        } else {
-                            swal("تم الإلغاء!", "تم إلغاء عملية الارسال", "error");
-                        }
-                    });
+                    if (isConfirm) {
+                        $('form#monthly_report-monthly').submit();
+                        swal("يتم الارسال...!", "تتم حالياً عملية الارسال", "info");
+                    } else {
+                        swal("تم الإلغاء!", "تم إلغاء عملية الارسال", "error");
+                    }
+                });
             });
 
             $(".js-select2-tags").select2({
