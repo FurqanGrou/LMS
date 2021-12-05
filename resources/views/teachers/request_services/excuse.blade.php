@@ -6,7 +6,6 @@
 @include('teachers.partials.success')
 
 <form class="form" method="POST" action="{{ route('teachers.request_services.store') }}">
-
     @csrf
 
     <div class="form-body">
@@ -30,14 +29,14 @@
                     <label>نوع الشكوى:</label>
                     <br>
                     <select class="select2">
-                        <option value="observer_complaint">شكوى مراقب</option>
-                        <option value="officer_complaint">شكوى مسؤول</option>
+                        <option value="observer_complaint">شكوى على مراقب</option>
+                        <option value="officer_complaint">شكوى على مسؤول</option>
                     </select>
                 </div>
 
                 {{-- name--}}
                 <div class="form-group">
-                    <label for="name">الاسم:</label>
+                    <label for="name" id="excuse-name">الاسم:</label>
                     <input type="text" name="name" class="form-control" id="email">
                 </div>
 
@@ -77,11 +76,24 @@
                 if($(this).val() == 'complaint'){
                     $('#complaint_type').removeClass('d-none');
                     $('#complaint_type select').attr('name', 'complaint_type');
+                    $('#excuse-name').html('اسم المراقب:');
                 }else{
                     $('#complaint_type').toggleClass('d-none');
                     $('#complaint_type select').removeAttr('name');
+                    $('#excuse-name').html('الاسم:');
                 }
             });
+
+            $(document).on('change', '#complaint_type select', function (e) {
+                if ($('#complaint_type select').val() == 'observer_complaint'){
+                    $('#excuse-name').html('اسم المراقب:');
+                }else{
+                    $('#excuse-name').html('اسم المسؤول:');
+                }
+            });
+
+
+
         });
     </script>
 @endpush
