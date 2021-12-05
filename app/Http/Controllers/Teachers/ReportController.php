@@ -563,7 +563,7 @@ class ReportController extends Controller
             ];
         }
 
-        $currentMonth = \Carbon\Carbon::create()->month()->subMonth()->format('m');
+        $currentMonth = date('m');
 
         $monthly_report_statistics = Report::query()
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
