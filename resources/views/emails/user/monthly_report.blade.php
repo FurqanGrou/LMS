@@ -26,7 +26,7 @@
     <div style="border: 2px solid black; width: 70%; margin: 0 auto;">
         <div style="text-align: center;font-family: arial, sans-serif">
             <img src="{{ public_path('dashboard\assets\img\logo3.png') }}" alt="">
-            <h1> {{ date('Y') . ' - ' . \Carbon\Carbon::create()->month(10)->format('F') }}  نتيجة شهر </h1>
+            <h1> {{ substr($date_filter, 0, 4) . ' - ' . \Carbon\Carbon::create()->month(substr($date_filter, -2))->format('F') }}  نتيجة شهر </h1>
         </div>
 
         <div style="text-align: right;font-family: arial, sans-serif">

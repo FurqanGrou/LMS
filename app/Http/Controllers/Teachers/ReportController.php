@@ -267,9 +267,13 @@ class ReportController extends Controller
         $year  = substr($month_year, 0, 4);
 
         if ($user->path == "قسم الهجاء"){
-            $pageNumber = $user->monthlyScores($month_year)->noorania_page_id ?? false;
+            $pageNumber = is_numeric($user->monthlyScores($month_year)->noorania_page_id) ?? false;
         }else{
-            $pageNumber = $user->monthlyScores($month_year)->lesson_page_id ?? false;
+            $pageNumber = is_numeric($user->monthlyScores($month_year)->lesson_page_id) ?? false;
+        }
+
+        if (!$pageNumber){
+            return false;
         }
 
         $is_new_student = false;
@@ -357,7 +361,7 @@ class ReportController extends Controller
 
         if (!$this->checkMonthlyReportInfo($user, $request->date_filter)){
             session()->flash('error', 'يرجى التأكد من إدخال جميع بيانات الشهر ورقم الصفحة بشكل صحيح!');
-            return redirect()->route('teachers.report.table', $request->student_id);
+            return redirect()->route('teachers.report.table', $request->student_id . '?date_filter=' . $request->date_filter);
         }
 
         try{
@@ -365,6 +369,7 @@ class ReportController extends Controller
             $report = $user->monthlyScores($request->date_filter);
             $report->update(['mail_status' => 1]);
         }
+
         catch(\Exception $e){
             session()->flash('error', 'فشلت عملية ارسال التقرير الشهري!');
             return redirect()->route('teachers.report.table', $request->student_id);
