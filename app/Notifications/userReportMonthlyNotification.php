@@ -50,7 +50,9 @@ class userReportMonthlyNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $subject = "نتيجة شهر ". " اكتوبر " . date("Y") ." - الطالب/ة - " . $this->student_name . " ، " . $this->student_number . "";
+        $month = substr($this->date_filter, -2);
+        $year = substr($this->date_filter, 0, 4);
+        $subject = "نتيجة شهر ". " $month " . $year ." - الطالب/ة - " . $this->student_name . " ، " . $this->student_number . "";
         return (new MailMessage)->subject($subject)->view('emails.user.monthly_report', ['student' => $this->student, 'student_id' => $this->student_id, "student_name" => $this->student_name, 'date_filter' => $this->date_filter]);
     }
 
