@@ -22,8 +22,8 @@ use Illuminate\Support\Facades\Auth;
 class ImportExportController extends Controller
 {
     public function __construct(){
-        ini_set('max_execution_time', 600);
-        ini_set('memory_limit', '60m');
+//        ini_set('max_execution_time', 600);
+//        ini_set('memory_limit', '60m');
 
 //        ini_set('post_max_size', "516M");
 //        ini_set('upload_max_filesize', "512M");
@@ -41,13 +41,13 @@ class ImportExportController extends Controller
         Excel::import(new UsersImport, request()->file('file'));
 
         // update student class number in reports table
-        $students = User::query()->get();
-        foreach ($students as $student){
-            if (!is_null($student->class_number)){
-                Report::where('student_id', $student->id)
-                    ->update(['class_number' => $student->class_number]);
-            }
-        }
+//        $students = User::query()->get();
+//        foreach ($students as $student){
+//            if (!is_null($student->class_number)){
+//                Report::where('student_id', $student->id)
+//                    ->update(['class_number' => $student->class_number]);
+//            }
+//        }
 
         Teacher::query()->update(['status' => 1]);
 
