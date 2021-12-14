@@ -132,11 +132,11 @@ class ReportController extends Controller
                 'behavior_grade'       => getPathDefaultGrade($student_path, 'behavior'),
             ];
 
-//            foreach ($grades as $key => $grade){
-//                if (is_numeric($grade) && $grade > $default_grade[$key]*2){
-//                    return response()->json(['error' => "يرجى إدخال درجة صحيحة"], 400);
-//                }
-//            }
+            foreach ($grades as $key => $grade){
+                if (is_numeric($grade) && $grade > $default_grade[$key]*2){
+                    return response()->json(['error' => "يرجى إدخال درجة صحيحة"], 400);
+                }
+            }
 
             $total = 0;
             if ($request->notes_to_parent == 'الطالب غائب' || $request->notes_to_parent == 'دوام 3 أيام'){

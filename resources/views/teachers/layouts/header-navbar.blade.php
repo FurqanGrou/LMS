@@ -38,11 +38,11 @@
                 @if(\Route::currentRouteName() == 'teachers.report.table')
                     <div style="width: 320px; margin: auto; margin-top: 20px; max-width: 320px; display: flex; justify-content: center;">
 
-                    <!--<form id="form-send-daily-report" method="POST" action="{{ route('teachers.send.report', request()->student_id . '?date_filter=' . request()->date_filter) }}" class="mr-5">-->
-                        <!--    @csrf-->
-                    <!--    <input type="hidden" name="student_id" value="{{ request()->student_id }}">-->
-                        <!--    <input type="submit" class="btn" style="color:#0a0e45;background: lemonchiffon !important;" id="btn-send-report" value="ارسال التقرير اليومي">-->
-                        <!--</form>-->
+                        <form id="form-send-daily-report" method="POST" action="{{ route('teachers.send.report', request()->student_id . '?date_filter=' . request()->date_filter) }}" class="mr-5">
+                            @csrf
+                            <input type="hidden" name="student_id" value="{{ request()->student_id }}">
+                            <input type="submit" class="btn" style="color:#0a0e45;background: lemonchiffon !important;" id="btn-send-report" value="ارسال التقرير اليومي">
+                        </form>
 
                         @if(isAvailableToSendMonthlyReport(request()->date_filter) || env('ENABLE_MONTHLY_SEND'))
                             <form method="POST" id="monthly_report-monthly" action="{{ route('teachers.send.report.monthly', request()->student_id . '?date_filter=' . '2021-11') }}">
