@@ -124,7 +124,8 @@
 
             $(document).on('change', '#end_date', function (e) {
                 let today = new Date();
-                let CurrentDate = new Date(today).getTime();
+                let CurrentDate1 = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                let CurrentDate = new Date(CurrentDate1).getTime();
                 let start_date  = new Date($('#start_date').val()).getTime();
                 let end_date    = new Date($(this).val()).getTime();
 
