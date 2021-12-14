@@ -49,8 +49,6 @@ class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, S
                                 'daily_revision_not_listened',
                                 'absence_excuse_days',
                                 'absence_unexcused_days',
-                                'lesson_pages.page_number',
-                                'lesson_pages.lesson_title',
                                 'avg',
                                 DB::raw('(CASE
                                         WHEN avg >= 90 THEN "Excellent - ممتاز"
@@ -63,7 +61,6 @@ class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, S
                                 'mail_status',
                                 ])
                             ->join('users', 'users.id', '=', 'monthly_scores.user_id')
-                            ->join('lesson_pages', 'lesson_pages.id', '=', 'monthly_scores.lesson_page_id')
                             ->join('classes', 'classes.class_number', '=', 'users.class_number')
                             ->join('classes_teachers', 'classes_teachers.class_number', '=', 'users.class_number')
                             ->join('teachers', 'teachers.email', '=', 'classes_teachers.teacher_email')
@@ -73,6 +70,7 @@ class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, S
             $monthly_scores->where('mail_status', '=', $this->mail_status);
         }
 
+        dd($monthly_scores->get());
         return $monthly_scores->get();
     }
 

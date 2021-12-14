@@ -50,5 +50,9 @@ class User extends Authenticatable implements Auditable
         return $this->hasMany(MonthlyScore::class, 'user_id')->where('month_year', '=', $month_year)->first();
     }
 
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
 
 }
