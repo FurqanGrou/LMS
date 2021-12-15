@@ -51,6 +51,15 @@
 
         {!! $dataTable->scripts() !!}
 
+        <script>
+            $(document).ready(function (){
+                setTimeout(function (){
+                    var secondFraction = '3.5'
+                    $('.js--bar-animated').css('animation', secondFraction + 's linear 0s normal none infinite progress-bar-stripes');
+                }, 10000);
+            });
+        </script>
+
     @endpush
 
 @endsection

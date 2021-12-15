@@ -12,6 +12,8 @@ class User extends Authenticatable implements Auditable
     use Notifiable;
     use \OwenIt\Auditing\Auditable;
 
+
+    protected $appends = ['avg'];
     /**
      * The attributes that are mass assignable.
      *
@@ -44,10 +46,12 @@ class User extends Authenticatable implements Auditable
 
     public function monthlyScores($month_year = null)
     {
+
         if(is_null($month_year) || (!isset(request()->date_filter)) ){
             $month_year = date('Y') . '-' . date('m');
         }
-        return $this->hasMany(MonthlyScore::class, 'user_id')->where('month_year', '=', $month_year)->first();
+
+        return $this->hasMany(MonthlyScore::class, 'user_id')->where('month_year', '=',$month_year)->first();
     }
 
     public function reports()
@@ -55,4 +59,8 @@ class User extends Authenticatable implements Auditable
         return $this->hasMany(Report::class);
     }
 
+    public function getAvgAttribute()
+    {
+        return $this->monthlyScores()->avg ?? 0;
+    }
 }

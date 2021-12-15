@@ -23,7 +23,6 @@ class TeachertDatatable extends DataTable
      */
     public function dataTable($query)
     {
-
         return datatables()
             ->eloquent($query)
             ->addColumn('zoom_link', 'teachers.classes.btn.zoom_link')
