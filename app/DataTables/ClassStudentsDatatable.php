@@ -30,11 +30,13 @@ class ClassStudentsDatatable extends DataTable
         $students = User::where('class_number', '=', $class_number)->get();
 
         return datatables($students)
-            ->addColumn('student_name', 'admins.students.btn.student_name')
-            ->addColumn('mail_status', 'admins.students.btn.mail_status')
+            ->addColumn('student_name', 'teachers.reports.btn.student_name')
+            ->addColumn('mail_status', 'teachers.reports.btn.mail_status')
+            ->addColumn('monthly_avg', 'teachers.reports.btn.monthly_avg')
             ->rawColumns([
                 'student_name',
                 'mail_status',
+                'monthly_avg',
             ])->with('class_number', $class_number);
     }
 
@@ -112,6 +114,9 @@ class ClassStudentsDatatable extends DataTable
             Column::make('mail_status')
                 ->data('mail_status')
                 ->title('حالة الارسال'),
+            Column::make('monthly_avg')
+                ->data('monthly_avg')
+                ->title('النسبة الشهرية %'),
         ];
     }
 
