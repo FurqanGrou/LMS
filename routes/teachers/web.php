@@ -1,6 +1,7 @@
 <?php
 
 use App\MonthlyScore;
+use App\Teacher;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;

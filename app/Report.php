@@ -124,4 +124,10 @@ class Report extends Model implements Auditable
             }
         });
     }
+
+    public function student()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

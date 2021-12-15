@@ -52,7 +52,9 @@ class ReportController extends Controller
         $students_listener_names = User::query()
             ->where('users.class_number', '=', $class_number)
             ->select('name')
-            ->get()->pluck('name')->toArray();
+            ->get()
+            ->pluck('name')
+            ->toArray();
 
         $teachers_listener_names = Teacher::query()
             ->join('classes_teachers', 'classes_teachers.teacher_email', '=', 'teachers.email')
