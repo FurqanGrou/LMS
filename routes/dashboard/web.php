@@ -106,10 +106,17 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
 //    Route::put('/request-services/{service}/update', 'RequestServiceController@update')->name('request_services.update');
     Route::get('request-services/export', 'ImportExportController@exportExamsRequests')->name('request_services.exams.export');
 
-    Route::get('test-fun', function (){
-    });
-
 });
+
+Route::get('test', function (){
+    $users = \App\User::query()->where('path', 'قسم التلاوة')->get();
+    foreach ($users as $user){
+        $report = \App\Report::query()->where('student_id', '=', $user->id)->take(8)->update([
+            'absence' => -2,
+        ]);
+    }
+});
+
 
 
 

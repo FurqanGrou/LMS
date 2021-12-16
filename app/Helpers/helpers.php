@@ -253,7 +253,7 @@ function isAchievedDefaultGrades($student_id, $month = false){
         $currentMonth = $month;
         $currentYear = 2021;
         if (!empty(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path) && !is_null(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path)){
-            $path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
+            $student_path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
         }
     }else{
         $today = Carbon::tomorrow();
