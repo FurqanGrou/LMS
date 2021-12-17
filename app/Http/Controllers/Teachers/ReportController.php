@@ -140,24 +140,51 @@ class ReportController extends Controller
 
             $total = 0;
             if ($request->notes_to_parent == 'الطالب غائب' || $request->notes_to_parent == 'دوام 3 أيام'){
-                $report = Report::updateOrCreate(
-                    [
-                        'student_id' => $request->student_id,
-                        'date' => $request->date,
-                        'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
-                    ],
-                    [
-                        'lesson_grade' => 'غ',
-                        'last_5_pages_grade' => $request->notes_to_parent == 'الطالب غائب' ? 0 : '-',
-                        'daily_revision_grade' => $request->notes_to_parent == 'الطالب غائب' ? 0 : '-',
-                        'behavior_grade' => $request->notes_to_parent == 'الطالب غائب' ? 0 : '-',
-                        'notes_to_parent' => $request->notes_to_parent,
-                        'absence' => $request->notes_to_parent == 'الطالب غائب' ? -5 : 0,
-                        'total' => $total,
-                        'mail_status' => 0,
-                        'class_number' => getStudentDetails(request()->student_id)->class_number,
-                    ]
-                );
+
+                if ($request->notes_to_parent == 'الطالب غائب'){
+                    $absence_grade = -5;
+                    if (getStudentDetails(request()->student_id)->path == 'قسم التلاوة'){
+                        $absence_grade = getAbsenceCount($request->student_id, -2) >= 8 ? -5 : -2;
+                    }
+                    $report = Report::updateOrCreate(
+                        [
+                            'student_id' => $request->student_id,
+                            'date'       => $request->date,
+                            'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
+                        ],
+                        [
+                            'lesson_grade' => 'غ',
+                            'last_5_pages_grade' => 0,
+                            'daily_revision_grade' => 0,
+                            'behavior_grade' => 0,
+                            'notes_to_parent' => 'الطالب غائب',
+                            'absence' => $absence_grade,
+                            'total' => $total,
+                            'mail_status' => 0,
+                            'class_number' => getStudentDetails(request()->student_id)->class_number,
+                        ]
+                    );
+                }else{
+                    $report = Report::updateOrCreate(
+                        [
+                            'student_id' => $request->student_id,
+                            'date'       => $request->date,
+                            'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
+                        ],
+                        [
+                            'lesson_grade' => 'غ',
+                            'last_5_pages_grade' => '-',
+                            'daily_revision_grade' => '-',
+                            'behavior_grade' => '-',
+                            'notes_to_parent' => 'دوام 3 أيام',
+                            'absence' => 0,
+                            'total' => $total,
+                            'mail_status' => 0,
+                            'class_number' => getStudentDetails(request()->student_id)->class_number,
+                        ]
+                    );
+                }
+
             }elseif($request->notes_to_parent == 'نشاط لا صفي'){
                 $report = Report::updateOrCreate(
                     [
