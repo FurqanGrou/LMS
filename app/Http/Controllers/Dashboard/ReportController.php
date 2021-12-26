@@ -149,7 +149,7 @@ class ReportController extends Controller
                         'daily_revision_grade' => '-',
                         'behavior_grade' => '-',
                         'notes_to_parent' => 'دوام 3 أيام',
-                        'absence' => 0,
+                        'absence' => '-1',
                         'total' => $total,
                         'mail_status' => 0,
                         'class_number' => getStudentDetails(request()->student_id)->class_number,
