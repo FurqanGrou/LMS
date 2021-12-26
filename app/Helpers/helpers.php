@@ -60,7 +60,7 @@ function getAbsenceCount($student_id, $type, $month = false){
 
     if($month){
         $nextMonth = $month + 1;
-        $myDate = $nextMonth . '/01/2021';
+        $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -248,7 +248,7 @@ function isAchievedDefaultGrades($student_id, $month = false){
 
     if($month){
         $nextMonth = $month + 1;
-        $myDate = $nextMonth . '/01/2021';
+        $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -294,7 +294,7 @@ function checkThirdCondition($student_id, $month = false){
 
     if($month){
         $nextMonth = $month + 1;
-        $myDate = $nextMonth . '/01/2021';
+        $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -328,7 +328,7 @@ function getLessonsNotListenedCount($student_id, $month = false){
 
     if($month){
         $nextMonth = $month + 1;
-        $myDate = $nextMonth . '/01/2021';
+        $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -459,7 +459,7 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
     $student_path = getStudentPath($student_id);
     if($month){
         $nextMonth = $month + 1;
-        $myDate = $nextMonth . '/01/2021';
+        $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -582,7 +582,7 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
 
     if($month){
         $nextMonth = $month + 1;
-        $myDate = $nextMonth . '/01/2021';
+        $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -821,7 +821,7 @@ function disableRecord($date, $day)
         }
     }
 
-    return $status ? '' : 'disabled';
+    return $status ? '' : '';
 }
 
 function disableRecordGrade($date, $day)
@@ -844,7 +844,7 @@ function disableRecordGrade($date, $day)
         $status = false;
     }
 
-    return $status ? '' : 'disabled';
+    return $status ? '' : '';
 }
 
 function getReportLesson($report_id)
