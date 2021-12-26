@@ -824,7 +824,7 @@ function disableRecord($date, $day)
         }
     }
 
-    return $status ? '' : '';
+    return $status ? '' : 'disabled';
 }
 
 function disableRecordGrade($date, $day)
@@ -847,7 +847,7 @@ function disableRecordGrade($date, $day)
         $status = false;
     }
 
-    return $status ? '' : '';
+    return $status ? '' : 'disabled';
 }
 
 function getReportLesson($report_id)
