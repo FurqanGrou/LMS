@@ -97,12 +97,12 @@ class ReportController extends Controller
 //                'daily_revision_grade' => $request->daily_revision_grade,
 //                'behavior_grade'       => $request->behavior_grade
 //            ];
-//            $default_grade = [
-//                'lesson_grade'         => getPathDefaultGrade($student_path, 'new_lesson'),
-//                'last_5_pages_grade'   => getPathDefaultGrade($student_path, 'last_5_pages'),
-//                'daily_revision_grade' => getPathDefaultGrade($student_path, 'daily_revision'),
-//                'behavior_grade'       => getPathDefaultGrade($student_path, 'behavior'),
-//            ];
+            $default_grade = [
+                'lesson_grade'         => getPathDefaultGrade($student_path, 'new_lesson'),
+                'last_5_pages_grade'   => getPathDefaultGrade($student_path, 'last_5_pages'),
+                'daily_revision_grade' => getPathDefaultGrade($student_path, 'daily_revision'),
+                'behavior_grade'       => getPathDefaultGrade($student_path, 'behavior'),
+            ];
 
 //            foreach ($grades as $key => $grade){
 //                if (is_numeric($grade) && $grade > $default_grade[$key]*2){
@@ -163,13 +163,13 @@ class ReportController extends Controller
                         'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
                     ],
                     [
-                        'lesson_grade' => 1,
-                        'last_5_pages_grade' => 2,
-                        'daily_revision_grade' => 1,
-                        'behavior_grade' => 1,
+                        'lesson_grade' => $default_grade['lesson_grade'],
+                        'last_5_pages_grade' => $default_grade['last_5_pages_grade'],
+                        'daily_revision_grade' => $default_grade['daily_revision_grade'],
+                        'behavior_grade' => $default_grade['behavior_grade'],
                         'notes_to_parent' => 'نشاط لا صفي',
                         'absence' => 0,
-                        'total' => 5,
+                        'total' => $default_grade['lesson_grade'] + $default_grade['last_5_pages_grade'] + $default_grade['daily_revision_grade'] + $default_grade['behavior_grade'],
                         'mail_status' => 0,
                         'class_number' => getStudentDetails(request()->student_id)->class_number,
                     ]
