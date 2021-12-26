@@ -108,13 +108,22 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
 
 });
 
-Route::get('test', function (){
+Route::get('update-absence-eight-days-telawa', function (){
     $users = \App\User::query()->where('path', 'قسم التلاوة')->get();
     foreach ($users as $user){
-        $report = \App\Report::query()->where('student_id', '=', $user->id)->take(8)->update([
+        \App\Report::query()->where('student_id', '=', $user->id)->take(8)->update([
             'absence' => -2,
         ]);
     }
+
+    dd('update-absence-eight-days-tellawa Done');
+});
+
+Route::get('update-business-three-days', function (){
+    \App\Report::query()->where('absence', 'like', '%دوام 3 أيام%')->update([
+        'absence' => '-1',
+    ]);
+    dd('update-absence-three-days Done');
 });
 
 

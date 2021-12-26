@@ -47,8 +47,8 @@ class TeachertDatatable extends DataTable
     {
         $classes = Classes::join('classes_teachers', 'classes.class_number', '=', 'classes_teachers.class_number')
             ->join('teachers', 'teachers.email', '=', 'classes_teachers.teacher_email')
-            ->where('teachers.teacher_number', '=', auth()->user()->teacher_number)
-            ->where('teachers.section', '=', auth()->user()->section)
+            ->where('teachers.email', '=', auth('teacher_web')->user()->email)
+            ->where('teachers.section', '=', auth('teacher_web')->user()->section)
             ->select([
                 'classes.class_number',
                 'classes.title',
@@ -69,29 +69,29 @@ class TeachertDatatable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('adsdatatable-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
+            ->setTableId('adsdatatable-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
 //                    ->parameters([$this->getBuilderParameters()]);
-                    ->parameters([
-                        'dom' => 'Bfrtip',
-                        'lengthMenu' => [
-                            [ 10, 25, 50, -1 ],
-                            [ '10', '25', '50', 'Show all' ]
-                        ],
-                        'buttons' => [
-                            ['extend' => 'pageLength', 'className' => 'dataTables_length'],
-                            ['extend' => 'csv', 'title' => $this->filename(), 'className' => 'btn btn-primary', 'text' => '<i class="la la-file"></i> CSV File'],
-                            ['extend' => 'excel', 'title' => $this->filename(), 'className' => 'btn btn-info', 'text' => '<i class="la la-print"></i> Export Excel'],
-                        ],
-                        'language' => [
-                            'url' => 'https://cdn.datatables.net/plug-ins/1.10.12/i18n/Arabic.json'
-                        ]
-                    ])
-                    ->buttons([
+            ->parameters([
+                'dom' => 'Bfrtip',
+                'lengthMenu' => [
+                    [ 10, 25, 50, -1 ],
+                    [ '10', '25', '50', 'Show all' ]
+                ],
+                'buttons' => [
+                    ['extend' => 'pageLength', 'className' => 'dataTables_length'],
+                    ['extend' => 'csv', 'title' => $this->filename(), 'className' => 'btn btn-primary', 'text' => '<i class="la la-file"></i> CSV File'],
+                    ['extend' => 'excel', 'title' => $this->filename(), 'className' => 'btn btn-info', 'text' => '<i class="la la-print"></i> Export Excel'],
+                ],
+                'language' => [
+                    'url' => 'https://cdn.datatables.net/plug-ins/1.10.12/i18n/Arabic.json'
+                ]
+            ])
+            ->buttons([
 //                        Button::make('csv'),
-                    ]);
+            ]);
     }
 
     /**

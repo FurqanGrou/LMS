@@ -32,12 +32,11 @@ class AbsenceController extends Controller
             $date = $date->format('l d-m-Y');
         }
 
-        Report::query()
-            ->where('id', '=', $request->report_id)
-            ->where('date', '=', $date)
-            ->update(['absence' => $request->absence_type]);
+        $report = Report::where('id', '=', $request->report_id)
+            ->where('date', '=', $date)->first();
 
-        return $request->report_id;
+        $report->update(['absence' => $request->absence_type]);
+
         return response()->json(['status' => 'success'], 200);
     }
 
