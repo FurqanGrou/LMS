@@ -75,6 +75,7 @@ class ReportController extends Controller
                     'listener_name' => $this->getValidData($request->listener_name, 'listener_name'),
                 ]
             );
+
         }
 
         if($request->type == 'grades'){
@@ -90,12 +91,12 @@ class ReportController extends Controller
                 }
             }
 
-            $grades = [
-                'lesson_grade'         => $request->lesson_grade,
-                'last_5_pages_grade'   => $request->last_5_pages_grade,
-                'daily_revision_grade' => $request->daily_revision_grade,
-                'behavior_grade'       => $request->behavior_grade
-            ];
+//            $grades = [
+//                'lesson_grade'         => $request->lesson_grade,
+//                'last_5_pages_grade'   => $request->last_5_pages_grade,
+//                'daily_revision_grade' => $request->daily_revision_grade,
+//                'behavior_grade'       => $request->behavior_grade
+//            ];
             $default_grade = [
                 'lesson_grade'         => getPathDefaultGrade($student_path, 'new_lesson'),
                 'last_5_pages_grade'   => getPathDefaultGrade($student_path, 'last_5_pages'),
@@ -103,60 +104,57 @@ class ReportController extends Controller
                 'behavior_grade'       => getPathDefaultGrade($student_path, 'behavior'),
             ];
 
-            foreach ($grades as $key => $grade){
-                if (is_numeric($grade) && $grade > $default_grade[$key]*2){
-                    return response()->json(['error' => "يرجى إدخال درجة صحيحة"], 400);
-                }
-            }
+//            foreach ($grades as $key => $grade){
+//                if (is_numeric($grade) && $grade > $default_grade[$key]*2){
+//                    return response()->json(['error' => "يرجى إدخال درجة صحيحة"], 400);
+//                }
+//            }
 
             $total = 0;
-            if ($request->notes_to_parent == 'الطالب غائب' || $request->notes_to_parent == 'دوام 3 أيام'){
 
-                if ($request->notes_to_parent == 'الطالب غائب'){
-                    $absence_grade = -5;
-                    if (getStudentDetails(request()->student_id)->path == 'قسم التلاوة'){
-                        $absence_grade = getAbsenceCount($request->student_id, -2) >= 8 ? -5 : -2;
-                    }
-
-                    $report = Report::updateOrCreate(
-                        [
-                            'student_id' => $request->student_id,
-                            'date'       => $request->date,
-                            'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
-                        ],
-                        [
-                            'lesson_grade' => 'غ',
-                            'last_5_pages_grade' => 0,
-                            'daily_revision_grade' => 0,
-                            'behavior_grade' => 0,
-                            'notes_to_parent' => 'الطالب غائب',
-                            'absence' => $absence_grade,
-                            'total' => $total,
-                            'mail_status' => 0,
-                            'class_number' => getStudentDetails(request()->student_id)->class_number,
-                        ]
-                    );
-                }else{
-                    $report = Report::updateOrCreate(
-                        [
-                            'student_id' => $request->student_id,
-                            'date'       => $request->date,
-                            'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
-                        ],
-                        [
-                            'lesson_grade' => 'غ',
-                            'last_5_pages_grade' => '-',
-                            'daily_revision_grade' => '-',
-                            'behavior_grade' => '-',
-                            'notes_to_parent' => 'دوام 3 أيام',
-                            'absence' => 0,
-                            'total' => $total,
-                            'mail_status' => 0,
-                            'class_number' => getStudentDetails(request()->student_id)->class_number,
-                        ]
-                    );
+            if ($request->notes_to_parent == 'الطالب غائب'){
+                $absence_grade = -5;
+                if (getStudentDetails(request()->student_id)->path == 'قسم التلاوة'){
+                    $absence_grade = getAbsenceCount($request->student_id, -2) >= 8 ? -5 : -2;
                 }
 
+                $report = Report::updateOrCreate(
+                    [
+                        'student_id' => $request->student_id,
+                        'date'       => $request->date,
+                        'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
+                    ],
+                    [
+                        'lesson_grade' => 'غ',
+                        'last_5_pages_grade' => 0,
+                        'daily_revision_grade' => 0,
+                        'behavior_grade' => 0,
+                        'notes_to_parent' => 'الطالب غائب',
+                        'absence' => $absence_grade,
+                        'total' => $total,
+                        'mail_status' => 0,
+                        'class_number' => getStudentDetails(request()->student_id)->class_number,
+                    ]
+                );
+            }elseif($request->notes_to_parent == 'دوام 3 أيام'){
+                $report = Report::updateOrCreate(
+                    [
+                        'student_id' => $request->student_id,
+                        'date'       => $request->date,
+                        'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
+                    ],
+                    [
+                        'lesson_grade' => 'غ',
+                        'last_5_pages_grade' => '-',
+                        'daily_revision_grade' => '-',
+                        'behavior_grade' => '-',
+                        'notes_to_parent' => 'دوام 3 أيام',
+                        'absence' => '-1',
+                        'total' => $total,
+                        'mail_status' => 0,
+                        'class_number' => getStudentDetails(request()->student_id)->class_number,
+                    ]
+                );
             }elseif($request->notes_to_parent == 'نشاط لا صفي'){
                 $report = Report::updateOrCreate(
                     [
@@ -165,18 +163,19 @@ class ReportController extends Controller
                         'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
                     ],
                     [
-                        'lesson_grade' => 1,
-                        'last_5_pages_grade' => 2,
-                        'daily_revision_grade' => 1,
-                        'behavior_grade' => 1,
+                        'lesson_grade' => $default_grade['lesson_grade'],
+                        'last_5_pages_grade' => $default_grade['last_5_pages_grade'],
+                        'daily_revision_grade' => $default_grade['daily_revision_grade'],
+                        'behavior_grade' => $default_grade['behavior_grade'],
                         'notes_to_parent' => 'نشاط لا صفي',
                         'absence' => 0,
-                        'total' => 5,
+                        'total' => $default_grade['lesson_grade'] + $default_grade['last_5_pages_grade'] + $default_grade['daily_revision_grade'] + $default_grade['behavior_grade'],
                         'mail_status' => 0,
                         'class_number' => getStudentDetails(request()->student_id)->class_number,
                     ]
                 );
             }else{
+
                 $request->absence = 0;
                 $total = $this->sumTotal([
                     $request->lesson_grade,
@@ -201,6 +200,7 @@ class ReportController extends Controller
                         'total' => $total,
                     ]
                 );
+
             }
 
         }
