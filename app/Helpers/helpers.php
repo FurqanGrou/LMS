@@ -317,6 +317,7 @@ function checkThirdCondition($student_id, $month = false){
         ->where('date', 'not like', '%Friday%')
         ->where('student_id', '=', $student_id)
         ->where('absence', '!=', 0)
+        ->where('absence', '!=', '-1')
         ->count();
 
     return (isAchievedDefaultGrades($student_id) && $absence_times > 0);
@@ -522,6 +523,7 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
             ->where('date', 'not like', '%Friday%')
             ->where('student_id', '=', $student_id)
             ->where('absence', '!=', 0)
+            ->where('absence', '!=', '-1')
             ->count();
 
         // number of over lesson grade
@@ -665,6 +667,7 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
             ->where('date', 'not like', '%Friday%')
             ->where('student_id', '=', $student_id)
             ->where('absence', '!=', 0)
+            ->where('absence', '!=', '-1')
             ->count();
 
         // عداد مرات الحضور في السبت والجمعة
