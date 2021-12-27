@@ -56,7 +56,7 @@ function getMailStatus($student_id){
 
 function getAbsenceCount($student_id, $type, $month = false){
 
-    $path = getStudentPath($student_id); // تلاوة
+//    $path = getStudentPath($student_id); // تلاوة
 
     if($month){
         $nextMonth = $month + 1;
@@ -64,9 +64,9 @@ function getAbsenceCount($student_id, $type, $month = false){
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
-        if (!empty(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path) && !is_null(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path)){
-            $path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
-        }
+//        if (!empty(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path) && !is_null(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path)){
+//            $path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
+//        }
     }else{
         $today = Carbon::tomorrow();
         $currentMonth = date('m');
@@ -194,11 +194,13 @@ function getAbsenceCount($student_id, $type, $month = false){
 function getStudentPath($student_id, $month_year = null){
 
     $path = \App\User::find($student_id)->path;
+
     $current_month_year = Carbon::today()->format('Y-m');
 
-    if ( ($current_month_year != $month_year) && !is_null($month_year) ){
-        if (!empty(\App\MonthlyScore::query()->where('month_year', '=', $month_year)->where('user_id', '=', $student_id)->first()->path) && !is_null(\App\MonthlyScore::query()->where('month_year', '=', $month_year)->where('user_id', '=', $student_id)->first()->path)){
-            $path = \App\MonthlyScore::query()->where('month_year', '=', $month_year)->where('user_id', '=', $student_id)->first()->path;
+    if ($current_month_year != $month_year && !is_null($month_year)){
+        $previous_path = \App\MonthlyScore::query()->where('month_year', '=', $month_year)->where('user_id', '=', $student_id)->first()->path;
+        if (!empty($previous_path)){
+            $path = $previous_path;
         }
     }
 
@@ -206,40 +208,41 @@ function getStudentPath($student_id, $month_year = null){
 }
 
 function getPathDefaultGrade($path, $grade){
-    if($path == "قسم الحفظ" || $path == "قسم الهجاء" || $path == "قسم التأسيس"){
-        switch ($grade){
-            case "new_lesson":
-                return 1;
-            case "last_5_pages":
-                return 1;
-            case "daily_revision":
-                return 2;
-            case "behavior":
-                return 1;
-        }
-    }elseif ($path == "قسم التلاوة"){
-        switch ($grade){
-            case "new_lesson":
-                return 2;
-            case "last_5_pages":
-                return 1;
-            case "daily_revision":
-                return 1;
-            case "behavior":
-                return 1;
-        }
-    }elseif ($path == "تمكين"){
-        switch ($grade){
-            case "new_lesson":
-                return 3;
-            case "last_5_pages":
-                return 1;
-            case "daily_revision":
-                return 1;
-            case "behavior":
-                return 1;
-        }
-    }
+
+    $grades = [
+        'قسم الحفظ' => [
+            'new_lesson' => 1,
+            'last_5_pages' => 1,
+            'daily_revision' => 2,
+            'behavior' => 1
+        ],
+        'قسم الهجاء' => [
+            'new_lesson' => 1,
+            'last_5_pages' => 1,
+            'daily_revision' => 2,
+            'behavior' => 1
+        ],
+        'قسم التأسيس' => [
+            'new_lesson' => 1,
+            'last_5_pages' => 1,
+            'daily_revision' => 2,
+            'behavior' => 1
+        ],
+        'قسم التلاوة' => [
+            'new_lesson' => 2,
+            'last_5_pages' => 1,
+            'daily_revision' => 1,
+            'behavior' => 1
+        ],
+        'تمكين' => [
+            'new_lesson' => 3,
+            'last_5_pages' => 1,
+            'daily_revision' => 1,
+            'behavior' => 1
+        ],
+    ];
+
+    return $grades[$path][$grade];
 }
 
 function isAchievedDefaultGrades($student_id, $month = false){
