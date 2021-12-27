@@ -122,7 +122,7 @@ Route::get('update-absence-eight-days-telawa', function (){
 Route::get('update-business-three-days', function (){
     \App\Report::query()->where('absence', 'like', '%دوام 3 أيام%')->update([
         'absence' => '-1',
-    ]);
+    ]); 
     dd('update-absence-three-days Done');
 });
 
