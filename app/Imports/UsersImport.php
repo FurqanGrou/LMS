@@ -16,7 +16,6 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
     public $count = 0;
     public $students_count = 0;
 
-
     /**
      * @param array $row
      *
@@ -24,6 +23,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
      */
     public function model(array $row)
     {
+
         /*
          * rkm_altalb = رقم الطالب
          * altalb = اسم الطالب
