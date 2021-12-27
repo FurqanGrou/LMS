@@ -75,24 +75,25 @@ class ReportController extends Controller
     public function reportTableStore(Request $request)
     {
 
-        $today = Carbon::today();
-        $date = Carbon::today()->format('Y-m-d');
-
-        $yesterday = Carbon::createFromDate($today->year, $today->month, $today->day)->format('l d-m-Y');
-        if($date != $request->created_at){
-            $report = Report::updateOrCreate(
-                [
-                    'student_id' => $request->student_id,
-                    'date'       => $yesterday,
-                    'created_at' => $date,
-                ],
-                [
-                    'mail_status' => 0,
-                ]
-            );
-        }
+//        $today = Carbon::today();
+//        $date = Carbon::today()->format('Y-m-d');
+//
+//        $yesterday = Carbon::createFromDate($today->year, $today->month, $today->day)->format('l d-m-Y');
+//        if($date != $request->created_at){
+//            $report = Report::updateOrCreate(
+//                [
+//                    'student_id' => $request->student_id,
+//                    'date'       => $yesterday,
+//                    'created_at' => $date,
+//                ],
+//                [
+//                    'mail_status' => 0,
+//                ]
+//            );
+//        }
 
         if($request->type == 'lessons'){
+
             $report = Report::updateOrCreate(
                 [
                     'student_id' => $request->student_id,
