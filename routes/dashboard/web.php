@@ -126,6 +126,9 @@ Route::get('update-business-three-days', function (){
     dd('update-absence-three-days Done');
 });
 
+Route::get('test', function (){
 
+    $today = getPathDefaultGrade('قسم الحفظ', 'daily_revision');
 
-
+    dd($today);
+});

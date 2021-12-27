@@ -38,7 +38,7 @@ class ReportSeeder extends Seeder
                 $daily_revision_not_listened = getDailyRevisionNotListenedCount($student->id, $month);
                 $absence_excuse_days = getAbsenceCount($student->id, -2, $month);
                 $absence_unexcused_days = getAbsenceCount($student->id, -5, $month);
-
+                
                 DB::table('monthly_scores')->updateOrInsert(
                     [
                         'user_id' => $student->id,
