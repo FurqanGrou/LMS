@@ -156,7 +156,7 @@
                             <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">إلى</td>
                             <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">خطأ</td>
                             <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">تنبيه</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 40px;">عدد الصفحات</td>
+                            <td style="min-height: 45px; height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 40px;">عدد الصفحات</td>
                             <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold">اسم المستمع</td>
                         </tr>
                         </thead>
