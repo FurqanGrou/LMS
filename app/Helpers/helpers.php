@@ -59,7 +59,7 @@ function getAbsenceCount($student_id, $type, $month = false){
 //    $path = getStudentPath($student_id); // تلاوة
 
     if($month){
-        $nextMonth = $month + 1;
+        $nextMonth = '01';
         $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
@@ -250,7 +250,7 @@ function isAchievedDefaultGrades($student_id, $month = false){
     $student_path = getStudentPath($student_id);
 
     if($month){
-        $nextMonth = $month + 1;
+        $nextMonth = '01';
         $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
@@ -296,7 +296,7 @@ function isAchievedDefaultGrades($student_id, $month = false){
 function checkThirdCondition($student_id, $month = false){
 
     if($month){
-        $nextMonth = $month + 1;
+        $nextMonth = '01';
         $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
@@ -331,7 +331,7 @@ function getLessonsNotListenedCount($student_id, $month = false){
     $student_path = getStudentPath($student_id);
 
     if($month){
-        $nextMonth = $month + 1;
+        $nextMonth = '01';
         $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
@@ -340,7 +340,7 @@ function getLessonsNotListenedCount($student_id, $month = false){
             $student_path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
         }
     }else{
-        $today = Carbon::tomorrow();
+        $today = Carbon::today(); // tomorrow
         $currentMonth = date('m');
         $currentYear = date('Y');
 
@@ -462,7 +462,7 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
 
     $student_path = getStudentPath($student_id);
     if($month){
-        $nextMonth = $month + 1;
+        $nextMonth = '01';
         $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
@@ -471,7 +471,7 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
             $student_path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
         }
     }else{
-        $today = Carbon::tomorrow();
+        $today = Carbon::today(); // tomorrow
         $currentMonth = date('m');
         $currentYear = date('Y');
 
@@ -586,7 +586,7 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
     $student_path = getStudentPath($student_id);
 
     if($month){
-        $nextMonth = $month + 1;
+        $nextMonth = '01';
         $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
@@ -595,7 +595,7 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
             $student_path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
         }
     }else{
-        $today = Carbon::tomorrow();
+        $today = Carbon::today(); // tomorrow
         $currentMonth = date('m');
         $currentYear = date('Y');
 

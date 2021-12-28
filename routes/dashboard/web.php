@@ -128,7 +128,25 @@ Route::get('update-business-three-days', function (){
 
 Route::get('test', function (){
 
-    $today = getPathDefaultGrade('قسم الحفظ', 'daily_revision');
+    $student_path = getStudentPath('634');
 
-    dd($today);
+    $today = \Carbon\Carbon::today();
+    $currentMonth = date('m');
+    $currentYear = date('Y');
+
+    $default_new_lesson_grade = getPathDefaultGrade($student_path, 'new_lesson'); // 2
+    $default_daily_revision_grade = getPathDefaultGrade($student_path, 'daily_revision');
+    $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'last_5_pages');
+    $default_behavior_grade = getPathDefaultGrade($student_path, 'behavior');
+
+    $monthly_report_statistics = \App\Report::query()
+        ->whereRaw('YEAR(created_at) = ?', [$currentYear])
+        ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
+        ->whereDate('created_at', '<=', $today)
+        ->where('date', 'not like', '%Saturday%')
+        ->where('date', 'not like', '%Friday%')
+        ->where('student_id', '=', '634')->get();
+
+    dd($monthly_report_statistics);
+
 });
