@@ -68,7 +68,7 @@ function getAbsenceCount($student_id, $type, $month = false){
 //            $path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
 //        }
     }else{
-        $today = Carbon::tomorrow();
+        $today = Carbon::today();
         $currentMonth = date('m');
         $currentYear = date('Y');
 
@@ -259,7 +259,7 @@ function isAchievedDefaultGrades($student_id, $month = false){
             $student_path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
         }
     }else{
-        $today = Carbon::tomorrow();
+        $today = Carbon::today();
         $currentMonth = date('m');
         $currentYear = date('Y');
 
@@ -302,7 +302,7 @@ function checkThirdCondition($student_id, $month = false){
         $currentMonth = $month;
         $currentYear = 2021;
     }else{
-        $today = Carbon::tomorrow();
+        $today = Carbon::today();
         $currentMonth = date('m');
         $currentYear = date('Y');
 

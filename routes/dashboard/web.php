@@ -135,9 +135,6 @@ Route::get('test', function (){
     $currentYear = date('Y');
 
     $default_new_lesson_grade = getPathDefaultGrade($student_path, 'new_lesson'); // 2
-    $default_daily_revision_grade = getPathDefaultGrade($student_path, 'daily_revision');
-    $default_last_5_pages_grade = getPathDefaultGrade($student_path, 'last_5_pages');
-    $default_behavior_grade = getPathDefaultGrade($student_path, 'behavior');
 
     $monthly_report_statistics = \App\Report::query()
         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
@@ -145,7 +142,14 @@ Route::get('test', function (){
         ->whereDate('created_at', '<=', $today)
         ->where('date', 'not like', '%Saturday%')
         ->where('date', 'not like', '%Friday%')
-        ->where('student_id', '=', '634')->get();
+        ->where('student_id', '=', '634')
+        ->where(function ($query) use ($default_new_lesson_grade){
+        $query->where('lesson_grade', '=', '0');
+        $query->orWhere('lesson_grade', '=', ' ');
+        $query->orWhereNull('lesson_grade');
+        $query->orWhere('lesson_grade', '<', $default_new_lesson_grade);
+    })->where('absence', '=', 0)
+        ->count();
 
     dd($monthly_report_statistics);
 
