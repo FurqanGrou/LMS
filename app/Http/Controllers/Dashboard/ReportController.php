@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Chapter;
 use App\DataTables\ReportDatatable;
+use App\Events\ReportUpdated;
 use App\Http\Controllers\Controller;
 use App\Lesson;
 use App\LessonPage;
@@ -18,6 +19,7 @@ use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Maatwebsite\Excel\Facades\Excel;
@@ -203,6 +205,7 @@ class ReportController extends Controller
 
             }
 
+            Event::dispatch(new ReportUpdated($report));
         }
 
         return response()->json(['report' => $report], 200);

@@ -283,7 +283,7 @@
             عدد مرات عدم تسميع الدرس الجديد / Number of not recite the new lesson
         </td>
         <td style="text-align: center">
-            {{ getLessonsNotListenedCount($student_id) }}
+            {{ $user_student->monthlyScores(request()->date_filter)->new_lessons_not_listened ?? 0 }}
         </td>
     </tr>
     <tr style="height: 40px">
@@ -291,7 +291,7 @@
             عدد مرات عدم تسميع اخر 5 صفحات / Number of not recite last 5 pages
         </td>
         <td style="text-align: center">
-            {{ getLastFivePagesNotListenedCount($student_id)  }}
+            {{ $user_student->monthlyScores(request()->date_filter)->last_five_pages_not_listened ?? 0 }}
         </td>
     </tr>
     <tr style="height: 40px">
@@ -299,7 +299,7 @@
             عدد مرات عدم تسميع المراجعة / Number of not recite the review
         </td>
         <td style="text-align: center">
-            {{ getDailyRevisionNotListenedCount($student_id) }}
+            {{ $user_student->monthlyScores(request()->date_filter)->daily_revision_not_listened ?? 0 }}
         </td>
     </tr>
     <tr style="height: 40px">
@@ -307,7 +307,7 @@
             عدد أيام الغياب بعذر / Number of absence days with excuse
         </td>
         <td style="text-align: center">
-            {{ count($monthly_report->where('absence', '=', -2)->pluck('absence')->toArray()) }}
+            {{ $user_student->monthlyScores(request()->date_filter)->absence_excuse_days ?? 0 }}
         </td>
     </tr>
     <tr style="height: 40px">
@@ -315,7 +315,7 @@
             عدد أيام الغياب بدون بعذر / Number of absence days without excuse
         </td>
         <td style="text-align: center">
-            {{ count($monthly_report->where('absence', '=', -5)->pluck('absence')->toArray()) }}
+            {{ $user_student->monthlyScores(request()->date_filter)->absence_unexcused_days ?? 0 }}
         </td>
     </tr>
     <tr style="height: 40px">
@@ -333,19 +333,9 @@
             General Score
         </td>
         <td style="text-align: center">
-{{--            {{ getRate(100 + ( (getLessonsNotListenedCount($student_id) * -1) +--}}
-{{--                        (getLastFivePagesNotListenedCount($student_id) * -1) +--}}
-{{--                        (getDailyRevisionNotListenedCount($student_id) * -2) +--}}
-{{--                        (count($monthly_report->where('absence', '=', -2)->pluck('absence')->toArray()) * -2) +--}}
-{{--                        (count($monthly_report->where('absence', '=', -5)->pluck('absence')->toArray()) * -5)--}}
-{{--                        ), 'ar') }}--}}
+            {{ getRate($user_student->monthlyScores(request()->date_filter)->avg ?? 100, 'ar') }}
             <br>
-{{--            {{ getRate(100 + ( (getLessonsNotListenedCount($student_id) * -1) +--}}
-{{--                        (getLastFivePagesNotListenedCount($student_id) * -1) +--}}
-{{--                        (getDailyRevisionNotListenedCount($student_id) * -2) +--}}
-{{--                        (count($monthly_report->where('absence', '=', -2)->pluck('absence')->toArray()) * -2) +--}}
-{{--                        (count($monthly_report->where('absence', '=', -5)->pluck('absence')->toArray()) * -5)--}}
-{{--                        ), 'en') }}--}}
+            {{ getRate($user_student->monthlyScores(request()->date_filter)->avg ?? 100, 'en') }}
         </td>
         <td style="text-align: center; background: #C6E0B4">
             نسبة
@@ -353,14 +343,7 @@
             Percentage
         </td>
         <td style="text-align: center">
-{{--            {{--}}
-{{--                100 + ( (getLessonsNotListenedCount($student_id) * -1) +--}}
-{{--                        (getLastFivePagesNotListenedCount($student_id) * -1) +--}}
-{{--                        (getDailyRevisionNotListenedCount($student_id) * -2) +--}}
-{{--                        (count($monthly_report->where('absence', '=', -2)->pluck('absence')->toArray()) * -2) +--}}
-{{--                        (count($monthly_report->where('absence', '=', -5)->pluck('absence')->toArray()) * -5)--}}
-{{--                        )--}}
-{{--            }}--}}
+            {{ $user_student->monthlyScores(request()->date_filter)->avg ?? 100 }}
         </td>
     </tr>
     </tbody>
