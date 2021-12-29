@@ -45,7 +45,7 @@
                         <!--</form>-->
 
                         @if(isAvailableToSendMonthlyReport(request()->date_filter) || env('ENABLE_MONTHLY_SEND'))
-                            <form method="POST" id="monthly_report-monthly" action="{{ route('teachers.send.report.monthly', request()->student_id . '?date_filter=' . '2021-11') }}">
+                            <form method="POST" id="monthly_report-monthly" action="{{ route('teachers.send.report.monthly', request()->student_id . '?date_filter=' . date('Y') . '-' . date('m')) }}">
                                 @csrf
                                 <input type="submit" class="btn" style="color:#0a0e45;background: lavenderblush !important;" id="btn-send-report-monthly" value="ارسال التقرير الشهري">
                             </form>

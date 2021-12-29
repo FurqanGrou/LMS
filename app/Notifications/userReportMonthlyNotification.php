@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -50,8 +51,13 @@ class userReportMonthlyNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $subject = "نتيجة شهر ". " اكتوبر " . date("Y") ." - الطالب/ة - " . $this->student_name . " ، " . $this->student_number . "";
-        return (new MailMessage)->subject($subject)->view('emails.user.monthly_report', ['student' => $this->student, 'student_id' => $this->student_id, "student_name" => $this->student_name, 'date_filter' => $this->date_filter]);
+        $month = substr(request()->date_filter, -2);
+        $year = substr(request()->date_filter, 0, 4);
+        $month_name = Carbon::createFromDate($year, $month)->getTranslatedMonthName();
+
+        $subject = " نتيجة شهر $month_name " . date("Y") . " - الطالب/ة -  $this->student_name  ،  $this->student_number";
+
+        return (new MailMessage)->subject($subject)->view('emails.user.monthly_report', ['student' => $this->student, 'student_id' => $this->student_id, "student_name" => $this->student_name, 'date_filter' => $this->date_filter, 'month_name' => $month_name, 'month' => $month]);
     }
 
     /**

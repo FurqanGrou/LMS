@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -127,30 +128,4 @@ Route::get('update-business-three-days', function (){
 });
 
 Route::get('test', function (){
-
-    $student_path = getStudentPath('634');
-
-    $today = \Carbon\Carbon::today();
-    $currentMonth = date('m');
-    $currentYear = date('Y');
-
-    $default_new_lesson_grade = getPathDefaultGrade($student_path, 'new_lesson'); // 2
-
-    $monthly_report_statistics = \App\Report::query()
-        ->whereRaw('YEAR(created_at) = ?', [$currentYear])
-        ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-        ->whereDate('created_at', '<=', $today)
-        ->where('date', 'not like', '%Saturday%')
-        ->where('date', 'not like', '%Friday%')
-        ->where('student_id', '=', '634')
-        ->where(function ($query) use ($default_new_lesson_grade){
-        $query->where('lesson_grade', '=', '0');
-        $query->orWhere('lesson_grade', '=', ' ');
-        $query->orWhereNull('lesson_grade');
-        $query->orWhere('lesson_grade', '<', $default_new_lesson_grade);
-    })->where('absence', '=', 0)
-        ->count();
-
-    dd($monthly_report_statistics);
-
 });

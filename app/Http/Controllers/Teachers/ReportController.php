@@ -372,7 +372,7 @@ class ReportController extends Controller
             $request['date_filter'] = date('Y') . '-' . date('m');
         }
 
-        if (!$this->checkMonthlyReportInfo($user, $request->date_filter)){
+        if (!$this->checkMonthlyReportInfo($user, $request->date_filter) && !env('ENABLE_TEMP_MONTHLY_REPORT')){
             session()->flash('error', 'يرجى التأكد من إدخال جميع بيانات الشهر ورقم الصفحة بشكل صحيح!');
             return redirect()->route('teachers.report.table', $request->student_id);
         }
@@ -472,17 +472,17 @@ class ReportController extends Controller
             ->whereNotNull('lesson_grade')
             ->where('lesson_grade', '!=', '')
             ->whereNotNull('last_5_pages_grade')
-//                        ->where('last_5_pages_grade', '!=', '')
+//            ->where('last_5_pages_grade', '!=', '')
             ->whereNotNull('behavior_grade')
-//                        ->where('behavior_grade', '!=', '')
+//            ->where('behavior_grade', '!=', '')
             ->whereNotNull('daily_revision_grade')
-//                        ->where('daily_revision_grade', '!=', '')
-            ->whereNotNull('listener_name')
-//                        ->where('listener_name', '!=', '')
-            ->whereNotNull('mistake')
-            ->where('mistake', '!=', '')
-            ->whereNotNull('alert')
-            ->where('alert', '!=', '')
+//            ->where('daily_revision_grade', '!=', '')
+//            ->whereNotNull('listener_name')
+//            ->where('listener_name', '!=', '')
+//            ->whereNotNull('mistake')
+//            ->where('mistake', '!=', '')
+//            ->whereNotNull('alert')
+//            ->where('alert', '!=', '')
             ->first();
 
         $lessons_report = Report::query()
@@ -580,7 +580,9 @@ class ReportController extends Controller
             ];
         }
 
-        $currentMonth = \Carbon\Carbon::create()->month()->subMonth()->format('m');
+//        $currentMonth = \Carbon\Carbon::create()->month()->subMonth()->format('m');
+        $currentMonth = date('m');
+        $now = Carbon::now();
 
         $monthly_report_statistics = Report::query()
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
@@ -588,8 +590,6 @@ class ReportController extends Controller
 
         $monthly_report = $monthly_report_statistics->get();
 
-        $now = Carbon::now();
-        $month = $now->month;
 
         $pdf = PDF::loadView('teachers.emails.monthly_report',
             [
@@ -598,12 +598,12 @@ class ReportController extends Controller
                 'monthly_report' => $monthly_report,
                 'monthly_report_statistics' => $monthly_report_statistics,
                 'now' => $now,
-                'month' => $month,
+                'user_student' => $student,
             ], [], [
                 'format' => 'A2'
             ]);
 
-//        return $pdf->stream('document.pdf');
+        return $pdf->stream('document.pdf');
 
         Mail::to($to_mails)
             ->bcc(['Alfurqantest20@gmail.com'])
