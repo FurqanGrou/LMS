@@ -26,11 +26,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ReportController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/ReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notifications/userReportMonthlyNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/userReportMonthlyNotification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/emails/user/monthly_report.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/user/monthly_report.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/emails/monthly_report.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/emails/monthly_report.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/layouts/header-navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/layouts/header-navbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +182,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../original_lms" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -377,7 +374,8 @@
       <workItem from="1640610363074" duration="3344000" />
       <workItem from="1640618820417" duration="16867000" />
       <workItem from="1640679492013" duration="719000" />
-      <workItem from="1640698279852" duration="13413000" />
+      <workItem from="1640698279852" duration="18292000" />
+      <workItem from="1640863361726" duration="868000" />
     </task>
     <servers />
   </component>
@@ -425,9 +423,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1637160257185" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1640779410866">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1640864175945">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1640779410866" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1640864175945" />
   </component>
 </project>

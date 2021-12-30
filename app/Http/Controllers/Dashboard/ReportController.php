@@ -51,7 +51,7 @@ class ReportController extends Controller
         $user_student = User::find(request()->student_id);
         $lesson_pages = LessonPage::query()->get();
 
-        return view('admins.reports.monthly_table', ['now' => $now, 'month' => $month, 'reports' => $reports, 'notes' => $notes, 'students' => $students, 'new_lessons' => $new_lessons, 'daily_revision' => $daily_revision, "user_student" => $user_student, "lesson_pages" => $lesson_pages]);
+        return view('admins.reports.monthly_table', ['now' => $now, 'month' => $month, 'reports' => $reports, 'notes' => $notes, 'students' => $students, 'new_lessons' => $new_lessons, 'daily_revision' => $daily_revision, "user_student" => $user_student, "lesson_pages" => $lesson_pages, 'year' => $year]);
     }
 
     public function reportTableStore(Request $request)
