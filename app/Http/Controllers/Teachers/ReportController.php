@@ -322,12 +322,12 @@ class ReportController extends Controller
             $workingDays = $this->getWorkingDaysCount($month, $year);
         }else{
             $first_report_this_month = Report::query()
-                ->whereMonth('created_at', '=', $month)
-                ->whereYear('created_at', '=', $year)
-                ->where('date', 'not like', '%Saturday%')
-                ->where('date', 'not like', '%Friday%')
-                ->where('student_id', '=', $user->id)
-                ->first()->created_at ?? false;
+                    ->whereMonth('created_at', '=', $month)
+                    ->whereYear('created_at', '=', $year)
+                    ->where('date', 'not like', '%Saturday%')
+                    ->where('date', 'not like', '%Friday%')
+                    ->where('student_id', '=', $user->id)
+                    ->first()->created_at ?? false;
 
             if (!$first_report_this_month){
                 return false;
@@ -374,13 +374,13 @@ class ReportController extends Controller
 
         if (!$this->checkMonthlyReportInfo($user, $request->date_filter) && !env('ENABLE_TEMP_MONTHLY_REPORT')){
             session()->flash('error', 'يرجى التأكد من إدخال جميع بيانات الشهر ورقم الصفحة بشكل صحيح!');
-            return redirect()->route('teachers.report.table', $request->student_id);
+            return redirect()->route('teachers.report.table', $request->student_id . '?date_filter=' . $request['date_filter']);
         }
 
         try{
             Notification::route('mail', [$user->father_mail, $user->mother_mail])->notify(new userReportMonthlyNotification($user, $request->date_filter));
             $report = $user->monthlyScores($request->date_filter);
-            $report->update(['mail_status' => 1]);
+            $report->update(['mail_status' => '1']);
         }
         catch(\Exception $e){
             session()->flash('error', 'فشلت عملية ارسال التقرير الشهري!');
@@ -590,7 +590,6 @@ class ReportController extends Controller
 
         $monthly_report = $monthly_report_statistics->get();
 
-
         $pdf = PDF::loadView('teachers.emails.monthly_report',
             [
                 'student_id' => $assignment->student_id,
@@ -603,10 +602,8 @@ class ReportController extends Controller
                 'format' => 'A2'
             ]);
 
-        return $pdf->stream('document.pdf');
-
         Mail::to($to_mails)
-            ->bcc(['Alfurqantest20@gmail.com'])
+            ->bcc(['lmsfurqan1@gmail.com'])
             ->send(new ReportMail($details, $pdf));
 
         if(empty(Mail::failures())) {

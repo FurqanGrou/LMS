@@ -198,8 +198,8 @@ function getStudentPath($student_id, $month_year = null){
     $current_month_year = Carbon::today()->format('Y-m');
 
     if ($current_month_year != $month_year && !is_null($month_year)){
-        $previous_path = \App\MonthlyScore::query()->where('month_year', '=', $month_year)->where('user_id', '=', $student_id)->first()->path;
-        if (!empty($previous_path)){
+        $previous_path = \App\MonthlyScore::query()->where('month_year', '=', $month_year)->where('user_id', '=', $student_id)->first()->path ?? null;
+        if (!is_null($previous_path)){
             $path = $previous_path;
         }
     }

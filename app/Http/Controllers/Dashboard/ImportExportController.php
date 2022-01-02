@@ -89,12 +89,12 @@ class ImportExportController extends Controller
 
     public function exportMonthlyScores(Request $request)
     {
+
         if (!isset($request->month_year)){
-            $request['month_year'] = date("Y" . "-" . date('m')); // 2021-10
+            $request['month_year'] = date("Y" . "-" . date('m')); // 2022-01
         }
         if (!isset($request->mail_status)){
             $request['mail_status'] = -1;
-            $status = 'all';
         }
 
         if ($request->mail_status == 0){
