@@ -56,15 +56,14 @@ class SuggestComplaintBoxController extends Controller
             'teacher_id' => auth()->guard('teacher_web')->user()->id,
         ]);
 
-//        Mail::to($email_to)
-        Mail::to(['lmsfurqan1@gmail.com'])
+        Mail::to($email_to)
+//        Mail::to(['lmsfurqan1@gmail.com'])
             ->send(new SuggestComplaint($result->request_type . " - " . $request->subject));
 
         if(!empty(Mail::failures())) {
             session()->flash('error', 'فشلت عملية ارسال الطلب');
             return redirect()->back();
         }
-
 
         session()->flash('success', 'تم تقديم الطلب بنجاح');
         return redirect()->back();
