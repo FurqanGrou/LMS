@@ -516,7 +516,7 @@ class ReportController extends Controller
         if($mail_status){
             session()->flash('success', 'تم ارسال التقرير اليومي بنجاح');
         }else{
-            session()->flash('success', 'فشلت عملية ارسال التقرير!');
+            session()->flash('error', 'فشلت عملية ارسال التقرير!');
         }
         if(request()->date_filter) {
             return redirect()->route('teachers.report.table', $request->student_id . '?date_filter=' . request()->date_filter);
