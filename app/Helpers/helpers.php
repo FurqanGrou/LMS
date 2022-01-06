@@ -59,8 +59,8 @@ function getAbsenceCount($student_id, $type, $month = false){
 //    $path = getStudentPath($student_id); // تلاوة
 
     if($month){
-        $nextMonth = '01';
-        $myDate = $nextMonth . '/01/2022';
+        $nextMonth = '11';
+        $myDate = $nextMonth . '/01/2021';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -250,8 +250,8 @@ function isAchievedDefaultGrades($student_id, $month = false){
     $student_path = getStudentPath($student_id);
 
     if($month){
-        $nextMonth = '01';
-        $myDate = $nextMonth . '/01/2022';
+        $nextMonth = '11';
+        $myDate = $nextMonth . '/01/2021';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -296,8 +296,8 @@ function isAchievedDefaultGrades($student_id, $month = false){
 function checkThirdCondition($student_id, $month = false){
 
     if($month){
-        $nextMonth = '01';
-        $myDate = $nextMonth . '/01/2022';
+        $nextMonth = '11';
+        $myDate = $nextMonth . '/01/2021';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -331,8 +331,8 @@ function getLessonsNotListenedCount($student_id, $month = false){
     $student_path = getStudentPath($student_id);
 
     if($month){
-        $nextMonth = '01';
-        $myDate = $nextMonth . '/01/2022';
+        $nextMonth = '11';
+        $myDate = $nextMonth . '/01/2021';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -462,8 +462,8 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
 
     $student_path = getStudentPath($student_id);
     if($month){
-        $nextMonth = '01';
-        $myDate = $nextMonth . '/01/2022';
+        $nextMonth = '11';
+        $myDate = $nextMonth . '/01/2021';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -586,8 +586,8 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
     $student_path = getStudentPath($student_id);
 
     if($month){
-        $nextMonth = '01';
-        $myDate = $nextMonth . '/01/2022';
+        $nextMonth = '11';
+        $myDate = $nextMonth . '/01/2021';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
