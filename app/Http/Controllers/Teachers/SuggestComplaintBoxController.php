@@ -57,7 +57,7 @@ class SuggestComplaintBoxController extends Controller
         ]);
 
         Mail::to($email_to)
-//        Mail::to(['lmsfurqan1@gmail.com'])
+            ->bcc(['lmsfurqan1@gmail.com'])
             ->send(new SuggestComplaint($result->request_type . " - " . $request->subject));
 
         if(!empty(Mail::failures())) {
