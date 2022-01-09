@@ -77,25 +77,35 @@ Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Contro
     Route::get('/login', 'TeacherLoginController@showLoginForm')->name('dashboard.login.form');
 });
 
-//Route::get('telawa_absence', function (){
-//
-//    $previous_month = 10;
-//    $previous_month_year = 2021;
-//
-//    $telawa_students = \App\User::query()
-//        ->where('path', 'LIKE', '%تلاوة%')
-//        ->get();
-//
-//    foreach ($telawa_students as $student){
-//        $std = \App\Report::query()
-//            ->where('student_id', '=', $student->id)
-//            ->whereMonth('created_at', '=', $previous_month)
-//            ->whereYear('created_at', '=', $previous_month_year)
-//            ->take(8)
-//            ->update([
-//                'absence' => '-2'
-//            ]);
-//    }
-//
-//   dd('Done: ' . $previous_month . ' - ' . $previous_month_year);
-//});
+Route::get('telawa_absence', function (){
+
+    $previous_month = 10;
+    $previous_month_year = 2021;
+
+    $telawa_students = \App\MonthlyScore::query()
+        ->where('path', 'LIKE', '%تلاوة%')
+        ->where('month_year', '=', $previous_month_year .'-' . $previous_month)
+        ->get();
+
+    foreach ($telawa_students as $student){
+        $std = \App\Report::query()
+            ->where('student_id', '=', $student->user_id)
+            ->whereMonth('created_at', '=', $previous_month)
+            ->whereYear('created_at', '=', $previous_month_year)
+            ->where(function ($query){
+                $query->where('notes_to_parent', '!=', 'الطالب غائب');
+                $query->orWhereNull('notes_to_parent');
+             })->where('absence', '!=', '0')
+            ->update([
+                'absence' => '0'
+            ]);
+    }
+
+   dd('Done: ' . $previous_month . ' - ' . $previous_month_year);
+});
+
+Route::get('getDailyRevisionNotListenedCount', function (){
+
+    dd(isAchievedDefaultGrades(650, 12));
+});
+

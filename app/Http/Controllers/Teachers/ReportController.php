@@ -548,7 +548,7 @@ class ReportController extends Controller
                 'student_info' => $student,
             ];
             Mail::to($to_mails)
-                ->bcc(['Alfurqantest20@gmail.com'])
+                ->bcc(['lmsfurqan1@gmail.com'])
                 ->send(new ReportMail($details));
 
             if(empty(Mail::failures())) {

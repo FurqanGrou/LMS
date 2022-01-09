@@ -59,8 +59,8 @@ function getAbsenceCount($student_id, $type, $month = false){
 //    $path = getStudentPath($student_id); // تلاوة
 
     if($month){
-        $nextMonth = '11';
-        $myDate = $nextMonth . '/01/2021';
+        $nextMonth = '01';
+        $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -135,7 +135,7 @@ function getAbsenceCount($student_id, $type, $month = false){
 
     // معندوش اي نقص باي يوم عن الدرجات الافتراضية True
     // يكون عنده ايام غياب True
-    if (isAchievedDefaultGrades($student_id) && $absence_times){
+    if (isAchievedDefaultGrades($student_id, $month) && $absence_times){
         // يتم التعويض من خلال ايام الجمعة والسبت بدل ايام الغياب بعذر
         // ومن ثم الغياب بدون عذر بحيث تكون الاولوية للغياب بعذر في التعويض
 
@@ -250,8 +250,8 @@ function isAchievedDefaultGrades($student_id, $month = false){
     $student_path = getStudentPath($student_id);
 
     if($month){
-        $nextMonth = '11';
-        $myDate = $nextMonth . '/01/2021';
+        $nextMonth = '01';
+        $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -296,8 +296,8 @@ function isAchievedDefaultGrades($student_id, $month = false){
 function checkThirdCondition($student_id, $month = false){
 
     if($month){
-        $nextMonth = '11';
-        $myDate = $nextMonth . '/01/2021';
+        $nextMonth = '01';
+        $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -319,11 +319,11 @@ function checkThirdCondition($student_id, $month = false){
         ->where('date', 'not like', '%Saturday%')
         ->where('date', 'not like', '%Friday%')
         ->where('student_id', '=', $student_id)
-        ->where('absence', '!=', 0)
+        ->where('absence', '!=', '0')
         ->where('absence', '!=', '-1')
         ->count();
 
-    return (isAchievedDefaultGrades($student_id) && $absence_times > 0);
+    return (isAchievedDefaultGrades($student_id, $month) && $absence_times > 0);
 }
 
 function getLessonsNotListenedCount($student_id, $month = false){
@@ -331,8 +331,8 @@ function getLessonsNotListenedCount($student_id, $month = false){
     $student_path = getStudentPath($student_id);
 
     if($month){
-        $nextMonth = '11';
-        $myDate = $nextMonth . '/01/2021';
+        $nextMonth = '01';
+        $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -395,7 +395,7 @@ function getLessonsNotListenedCount($student_id, $month = false){
     // 1- have absence
     // 2- incomplete default grades count
 
-    if(checkThirdCondition($student_id)){
+    if(checkThirdCondition($student_id, $month)){
 
         $absence_times = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
@@ -462,8 +462,8 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
 
     $student_path = getStudentPath($student_id);
     if($month){
-        $nextMonth = '11';
-        $myDate = $nextMonth . '/01/2021';
+        $nextMonth = '01';
+        $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -516,7 +516,7 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
     // 1- have absence
     // 2- incomplete default grades count
 
-    if(checkThirdCondition($student_id)){
+    if(checkThirdCondition($student_id, $month)){
 
         $absence_times = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
@@ -586,8 +586,8 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
     $student_path = getStudentPath($student_id);
 
     if($month){
-        $nextMonth = '11';
-        $myDate = $nextMonth . '/01/2021';
+        $nextMonth = '01';
+        $myDate = $nextMonth . '/01/2022';
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
@@ -641,7 +641,7 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
     // get summation of grades less than default and greater than zero in daily_revision_grade column
     $summation = $clonedSummationQuery->where('daily_revision_grade', '>', '0')
             ->where('daily_revision_grade', '<', $default_daily_revision_grade)
-            ->where('absence', '=', 0)
+            ->where('absence', '=', '0')
             ->sum('daily_revision_grade')/$default_daily_revision_grade;
 
     $normal_count +=$summation;
@@ -659,7 +659,7 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
     // 1- have absence
     // 2- incomplete default grades count
 
-    if(checkThirdCondition($student_id)){
+    if(checkThirdCondition($student_id, $month)){
 
         // عدد مرات الغياب الطبيعي الاجمالي
         $absence_times = Report::query()
@@ -673,7 +673,7 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
             ->where('absence', '!=', '-1')
             ->count();
 
-        // عداد مرات الحضور في السبت والجمعة
+        // عدد مرات الحضور في السبت والجمعة
         // number of over lesson grade
         $over_count = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
@@ -721,10 +721,8 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
 
     // يومي الجمعة والسبت لا يشترط ان تكون جميع الدرجات فيه مكتملة انما كل درجة تقابلها تعوبض درجة من يوم أخر
 
-
     return max($normal_count - ( ( ($over_count_total - ($default_daily_revision_grade * $over_count)) / $default_daily_revision_grade ) + ($over_count_total_sat/$default_daily_revision_grade) ), 0);
     //          9            - (  ( ( 0               -  ( 2                        * 0         )) /  2                         ) + 0                    )      = 6
-
 }
 
 function getStudentDetails($student_id){
@@ -880,7 +878,7 @@ function isAvailableToSendMonthlyReport($month_year){
 
     $daysOfMonth = \Carbon\CarbonPeriod::between($monthPeriod.'-'.$first_day, $monthPeriod.'-'.$lastDay)->filter('isWeekday');
 
-    $currentDate    = Carbon::createFromDate(date('Y'), date('m'), date('d'))->format('Y-m-d'); // 30-11-2021
+    $currentDate    = Carbon::createFromDate(date('Y'), date('m'), date('d'))->format('Y-m-d'); // 30-11-2022
     $lastWorkingDay = last($daysOfMonth->toArray())->format('Y-m-d'); // 30-11-201
 
     return ($currentDate >= $lastWorkingDay && $currentDate <= $monthReport->format('Y-m-t'));
