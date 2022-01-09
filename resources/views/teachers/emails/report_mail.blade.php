@@ -1,5 +1,5 @@
 <html><head></head><body>
-<img style='display:block;margin-left:auto;margin-right:auto' src='https://reports.furqangroup.com/original/logo.jpg' alt='Furqan Group' width='133' height='133' class='CToWUd'><div style='text-align: center;'>
+<img style='display:block;margin-left:auto;margin-right:auto' src='https://reports.furqangroup.com/original/logo1.jpg' alt='Furqan Group' width='600' height='86' class='CToWUd'><div style='text-align: center;'>
  <span style='font-family: tahoma, arial, helvetica, sans-serif;'>
   <strong>
    <span style='font-size: 14pt;'> Student Daily Report التقرير اليومي للطالب{{ getTitleName($details['student_info']->section) }} </span>
