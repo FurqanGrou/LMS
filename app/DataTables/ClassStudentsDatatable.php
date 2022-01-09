@@ -29,8 +29,14 @@ class ClassStudentsDatatable extends DataTable
 
         $students = User::where('class_number', '=', $class_number)->get();
 
+        if (auth()->guard('admin_web')->check()){
+            $student_name = 'admins.students.btn.student_name';
+        }else{
+            $student_name = 'teachers.reports.btn.student_name';
+        }
+
         return datatables($students)
-            ->addColumn('student_name', 'teachers.reports.btn.student_name')
+            ->addColumn('student_name', $student_name)
             ->addColumn('mail_status', 'teachers.reports.btn.mail_status')
             ->addColumn('monthly_avg', 'teachers.reports.btn.monthly_avg')
             ->rawColumns([
@@ -100,23 +106,27 @@ class ClassStudentsDatatable extends DataTable
         return [
             Column::make('student_number')
                 ->data('student_number')
-                ->title('رقم الطالب'),
+                ->title('رقم الطالب')
+                ->className('font-weight-bold black'),
             Column::make('student_name')
                 ->data('student_name')
-                ->title('اسم الطالب'),
+                ->title('اسم الطالب')
+                ->className('black'),
             Column::make('login_time')
                 ->data('login_time')
                 ->title('وقت الدخول')
-                ->className('std-name'),
+                ->className('std-name font-weight-bold black'),
 //            Column::make('status')
 //                ->data('status')
 //                ->title('الحالة'),
             Column::make('mail_status')
                 ->data('mail_status')
-                ->title('حالة الارسال'),
+                ->title('حالة الارسال')
+                ->className('black'),
             Column::make('monthly_avg')
                 ->data('monthly_avg')
-                ->title('النسبة الشهرية %'),
+                ->title('النسبة الشهرية %')
+                ->className('black'),
         ];
     }
 

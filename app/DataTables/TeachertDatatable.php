@@ -104,23 +104,29 @@ class TeachertDatatable extends DataTable
         return [
             Column::make('classes.title')
                 ->data('title')
-                ->title('اسم الحلقة'),
+                ->title('اسم الحلقة')
+                ->className('font-weight-bold black'),
             Column::make('role')
                 ->data('role')
                 ->title('الدور')
+                ->className('font-weight-bold black')
                 ->searchable(false),
             Column::make('zoom_link')
                 ->data('zoom_link')
-                ->title('رابط الحلقة'),
+                ->title('رابط الحلقة')
+                ->className('font-weight-bold black'),
             Column::make('students_count')
                 ->data('students_count')
-                ->title('عدد الطلاب'),
+                ->title('عدد الطلاب')
+                ->className('font-weight-bold black'),
             Column::make('path')
                 ->data('path')
-                ->title('المسار'),
+                ->title('المسار')
+                ->className('font-weight-bold black'),
             Column::make('period')
                 ->data('period')
-                ->title('الفترة'),
+                ->title('الفترة')
+                ->className('font-weight-bold black'),
         ];
     }
 
