@@ -15,6 +15,13 @@ use Maatwebsite\Excel\Concerns\WithBatchInserts;
 class PreviousMonthlyScoresImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatchInserts
 {
 
+    public $month;
+
+    public function __construct($month)
+    {
+        $this->month = $month;
+    }
+
     /**
      * @param array $row
      *
@@ -60,8 +67,8 @@ class PreviousMonthlyScoresImport implements ToModel, WithHeadingRow, WithChunkR
         if (!is_null($row['rkm_altalb']) && !is_null($row['altalb'])) {
 
             $section = $row['alksm'] == 'بنات' ? 'female' : 'male';
-            $path = trim($row['almsar']);
-            $month = 10;
+            $class_number = trim($row['rkm_alhlk']);
+            $month = $this->month;
 
             //check if this student is exists or not
             $exists_student = User::where('student_number', '=', $row['rkm_altalb'])->where('section', '=', $section)->first();
@@ -74,7 +81,7 @@ class PreviousMonthlyScoresImport implements ToModel, WithHeadingRow, WithChunkR
                         'month_year' => "2021-" . $month,
                     ],
                     [
-                        'path' => $path,
+                        'class_number' => $class_number,
                     ]
                 );
             }
