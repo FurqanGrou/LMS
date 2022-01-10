@@ -332,7 +332,14 @@
                     <select name="page_number" id="page_number">
                         <option value=""></option>
 
-                        @if(getStudentPath(request()->student_id) == "قسم الهجاء")
+                        @php
+                            $student_path = getStudentPath(request()->student_id);
+                            if(request()->date_filter) {
+                                $student_path = getStudentPath(request()->student_id, request()->date_filter) ?? getStudentPath(request()->student_id);
+                            }
+                        @endphp
+
+                        @if($student_path == "قسم الهجاء")
                             @foreach(\App\NooraniaPage::query()->get() as $lesson_page)
                                 <option value="{{ $lesson_page->id }}" {{ isset($user_student->monthlyScores(request()->date_filter)->noorania_page_id) && $user_student->monthlyScores(request()->date_filter)->noorania_page_id == $lesson_page->id ? 'selected' : ''}}>{{ $lesson_page->page_number }}</option>
                             @endforeach
