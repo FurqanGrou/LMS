@@ -39,7 +39,7 @@ class ExportMonthlyScores implements ShouldQueue
     public function handle()
     {
 
-        (new MonthlyScoresExport($this->month_year, $this->mail_status))->queue($this->file_name);
+        (new MonthlyScoresExport($this->month_year, $this->mail_status))->queue('public/' . $this->file_name);
 
         $data = ['link' => asset('storage/' . $this->file_name)];
 
