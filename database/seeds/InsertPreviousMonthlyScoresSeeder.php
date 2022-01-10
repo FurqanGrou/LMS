@@ -17,7 +17,8 @@ class InsertPreviousMonthlyScoresSeeder extends Seeder
      */
     public function run()
     {
-        Excel::import(new PreviousMonthlyScoresImport(), 'public/males-10.xlsx');
+        $month = 10;
+        Excel::import(new PreviousMonthlyScoresImport($month), 'public/males-10.xlsx');
 
         dd('Males - 10 Done');
     }

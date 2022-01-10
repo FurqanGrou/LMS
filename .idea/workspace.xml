@@ -24,7 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/emails/report_mail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/emails/report_mail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/MonthlyScoresExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/MonthlyScoresExport.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -383,7 +383,9 @@
       <workItem from="1641492674356" duration="5446000" />
       <workItem from="1641634835229" duration="5005000" />
       <workItem from="1641672882363" duration="4863000" />
-      <workItem from="1641717510773" duration="5814000" />
+      <workItem from="1641717510773" duration="8921000" />
+      <workItem from="1641763003003" duration="1116000" />
+      <workItem from="1641820572670" duration="1036000" />
     </task>
     <servers />
   </component>
@@ -415,10 +417,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1641070398686" />
-    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1641667999207">
+    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1641765286982">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1641667999207" />
+    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1641765286982" />
     <state x="517" y="287" key="NewPhpFileDialog" timestamp="1635260767590">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -431,9 +433,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1637160257185" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1641724844107">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1641821512843">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1641724844107" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1641821512843" />
   </component>
 </project>
