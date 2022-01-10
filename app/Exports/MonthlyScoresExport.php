@@ -5,15 +5,19 @@ namespace App\Exports;
 use App\MonthlyScore;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\FromQuery;
 
-class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, ShouldAutoSize, ShouldQueue, WithStrictNullComparison
+class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, ShouldQueue, WithStrictNullComparison, FromQuery
 {
+    use Exportable;
+
     protected $month_year;
     protected $mail_status;
 
@@ -25,8 +29,9 @@ class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, S
     /**
      * @return \Illuminate\Support\Collection
      */
-    public function collection()
+    public function query()
     {
+
         $monthly_scores = DB::table('monthly_scores')
             ->select([
                 'month_year',
@@ -59,7 +64,6 @@ class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, S
                                         WHEN avg < 60 THEN "Low - ضعيف"
                                         ELSE "ضعيف"
                                         END) AS rate'),
-                'mail_status',
                 DB::raw('(CASE
                                         WHEN lesson_pages.lesson_title IS NULL  THEN noorania_pages.lesson_title
                                         ELSE lesson_pages.lesson_title
@@ -82,7 +86,7 @@ class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, S
             $monthly_scores->where('monthly_scores.mail_status', '=', $this->mail_status);
         }
 
-        return $monthly_scores->get();
+        return $monthly_scores->orderBy('monthly_scores.id');
     }
 
     public function headings(): array
@@ -102,7 +106,6 @@ class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, S
             'النتيجة',
             'رقم الحلقة',
             'التقدير',
-            'حالة الارسال',
             'عنوان الدرس',
             'رقم الصفحة',
         ];
