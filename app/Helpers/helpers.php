@@ -255,8 +255,8 @@ function isAchievedDefaultGrades($student_id, $month = false){
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
-        if (!empty(getStudentPath($student_id, $currentYear . '-' . $month))){
-            $student_path = getStudentPath($student_id, $currentYear . '-' . $month);
+        if (!empty(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path) && !is_null(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path)){
+            $student_path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
         }
     }else{
         $today = Carbon::today();
@@ -336,8 +336,8 @@ function getLessonsNotListenedCount($student_id, $month = false){
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
-        if (!empty(getStudentPath($student_id, $currentYear . '-' . $month))){
-            $student_path = getStudentPath($student_id, $currentYear . '-' . $month);
+        if (!empty(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path) && !is_null(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path)){
+            $student_path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
         }
     }else{
         $today = Carbon::today(); // tomorrow
@@ -467,8 +467,8 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
-        if (!empty(getStudentPath($student_id, $currentYear . '-' . $month))){
-            $student_path = getStudentPath($student_id, $currentYear . '-' . $month);
+        if (!empty(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path) && !is_null(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path)){
+            $student_path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
         }
     }else{
         $today = Carbon::today(); // tomorrow
@@ -591,8 +591,8 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->day();
         $currentMonth = $month;
         $currentYear = 2021;
-        if (!empty(getStudentPath($student_id, $currentYear . '-' . $month))){
-            $student_path = getStudentPath($student_id, $currentYear . '-' . $month);
+        if (!empty(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path) && !is_null(\App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path)){
+            $student_path = \App\MonthlyScore::query()->where('month_year', '=', date('Y') . '-' . $month)->where('user_id', '=', $student_id)->first()->path;
         }
     }else{
         $today = Carbon::today(); // tomorrow
