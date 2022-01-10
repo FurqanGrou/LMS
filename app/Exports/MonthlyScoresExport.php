@@ -50,6 +50,7 @@ class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, S
                 'absence_excuse_days',
                 'absence_unexcused_days',
                 'avg',
+                'monthly_scores.class_number',
                 DB::raw('(CASE
                                         WHEN avg >= 90 THEN "Excellent - ممتاز"
                                         WHEN avg >= 80 THEN "Very Good - جيد جداً"
@@ -99,6 +100,7 @@ class MonthlyScoresExport implements FromCollection, WithHeadings, WithStyles, S
             'عدد مرات الغياب بعذر',
             'عدد مرات الغياب بدون عذر',
             'النتيجة',
+            'رقم الحلقة',
             'التقدير',
             'حالة الارسال',
             'عنوان الدرس',
