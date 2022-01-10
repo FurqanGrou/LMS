@@ -365,7 +365,17 @@ class ReportController extends Controller
 
     public function changePageNumber(Request $request){
 
-        if(getStudentPath($request->student_id) == "قسم الهجاء"){
+        $student_path = getStudentPath($request->student_id);
+        if(request()->date_filter) {
+            $currentMonth = substr(request()->date_filter, -2);
+            $currentYear = substr(request()->date_filter, 0, 4);
+
+            if (!empty(getStudentPath($request->student_id, $currentYear . '-' . $currentMonth))){
+                $student_path = getStudentPath($request->student_id, $currentYear . '-' . $currentMonth);
+            }
+        }
+
+        if($student_path == "قسم الهجاء"){
             $is_hejaa = true;
             $lesson = NooraniaPage::find($request->page_number_id);
         }else{
