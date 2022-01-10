@@ -9,6 +9,7 @@ use App\Imports\ChapterImport;
 use App\Imports\ClassesTeachersImport;
 use App\Imports\LessonImport;
 use App\Imports\PartImport;
+use App\Jobs\ExportMonthlyScores;
 use App\Report;
 use App\Teacher;
 use App\User;
@@ -16,6 +17,7 @@ use Illuminate\Http\Request;
 use App\Imports\ClassesImport;
 use App\Imports\UsersImport;
 use App\Imports\TeachersImport;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
 
@@ -105,8 +107,10 @@ class ImportExportController extends Controller
             $status = 'all';
         }
 
-        $file_name = "monthly-scores $status.xlsx";
+        $file_name = $request->month_year . "-monthly-scores-$status.xlsx";
 
-        return Excel::download(new MonthlyScoresExport($request->month_year, $request->mail_status), $file_name);
+        dispatch(new ExportMonthlyScores($request->month_year, $request->mail_status, $file_name));
+
+        return back()->withSuccess('بدأت عملية إستخراج نتائج التقارير الشهرية بنجاح ستصلك رسالة عبر البريد الالكتروني تحمل رابط التنزيل');
     }
 }
