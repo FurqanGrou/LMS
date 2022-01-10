@@ -24,11 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exports/MonthlyScoresExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/MonthlyScoresExport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/ReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,19 +184,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="B:\LMS\lms_hatim\resources\views\admins\students\btn" />
-      <recent name="B:\LMS\lms_hatim\app\Http\Controllers\Teachers" />
-      <recent name="B:\LMS\lms_hatim\resources\views\teachers\reports\old_features" />
-      <recent name="B:\LMS\staging\lms_3_staging\public" />
-      <recent name="B:\LMS\staging\lms_3_staging\storage\app\public" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="B:\LMS\lms_hatim\resources\views\admins\classes\btn" />
       <recent name="B:\LMS\lms_hatim\resources\views\teachers\reports\btn" />
       <recent name="B:\LMS\lms_hatim\resources\views\admins\import_export" />
       <recent name="B:\LMS\lms_hatim\resources\views\admins" />
       <recent name="B:\LMS\lms_hatim\app\Exports" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="B:\LMS\lms_hatim\resources\views\emails\admin" />
+      <recent name="B:\LMS\lms_hatim\resources\views\admins\students\btn" />
+      <recent name="B:\LMS\lms_hatim\app\Http\Controllers\Teachers" />
+      <recent name="B:\LMS\lms_hatim\resources\views\teachers\reports\old_features" />
+      <recent name="B:\LMS\staging\lms_3_staging\public" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.ExamRequestController.php">
@@ -391,6 +387,7 @@
       <workItem from="1641763003003" duration="1116000" />
       <workItem from="1641820572670" duration="3605000" />
       <workItem from="1641830882687" duration="3515000" />
+      <workItem from="1641841291465" duration="4483000" />
     </task>
     <servers />
   </component>
@@ -414,10 +411,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1635193954898" />
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1641497145373">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1641846011798">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1641497145373" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1641846011798" />
     <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1641070398686">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -438,9 +435,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1637160257185" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1641840460777">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1641843609718">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1641840460777" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1641843609718" />
   </component>
 </project>
