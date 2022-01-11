@@ -38,10 +38,12 @@ class ClassStudentsDatatable extends DataTable
         return datatables($students)
             ->addColumn('student_name', $student_name)
             ->addColumn('mail_status', 'teachers.reports.btn.mail_status')
+            ->addColumn('monthly_mail_status', 'teachers.reports.btn.monthly_mail_status')
             ->addColumn('monthly_avg', 'teachers.reports.btn.monthly_avg')
             ->rawColumns([
                 'student_name',
                 'mail_status',
+                'monthly_mail_status',
                 'monthly_avg',
             ])->with('class_number', $class_number);
     }
@@ -122,6 +124,10 @@ class ClassStudentsDatatable extends DataTable
             Column::make('mail_status')
                 ->data('mail_status')
                 ->title('حالة الارسال')
+                ->className('black'),
+            Column::make('monthly_mail_status')
+                ->data('monthly_mail_status')
+                ->title('حالة ارسال الشهري')
                 ->className('black'),
             Column::make('monthly_avg')
                 ->data('monthly_avg')

@@ -51,7 +51,7 @@ class User extends Authenticatable implements Auditable
             $month_year = date('Y') . '-' . date('m');
         }
 
-        return $this->hasMany(MonthlyScore::class, 'user_id')->where('month_year', '=',$month_year)->first();
+        return $this->hasMany(MonthlyScore::class, 'user_id')->where('month_year', '=', $month_year)->first() ?? 0;
     }
 
     public function reports()
@@ -63,4 +63,5 @@ class User extends Authenticatable implements Auditable
     {
         return $this->monthlyScores()->avg ?? 0;
     }
+
 }
