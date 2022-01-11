@@ -103,9 +103,3 @@ Route::get('telawa_absence', function (){
 
    dd('Done: ' . $previous_month . ' - ' . $previous_month_year);
 });
-
-Route::get('getDailyRevisionNotListenedCount', function (){
-
-    dd(isAchievedDefaultGrades(650, 12));
-});
-

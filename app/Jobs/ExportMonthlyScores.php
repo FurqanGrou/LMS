@@ -39,9 +39,9 @@ class ExportMonthlyScores implements ShouldQueue
     public function handle()
     {
 
-        (new MonthlyScoresExport($this->month_year, $this->mail_status))->queue('public/' . $this->file_name);
+        (new MonthlyScoresExport($this->month_year, $this->mail_status))->queue($this->file_name, 'public')->onQueue('ExportMonthlyScores')->allOnQueue('ExportMonthlyScores');
 
-        $data = ['link' => asset('storage/' . $this->file_name)];
+        $data = ['link' => url('storage/' . $this->file_name)];
 
         Mail::send('emails.admin.monthly_scores_job_mail', $data, function($message) {
             $message->to('lmsfurqan1@gmail.com')->subject('رابط تنزيل ملف النتيجة الشهرية');
