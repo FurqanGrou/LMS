@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Exports\MonthlyScoresExport;
 use App\Mail\ReportMail;
+use App\MonthlyScoresFile;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -41,12 +42,8 @@ class ExportMonthlyScores implements ShouldQueue
 
         (new MonthlyScoresExport($this->month_year, $this->mail_status))->queue($this->file_name, 'public')->onQueue('ExportMonthlyScores')->allOnQueue('ExportMonthlyScores');
 
-        $data = ['link' => url('storage/' . $this->file_name)];
-
-        Mail::send('emails.admin.monthly_scores_job_mail', $data, function($message) {
-            $message->to('lmsfurqan1@gmail.com')->subject('رابط تنزيل ملف النتيجة الشهرية');
-        });
-
-
+        MonthlyScoresFile::query()->create([
+            'name' => $this->file_name,
+        ]);
     }
 }
