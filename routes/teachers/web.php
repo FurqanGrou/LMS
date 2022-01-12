@@ -43,6 +43,7 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     Route::post('/report/send/{student_id}', 'ReportController@sendReportTable')->name('send.report');
     Route::post('/report/send-monthly/{student_id}', 'ReportController@sendReportTableMonthly')->name('send.report.monthly');
     Route::post('/report/change_page_number/{student_id}', 'ReportController@changePageNumber')->name('report.changePageNumber');
+    Route::post('/report/update_monthly_scores_event', 'ReportController@fireUpdateMonthlyScoresEvent')->name('report.updateMonthlyScoresEvent');
 
     Route::get('/classes', 'ClassesController@index')->name('classes.index');
     Route::get('/join_request', 'ClassesController@joinRequest')->name('classes.join_request');
