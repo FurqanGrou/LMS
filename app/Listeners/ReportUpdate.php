@@ -31,21 +31,21 @@ class ReportUpdate implements ShouldQueue
         $report = $event->report;
 
         $current_month_year = Carbon::today()->format('Y-m');
-        $report_month_year = $report->created_at->format('Y-m');
+        $report_month_year = $report['created_at'];
 
         if ($current_month_year == $report_month_year){
-            $student_path = getStudentPath($report->student_id);
+            $student_path = getStudentPath($report['student_id']);
 
-            $new_lessons_not_listened = getLessonsNotListenedCount($report->student_id);
-            $last_five_pages_not_listened = getLastFivePagesNotListenedCount($report->student_id);
-            $daily_revision_not_listened = getDailyRevisionNotListenedCount($report->student_id);
-            $absence_excuse_days = getAbsenceCount($report->student_id, -2);
-            $absence_unexcused_days = getAbsenceCount($report->student_id, -5);
+            $new_lessons_not_listened = getLessonsNotListenedCount($report['student_id']);
+            $last_five_pages_not_listened = getLastFivePagesNotListenedCount($report['student_id']);
+            $daily_revision_not_listened = getDailyRevisionNotListenedCount($report['student_id']);
+            $absence_excuse_days = getAbsenceCount($report['student_id'], -2);
+            $absence_unexcused_days = getAbsenceCount($report['student_id'], -5);
 
             DB::table('monthly_scores')->updateOrInsert(
                 [
-                    'user_id' => $report->student_id,
-                    'month_year' => $report->created_at->format('Y-m'),
+                    'user_id' => $report['student_id'],
+                    'month_year' => $report['created_at'],
                 ],
                 [
                     'path' => $student_path,
@@ -65,20 +65,20 @@ class ReportUpdate implements ShouldQueue
             );
 
         }else{
-            $month = $report->created_at->format('m');
-            $month_year = $report->created_at->format('Y-m');
-            $student_path = getStudentPath($report->student_id, $month_year);
+            $month = substr($report['created_at'], -2);
+            $month_year = $report['created_at'];
+            $student_path = getStudentPath($report['student_id'], $month_year);
 
-            $new_lessons_not_listened = getLessonsNotListenedCount($report->student_id, $month);
-            $last_five_pages_not_listened = getLastFivePagesNotListenedCount($report->student_id, $month);
-            $daily_revision_not_listened = getDailyRevisionNotListenedCount($report->student_id, $month);
-            $absence_excuse_days = getAbsenceCount($report->student_id, -2, $month);
-            $absence_unexcused_days = getAbsenceCount($report->student_id, -5, $month);
+            $new_lessons_not_listened = getLessonsNotListenedCount($report['student_id'], $month);
+            $last_five_pages_not_listened = getLastFivePagesNotListenedCount($report['student_id'], $month);
+            $daily_revision_not_listened = getDailyRevisionNotListenedCount($report['student_id'], $month);
+            $absence_excuse_days = getAbsenceCount($report['student_id'], -2, $month);
+            $absence_unexcused_days = getAbsenceCount($report['student_id'], -5, $month);
 
             DB::table('monthly_scores')->updateOrInsert(
                 [
-                    'user_id' => $report->student_id,
-                    'month_year' => $report->created_at->format('Y-m'),
+                    'user_id' => $report['student_id'],
+                    'month_year' => $report['created_at'],
                 ],
                 [
                     'new_lessons_not_listened' => $new_lessons_not_listened,

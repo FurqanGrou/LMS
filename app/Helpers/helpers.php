@@ -792,11 +792,13 @@ function disableRecord($date, $day)
     }
 
     if(Auth::guard('admin_web')->check()){
-        if( ($date->year == $today->year) && ($date->month < $today->month) && ($date->month <= $today->month) ) {
-            $status = true;
-        }elseif(($date->year == $today->year) && ($date->month == $today->month) && ($date->day <= $today->day)){
-            $status = true;
-        }
+//        if( ($date->year == $today->year) && ($date->month < $today->month) && ($date->month <= $today->month) ) {
+//            $status = true;
+//        }elseif(($date->year == $today->year) && ($date->month == $today->month) && ($date->day <= $today->day)){
+//            $status = true;
+//        }
+
+        return '';
     }
 
     if(Auth::guard('teacher_web')->check()){

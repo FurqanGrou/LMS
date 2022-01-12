@@ -924,18 +924,31 @@
 
             $(document).on('change', 'form input#month_report', function (e) {
                 window.location.href = "{{ route('teachers.report.table', request()->student_id) }}?date_filter=" + $(this).val() + "";
-            })
+            });
 
             $(document).on('change', 'form select#students_repors', function (e) {
                 var url = '{{ route("teachers.report.table", ":student_id") }}';
                 url = url.replace(':student_id', $(this).val());
 
                 window.location.href = url;
-            })
+            });
 
             $(document).on('click', '#btn-send-report', function (e) {
 
                 e.preventDefault();
+                let created_at = '{{ request()->date_filter ?? \Carbon\Carbon::now()->format('Y-m') }}';
+                let student_id = '{{ request()->student_id }}';
+
+                // fire update monthly scores event
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: '{{ route('teachers.report.updateMonthlyScoresEvent') }}',
+                    data: {
+                        'student_id': student_id,
+                        'created_at': created_at,
+                    },
+                });
 
                 swal({
                     title: "هل أنت متأكد من ارسال التقرير؟",
@@ -1027,7 +1040,7 @@
                         $('span#lesson_name').html(data.lesson_title);
                     },
                 });
-            })
+            });
 
         });
     </script>
