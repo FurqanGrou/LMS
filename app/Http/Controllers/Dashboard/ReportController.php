@@ -205,7 +205,7 @@ class ReportController extends Controller
 
             }
 
-            Event::dispatch(new ReportUpdated($report));
+//            Event::dispatch(new ReportUpdated($report));
         }
 
         return response()->json(['report' => $report], 200);
@@ -363,23 +363,21 @@ class ReportController extends Controller
         return redirect()->route('admins.report.table', $request->student_id);
     }
 
+    public function fireUpdateMonthlyScoresEvent(Request $request)
+    {
+        $report = ['created_at' => $request->created_at, 'student_id' => $request->student_id];
+        Event::dispatch(new ReportUpdated($report));
+    }
+
     public function changePageNumber(Request $request){
 
-        $student_path = getStudentPath($request->student_id);
-        if(request()->date_filter) {
-            $currentMonth = substr(request()->date_filter, -2);
-            $currentYear = substr(request()->date_filter, 0, 4);
+        $student_path = getStudentPath($request->student_id, $request->month_year) ?? getStudentPath($request->student_id);
 
-            if (!empty(getStudentPath($request->student_id, $currentYear . '-' . $currentMonth))){
-                $student_path = getStudentPath($request->student_id, $currentYear . '-' . $currentMonth);
-            }
-        }
-
+        $is_hejaa = false;
         if($student_path == "قسم الهجاء"){
             $is_hejaa = true;
             $lesson = NooraniaPage::find($request->page_number_id);
         }else{
-            $is_hejaa = false;
             $lesson = LessonPage::find($request->page_number_id);
         }
 

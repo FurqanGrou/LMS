@@ -136,7 +136,6 @@
             border: none;
             width: 100%">
         <tbody style="width: 100%;">
-
             <tr style="border: none; display: flex;align-items: flex-start;" id="lessons-tables">
 
                 {{-- Lessons--}}
@@ -701,7 +700,7 @@
             $(document).on('change', 'select#page_number', function (e) {
                 var student_id = $('#student_id').val();
                 var page_number_id = $('#page_number').val();
-                var month_year = '{{ isset(request()->date_filter) ? request()->date_filter : date('Y') . '-' . date('m') }}';
+                var month_year = '{{ !is_null(request()->date_filter) ? request()->date_filter : date('Y') . '-' . date('m') }}';
 
                 $.ajax({
                     type: "POST",
@@ -717,6 +716,24 @@
                     },
                 });
             })
+
+            $(document).on('change', 'form#monthly_report #grades input', function (e) {
+
+                e.preventDefault();
+                let created_at = '{{ request()->date_filter ?? \Carbon\Carbon::now()->format('Y-m') }}';
+                let student_id = '{{ request()->student_id }}';
+
+                // fire update monthly scores event
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: '{{ route('admins.report.updateMonthlyScoresEvent') }}',
+                    data: {
+                        'student_id': student_id,
+                        'created_at': created_at,
+                    },
+                });
+            });
 
         });
     </script>
