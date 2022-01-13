@@ -1,8 +1,10 @@
 <?php
 
 use App\MonthlyScore;
+use App\Report;
 use App\Teacher;
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
@@ -78,6 +80,6 @@ Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Contro
     Route::get('/login', 'TeacherLoginController@showLoginForm')->name('dashboard.login.form');
 });
 
-Route::get('test', function (){
+Route::get('test123', function (){
 
 });
