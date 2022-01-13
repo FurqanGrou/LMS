@@ -44,9 +44,9 @@
                         <!--    <input type="submit" class="btn" style="color:#0a0e45;background: lemonchiffon !important;" id="btn-send-report" value="ارسال التقرير اليومي">-->
                         <!--</form>-->
 
-                        @if(isAvailableToSendMonthlyReport(request()->date_filter) || env('ENABLE_MONTHLY_SEND'))
+                        @if(isAvailableToSendMonthlyReport(request()->date_filter))
 {{--                            <form method="POST" id="monthly_report-monthly" action="{{ route('teachers.send.report.monthly', request()->student_id . '?date_filter=' . date('Y') . '-' . date('m')) }}">--}}
-                                <form method="POST" id="monthly_report-monthly" style="width: 100%;display: flex;justify-content: space-between;align-items: center;" action="{{ route('teachers.send.report.monthly', request()->student_id . '?date_filter=2021-12') }}">
+                            <form method="POST" id="monthly_report-monthly" style="width: 100%;display: flex;justify-content: space-between;align-items: center;" action="{{ route('teachers.send.report.monthly', request()->student_id . '?date_filter=2021-12') }}">
                                     @csrf
                                     <a href="{{ route('teachers.report.table', request()->student_id) }}?date_filter=2021-12" class="btn btn-danger" style="display: inline-block;margin-left: 5px;">عرص تقرير الشهر السابق - 12</a>
                                     <input type="submit" class="btn" style="color:#0a0e45;background: lavenderblush !important;" id="btn-send-report-monthly" value="ارسال التقرير الشهري - 12">

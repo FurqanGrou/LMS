@@ -257,29 +257,26 @@ class ReportController extends Controller
         return response()->json(['lesson_title' => $lesson->lesson_title], 201);
     }
 
-    public function getWorkingDaysCount($month, $year)
+    public function getWorkingDaysCount($year, $month, $start_day)
     {
+        $start = Carbon::createFromDate($year, $month, $start_day);
 
-        $currentMonth = Carbon::createFromDate($year, $month)->format('F');
-        $nextMonth = Carbon::createFromDate($year, $month)->addMonth();
+        if(is_numeric(env('SPECIFIC_DAY'))){
+            $end_day = intval(env('SPECIFIC_DAY'));
+        }else{
+            $end_day = Carbon::createFromDate($year, $month)->daysInMonth;
+        }
 
-        $holidays[] = new \DatePeriod(
-            Carbon::parse("first saturday of $currentMonth $year"),
-            CarbonInterval::week(),
-            Carbon::parse("first day of " . $nextMonth->format('F') . " " . $nextMonth->year)
-        );
+        $end = Carbon::createFromDate($year, $month, $end_day);
+        $daysInMonth = $end->diffInDays($start);
 
-        $holidays[] = new \DatePeriod(
-            Carbon::parse("first friday of $currentMonth $year"),
-            CarbonInterval::week(),
-            Carbon::parse("first friday of " . $nextMonth->format('F') . " " . $nextMonth->year)
-        );
-
-        $daysInMonth = Carbon::createFromDate($year, $month)->daysInMonth;
         $holidaysCont = 0;
-
-        foreach ($holidays as $key => $days){
-            $holidaysCont += iterator_count($days);
+        while ($start->lte($end)) {
+            $carbon = Carbon::parse($start);
+            if ($carbon->isWeekend()) {
+                $holidaysCont++;
+            }
+            $start->addDay();
         }
 
         return $daysInMonth - $holidaysCont;
@@ -291,6 +288,12 @@ class ReportController extends Controller
         $month = substr($month_year, -2);
         $year  = substr($month_year, 0, 4);
 
+        if(is_numeric(env('SPECIFIC_DAY'))){
+            $day = intval(env('SPECIFIC_DAY'));
+        }else{
+            $day = Carbon::createFromDate($year, $month)->daysInMonth;
+        }
+
         if ($user->path == "قسم الهجاء"){
             $pageNumber = $user->monthlyScores($month_year)->noorania_page_id ?? false;
         }else{
@@ -298,7 +301,7 @@ class ReportController extends Controller
         }
 
         $is_new_student = false;
-        $previous_date = Carbon::createFromDate($year, $month)->subMonth();
+        $previous_date = Carbon::createFromDate($year, $month)->subMonth(); // subtract one month from current month
         $previous_month      = $previous_date->month;
         $previous_month_year = $previous_date->year;
 
@@ -306,12 +309,14 @@ class ReportController extends Controller
             ->whereMonth('created_at', '=', $previous_month)
             ->whereYear('created_at', '=', $previous_month_year)
             ->where('student_id', '=', $user->id)
-            ->count();
+            ->count(); // if this student has any previous reports in last month the count will be more than 0
 
+        // if is old student
         if($is_old_student){
             $reportsCount = Report::query()
                 ->whereMonth('created_at', '=', $month)
                 ->whereYear('created_at', '=', $year)
+                ->whereDay('created_at', '<=', $day)
                 ->where('date', 'not like', '%Saturday%')
                 ->where('date', 'not like', '%Friday%')
                 ->where('student_id', '=', $user->id)
@@ -327,11 +332,12 @@ class ReportController extends Controller
                 })->whereIn('absence', [0, -2, -5])
                 ->count();
 
-            $workingDays = $this->getWorkingDaysCount($month, $year);
+            $workingDays = $this->getWorkingDaysCount($year, $month, 1);
         }else{
             $first_report_this_month = Report::query()
                     ->whereMonth('created_at', '=', $month)
                     ->whereYear('created_at', '=', $year)
+                    ->whereDay('created_at', '<=', $day)
                     ->where('date', 'not like', '%Saturday%')
                     ->where('date', 'not like', '%Friday%')
                     ->where('student_id', '=', $user->id)
@@ -344,6 +350,7 @@ class ReportController extends Controller
             $reportsCount = Report::query()
                 ->whereMonth('created_at', '=', $month)
                 ->whereYear('created_at', '=', $year)
+                ->whereDay('created_at', '<=', $day)
                 ->where('date', 'not like', '%Saturday%')
                 ->where('date', 'not like', '%Friday%')
                 ->where('student_id', '=', $user->id)
@@ -359,8 +366,7 @@ class ReportController extends Controller
                 })->whereIn('absence', [0, -2, -5])
                 ->count();
 
-            $daysOfMonth = \Carbon\CarbonPeriod::between($first_report_this_month->year. '-' . $first_report_this_month->month . '-'.$first_report_this_month->day, $first_report_this_month->year. '-' . $first_report_this_month->month . '-' .$first_report_this_month->format('t'))->filter('isWeekday');
-            $workingDays = count($daysOfMonth->toArray()); // 14
+            $workingDays = $this->getWorkingDaysCount($first_report_this_month->year, $first_report_this_month->month, $first_report_this_month->day);
         }
 
         if($reportsCount < $workingDays){
@@ -376,11 +382,11 @@ class ReportController extends Controller
     {
         $user =  User::find($request->student_id);
 
-        if(!isset($request->date_filter) || is_null($request->date_filter)) {
+        if(is_null($request->date_filter)) {
             $request['date_filter'] = date('Y') . '-' . date('m');
         }
 
-        if (!$this->checkMonthlyReportInfo($user, $request->date_filter) && !env('ENABLE_TEMP_MONTHLY_REPORT')){
+        if (!$this->checkMonthlyReportInfo($user, $request->date_filter)){
             session()->flash('error', 'يرجى التأكد من إدخال جميع بيانات الشهر ورقم الصفحة بشكل صحيح!');
             return redirect()->route('teachers.report.table', $request->student_id . '?date_filter=' . $request['date_filter']);
         }
@@ -389,8 +395,7 @@ class ReportController extends Controller
             Notification::route('mail', [$user->father_mail, $user->mother_mail])->notify(new userReportMonthlyNotification($user, $request->date_filter));
             $report = $user->monthlyScores($request->date_filter);
             $report->update(['mail_status' => '1']);
-        }
-        catch(\Exception $e){
+        }catch(\Exception $e){
             session()->flash('error', 'فشلت عملية ارسال التقرير الشهري!');
             return redirect()->route('teachers.report.table', $request->student_id);
         }
