@@ -46,7 +46,7 @@
             <li class=" nav-item">
                 <a href="#">
                     <i class="la la-file-text"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">طلبات الاختبارات</span>
+                    <span class="menu-title" data-i18n="nav.templates.main">الطلبات</span>
                 </a>
                 <ul class="menu-content">
 {{--                    <li>--}}
@@ -54,6 +54,9 @@
 {{--                    </li>--}}
                     <li>
                         <a class="menu-item" href="{{ route('teachers.request_services.exam.create') }}" data-i18n="nav.templates.vert.classic_menu">طلب اختبار</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('teachers.modification_request.create') }}" data-i18n="nav.templates.vert.classic_menu">طلب تعديل درجات</a>
                     </li>
                 </ul>
             </li>
