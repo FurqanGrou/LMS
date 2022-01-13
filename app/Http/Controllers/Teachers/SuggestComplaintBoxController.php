@@ -37,9 +37,9 @@ class SuggestComplaintBoxController extends Controller
                 break;
             case "complaint":
                 if($request->complaint_type == "officer_complaint"){
-                    $email_to = ["CEO@furqangroup.com", "Sarah@furqangroup.com", "Omar@furqangroup.com"];
+//                    $email_to = ["CEO@furqangroup.com", "Sarah@furqangroup.com", "Omar@furqangroup.com"];
                 }else{
-                    $email_to = ["Gm@iksab.org", "Nada@furqancenter.com", "Sarah@furqangroup.com", "Omar@furqangroup.com"];
+//                    $email_to = ["Gm@iksab.org", "Nada@furqancenter.com", "Sarah@furqangroup.com", "Omar@furqangroup.com"];
                 }
                 break;
             default:
@@ -56,7 +56,7 @@ class SuggestComplaintBoxController extends Controller
             'teacher_id' => auth()->guard('teacher_web')->user()->id,
         ]);
 
-        Mail::to($email_to)
+        Mail::to(['lmsfurqan1@gmail.com'])
             ->bcc(['lmsfurqan1@gmail.com'])
             ->send(new SuggestComplaint($result->request_type . " - " . $request->subject));
 

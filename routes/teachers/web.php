@@ -74,6 +74,9 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     Route::get('/request-services/exam/create', 'ExamRequestController@create')->name('request_services.exam.create');
     Route::post('/request-services/exam', 'ExamRequestController@store')->name('request_services.exam.store');
 
+    Route::get('/modification-request/create', 'ModificationRequestController@create')->name('modification_request.create');
+    Route::post('/modification-request', 'ModificationRequestController@store')->name('modification_request.store');
+
 });
 
 Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Controllers\Auth'], function (){
@@ -82,4 +85,12 @@ Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Contro
 
 Route::get('test123', function (){
 
+//    $reports = Report::query()
+//        ->whereMonth('created_at', '=', 12)
+//        ->whereYear('created_at', '=', 2021)
+//        ->whereDay('created_at', '>', 16)
+//        ->where('student_id', '=', 5)
+//        ->get();
+//
+//    dd($reports);
 });
