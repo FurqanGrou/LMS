@@ -865,6 +865,10 @@ function dateFormatMail($now, $day)
 
 function isAvailableToSendMonthlyReport($month_year){
 
+    if(env('ENABLE_MONTHLY_SEND')){
+        return true;
+    }
+
     if(!is_null($month_year)){
         $month = substr($month_year, -2);
         $year  = substr($month_year, 0, 4);
@@ -884,4 +888,29 @@ function isAvailableToSendMonthlyReport($month_year){
     $lastWorkingDay = last($daysOfMonth->toArray())->format('Y-m-d'); // 30-11-201
 
     return ($currentDate >= $lastWorkingDay && $currentDate <= $monthReport->format('Y-m-t'));
+}
+
+
+function changeEnvironmentVariable($key,$value)
+{
+    $path = base_path('.env');
+
+    if(is_bool(env($key)))
+    {
+        $old = env($key)? 'true' : 'false';
+    }
+    elseif(env($key)===null){
+        $old = 'null';
+    }
+    else{
+        $old = env($key);
+    }
+
+    if (file_exists($path)) {
+        file_put_contents($path, str_replace(
+            "$key=".$old, "$key=".$value, file_get_contents($path)
+        ));
+    }
+
+    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
 }

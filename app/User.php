@@ -47,7 +47,7 @@ class User extends Authenticatable implements Auditable
     public function monthlyScores($month_year = null)
     {
 
-        if(is_null($month_year) || (!isset(request()->date_filter)) ){
+        if(is_null($month_year) || is_null(request()->date_filter) ){
             $month_year = date('Y') . '-' . date('m');
         }
 
