@@ -61,5 +61,4 @@ class Teacher extends Authenticatable implements Auditable
         return $this->hasMany(ExamRequest::class, 'teacher_id');
     }
 
-
 }

@@ -77,6 +77,9 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     Route::get('/modification-request/create', 'ModificationRequestController@create')->name('modification_request.create');
     Route::post('/modification-request', 'ModificationRequestController@store')->name('modification_request.store');
 
+    Route::get('/request-services/meetings/create', 'RequestServiceController@createMeeting')->name('request_services.meetings.create');
+    Route::post('/request-services/meetings', 'RequestServiceController@storeMeeting')->name('request_services.meetings.store');
+
 });
 
 Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Controllers\Auth'], function (){
