@@ -6,12 +6,15 @@ use App\Chapter;
 use App\ClassesTeachers;
 use App\Form;
 use App\Http\Controllers\Controller;
+use App\Mail\MeetingMail;
+use App\Meeting;
 use App\Service;
 use App\SuggestComplaintBox;
 use App\Teacher;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class RequestServiceController extends Controller
 {
@@ -72,5 +75,58 @@ class RequestServiceController extends Controller
         $values = Service::query()->where('request_code', '=', $request->service)->pluck('value', 'name')->toArray();
 
         return view('teachers.request_services.exams.show', ['values' => $values, 'request_type' => $request_type, 'request_code' => $request->service]);
+    }
+
+    public function createMeeting()
+    {
+
+        $teachers = DB::table('classes_teachers')
+                    ->where('teacher_email', '=', auth('teacher_web')->user()->email)
+                    ->pluck('class_number')
+                    ->unique()
+                    ->toArray();
+
+        $teachers = ClassesTeachers::query()->whereIn('class_number', $teachers)->where('role', '=', 'supervisor')->pluck('teacher_email')->toArray();
+        $teachers = Teacher::query()->whereIn('email', $teachers)->get();
+
+        return view('teachers.request_services.meetings.create', ['teachers' => $teachers]);
+    }
+
+    public function storeMeeting(Request $request)
+    {
+        $request->validate([
+            'teacher_id' => 'required|exists:teachers,id',
+            'status' => 'required|string',
+            'favorite_time' => 'required|string',
+            'reason' => 'required|string',
+        ], [
+            'teacher_id.required' => 'يجب عليك التأكد من إختيار اسم معلم',
+            'teacher_id.exists' => 'يجب عليك التأكد من إختيار اسم معلم',
+            'status.required' => 'يجب عليك التأكد من إختيار حالة الاجتماع',
+            'status.string' => 'يجب عليك التأكد من إختيار حالة الاجتماع',
+            'favorite_time.required' => 'يجب عليك التأكد من إدخال الوقت المناسب للأجتماع',
+            'favorite_time.string' => 'يجب عليك التأكد من إدخال الوقت المناسب للأجتماع',
+            'reason.required' => 'يجب عليك التأكد من إدخال سبب الأجتماع',
+            'reason.string' => 'يجب عليك التأكد من إدخال سبب الأجتماع',
+        ]);
+
+        $result = Meeting::query()->create([
+            'teacher_id' => $request->teacher_id,
+            'status' => $request->status,
+            'favorite_time' => $request->favorite_time,
+            'reason' => $request->reason,
+            'description' => $request->description,
+        ]);
+
+        $to_emails = [$result->teacher->email, 'e-supervision@furqancenter.com'];
+        Mail::to($to_emails)
+            ->bcc(['lmsfurqan1@gmail.com'])
+            ->send(new MeetingMail($result));
+
+        if(!empty(Mail::failures())) {
+            return back()->withError('فشلت عملية ارسال الطلب');
+        }
+
+        return back()->withSuccess('تم تقديم طلب الاجتماع بنجاح');
     }
 }

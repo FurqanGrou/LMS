@@ -8,4 +8,5 @@ class ClassesTeachers extends Model
 {
     protected $table = 'classes_teachers';
     protected $guarded = [];
+
 }
