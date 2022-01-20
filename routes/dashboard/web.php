@@ -22,13 +22,16 @@ Route::group(['prefix' => 'dashboard-admins', 'namespace' => '\App\Http\Controll
     Route::post('/login', 'AdminLoginController@login')->name('login.post');
 });
 
-Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' => ['auth:admin_web']], function (){
+Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web'], 'as' => 'admins.'], function (){
 
     // logout
     Route::post('/logout', '\App\Http\Controllers\Auth\AdminLoginController@logout')->name('logout');
 
     // home
     Route::get('/', 'HomeController@index')->name('home');
+    // monthly scores export
+    Route::get('monthly-scores-export', 'ImportExportController@exportMonthlyScoresIndex')->name('monthly_scores.index');
+    Route::post('monthly-scores-export', 'ImportExportController@exportMonthlyScores')->name('monthly_scores.export');
 
     // admins
     Route::get('/admins', 'AdminController@index')->name('admins.index');
@@ -98,10 +101,6 @@ Route::group(['prefix' => 'dashboard-admins', 'as' => 'admins.', 'middleware' =>
     Route::get('attendance-export', 'AttendanceController@exportIndex')->name('attendance.export_index');
     Route::post('attendance-export', 'AttendanceController@export')->name('attendance.export');
 
-    // monthly scores export
-    Route::get('monthly-scores-export', 'ImportExportController@exportMonthlyScoresIndex')->name('monthly_scores.index');
-    Route::post('monthly-scores-export', 'ImportExportController@exportMonthlyScores')->name('monthly_scores.export');
-
     // request services
 //    Route::get('/request-services', 'RequestServiceController@index')->name('request_services.index');
 //    Route::get('/request-services/{service}', 'RequestServiceController@show')->name('request_services.show');
@@ -128,5 +127,3 @@ Route::get('update-business-three-days', function (){
     dd('update-absence-three-days Done');
 });
 
-Route::get('test', function (){
-});
