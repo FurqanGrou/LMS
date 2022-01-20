@@ -104,10 +104,10 @@ class RequestServiceController extends Controller
             'teacher_id.exists' => 'يجب عليك التأكد من إختيار اسم معلم',
             'status.required' => 'يجب عليك التأكد من إختيار حالة الاجتماع',
             'status.string' => 'يجب عليك التأكد من إختيار حالة الاجتماع',
-            'favorite_time.required' => 'يجب عليك التأكد من إدخال الوقت المناسب للأجتماع',
-            'favorite_time.string' => 'يجب عليك التأكد من إدخال الوقت المناسب للأجتماع',
-            'reason.required' => 'يجب عليك التأكد من إدخال سبب الأجتماع',
-            'reason.string' => 'يجب عليك التأكد من إدخال سبب الأجتماع',
+            'favorite_time.required' => 'يجب عليك التأكد من إدخال الوقت المناسب للاجتماع',
+            'favorite_time.string' => 'يجب عليك التأكد من إدخال الوقت المناسب للاجتماع',
+            'reason.required' => 'يجب عليك التأكد من إدخال سبب الاجتماع',
+            'reason.string' => 'يجب عليك التأكد من إدخال سبب الاجتماع',
         ]);
 
         $result = Meeting::query()->create([
@@ -157,10 +157,10 @@ class RequestServiceController extends Controller
             'teacher_id.exists' => 'يجب عليك التأكد من إختيار اسم معلم',
             'status.required' => 'يجب عليك التأكد من إختيار حالة الاجتماع',
             'status.string' => 'يجب عليك التأكد من إختيار حالة الاجتماع',
-            'favorite_time.required' => 'يجب عليك التأكد من إدخال الوقت المناسب للأجتماع',
-            'favorite_time.string' => 'يجب عليك التأكد من إدخال الوقت المناسب للأجتماع',
-            'reason.required' => 'يجب عليك التأكد من إدخال سبب الأجتماع',
-            'reason.string' => 'يجب عليك التأكد من إدخال سبب الأجتماع',
+            'favorite_time.required' => 'يجب عليك التأكد من إدخال الوقت المناسب للاجتماع',
+            'favorite_time.string' => 'يجب عليك التأكد من إدخال الوقت المناسب للاجتماع',
+            'reason.required' => 'يجب عليك التأكد من إدخال سبب الاجتماع',
+            'reason.string' => 'يجب عليك التأكد من إدخال سبب الاجتماع',
         ]);
 
         $result = Meeting::query()->create([
