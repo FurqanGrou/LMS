@@ -372,6 +372,7 @@ class ReportController extends Controller
     public function changePageNumber(Request $request){
 
         $student_path = getStudentPath($request->student_id, $request->month_year) ?? getStudentPath($request->student_id);
+        $student =  User::query()->find($request->student_id);;
 
         $is_hejaa = false;
         if($student_path == "قسم الهجاء"){
@@ -381,16 +382,34 @@ class ReportController extends Controller
             $lesson = LessonPage::find($request->page_number_id);
         }
 
-        DB::table('monthly_scores')->updateOrInsert(
-            [
-                'user_id' => $request->student_id,
-                'month_year' => $request->month_year,
-            ],
-            [
-                'lesson_page_id'   => $is_hejaa ? null : $request->page_number_id,
-                'noorania_page_id' => $is_hejaa ? $request->page_number_id : null,
-            ]
-        );
+        $current_month_year = Carbon::today()->format('Y-m');
+
+        if ($current_month_year != $request->month_year){
+            DB::table('monthly_scores')->updateOrInsert(
+                [
+                    'user_id' => $request->student_id,
+                    'month_year' => $request->month_year,
+                ],
+                [
+                    'lesson_page_id'   => $is_hejaa ? null : $request->page_number_id,
+                    'noorania_page_id' => $is_hejaa ? $request->page_number_id : null,
+                ]
+            );
+        }else{
+            DB::table('monthly_scores')->updateOrInsert(
+                [
+                    'user_id' => $request->student_id,
+                    'month_year' => $request->month_year,
+                ],
+                [
+                    'lesson_page_id'   => $is_hejaa ? null : $request->page_number_id,
+                    'noorania_page_id' => $is_hejaa ? $request->page_number_id : null,
+                    'path'             => $student_path,
+                    'class_number'     => $student->class_number,
+                ]
+            );
+        }
+
         return response()->json(['lesson_title' => $lesson->lesson_title], 201);
     }
 
