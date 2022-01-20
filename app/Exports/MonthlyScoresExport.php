@@ -54,6 +54,7 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
                 'absence_excuse_days',
                 'absence_unexcused_days',
                 'avg',
+                'monthly_scores.path',
                 'monthly_scores.class_number',
                 DB::raw('(CASE
                                         WHEN avg >= 90 THEN "Excellent - ممتاز"
@@ -103,6 +104,7 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
             'عدد مرات الغياب بعذر',
             'عدد مرات الغياب بدون عذر',
             'النتيجة',
+            'المسار',
             'رقم الحلقة',
             'التقدير',
             'عنوان الدرس',
