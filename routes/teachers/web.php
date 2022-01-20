@@ -80,6 +80,9 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     Route::get('/request-services/meetings/create', 'RequestServiceController@createMeeting')->name('request_services.meetings.create');
     Route::post('/request-services/meetings', 'RequestServiceController@storeMeeting')->name('request_services.meetings.store');
 
+    Route::get('/request-services/meetings-admin/create', 'RequestServiceController@createMeetingWithAdmin')->name('request_services.meetings-admin.create');
+    Route::post('/request-services/meetings-admin', 'RequestServiceController@storeMeetingWithAdmin')->name('request_services.meetings.store');
+
 });
 
 Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Controllers\Auth'], function (){

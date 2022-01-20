@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
                 if (!is_null($exported_file)){
                     $data = ['link' => url('storage/' . $exported_file->name)];
                     Mail::send('emails.admin.monthly_scores_job_mail', $data, function($message) use ($exported_file) {
-                        $message->to('lmsfurqan1@gmail.com')->subject(' رابط تنزيل ملف النتيجة الشهرية ' . $exported_file->name);
+                        $message->to(['lmsfurqan1@gmail.com', $exported_file->email_to])->subject(' رابط تنزيل ملف النتيجة الشهرية ' . $exported_file->name);
                     });
                     MonthlyScoresFile::query()->where('name', '=', $exported_file->name)->delete();
                 }

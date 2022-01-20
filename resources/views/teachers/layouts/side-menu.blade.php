@@ -58,6 +58,9 @@
                     <li>
                         <a class="menu-item" href="{{ route('teachers.modification_request.create') }}" data-i18n="nav.templates.vert.classic_menu">طلب تعديل درجات</a>
                     </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('teachers.request_services.meetings.create') }}" data-i18n="nav.templates.vert.classic_menu">طلب اجتماع مع مراقب</a>
+                    </li>
                 </ul>
             </li>
 

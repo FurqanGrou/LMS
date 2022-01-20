@@ -25,11 +25,13 @@ class ExportMonthlyScores implements ShouldQueue
     protected $month_year;
     protected $mail_status;
     protected $file_name;
+    protected $email_to;
 
-    function __construct($month_year, $mail_status, $file_name) {
+    function __construct($month_year, $mail_status, $file_name, $email_to) {
         $this->month_year = $month_year;
         $this->mail_status = $mail_status;
         $this->file_name = $file_name;
+        $this->email_to = $email_to;
     }
 
     /**
@@ -44,6 +46,7 @@ class ExportMonthlyScores implements ShouldQueue
 
         MonthlyScoresFile::query()->create([
             'name' => $this->file_name,
+            'email_to' => $this->email_to,
         ]);
     }
 }

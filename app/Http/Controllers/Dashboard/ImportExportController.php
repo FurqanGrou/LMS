@@ -90,10 +90,10 @@ class ImportExportController extends Controller
 
     public function exportMonthlyScores(Request $request)
     {
-
         if (!isset($request->month_year)){
             $request['month_year'] = date("Y" . "-" . date('m')); // 2022-01
         }
+
         if (!isset($request->mail_status)){
             $request['mail_status'] = -1;
         }
@@ -107,8 +107,7 @@ class ImportExportController extends Controller
         }
 
         $file_name = $request->month_year . "-monthly-scores-$status.xlsx";
-
-        dispatch(new ExportMonthlyScores($request->month_year, $request->mail_status, $file_name))->onQueue('ExportMonthlyScores')->allOnQueue('ExportMonthlyScores');
+        dispatch(new ExportMonthlyScores($request->month_year, $request->mail_status, $file_name, auth()->user()->email))->onQueue('ExportMonthlyScores')->allOnQueue('ExportMonthlyScores');
 
         return back()->withSuccess('بدأت عملية إستخراج نتائج التقارير الشهرية بنجاح ستصلك رسالة عبر البريد الالكتروني تحمل رابط التنزيل');
     }
