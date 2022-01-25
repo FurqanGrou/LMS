@@ -583,7 +583,8 @@ class ReportController extends Controller
     public function sendReport($grades = null, $assignment){
 
         if(is_null($grades)){
-            $student = User::where('id', '=', $assignment->student_id)->first();
+//            $student = User::where('id', '=', $assignment->student_id)->first();
+            $student = User::with('monthlyScores')->where('users.id', '=', $grades->student_id)->first();
             $to_mails = [];
 
             if(filter_var($student->father_mail, FILTER_VALIDATE_EMAIL)){
@@ -615,7 +616,7 @@ class ReportController extends Controller
 
             return 0;
         }else{
-            $student = User::where('id', '=', $grades->student_id)->first();
+            $student = User::with('monthlyScores')->where('users.id', '=', $grades->student_id)->first();
             $to_mails = [];
 
             if(filter_var($student->father_mail, FILTER_VALIDATE_EMAIL)){
