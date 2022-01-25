@@ -72,12 +72,12 @@ class ClassesDataTable extends DataTable
                 ],
                 'buttons' => [
                     ['extend' => 'pageLength', 'className' => 'dataTables_length'],
-                    ['extend' => 'csv', 'title' => $this->filename(), 'className' => 'btn btn-primary', 'text' => '<i class="la la-file"></i> CSV File'],
-                    ['extend' => 'excel', 'title' => $this->filename(), 'className' => 'btn btn-info', 'text' => '<i class="la la-print"></i> Export Excel'],
+//                    ['extend' => 'csv', 'title' => $this->filename(), 'className' => 'btn btn-primary', 'text' => '<i class="la la-file"></i> CSV File'],
+//                    ['extend' => 'excel', 'title' => $this->filename(), 'className' => 'btn btn-info', 'text' => '<i class="la la-print"></i> Export Excel'],
                 ],
-                'language' => [
-                    'url' => 'https://cdn.datatables.net/plug-ins/1.10.12/i18n/Arabic.json'
-                ]
+//                'language' => [
+//                    'url' => 'https://cdn.datatables.net/plug-ins/1.10.12/i18n/Arabic.json'
+//                ]
             ])
             ->buttons([
 //                        Button::make('csv'),

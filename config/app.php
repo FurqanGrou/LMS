@@ -245,6 +245,7 @@ return [
         'Datatables' => Yajra\DataTables\Facades\DataTables::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
+        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
 
     ],
 

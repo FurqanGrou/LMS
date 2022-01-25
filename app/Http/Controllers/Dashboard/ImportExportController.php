@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 use App\Imports\ClassesImport;
 use App\Imports\UsersImport;
 use App\Imports\TeachersImport;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,6 +53,7 @@ class ImportExportController extends Controller
 //        }
 
         Teacher::query()->update(['status' => 1]);
+        Artisan::call('cache:clear');
 
         return redirect()->back()->with('success', 'تم تحديث بيانات الطلاب بنجاح');
     }
