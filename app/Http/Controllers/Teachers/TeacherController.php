@@ -12,6 +12,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -39,7 +40,12 @@ class TeacherController extends Controller
 //        $remaining = $studentsCount - $reportsCount;
 
 //        return $classStudents->with('class_number', request()->class_number)->render('teachers.class_students.index', ['remaining' => $remaining]);
-        return $classStudents->with('class_number', request()->class_number)->render('teachers.class_students.index');
+
+        $class = Cache::remember('class_info.' . request()->class_number,60 * 60 * 60,function(){
+            return Classes::where('class_number', '=', request()->class_number)->first();
+        });
+
+        return $classStudents->with('class_number', request()->class_number)->render('teachers.class_students.index', ['class' => $class]);
     }
 
     public function changePasswordView(Teacher $teacher)

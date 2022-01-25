@@ -6,6 +6,7 @@ use App\Teacher;
 use App\Classes;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -27,7 +28,9 @@ class ClassStudentsDatatable extends DataTable
 
         $class_number = $this->class_number;
 
-        $students = User::where('class_number', '=', $class_number)->get();
+        $students = Cache::remember('all_students.' . $class_number,60 * 60 * 24, function() use ($class_number){
+             return User::query()->where('class_number', '=', $class_number);
+        });
 
         if (auth()->guard('admin_web')->check()){
             $student_name = 'admins.students.btn.student_name';
@@ -88,10 +91,10 @@ class ClassStudentsDatatable extends DataTable
                         ],
                         'buttons' => [
                             ['extend' => 'pageLength', 'className' => 'dataTables_length'],
-                            ['extend' => 'csv', 'title' => $this->filename(), 'className' => 'btn btn-primary', 'text' => '<i class="la la-file"></i> CSV File'],
-                            ['extend' => 'excel', 'title' => $this->filename(), 'className' => 'btn btn-info', 'text' => '<i class="la la-print"></i> Export Excel'],
+//                            ['extend' => 'csv', 'title' => $this->filename(), 'className' => 'btn btn-primary', 'text' => '<i class="la la-file"></i> CSV File'],
+//                            ['extend' => 'excel', 'title' => $this->filename(), 'className' => 'btn btn-info', 'text' => '<i class="la la-print"></i> Export Excel'],
                         ],
-                        'language' => ['url' => 'http://cdn.datatables.net/plug-ins/1.10.12/i18n/Arabic.json']
+//                        'language' => ['url' => 'http://cdn.datatables.net/plug-ins/1.10.12/i18n/Arabic.json']
                     ])
                     ->buttons([
 //                        Button::make('csv'),

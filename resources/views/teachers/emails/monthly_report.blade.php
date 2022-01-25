@@ -283,7 +283,7 @@
             عدد مرات عدم تسميع الدرس الجديد / Number of not recite the new lesson
         </td>
         <td style="text-align: center">
-            {{ $user_student->monthlyScores(request()->date_filter)->new_lessons_not_listened ?? 0 }}
+            {{ $user_student->monthlyScores->first()->new_lessons_not_listened ?? 0 }}
         </td>
     </tr>
     <tr style="height: 40px">
@@ -291,7 +291,7 @@
             عدد مرات عدم تسميع اخر 5 صفحات / Number of not recite last 5 pages
         </td>
         <td style="text-align: center">
-            {{ $user_student->monthlyScores(request()->date_filter)->last_five_pages_not_listened ?? 0 }}
+            {{ $user_student->monthlyScores->first()->last_five_pages_not_listened ?? 0 }}
         </td>
     </tr>
     <tr style="height: 40px">
@@ -299,7 +299,7 @@
             عدد مرات عدم تسميع المراجعة / Number of not recite the review
         </td>
         <td style="text-align: center">
-            {{ $user_student->monthlyScores(request()->date_filter)->daily_revision_not_listened ?? 0 }}
+            {{ $user_student->monthlyScores->first()->daily_revision_not_listened ?? 0 }}
         </td>
     </tr>
     <tr style="height: 40px">
@@ -307,7 +307,7 @@
             عدد أيام الغياب بعذر / Number of absence days with excuse
         </td>
         <td style="text-align: center">
-            {{ $user_student->monthlyScores(request()->date_filter)->absence_excuse_days ?? 0 }}
+            {{ $user_student->monthlyScores->first()->absence_excuse_days ?? 0 }}
         </td>
     </tr>
     <tr style="height: 40px">
@@ -315,7 +315,7 @@
             عدد أيام الغياب بدون بعذر / Number of absence days without excuse
         </td>
         <td style="text-align: center">
-            {{ $user_student->monthlyScores(request()->date_filter)->absence_unexcused_days ?? 0 }}
+            {{ $user_student->monthlyScores->first()->absence_unexcused_days ?? 0 }}
         </td>
     </tr>
     <tr style="height: 40px">
@@ -333,9 +333,9 @@
             General Score
         </td>
         <td style="text-align: center">
-            {{ getRate($user_student->monthlyScores(request()->date_filter)->avg ?? 100, 'ar') }}
+            {{ getRate($user_student->monthlyScores->first()->avg ?? 100, 'ar') }}
             <br>
-            {{ getRate($user_student->monthlyScores(request()->date_filter)->avg ?? 100, 'en') }}
+            {{ getRate($user_student->monthlyScores->first()->avg ?? 100, 'en') }}
         </td>
         <td style="text-align: center; background: #C6E0B4">
             نسبة
@@ -343,7 +343,7 @@
             Percentage
         </td>
         <td style="text-align: center">
-            {{ $user_student->monthlyScores(request()->date_filter)->avg ?? 100 }}
+            {{ $user_student->monthlyScores->first()->avg ?? 100 }}
         </td>
     </tr>
     </tbody>
