@@ -21,6 +21,7 @@ use App\Year;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
@@ -44,32 +45,55 @@ class ReportController extends Controller
         }
 
         $reports = Report::query()->where('student_id', '=', request()->student_id)->whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month)->get();
+
         $notes = NoteParent::query()->where('gender', '=', User::query()->where('id', '=', request()->student_id)->first()->section)->get();
-        $new_lessons = Lesson::query()->get();
-        $daily_revision = Chapter::query()->get();
 
         $class_number = User::query()->where('id', '=', request()->student_id)->first()->class_number;
-        $students = User::query()->where('class_number', '=', $class_number)->orderBy('student_number', 'ASC')->get();
 
-        $students_listener_names = User::query()
-            ->where('users.class_number', '=', $class_number)
-            ->select('name')
-            ->get()
-            ->pluck('name')
-            ->toArray();
+        $students = Cache::remember('class_students.' . $class_number,60 * 60 * 24, function() use ($class_number){
+            return User::query()->where('class_number', '=', $class_number)->orderBy('student_number', 'ASC')->get();
+        });
 
-        $teachers_listener_names = Teacher::query()
-            ->join('classes_teachers', 'classes_teachers.teacher_email', '=', 'teachers.email')
-            ->where('classes_teachers.class_number', '=', $class_number)
-            ->select('teachers.name')
-            ->get()->pluck('name')->toArray();
+        $students_listener_names = Cache::remember('students_listener_names.' . $class_number,60 * 60 * 24, function() use ($class_number) {
+            return User::query()
+                ->where('users.class_number', '=', $class_number)
+                ->select('name')
+                ->get()
+                ->pluck('name')
+                ->toArray();
+        });
+
+        $teachers_listener_names = Cache::remember('teachers_listener_names.' . $class_number,60 * 60 * 24, function() use ($class_number) {
+            return Teacher::query()
+                ->join('classes_teachers', 'classes_teachers.teacher_email', '=', 'teachers.email')
+                ->where('classes_teachers.class_number', '=', $class_number)
+                ->select('teachers.name')
+                ->get()
+                ->pluck('name')
+                ->toArray();
+        });
 
         $listener_names = array_merge($students_listener_names, $teachers_listener_names);
 
-        $user_student = User::find(request()->student_id);
-        $lesson_pages = LessonPage::query()->get();
+        $user_student = User::with('monthlyScores')->where('users.id', '=', request()->student_id)->first();
 
-        return view('teachers.reports.monthly_table', ['now' => $now, 'month' => $month, 'reports' => $reports, 'notes' => $notes, 'students' => $students, 'new_lessons' => $new_lessons, 'daily_revision' => $daily_revision, 'listener_names' => $listener_names, 'user_student' => $user_student, "lesson_pages" => $lesson_pages, 'year' => $year]);
+        $lesson_pages = Cache::remember('lesson_pages',60 * 60 * 48,function(){
+            return LessonPage::query()->get();
+        });
+
+        $noorania_pages = Cache::remember('noorania_pages',60 * 60 * 48,function(){
+            return NooraniaPage::query()->get();
+        });
+
+        $new_lessons = Cache::remember('new_lessons',60 * 60 * 48,function(){
+            return Lesson::query()->get();
+        });
+
+        $daily_revision = Cache::remember('daily_revision',60 * 60 * 48,function(){
+            return Chapter::query()->get();
+        });
+
+        return view('teachers.reports.monthly_table', ['now' => $now, 'month' => $month, 'reports' => $reports, 'notes' => $notes, 'students' => $students, 'new_lessons' => $new_lessons, 'daily_revision' => $daily_revision, 'listener_names' => $listener_names, 'user_student' => $user_student, "lesson_pages" => $lesson_pages, 'year' => $year, 'noorania_pages' => $noorania_pages]);
     }
 
     public function reportTableStore(Request $request)

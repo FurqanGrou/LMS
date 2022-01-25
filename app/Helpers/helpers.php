@@ -1,7 +1,9 @@
 <?php
 
 use App\Report;
+use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 function getPeriod($number){
@@ -193,7 +195,9 @@ function getAbsenceCount($student_id, $type, $month = false){
 
 function getStudentPath($student_id, $month_year = null){
 
-    $path = \App\User::find($student_id)->path;
+    $path = Cache::remember('student_path.' . $student_id, 60 * 60 * 24, function() use ($student_id) {
+        return User::find($student_id)->path;
+    });
 
     $current_month_year = Carbon::today()->format('Y-m');
 
@@ -726,7 +730,9 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
 }
 
 function getStudentDetails($student_id){
-    return \App\User::where('id', '=', $student_id)->first();
+    return Cache::remember('get_student_details.' . $student_id, 60 * 60 * 24, function() use($student_id) {
+        return \App\User::where('id', '=', $student_id)->first();
+    });
 }
 
 function getRate($percentage, $lang){
@@ -804,11 +810,22 @@ function disableRecord($date, $day)
     if(Auth::guard('teacher_web')->check()){
 
         $teacher_email = auth()->user()->email;
-        $class_number  = \App\User::query()->find(request()->student_id)->class_number;
-        $role = \App\ClassesTeachers::query()
-                ->where('teacher_email', '=', $teacher_email)
-                ->where('class_number', '=', $class_number)
-                ->first()->role ?? '';
+
+        $class_number = Cache::remember('get_class_number.' . request()->student_id, 60 * 60 * 24, function() {
+            return \App\User::query()->find(request()->student_id)->class_number;
+        });
+
+//        $role = \App\ClassesTeachers::query()
+//                ->where('teacher_email', '=', $teacher_email)
+//                ->where('class_number', '=', $class_number)
+//                ->first()->role ?? '';
+
+        $role =  Cache::remember('role.' . $teacher_email . $class_number, 60 * 60 * 24, function() use($teacher_email, $class_number) {
+            return  \App\ClassesTeachers::query()
+                    ->where('teacher_email', '=', $teacher_email)
+                    ->where('class_number', '=', $class_number)
+                    ->first()->role ?? '';
+        });
 
         if($role == 'supervisor'){
             if(

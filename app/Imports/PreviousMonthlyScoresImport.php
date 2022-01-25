@@ -64,14 +64,18 @@ class PreviousMonthlyScoresImport implements ToModel, WithHeadingRow, WithChunkR
          * */
 
 //Students
-        if (!is_null($row['rkm_altalb']) && !is_null($row['altalb'])) {
+        $class_number = trim($row['rkm_alhlk']);
+        $student_number = trim($row['rkm_altalb']);
+        $altalb = trim($row['altalb']);
+        $section = trim($row['alksm']);
+        $month = $this->month;
 
-            $section = $row['alksm'] == 'بنات' ? 'female' : 'male';
-            $class_number = trim($row['rkm_alhlk']);
-            $month = $this->month;
+        if (!empty($class_number) && !empty($altalb) && !empty($student_number)) {
+
+            $section = $section == 'بنات' ? 'female' : 'male';
 
             //check if this student is exists or not
-            $exists_student = User::where('student_number', '=', $row['rkm_altalb'])->where('section', '=', $section)->first();
+            $exists_student = User::where('student_number', '=', $student_number)->where('section', '=', $section)->first();
 
             //if exists is true update current monthly scores data
             if ($exists_student) {
