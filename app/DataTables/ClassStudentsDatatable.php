@@ -28,9 +28,7 @@ class ClassStudentsDatatable extends DataTable
 
         $class_number = $this->class_number;
 
-        $students = Cache::remember('all_students.' . $class_number,60 * 60 * 24, function() use ($class_number){
-             return User::query()->where('class_number', '=', $class_number);
-        });
+        $students = User::query()->where('class_number', '=', $class_number);
 
         if (auth()->guard('admin_web')->check()){
             $student_name = 'admins.students.btn.student_name';
