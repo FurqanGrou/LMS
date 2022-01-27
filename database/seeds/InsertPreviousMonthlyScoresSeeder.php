@@ -17,10 +17,10 @@ class InsertPreviousMonthlyScoresSeeder extends Seeder
      */
     public function run()
     {
-        $month = 12;
+        $month_year = '2021-12';
         $file_name = 'females-dec-12.xlsx';
 
-        Excel::import(new PreviousMonthlyScoresImport($month), 'public/grades_previous_months/'.$file_name);
+        Excel::import(new PreviousMonthlyScoresImport($month_year), 'public/grades_previous_months/'.$file_name);
 
         echo "$file_name Done";
     }
