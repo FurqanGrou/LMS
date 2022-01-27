@@ -110,14 +110,7 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
 });
 
 Route::get('update-absence-eight-days-telawa', function (){
-    $users = \App\User::query()->where('path', 'قسم التلاوة')->get();
-    foreach ($users as $user){
-        \App\Report::query()->where('student_id', '=', $user->id)->take(8)->update([
-            'absence' => -2,
-        ]);
-    }
-
-    dd('update-absence-eight-days-tellawa Done');
+    return getLessonsNotListenedCount(37, '2021-12');
 });
 
 Route::get('update-business-three-days', function (){

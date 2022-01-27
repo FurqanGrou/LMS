@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
 class ReportSeeder extends Seeder
@@ -12,7 +13,11 @@ class ReportSeeder extends Seeder
      */
     public function run()
     {
-        $month = 12;
+        $month_year = '2021-12';
+
+        $currentMonth = substr($month_year, -2);
+        $currentYear  = substr($month_year, 0, 4);
+
         $students = \App\User::query()->get();
 
         foreach ($students as $student){
@@ -23,8 +28,8 @@ class ReportSeeder extends Seeder
 
         foreach ($students as $key => $student){
             $report = \App\Report::where('student_id', '=', $student->id)
-                ->whereMonth('created_at', '=', $month)
-                ->whereYear('created_at', '=', 2021)
+                ->whereMonth('created_at', '=', $currentMonth)
+                ->whereYear('created_at', '=', $currentYear)
                 ->first();
 
             if (!is_null($report)){
@@ -33,16 +38,16 @@ class ReportSeeder extends Seeder
                 $month_year = $report->created_at->format('Y-m');
                 $student_path = getStudentPath($report->student_id, $month_year);
 
-                $new_lessons_not_listened = getLessonsNotListenedCount($student->id, $month);
-                $last_five_pages_not_listened = getLastFivePagesNotListenedCount($student->id, $month);
-                $daily_revision_not_listened = getDailyRevisionNotListenedCount($student->id, $month);
-                $absence_excuse_days = getAbsenceCount($student->id, -2, $month);
-                $absence_unexcused_days = getAbsenceCount($student->id, -5, $month);
+                $new_lessons_not_listened = getLessonsNotListenedCount($student->id, $month_year);
+                $last_five_pages_not_listened = getLastFivePagesNotListenedCount($student->id, $month_year);
+                $daily_revision_not_listened = getDailyRevisionNotListenedCount($student->id, $month_year);
+                $absence_excuse_days = getAbsenceCount($student->id, -2, $month_year);
+                $absence_unexcused_days = getAbsenceCount($student->id, -5, $month_year);
 
                 DB::table('monthly_scores')->updateOrInsert(
                     [
                         'user_id' => $student->id,
-                        'month_year' => "2021-" . $month,
+                        'month_year' => $month_year,
                     ],
                     [
                         'path' => $student_path,
