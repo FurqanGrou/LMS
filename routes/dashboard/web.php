@@ -110,7 +110,7 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
 });
 
 Route::get('update-absence-eight-days-telawa', function (){
-    return getLessonsNotListenedCount(37, '2021-12');
+    dd(env('ENABLE_MONTHLY_SEND'));
 });
 
 Route::get('update-business-three-days', function (){

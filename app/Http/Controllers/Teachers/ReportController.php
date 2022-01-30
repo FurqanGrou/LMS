@@ -338,9 +338,9 @@ class ReportController extends Controller
         }
 
         if ($user->path == "قسم الهجاء"){
-            $pageNumber = $user->monthlyScores($month_year)->noorania_page_id ?? false;
+            $pageNumber = $user->monthlyScores()->first()->noorania_page_id ?? false;
         }else{
-            $pageNumber = $user->monthlyScores($month_year)->lesson_page_id ?? false;
+            $pageNumber = $user->monthlyScores()->first()->lesson_page_id ?? false;
         }
 
         $is_new_student = false;
@@ -412,6 +412,7 @@ class ReportController extends Controller
             $workingDays = $this->getWorkingDaysCount($first_report_this_month->year, $first_report_this_month->month, $first_report_this_month->day);
         }
 
+
         if($reportsCount < $workingDays){
             $all_days_filled = false;
         }else{
@@ -423,7 +424,7 @@ class ReportController extends Controller
 
     public function sendReportTableMonthly(Request $request)
     {
-        $user =  User::find($request->student_id);
+        $user = User::with('monthlyScores')->where('users.id', '=', $request->student_id)->first();
 
         if(is_null($request->date_filter)) {
             $request['date_filter'] = date('Y') . '-' . date('m');
@@ -436,7 +437,7 @@ class ReportController extends Controller
 
         try{
             Notification::route('mail', [$user->father_mail, $user->mother_mail])->notify(new userReportMonthlyNotification($user, $request->date_filter));
-            $report = $user->monthlyScores($request->date_filter);
+            $report = $user->monthlyScores()->first();
             $report->update(['mail_status' => '1']);
         }catch(\Exception $e){
             session()->flash('error', 'فشلت عملية ارسال التقرير الشهري!');

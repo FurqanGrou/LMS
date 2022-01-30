@@ -3,7 +3,7 @@
 {{--    request()->merge(['date_filter' => '2021-12'])--}}
 {{--@endphp--}}
 
-@if(\App\User::find($id)->monthlyScores()->mail_status ?? 0)
+@if(\App\User::find($id)->monthlyScores()->first()->mail_status ?? 0)
     <span class="btn btn-success" title="تم ارسال التقرير الشهري">
         <i class="la la-envelope-o"></i>
     </span>
