@@ -62,7 +62,7 @@ class User extends Authenticatable implements Auditable
 
     public function getAvgAttribute()
     {
-        return $this->monthlyScores()->avg ?? 0;
+        return $this->monthlyScores()->first()->avg ?? 0;
     }
 
 }

@@ -372,7 +372,7 @@ class ReportController extends Controller
                 })->where(function ($query){
                     $query ->where('daily_revision_grade', '>=', 0);
                     $query ->orWhere('daily_revision_grade', '=', '-');
-                })->whereIn('absence', [0, -2, -5])
+                })->whereIn('absence', [0, -2, -5, -1])
                 ->count();
 
             $workingDays = $this->getWorkingDaysCount($year, $month, 1);
@@ -406,7 +406,7 @@ class ReportController extends Controller
                 })->where(function ($query){
                     $query ->where('daily_revision_grade', '>=', 0);
                     $query ->orWhere('daily_revision_grade', '=', '-');
-                })->whereIn('absence', [0, -2, -5])
+                })->whereIn('absence', [0, -2, -5, -1])
                 ->count();
 
             $workingDays = $this->getWorkingDaysCount($first_report_this_month->year, $first_report_this_month->month, $first_report_this_month->day);
