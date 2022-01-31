@@ -717,7 +717,7 @@
                 });
             })
 
-            $(document).on('change', 'form#monthly_report #grades input', function (e) {
+            $(document).on('change', 'form#monthly_report #grades input, form#monthly_report #grades select[name="notes_to_parent"]', function (e) {
 
                 e.preventDefault();
                 let created_at = '{{ request()->date_filter ?? \Carbon\Carbon::now()->format('Y-m') }}';
