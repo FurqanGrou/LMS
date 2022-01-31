@@ -436,10 +436,20 @@ class ReportController extends Controller
         }
 
         try{
-            Notification::route('mail', [$user->father_mail, $user->mother_mail])->notify(new userReportMonthlyNotification($user, $request->date_filter));
+            $to_mails = [];
+            if(filter_var($user->father_mail, FILTER_VALIDATE_EMAIL)){
+                $to_mails[] = $user->father_mail;
+            }
+
+            if(filter_var($user->mother_mail, FILTER_VALIDATE_EMAIL)){
+                $to_mails[] = $user->mother_mail;
+            }
+
+            Notification::route('mail', $to_mails)->notify(new userReportMonthlyNotification($user, $request->date_filter));
             $report = $user->monthlyScores()->first();
             $report->update(['mail_status' => '1']);
         }catch(\Exception $e){
+            dd($e);
             session()->flash('error', 'فشلت عملية ارسال التقرير الشهري!');
             return redirect()->route('teachers.report.table', $request->student_id);
         }
