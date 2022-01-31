@@ -57,7 +57,7 @@ class userReportMonthlyNotification extends Notification
 
         $subject = " نتيجة شهر $month_name " . $year . " - الطالب/ة -  $this->student_name  ،  $this->student_number";
 
-        return (new MailMessage)->subject($subject)->view('emails.user.monthly_report', ['student' => $this->student, 'student_id' => $this->student_id, "student_name" => $this->student_name, 'date_filter' => $this->date_filter, 'month_name' => $month_name, 'month' => $month, 'year' => $year]);
+        return (new MailMessage)->bcc('lmsfurqan1@gmail.com')->subject($subject)->view('emails.user.monthly_report', ['student' => $this->student, 'student_id' => $this->student_id, "student_name" => $this->student_name, 'date_filter' => $this->date_filter, 'month_name' => $month_name, 'month' => $month, 'year' => $year]);
     }
 
     /**

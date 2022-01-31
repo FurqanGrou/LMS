@@ -26,6 +26,7 @@ class TeacherController extends Controller
 
     public function classStudents(ClassStudentsDatatable $classStudents)
     {
+
 //        $tomorrow_date = Carbon::tomorrow();
 //        $tomorrow_date_check = Carbon::tomorrow();
 //        if(str_contains($tomorrow_date->format('l') ,'Friday')){
@@ -41,7 +42,7 @@ class TeacherController extends Controller
 
 //        return $classStudents->with('class_number', request()->class_number)->render('teachers.class_students.index', ['remaining' => $remaining]);
 
-        $class = Cache::remember('class_info.' . request()->class_number,60 * 60 * 60,function(){
+        $class = Cache::remember('class_info.' . request()->class_number,60 * 60 * 24,function(){
             return Classes::where('class_number', '=', request()->class_number)->first();
         });
 
