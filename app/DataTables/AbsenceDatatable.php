@@ -50,7 +50,7 @@ class AbsenceDatatable extends DataTable
 
         $absences = User::join('reports', 'users.id', '=', 'reports.student_id')
                         ->where('reports.date', '=', $date)
-                        ->where('reports.absence', '!=', 0)
+                        ->whereNotIn('reports.absence', [0, -1])
                         ->select(['reports.id', 'users.student_number', 'reports.student_id', 'reports.absence', 'users.name']);
         return $absences;
     }
