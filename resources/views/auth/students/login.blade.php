@@ -16,9 +16,9 @@
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
                 <li class="nav-item">
-                    <a class="navbar-brand" href="index.html">
-                        <img class="brand-logo" alt="msbah admin logo" src="{{ asset('dashboard/app-assets/images/logo/logo.png') }}">
-                        <h3 class="brand-text">مركز الفرقان لتعليم القرآن</h3>
+                    <a class="navbar-brand" href="{{ url('/') }}">
+{{--                        <img class="brand-logo" alt="msbah admin logo" src="{{ asset('dashboard/app-assets/images/logo/logo.png') }}">--}}
+                        <h3 class="brand-text">مجموعة الفرقان لتعليم القرآن</h3>
                     </a>
                 </li>
                 <li class="nav-item d-md-none">
@@ -41,10 +41,10 @@
                         <div class="card border-grey border-lighten-3 m-0">
                             <div class="card-header border-0">
                                 <div class="card-title text-center">
-                                    <img src="{{ asset('dashboard/app-assets/images/logo/logo-dark.png') }}" alt="branding logo">
+                                    <img width="50%" alt="msbah admin logo" src="{{ asset('dashboard/assets/img/logo2.png') }}">
                                 </div>
                                 <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
-                                    <span>مركز الفرقان لتعليم القرآن || دخول الطلاب</span>
+                                    <span>مجموعة الفرقان لتعليم القرآن || دخول الطلاب</span>
                                 </h6>
                             </div>
                             <div class="card-content">
