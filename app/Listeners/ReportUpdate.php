@@ -61,6 +61,7 @@ class ReportUpdate implements ShouldQueue
                             ($absence_excuse_days * -2) +
                             ($absence_unexcused_days * -5)
                         ),
+                    'class_number' => $report['class_number']
                 ]
             );
 
