@@ -1,8 +1,12 @@
 <?php
 
+use App\Exports\ExamRequestsExport;
+use App\Exports\MonthlyScoresExport;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 use GuzzleHttp\Client;
 
@@ -114,6 +118,8 @@ Route::get('update-absence-eight-days-telawa', function (){
 });
 
 Route::get('test-code', function (){
-    dd(getLessonsNotListenedCount('2037', '2022-01'));
+
+    $class_number = User::find(1357);
+    dd($class_number);
 });
 

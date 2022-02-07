@@ -74,8 +74,8 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
                                         END) AS page_number'),
             ])
             ->join('users', 'users.id', '=', 'monthly_scores.user_id')
-            ->join('classes', 'classes.class_number', '=', 'users.class_number')
-            ->join('classes_teachers', 'classes_teachers.class_number', '=', 'users.class_number')
+            ->join('classes', 'classes.class_number', '=', 'monthly_scores.class_number')
+            ->join('classes_teachers', 'classes_teachers.class_number', '=', 'monthly_scores.class_number')
             ->join('teachers', 'teachers.email', '=', 'classes_teachers.teacher_email')
             ->leftJoin('lesson_pages', 'monthly_scores.lesson_page_id', '=', 'lesson_pages.id')
             ->leftJoin('noorania_pages', 'monthly_scores.noorania_page_id', '=', 'noorania_pages.id')
