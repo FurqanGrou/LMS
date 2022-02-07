@@ -65,7 +65,7 @@ class ReportUpdate implements ShouldQueue
             );
 
         }else{
-            $month_year = $report['created_at'];
+            $month_year   = $report['created_at'];
             $student_path = getStudentPath($report['student_id'], $month_year);
 
             $new_lessons_not_listened = getLessonsNotListenedCount($report['student_id'], $month_year);
@@ -76,7 +76,7 @@ class ReportUpdate implements ShouldQueue
 
             DB::table('monthly_scores')->updateOrInsert(
                 [
-                    'user_id' => $report['student_id'],
+                    'user_id'    => $report['student_id'],
                     'month_year' => $report['created_at'],
                 ],
                 [

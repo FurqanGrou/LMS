@@ -35,7 +35,7 @@ class ReportSeeder extends Seeder
             if (!is_null($report)){
                 echo $student->id . "\n";
 
-                $month_year = $report->created_at->format('Y-m');
+                $month_year   = $report->created_at->format('Y-m');
                 $student_path = getStudentPath($report->student_id, $month_year);
 
                 $new_lessons_not_listened = getLessonsNotListenedCount($student->id, $month_year);

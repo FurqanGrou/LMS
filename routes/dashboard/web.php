@@ -113,7 +113,7 @@ Route::get('update-absence-eight-days-telawa', function (){
     dd(env('ENABLE_MONTHLY_SEND'));
 });
 
-Route::get('update-business-three-days', function (){
-    dd(\Carbon\Carbon::now()->format('Y-m'));
+Route::get('test-code', function (){
+    dd(getLessonsNotListenedCount('2037', '2022-01'));
 });
 
