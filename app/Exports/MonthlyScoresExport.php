@@ -48,6 +48,7 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
                                         WHEN classes.period = 5 THEN "الفترة المسائية الرابعة"
                                         END)'),
                 'teachers.name as teacher_name',
+                'teachers.teacher_number as teacher_number',
                 'new_lessons_not_listened',
                 'last_five_pages_not_listened',
                 'daily_revision_not_listened',
@@ -98,6 +99,7 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
             'القسم',
             'الفترة',
             'اسم المعلم',
+            'رقم المعلم',
             'عدد مرات عدم تسميع الدرس الجديد',
             'عدد مرات عدم تسميع اخر 5 صفحات',
             'عدد مرات عدم تسميع المراجعة اليومية',

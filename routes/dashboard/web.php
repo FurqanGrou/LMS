@@ -2,7 +2,6 @@
 
 use App\Exports\ExamRequestsExport;
 use App\Exports\MonthlyScoresExport;
-use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
@@ -119,7 +118,8 @@ Route::get('update-absence-eight-days-telawa', function (){
 
 Route::get('test-code', function (){
 
-    $class_number = User::find(1357);
-    dd($class_number);
+    $month_year = "2021-12";
+    $mail_status = "-1";
+    return Excel::download(new MonthlyScoresExport($month_year, $mail_status), 'exams-requests.xlsx');
 });
 
