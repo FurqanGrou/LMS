@@ -118,27 +118,30 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
 
             //check if this teacher is exists or not
             $email = str_replace(' ', '', $row['bryd_almaalm']);
+            $teacher_number = trim($row['rkm_almaalm']);
+            $teacher_name   = trim($row['almaalm']);
+
             $exists_teacher = Teacher::where('email', '=', $email)->first();
-            $teacher_name = trim($row['almaalm']);
             //if exists is true update current teacher data
             if($exists_teacher){
 
                 $exists_teacher->update([
                     'name'      => $teacher_name,
                     'section'   => $row['alksm'] == 'بنات' ? 'female' : 'male',
-                    'last_4_id'         => $row['akhr_4_arkam_mn_alhoy_llmaalm'] ?? '00',
+                    'last_4_id' => $row['akhr_4_arkam_mn_alhoy_llmaalm'] ?? '00',
+                    'teacher_number' => $teacher_number,
                 ]);
 
             }else{
 
                 //if exists is false insert new teacher data
                 $teacher = Teacher::create([
-                    'teacher_number'    => $row['rkm_almaalm'],
-                    'name'      => $teacher_name,
-                    'email'             => $email,
-                    'password'          => \Hash::make('12345'),
-                    'section'           => $row['alksm'] == 'بنات' ? 'female' : 'male',
-                    'last_4_id'         => $row['akhr_4_arkam_mn_alhoy_llmaalm'] ?? '00',
+                    'teacher_number' => $teacher_number,
+                    'name'           => $teacher_name,
+                    'email'          => $email,
+                    'password'       => \Hash::make('12345'),
+                    'section'        => $row['alksm'] == 'بنات' ? 'female' : 'male',
+                    'last_4_id'      => $row['akhr_4_arkam_mn_alhoy_llmaalm'] ?? '00',
                 ]);
 
             }
@@ -152,21 +155,24 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
             $email = str_replace(' ', '', $row['bryd_almshrf']);
             $exists_supervisor = Teacher::where('email', '=', $email)->first();
             $supervisor_name = trim($row['asm_almshrf']);
+            $supervisor_number = trim($row['rkm_almshrf']);
+
             //if exists is true update current supervisor data
             if($exists_supervisor){
 
                 $exists_supervisor->update([
                     'name'      => $supervisor_name,
                     'section'   => $row['alksm'] == 'بنات' ? 'female' : 'male',
-                    'last_4_id'         => '00',
+                    'last_4_id' => '00',
+                    'teacher_number' => $supervisor_number,
                 ]);
 
             }else{
 
                 //if exists is false insert new supervisor data
                 $supervisor = Teacher::create([
-                    'teacher_number'    => $row['rkm_almshrf'],
-                    'name'      => $supervisor_name,
+                    'teacher_number' => $supervisor_number,
+                    'name'           => $supervisor_name,
                     'email'             => $email,
                     'password'          => \Hash::make('12345'),
                     'section'           => $row['alksm'] == 'بنات' ? 'female' : 'male',
