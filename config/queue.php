@@ -2,9 +2,11 @@
 
 return [
 
+
     /*
     |--------------------------------------------------------------------------
     | Default Queue Connection Name
+    | php artisan queue:work --queue=default,ExportMonthlyScores
     |--------------------------------------------------------------------------
     |
     | Laravel's queue API supports an assortment of back-ends via a single
