@@ -110,16 +110,17 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
 //    Route::put('/request-services/{service}/update', 'RequestServiceController@update')->name('request_services.update');
     Route::get('request-services/export', 'ImportExportController@exportExamsRequests')->name('request_services.exams.export');
 
+    Route::get('change-send-monthly-report-status', 'AdminController@changeSendMonthlyReportStatus')->name('change_send_monthly_report_status.index');
+    Route::put('change-send-monthly-report-status', 'AdminController@changeSendMonthlyReportStatusUpdate')->name('change_send_monthly_report_status.update');
+
 });
 
-Route::get('update-absence-eight-days-telawa', function (){
-    dd(env('ENABLE_MONTHLY_SEND'));
+Route::get('clear-cache', function (){
+    clearCache();
+    echo "Clear Done";
 });
 
 Route::get('test-code', function (){
 
-    $month_year = "2021-12";
-    $mail_status = "-1";
-    return Excel::download(new MonthlyScoresExport($month_year, $mail_status), 'exams-requests.xlsx');
 });
 
