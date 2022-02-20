@@ -173,4 +173,21 @@ class AdminController extends Controller
         }
         return response()->json(['status' => 'success'], 200);
     }
+
+    public function changeSendMonthlyReportStatus()
+    {
+        clearCache();
+        $status_previous = env('ENABLE_PREVIOUS_MONTH');
+        $status_current  = env('ENABLE_MONTHLY_SEND');
+
+        return view('admins.settings.change_monthly_send', ['status_previous' => $status_previous, 'status_current' => $status_current]);
+    }
+
+    public function changeSendMonthlyReportStatusUpdate(Request $request)
+    {
+        changeEnvironmentVariable("ENABLE_PREVIOUS_MONTH", $request->previous_status);
+//        changeEnvironmentVariable("ENABLE_MONTHLY_SEND", $request->current_status);
+
+        return response()->json(['status' => 'success'], 200);
+    }
 }
