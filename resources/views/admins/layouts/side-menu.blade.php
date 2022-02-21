@@ -25,6 +25,10 @@
                             <i class="la la-file-excel-o"></i>
                             تصدير التقارير الشهرية
                         </a>
+                        <a class="menu-item" href="{{ route('admins.change_send_monthly_report_status.index') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="la la-send"></i>
+                            تفعيل الارسال للشهر السابق
+                        </a>
                     </li>
                 </ul>
             </li>
