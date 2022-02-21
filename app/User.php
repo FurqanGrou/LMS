@@ -46,13 +46,10 @@ class User extends Authenticatable implements Auditable
 
     public function monthlyScores($month_year = null)
     {
-        if (env('ENABLE_PREVIOUS_MONTH')){
-            $month_year = getReportMonth();
-        }else{
-            $month_year = request()->date_filter;
-            if(empty($month_year)){
-                $month_year = date('Y') . '-' . date('m');
-            }
+
+        $month_year = request()->date_filter;
+        if(empty($month_year)){
+            $month_year = date('Y') . '-' . date('m');
         }
 
         return $this->hasMany(MonthlyScore::class, 'user_id')->where('month_year', '=', $month_year);

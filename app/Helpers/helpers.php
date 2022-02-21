@@ -5,7 +5,6 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Artisan;
 
 function getPeriod($number){
     $name = '';
@@ -882,7 +881,7 @@ function dateFormatMail($now, $day)
 
 function isAvailableToSendMonthlyReport($month_year){
 
-    if(env('ENABLE_MONTHLY_SEND') || env('ENABLE_PREVIOUS_MONTH')){
+    if(env('ENABLE_MONTHLY_SEND')){
         return true;
     }
 
@@ -908,45 +907,26 @@ function isAvailableToSendMonthlyReport($month_year){
 }
 
 
-function changeEnvironmentVariable($key, $value)
+function changeEnvironmentVariable($key,$value)
 {
-    clearCache();
-
     $path = base_path('.env');
 
     if(is_bool(env($key)))
     {
-        $old = env($key) ? 'true' : 'false';
-    }elseif(env($key)===null){
+        $old = env($key)? 'true' : 'false';
+    }
+    elseif(env($key)===null){
         $old = 'null';
-    }else{
+    }
+    else{
         $old = env($key);
     }
 
     if (file_exists($path)) {
         file_put_contents($path, str_replace(
-            "$key=" . $old, "$key=".$value, file_get_contents($path)
+            "$key=".$old, "$key=".$value, file_get_contents($path)
         ));
     }
 
-    clearCache();
-}
-
-function getReportMonth()
-{
-    $date = Carbon::now();
-
-    if (env('ENABLE_PREVIOUS_MONTH')){
-        $date_filter = $date->subMonth()->format('Y-m');
-    }else{
-        $date_filter = $date->format('Y-m');
-    }
-
-    return $date_filter;
-}
-
-function clearCache()
-{
-    Artisan::call('config:clear');
-    Artisan::call('cache:clear');
+    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
 }

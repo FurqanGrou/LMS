@@ -132,7 +132,7 @@ class ClassStudentsDatatable extends DataTable
                 ->className('black'),
             Column::make('monthly_avg')
                 ->data('monthly_avg')
-                ->title('النسبة الشهرية ' . getReportMonth())
+                ->title('النسبة الشهرية %')
                 ->className('black'),
         ];
     }

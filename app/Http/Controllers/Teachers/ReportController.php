@@ -36,7 +36,7 @@ class ReportController extends Controller
     {
         $now = Carbon::now();
         $month = $now->month;
-        $year  = $now->year;
+        $year = $now->year;
 
         if(request()->date_filter){
             $month = substr(request()->date_filter, -2);

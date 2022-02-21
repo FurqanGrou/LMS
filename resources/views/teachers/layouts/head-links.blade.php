@@ -71,11 +71,6 @@
             z-index: 999;
         }
 
-        #atlwdg-trigger {
-            z-index: 99999 !important;
-            left: 3% !important;
-            top: 45% !important;
-        }
     </style>
 
     @stack('css')
