@@ -121,6 +121,16 @@ Route::get('clear-cache', function (){
 });
 
 Route::get('test-code', function (){
+    $month = substr(request()->date_filter, -2);
+    $year = substr(request()->date_filter, 0, 4);
 
+    $today  = Carbon::today()->format('Y-m');
+    $month_year = request()->date_filter;
+
+    if ($today == $month_year){
+        $now  = Carbon::today()->format('Y-m');
+    }
+
+    dd(disableRecord($now, 2));
 });
 
