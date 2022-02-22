@@ -339,7 +339,13 @@ class ReportController extends Controller
             $day = Carbon::createFromDate($year, $month)->daysInMonth;
         }
 
-        if ($user->path == "قسم الهجاء"){
+        if (empty($user->monthlyScores->first()->path)){
+            $user_path = $user->path;
+        }else{
+            $user_path = $user->monthlyScores->first()->path;
+        }
+
+        if ($user_path == "قسم الهجاء"){
             $pageNumber = $user->monthlyScores()->first()->noorania_page_id ?? false;
         }else{
             $pageNumber = $user->monthlyScores()->first()->lesson_page_id ?? false;

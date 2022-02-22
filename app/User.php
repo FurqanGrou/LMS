@@ -47,8 +47,9 @@ class User extends Authenticatable implements Auditable
 
     public function monthlyScores($month_year = null)
     {
+
         if (env('ENABLE_PREVIOUS_MONTH')){
-            if (\Request::route()->getName() == 'admins.report.table' && !request()->date_filter){
+            if ((\Request::route()->getName() == 'teachers.report.table' || \Request::route()->getName() == 'admins.report.table' ) && !request()->date_filter){
                 $month_year = date('Y') . '-' . date('m');
             }else{
                 $month_year = getReportMonth();

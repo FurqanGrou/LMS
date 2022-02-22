@@ -14,7 +14,7 @@ class MonthlyScore extends Model
     }
 
     public function lessonPage(){
-        if (getStudentPath(request()->student_id) == "قسم الهجاء"){
+        if (getStudentPath(request()->student_id, request()->date_filter) == "قسم الهجاء"){
             return $this->belongsTo(NooraniaPage::class, 'noorania_page_id');
         }
         return $this->belongsTo(LessonPage::class, 'lesson_page_id');
