@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 
 function getPeriod($number){
     $name = '';
@@ -798,13 +799,13 @@ function disableRecord($date, $day)
     }
 
     if(Auth::guard('admin_web')->check()){
-//        if( ($date->year == $today->year) && ($date->month < $today->month) && ($date->month <= $today->month) ) {
-//            $status = true;
-//        }elseif(($date->year == $today->year) && ($date->month == $today->month) && ($date->day <= $today->day)){
-//            $status = true;
-//        }
-
-        return '';
+        if ($date->year < $today->year){
+            $status = true;
+        }elseif( ($date->year == $today->year) && ($date->month < $today->month)){
+            $status = true;
+        } elseif( ($date->year <= $today->year) && ($date->month <= $today->month) && ($day <= $date->day || $day == $tomorrow->day) ) {
+            $status = true;
+        }
     }
 
     if(Auth::guard('teacher_web')->check()){
