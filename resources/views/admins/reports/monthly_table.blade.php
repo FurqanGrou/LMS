@@ -433,19 +433,23 @@
                 current_row.find("select[name=notes_to_parent]").val('{{ $report->notes_to_parent }}');
                 current_row.find("select[name=notes_to_parent]").trigger('change');
                 current_row.find(".total").html('{{ $report->total }}');
-                if(current_row.find('select[name="notes_to_parent[]"]').val() == 'الطالب غائب'
-                    || current_row.find('select[name="notes_to_parent[]"]').val() == 'دوام 3 أيام'
-                    || current_row.find('select[name="notes_to_parent[]"]').val() == 'نشاط لا صفي'
+
+                if('{{$report->mail_status}}' != 1){
+                    current_row.find('td.day-name').addClass('bg-danger');
+                    current_row.find('td.day-name').removeClass('custom-bg-gray');
+                }
+            
+                if(current_row.find('select[name="notes_to_parent"]').val() == 'الطالب غائب'
+                    || current_row.find('select[name="notes_to_parent"]').val() == 'دوام 3 أيام'
+                    || current_row.find('select[name="notes_to_parent"]').val() == 'نشاط لا صفي'
                 ){
 
-                    if('{{$report->mail_status}}' != 1){
-                        current_row.find('').addClass('');
-                    }
+
                     let grades_row = date.closest('#grades tr'),
                         total = grades_row.find('.total');
-                        grades_row.find("input").attr('disabled', true);
+                    grades_row.find("input").attr('disabled', true);
 
-                    if(current_row.find('select[name="notes_to_parent[]"]').val() != 'نشاط لا صفي') {
+                    if(current_row.find('select[name="notes_to_parent"]').val() != 'نشاط لا صفي') {
                         if({{$report->absence}} == -2){
                             total.parent().addClass('bg-success');
                         }
@@ -453,8 +457,8 @@
                             total.parent().addClass('bg-danger');
                         }
                     }
-
                 }
+
             @endforeach
 
             setTimeout(function() {
