@@ -37,23 +37,29 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
          * alftr = الفترة
          * odaa_altalb = حالة الطالب
          * alksm = القسم
-         * goal_alab = هاتف الأب
-         * goal_alam = هاتف الأم
+         *
+         * goal_alab = هاتف الأب --
+         * goal_alam = هاتف الأم --
+         *
          * bryd_alab = بريد الأب
          * bryd_alam = بريد الأم
          * bryd_almaalm = بريد المعلم
-         * alaamr = العمر
-         * allgh = اللغة
-         * dol_alakam = دولة الاقامة
-         * tarykh_almylad = تاريخ الميلاد
-         * rabt_aldlyl_alsnoy = رابط الدليل السنوي
-         * rkm_almaalm_almsaaad = رقم المعلم المساعد
-         * asm_almaalm_almsaaad = اسم المعلم المساعد
-         * bryd_almaalm_almsaaad = بريد المعلم المساعد
+         *
+         * alaamr = العمر **
+         *
+         * allgh = اللغة --
+         *
+         * dol_alakam = دولة الاقامة **
+         * tarykh_almylad = تاريخ الميلاد **
+         * rabt_aldlyl_alsnoy = رابط الدليل السنوي **
+         * rkm_almaalm_almsaaad = رقم المعلم المساعد --
+         * asm_almaalm_almsaaad = اسم المعلم المساعد --
+         * bryd_almaalm_almsaaad = بريد المعلم المساعد --
+         *
          * rkm_almshrf = رقم المشرف
          * asm_almshrf = اسم المشرف
          * bryd_almshrf = بريد المشرف
-         *
+         * akhr_4_arkam_mn_alhoy_llmaalm = اخر 4 ارقام من الهوية للمعلم
          *
          * */
 
