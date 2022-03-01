@@ -21,7 +21,7 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
     protected $mail_status;
 
     function __construct($month_year, $mail_status) {
-        $this->month_year = $month_year;
+        $this->month_year  = $month_year;
         $this->mail_status = $mail_status;
     }
 
@@ -33,7 +33,7 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
 
         $monthly_scores = DB::table('monthly_scores')
             ->select([
-                'month_year',
+                DB::raw('substr(month_year, -2)'),
                 'users.name as student_name',
                 'users.student_number',
                 DB::raw('(CASE
@@ -73,6 +73,7 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
                                         WHEN lesson_pages.page_number IS NULL  THEN noorania_pages.page_number
                                         ELSE lesson_pages.page_number
                                         END) AS page_number'),
+                DB::raw('substr(month_year, 1, 4)')
             ])
             ->join('users', 'users.id', '=', 'monthly_scores.user_id')
             ->join('classes', 'classes.class_number', '=', 'monthly_scores.class_number')
@@ -93,7 +94,7 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
     public function headings(): array
     {
         return [
-            'الشهر - السنة',
+            'الشهر',
             'اسم الطالب',
             'رقم الطالب',
             'القسم',
@@ -111,6 +112,7 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
             'التقدير',
             'عنوان الدرس',
             'رقم الصفحة',
+            'السنة',
         ];
     }
 
