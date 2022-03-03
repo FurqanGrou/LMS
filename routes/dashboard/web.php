@@ -3,6 +3,7 @@
 use App\Exports\ExamRequestsExport;
 use App\Exports\MonthlyScoresExport;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -113,6 +114,9 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
     Route::get('change-send-monthly-report-status', 'AdminController@changeSendMonthlyReportStatus')->name('change_send_monthly_report_status.index');
     Route::put('change-send-monthly-report-status', 'AdminController@changeSendMonthlyReportStatusUpdate')->name('change_send_monthly_report_status.update');
 
+    Route::get('holidays', 'HolidayController@index')->name('holidays.index');
+    Route::post('holidays', 'HolidayController@store')->name('holidays.store');
+
 });
 
 Route::get('clear-cache', function (){
@@ -121,16 +125,6 @@ Route::get('clear-cache', function (){
 });
 
 Route::get('test-code', function (){
-    $month = substr(request()->date_filter, -2);
-    $year = substr(request()->date_filter, 0, 4);
-
-    $today  = Carbon::today()->format('Y-m');
-    $month_year = request()->date_filter;
-
-    if ($today == $month_year){
-        $now  = Carbon::today()->format('Y-m');
-    }
-
-    dd(disableRecord($now, 2));
+    Log::info(auth('admin_web')->user());
 });
 
