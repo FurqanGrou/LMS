@@ -774,7 +774,15 @@
                 }
             });
 
-            $(document).on('keypress', 'table#lessons [name="listener_name[]"]', function (e) {
+            $(document).on('keypress', 'table#lessons [name="listener_name[]"],' +
+                'table#lessons [name="number_pages[]"],' +
+                'table#lessons [name="alert[]"],' +
+                'table#lessons [name="mistake[]"],' +
+                'table#lessons [name="last_5_pages[]"],' +
+                'table#lessons [name="daily_revision_from[]"],' +
+                'table#lessons [name="daily_revision_to[]"],' +
+                'table#lessons [name="new_lesson_from[]"],' +
+                'table#lessons [name="new_lesson_to[]"]', function (e) {
 
                 let charCode = !e.charCode ? e.which : e.charCode;
                 let array = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 47, 58, 92, 94, 96, 60, 61, 62, 63, 64, 123, 124, 125, 126, 1567];
