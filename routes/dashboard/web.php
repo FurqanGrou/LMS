@@ -117,6 +117,12 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
     Route::get('holidays', 'HolidayController@index')->name('holidays.index');
     Route::post('holidays', 'HolidayController@store')->name('holidays.store');
 
+    Route::get('/request-services/all-attendanceAbsence/', 'RequestServiceController@showAppliedRequests')->name('request_services.attendanceAbsenceTeachers.index');
+    Route::get('/request-services/attendanceAbsence/{attendanceAbsenceRequests}', 'RequestServiceController@showSingleAppliedRequest')->name('request_services.attendanceAbsenceTeachers.show');
+
+    Route::get('/attendanceAbsence/query-teacher/{attendanceAbsenceRequests}', 'RequestServiceController@assignTeacherQuery')->name('assign.teacher.query');
+    Route::put('/attendanceAbsence/assign-teacher/{attendanceAbsenceRequests}', 'RequestServiceController@assignTeacher')->name('assign.teacher.update');
+
 });
 
 Route::get('clear-cache', function (){

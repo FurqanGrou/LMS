@@ -7,9 +7,11 @@
 </head>
 
 <body class="vertical-layout vertical-menu 2-columns fixed-navbar pace-done menu-collapsed" data-open="click" data-menu="vertical-menu" data-col="2-columns">
-   @include('teachers.layouts.header-navbar')
 
-   @include('teachers.layouts.side-menu')
+  <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+  @include('teachers.layouts.header-navbar')
+
+  @include('teachers.layouts.side-menu')
 
   <div class="app-content content">
     <div class="content-wrapper">

@@ -951,3 +951,29 @@ function clearCache()
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
 }
+
+function getClassName($class_number)
+{
+    return \App\Classes::query()->where('class_number', $class_number)->first()->title ?? '';
+}
+
+function getPeriodTimeAvailable($period){
+    $status = false;
+
+    $hour = Carbon::now()->timezone('Asia/Riyadh');
+
+    switch ($period){
+        case 1: $status = ($hour <= 7); // 09:00 AM
+            break;
+        case 2: $status = ($hour <= 13); // 03:00 PM
+            break;
+        case 3: $status = ($hour <= 17); // 07:00 PM
+            break;
+        case 4: $status = ($hour <= 21); // 11:00 PM
+            break;
+        case 5:
+            $status = ($hour <= 0); // 02:00 AM
+            break;
+    }
+    return $status;
+}
