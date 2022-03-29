@@ -348,25 +348,25 @@
                 $('button[type="submit"] i.fa-check').css('display', 'none');
             });
 
-            $('#form-type-delay select#class_numbers').on('change', function () {
+            {{--$('#form-type-delay select#class_numbers').on('change', function () {--}}
 
-                let date = $('#form-type-delay #date_excuse_delay').val();
-                let class_numbers = $(this).val();
-                let url = '{{ route("teachers.request_services.attendanceAbsenceTeachers.checkPeriod") }}';
+            {{--    let date = $('#form-type-delay #date_excuse_delay').val();--}}
+            {{--    let class_numbers = $(this).val();--}}
+            {{--    let url = '{{ route("teachers.request_services.attendanceAbsenceTeachers.checkPeriod") }}';--}}
 
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    url: url,
-                    data: {
-                        "class_numbers": class_numbers,
-                        "date": date,
-                    },
-                    success: function (data) {
-                        console.log(data);
-                    }
-                });
-            });
+            {{--    $.ajax({--}}
+            {{--        type: "POST",--}}
+            {{--        dataType: "json",--}}
+            {{--        url: url,--}}
+            {{--        data: {--}}
+            {{--            "class_numbers": class_numbers,--}}
+            {{--            "date": date,--}}
+            {{--        },--}}
+            {{--        success: function (data) {--}}
+            {{--            console.log(data);--}}
+            {{--        }--}}
+            {{--    });--}}
+            {{--});--}}
 
         });
     </script>

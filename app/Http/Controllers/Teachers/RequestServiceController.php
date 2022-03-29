@@ -238,23 +238,23 @@ class RequestServiceController extends Controller
         return redirect()->back()->withSuccess('تم تقديم طلبك بنجاح');
     }
 
-    public function checkPeriod(Request $request)
-    {
-        $date = Carbon::today()->toDate()->format('Y-m-d');
-        $classes = Classes::query()->select(['period', 'title', 'class_number'])->whereIn('class_number', $request->class_numbers)->get();
-
-        foreach ($classes as $class){
-            if (getPeriodTimeAvailable($class->period)){
-                continue;
-            }elseif($request->date == $date){
-
-            }else{
-                return response()->json(['status' => getPeriodTimeAvailable($class->period), 'class_number' => $class->class_number]);
-            }
-        }
-
-        return response()->json(['status' => true]);
-    }
+//    public function checkPeriod(Request $request)
+//    {
+//        $date = Carbon::today()->toDate()->format('Y-m-d');
+//        $classes = Classes::query()->select(['period', 'title', 'class_number'])->whereIn('class_number', $request->class_numbers)->get();
+//
+//        foreach ($classes as $class){
+//            if (getPeriodTimeAvailable($class->period)){
+//                continue;
+//            }elseif($request->date == $date){
+//
+//            }else{
+//                return response()->json(['status' => getPeriodTimeAvailable($class->period), 'class_number' => $class->class_number]);
+//            }
+//        }
+//
+//        return response()->json(['status' => true]);
+//    }
 
     public function showAppliedRequests()
     {

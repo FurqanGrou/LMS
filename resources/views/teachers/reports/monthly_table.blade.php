@@ -774,7 +774,7 @@
                 }
             });
 
-            $(document).on('keypress', 'table#lessons [name="listener_name[]"],' +
+            $(document).on("keypress", 'table#lessons [name="listener_name[]"],' +
                 'table#lessons [name="number_pages[]"],' +
                 'table#lessons [name="alert[]"],' +
                 'table#lessons [name="mistake[]"],' +
