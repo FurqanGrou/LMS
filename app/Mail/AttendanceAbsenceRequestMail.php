@@ -12,16 +12,16 @@ class AttendanceAbsenceRequestMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $details;
+    protected $options;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct($options)
     {
-        $this->details = $details;
+        $this->options = $options;
     }
 
     /**
@@ -31,19 +31,24 @@ class AttendanceAbsenceRequestMail extends Mailable
      */
     public function build()
     {
-        $subject = '';
-        switch ($this->details->request_type){
-            case 'absence':
-                $subject = 'طلب - اذن غياب';
-                break;
-            case 'delay':
-                $subject = 'طلب - اذن تأخير';
-                break;
-            case 'exit':
-                $subject = 'طلب - اذن خروج';
-                break;
+
+        if ($this->options['type'] == 'remove') {
+            $subject = 'تم تغيير المعلم الاحتياط - نعتذر لكم على الأزعاج';
+        }else{
+            $subject = '';
+            switch ('delay'){
+                case 'absence':
+                    $subject = 'طلب - اذن غياب';
+                    break;
+                case 'delay':
+                    $subject = 'طلب - اذن تأخير';
+                    break;
+                case 'exit':
+                    $subject = 'طلب - اذن خروج';
+                    break;
+            }
         }
         return $this->subject($subject)
-            ->view('teachers.emails.request_service', ['details' => $this->details]);
+            ->view('teachers.emails.request_service', ['details' => $this->options['details']]);
     }
 }

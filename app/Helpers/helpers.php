@@ -957,22 +957,24 @@ function getClassName($class_number)
     return \App\Classes::query()->where('class_number', $class_number)->first()->title ?? '';
 }
 
-function getPeriodTimeAvailable($period){
+function getPeriodTimeAvailable($data){
     $status = false;
 
-    $hour = Carbon::now()->timezone('Asia/Riyadh');
+    $hour = Carbon::now()->timezone('Asia/Riyadh')->hour;
+    $date = Carbon::now()->format('Y-m-d');
+    $excuse_date = Carbon::createFromFormat('Y-m-d', $data['excuse_date'])->format('Y-m-d');
 
-    switch ($period){
-        case 1: $status = ($hour <= 7); // 09:00 AM
+    switch ($data['period']){
+        case 1: $status = ($hour <= 7 && $date == $excuse_date) || ($date < $excuse_date); // 09:00 AM
             break;
-        case 2: $status = ($hour <= 13); // 03:00 PM
+        case 2: $status = ($hour <= 13 && $date == $excuse_date) || ($date < $excuse_date); // 03:00 PM
             break;
-        case 3: $status = ($hour <= 17); // 07:00 PM
+        case 3: $status = ($hour <= 17 && $date == $excuse_date) || ($date < $excuse_date); // 07:00 PM
             break;
-        case 4: $status = ($hour <= 21); // 11:00 PM
+        case 4: $status = ($hour <= 21 && $date == $excuse_date) || ($date < $excuse_date); // 11:00 PM
             break;
         case 5:
-            $status = ($hour <= 0); // 02:00 AM
+            $status = ($hour <= 0 && $date == $excuse_date) || ($date < $excuse_date); // 02:00 AM
             break;
     }
     return $status;

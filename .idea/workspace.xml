@@ -31,9 +31,17 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AttendanceAbsenceRequests.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AttendanceAbsenceRequests.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ClassesTeachers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ClassesTeachers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/helpers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/RequestServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/RequestServiceController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/RequestServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/RequestServiceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Mail/AttendanceAbsenceRequestMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/AttendanceAbsenceRequestMail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_03_06_092946_create_attendance_absence_requests_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_03_06_092946_create_attendance_absence_requests_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/request_services/show_attendanceAbsence.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/request_services/show_attendanceAbsence.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/teachers/emails/request_service.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/emails/request_service.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/teachers/request_services/attendanceAbsence.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/request_services/attendanceAbsence.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/teachers/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/teachers/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -456,7 +464,12 @@
       <workItem from="1647892001039" duration="6699000" />
       <workItem from="1647932754626" duration="510000" />
       <workItem from="1648387575371" duration="11875000" />
-      <workItem from="1648556081306" duration="3969000" />
+      <workItem from="1648556081306" duration="5478000" />
+      <workItem from="1648582793138" duration="8039000" />
+      <workItem from="1648641707443" duration="13523000" />
+      <workItem from="1648708215518" duration="1609000" />
+      <workItem from="1648710986753" duration="5951000" />
+      <workItem from="1648717079831" duration="4395000" />
     </task>
     <servers />
   </component>
@@ -488,14 +501,14 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1646836270684">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1648711861482">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1646836270684" />
-    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1646838462085">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1648711861482" />
+    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1648719695248">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1646838462085" />
+    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1648719695248" />
     <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1648414368089">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -508,13 +521,13 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1646249491722" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1648402772773">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1648720392418">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1648402772773" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1648571811828">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1648720392418" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1648721887515">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1648571811828" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1648721887515" />
   </component>
 </project>

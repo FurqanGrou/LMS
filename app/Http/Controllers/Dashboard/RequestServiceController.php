@@ -8,12 +8,16 @@ use App\ClassesTeachers;
 use App\DataTables\RequestServiceDatatable;
 use App\Form;
 use App\Http\Controllers\Controller;
+use App\Mail\AttendanceAbsenceRequestMail;
+use App\Notifications\userReportMonthlyNotification;
 use App\Service;
 use App\Teacher;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class RequestServiceController extends Controller
 {
@@ -95,21 +99,28 @@ class RequestServiceController extends Controller
         try {
             DB::beginTransaction();
                 $teacher = Teacher::find($request->teacher_id);
-                $request->available_to_date;
 
-                ClassesTeachers::query()
-                    ->where('class_number', '=', $attendanceAbsenceRequests->class_number)
-                    ->where('role', '=', 'spare')
-                    ->delete();
+                $teacher_spare = DB::table('classes_teachers')
+                        ->where('class_number', '=', $attendanceAbsenceRequests->class_number)
+                        ->where('role', '=', 'spare');
+                $teacher_result = $teacher_spare->first();
+
+                // send email to previous spare teachers
+                if ($teacher_result){
+//                    Mail::to($teacher_result->teacher_email)
+//                        ->bcc(['lmsfurqan1@gmail.com'])
+//                        ->send(new AttendanceAbsenceRequestMail(['details' => $attendanceAbsenceRequests, 'type' => 'remove']));
+                    $teacher_spare->delete();
+                }
 
                 ClassesTeachers::query()->create([
-                    'class_number'  => $attendanceAbsenceRequests->class_number,
-                    'teacher_email' => $teacher->email,
-                    'type' => $teacher->section,
-                    'role' => 'spare',
-                ]);
+                        'class_number'  => $attendanceAbsenceRequests->class_number,
+                        'teacher_email' => $teacher->email,
+                        'type' => $teacher->section,
+                        'role' => 'spare',
+                    ]);
 
-                $attendanceAbsenceRequests->update([
+                 $attendanceAbsenceRequests->update([
                     'spare_teacher_id' => $request->teacher_id,
                     'status' => 'processing',
                     'available_to_date' => $request->available_to_date,
@@ -117,11 +128,13 @@ class RequestServiceController extends Controller
                 ]);
 
                 // here will send mail to spare teachers
+//                Mail::to($teacher->email)
+//                    ->bcc(['lmsfurqan1@gmail.com'])
+//                    ->send(new AttendanceAbsenceRequestMail(['details' => $attendanceAbsenceRequests, 'type' => 'add']));
 
             DB::commit();
         }catch (\Throwable $e){
             DB::rollBack();
-            dd($e);
             return response()->json(['msg' => "حدث خطأ ما"], 500);
         }
 

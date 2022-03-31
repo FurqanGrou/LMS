@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class RequestServiceController extends Controller
 {
@@ -194,67 +195,58 @@ class RequestServiceController extends Controller
         return view('teachers.request_services.attendanceAbsence', ['classes' => $classes]);
     }
 
-    public function attendanceAbsenceTeachersStore(Request $request)
+    public function checkPeriod(Request $request)
     {
-
         if (!$request->type){
-            return redirect()->back()->withErrors('يجب عليك التأكد من صحة نوع الطلب');
+            return response()->json(['errors' => ['يجب عليك التأكد من صحة نوع الطلب']], 404);
         }
 
         if ($request->type == 'absence' && $request->reason_excuse == 'null'){
-            return redirect()->back()->withErrors('يجب عليك التأكد من صحة سبب الغياب');
+            return response()->json(['errors' => ['يجب عليك التأكد من صحة سبب الغياب']], 404);
         }
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
+            'class_number' => 'required|numeric',
             'date_excuse' => 'required|date',
             'reason_excuse' => 'required|string',
             'absence_reason' => ($request->reason_excuse == 'other' && $request->type == 'absence') ? 'required|string' : 'nullable',
             'duration_delay' => ($request->type == 'delay') ? 'required' : 'nullable',
             'exit_time' => ($request->type == 'exit') ? 'required' : 'nullable',
-            'class_numbers' => 'required',
         ], [
+            'date.required' => 'يجب عليك اختيار تاريخ صالح',
+            'class_number.required' => 'يجب عليك اختيار حلقة صحيحة',
             'date_excuse.required' => 'يجب عليك التأكد من إدخال تاريخ العذر',
             'date_excuse.date'     => 'يجب عليك التأكد من صحة تاريخ العذر',
             'reason_excuse.required'  => 'يجب عليك التأكد من إدخال العذر/السبب',
             'absence_reason.required' => 'يجب عليك التأكد من إدخال العذر/السبب',
             'duration_delay.required' => 'يجب عليك التأكد من إدخال مدة التأخير',
             'exit_time.required'      => 'يجب عليك التأكد من إدخال موعد الخروج',
-            'class_numbers.required'      => 'يجب عليك التأكد من اختيار حلقة على الأقل',
         ]);
 
-        foreach ($request->class_numbers as $class_number){
-            AttendanceAbsenceRequests::query()->create([
-                'request_type' => $request->type,
-                'date_excuse' => $request->date_excuse,
-                'reason_excuse' => ($request->reason_excuse == 'other' && $request->type == 'absence') ? $request->absence_reason : $request->reason_excuse,
-                'additional_attachments_path' => ($request->type == 'absence' && $request->absence_additional_attachments) ? $request->file('absence_additional_attachments')->store('/absence_additional_attachments') : null,
-                'duration_delay' => $request->duration_delay,
-                'exit_time' => $request->exit_time,
-                'teacher_id' => auth('teacher_web')->user()->id,
-                'class_number' => $class_number,
-            ]);
+        if($validator->fails()){
+            return response()->json(['errors' => $validator->errors()->all()], 404);
         }
 
-        return redirect()->back()->withSuccess('تم تقديم طلبك بنجاح');
-    }
+        $class = Classes::query()->select(['period', 'title', 'class_number'])->where('class_number', '=', $request->class_number)->first();
+        $status = getPeriodTimeAvailable(['period' => $class->period, 'excuse_date' => $request->date_excuse]);
 
-//    public function checkPeriod(Request $request)
-//    {
-//        $date = Carbon::today()->toDate()->format('Y-m-d');
-//        $classes = Classes::query()->select(['period', 'title', 'class_number'])->whereIn('class_number', $request->class_numbers)->get();
-//
-//        foreach ($classes as $class){
-//            if (getPeriodTimeAvailable($class->period)){
-//                continue;
-//            }elseif($request->date == $date){
-//
-//            }else{
-//                return response()->json(['status' => getPeriodTimeAvailable($class->period), 'class_number' => $class->class_number]);
-//            }
-//        }
-//
-//        return response()->json(['status' => true]);
-//    }
+        if(!$status){
+            return response()->json(['status' => $status, 'errors' => ['لا يمكنك طلب الاذن إلا قبل موعد الحلقة بساعتين أو أكثر']], 404);
+        }
+
+        AttendanceAbsenceRequests::query()->create([
+            'request_type' => $request->type,
+            'date_excuse' => $request->date_excuse,
+            'reason_excuse' => ($request->reason_excuse == 'other' && $request->type == 'absence') ? $request->absence_reason : $request->reason_excuse,
+            'additional_attachments_path' => ($request->type == 'absence' && $request->absence_additional_attachment) ? $request->file('absence_additional_attachment')->store('/absence_additional_attachment') : null,
+            'duration_delay' => $request->duration_delay,
+            'exit_time' => $request->exit_time,
+            'teacher_id' => auth('teacher_web')->user()->id,
+            'class_number' => $request->class_number,
+        ]);
+
+        return response()->json(['status' => $status, 'errors' => []], 200);
+    }
 
     public function showAppliedRequests()
     {

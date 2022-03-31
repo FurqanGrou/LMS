@@ -58,10 +58,7 @@
                                                     <span class="badge badge-status-request @if($appliedRequest->status == 'pending') {{ 'badge-danger' }} @elseif($appliedRequest->status == 'processing') {{ 'badge-success' }} @else {{ 'badge-primary' }} @endif">{{ $appliedRequest->status_title }}</span>
                                                 </td>
                                                 <td>
-    {{--                                                <a href="{{ route('admins.request_services.attendanceAbsenceTeachers.show', $appliedRequest) }}" class="btn btn-info mr-1">--}}
-    {{--                                                    <i class="fa fa-eye"></i>--}}
-    {{--                                                </a>--}}
-                                                    @if($appliedRequest->date_excuse < \Carbon\Carbon::now() || $appliedRequest->status == 'completed')
+                                                    @if( (!getPeriodTimeAvailable(['period' => @$appliedRequest->classNumber->period, 'excuse_date' => $appliedRequest->date_excuse])) || $appliedRequest->status == 'completed')
                                                         <a href="#" class="btn btn-success disabled" data-toggle="modal" data-target="#">
                                                             <i class="fa fa-plus-circle"></i>
                                                         </a>
@@ -84,7 +81,7 @@
         </div>
     </div>
 
-    <div class="modal fade text-left" id="add_teacher_to_class" tabindex="-1" role="dialog" aria-labelledby="add_teacher_to_class"
+    <div class="modal fade text-left" id="add_teacher_to_class" role="dialog" aria-labelledby="add_teacher_to_class"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -237,6 +234,7 @@
                     $('button[type="submit"] i.fa-spinner').css('display', 'inline-block');
                     $('button[type="submit"] i.fa-check').css('display', 'none');
                 });
+
             });
         </script>
     @endpush

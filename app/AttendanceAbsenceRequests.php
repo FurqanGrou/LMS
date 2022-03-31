@@ -17,41 +17,40 @@ class AttendanceAbsenceRequests extends Model
     protected static function booted()
     {
         static::created(function(AttendanceAbsenceRequests $absenceRequests) {
-
-            $supervisor_emails = ClassesTeachers::query()
-                ->where('role', '=', 'supervisor')
-                ->where('class_number', '=', $absenceRequests->class_number)
-                ->distinct()
-                ->pluck('teacher_email')
-                ->toArray();
-
-//            Mail::to($supervisor_emails)
-            Mail::to(['lmsfurqan1@gmail.com'])
-//                ->cc([self::$to_mails[$absenceRequests->teacher->section]])
-                ->bcc(self::$bcc)
-                ->send(new AttendanceAbsenceRequestMail($absenceRequests));
-
+//
+//            $supervisor_emails = ClassesTeachers::query()
+//                ->where('role', '=', 'supervisor')
+//                ->where('class_number', '=', $absenceRequests->class_number)
+//                ->distinct()
+//                ->pluck('teacher_email')
+//                ->toArray();
+//
+////            Mail::to($supervisor_emails)
+//            Mail::to(['lmsfurqan1@gmail.com'])
+////                ->cc([self::$to_mails[$absenceRequests->teacher->section]])
+//                ->bcc(self::$bcc)
+//                ->send(new AttendanceAbsenceRequestMail($absenceRequests));
+//
             Cache::forget('appliedRequests');
         });
 
         static::updated(function(AttendanceAbsenceRequests $absenceRequests) {
-
-            $supervisor_emails = ClassesTeachers::query()
-                ->where('role', '=', 'supervisor')
-                ->where('class_number', '=', $absenceRequests->class_number)
-                ->distinct()
-                ->pluck('teacher_email')
-                ->toArray();
-
-//            Mail::to($supervisor_emails)
-            Mail::to(['lmsfurqan1@gmail.com'])
-//                ->cc([self::$to_mails[$absenceRequests->teacher->section]])
-                ->bcc(self::$bcc)
-                ->send(new AttendanceAbsenceRequestMail($absenceRequests));
-
+//
+//            $supervisor_emails = ClassesTeachers::query()
+//                ->where('role', '=', 'supervisor')
+//                ->where('class_number', '=', $absenceRequests->class_number)
+//                ->distinct()
+//                ->pluck('teacher_email')
+//                ->toArray();
+//
+////            Mail::to($supervisor_emails)
+//            Mail::to(['lmsfurqan1@gmail.com'])
+////                ->cc([self::$to_mails[$absenceRequests->teacher->section]])
+//                ->bcc(self::$bcc)
+//                ->send(new AttendanceAbsenceRequestMail($absenceRequests));
+//
             Cache::forget('appliedRequests');
         });
-
     }
 
     public function teacher()

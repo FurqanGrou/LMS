@@ -22,7 +22,7 @@ class CreateAttendanceAbsenceRequestsTable extends Migration
             $table->string('duration_delay')->nullable();
             $table->string('exit_time')->nullable();
             $table->integer('teacher_id');
-            $table->json('class_numbers');
+            $table->json('class_number');
             $table->integer('spare_teacher_id')->nullable();
             $table->enum('status', ['pending', 'processing', 'completed'])->default('pending');
             $table->date('available_to_date')->nullable();
