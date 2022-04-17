@@ -101,7 +101,3 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
 Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Controllers\Auth'], function (){
     Route::get('/login', 'TeacherLoginController@showLoginForm')->name('dashboard.login.form');
 });
-
-Route::get('test123', function (){
-    dd(getPeriodTimeAvailable(5));
-});

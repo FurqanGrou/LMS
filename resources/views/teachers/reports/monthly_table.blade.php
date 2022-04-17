@@ -943,9 +943,12 @@
             });
 
             $(document).on('change', 'form#monthly_report #grades input, form#monthly_report #grades select[name="notes_to_parent[]"]', function (e) {
+
                 e.preventDefault();
-                let created_at = '{{ request()->date_filter ?? \Carbon\Carbon::now()->format('Y-m') }}';
-                let student_id = '{{ request()->student_id }}';
+
+                let report_date = $(this).parent().parent().find("input[name=created_at]").val();
+                let created_at  = '{{ request()->date_filter ?? \Carbon\Carbon::now()->format('Y-m') }}';
+                let student_id  = '{{ request()->student_id }}';
 
                 // fire update monthly scores event
                 $.ajax({
@@ -955,6 +958,7 @@
                     data: {
                         'student_id': student_id,
                         'created_at': created_at,
+                        'report_date': report_date,
                     },
                 });
             });

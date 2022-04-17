@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Log;
 
 function getPeriod($number){
     $name = '';
@@ -978,4 +977,30 @@ function getPeriodTimeAvailable($data){
             break;
     }
     return $status;
+}
+
+function checkAbleToUpdateMonthlyScores($report)
+{
+    $report = Carbon::parse($report->report_date);
+
+    $report_date  = $report->format('Y-m-d');
+    $report_month = $report->format('m');
+    $report_year  = $report->format('Y');
+
+    $day   = env('SPECIFIC_DAY');
+    $month = substr(env('SPECIFIC_MONTH_YEAR'), -2);
+    $year  = substr(env('SPECIFIC_MONTH_YEAR'), 0, 4);
+
+    if(is_numeric($day) && $report_month == $month && $report_year == $year){
+        $day = intval(env('SPECIFIC_DAY'));
+        $date = Carbon::createFromDate($year, $month, $day); // SPECIFIC DATE TO SEND = 18
+
+        if ($date >= $report_date){
+            return true;
+        }
+
+        return false;
+    }
+
+    return true;
 }
