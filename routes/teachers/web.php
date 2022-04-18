@@ -1,5 +1,7 @@
 <?php
 
+use App\AttendanceAbsenceRequests;
+use App\ClassesTeachers;
 use App\MonthlyScore;
 use App\Report;
 use App\Teacher;
@@ -83,20 +85,19 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     Route::get('/request-services/meetings-admin/create', 'RequestServiceController@createMeetingWithAdmin')->name('request_services.meetings-admin.create');
     Route::post('/request-services/meetings-admin', 'RequestServiceController@storeMeetingWithAdmin')->name('request_services.meetings.store');
 
+    //Attendance Absence
+    Route::get('/request-services/attendanceAbsence', 'RequestServiceController@attendanceAbsenceTeachers')->name('request_services.attendanceAbsenceTeachers.create');
+    Route::post('/request-services/attendanceAbsence', 'RequestServiceController@attendanceAbsenceTeachersStore')->name('request_services.attendanceAbsenceTeachers.store');
+    Route::get('/request-services/all-attendanceAbsence/', 'RequestServiceController@showAppliedRequests')->name('request_services.attendanceAbsenceTeachers.index');
+    Route::get('/request-services/attendanceAbsence/{attendanceAbsenceRequests}', 'RequestServiceController@showSingleAppliedRequest')->name('request_services.attendanceAbsenceTeachers.show');
+    Route::get('/request-services/attendanceAbsence/{attendanceAbsenceRequests}/edit', 'RequestServiceController@editAttendanceAbsence')->name('request_services.attendanceAbsenceTeachers.edit');
+    Route::put('/request-services/attendanceAbsence/{attendanceAbsenceRequests}', 'RequestServiceController@updateAttendanceAbsence')->name('request_services.attendanceAbsenceTeachers.update');
+
+    // ajax to check period of class
+    Route::post('/request-services/attendanceAbsence/checkPeriod', 'RequestServiceController@checkPeriod')->name('request_services.attendanceAbsenceTeachers.checkPeriod');
+
 });
 
 Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Controllers\Auth'], function (){
     Route::get('/login', 'TeacherLoginController@showLoginForm')->name('dashboard.login.form');
-});
-
-Route::get('test123', function (){
-
-//    $reports = Report::query()
-//        ->whereMonth('created_at', '=', 12)
-//        ->whereYear('created_at', '=', 2021)
-//        ->whereDay('created_at', '>', 16)
-//        ->where('student_id', '=', 5)
-//        ->get();
-//
-//    dd($reports);
 });

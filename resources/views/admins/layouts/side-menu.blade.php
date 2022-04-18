@@ -77,6 +77,13 @@
             </li>
 
             <li class="nav-item">
+                <a href="{{ route('admins.request_services.attendanceAbsenceTeachers.index') }}">
+                    <i class="ft-sliders"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">الاذونات</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a href="#">
                     <i class="ft-log-in"></i>
                     <span class="menu-title" data-i18n="nav.templates.main">الحضور والانصراف</span>

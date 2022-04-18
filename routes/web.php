@@ -20,7 +20,6 @@ Route::get('/', function () {
 Route::group(['prefix' => 'dashboard_students', 'namespace' => '\App\Http\Controllers\Auth', 'as' => 'students.'], function (){
     Route::get('/login', 'LoginController@showLoginForm')->name('login.form');
     Route::post('/login', 'LoginController@login')->name('login.post');
-
 });
 
 Route::group(['prefix' => 'dashboard_students', 'as' => 'students.', 'middleware' => ['auth']], function (){
@@ -31,7 +30,6 @@ Route::group(['prefix' => 'dashboard_students', 'as' => 'students.', 'middleware
     Route::get('report/{id}', 'StudentController@showReport')->name('student.showReport');
     Route::get('download/{report_id}', 'StudentController@generate_pdf')->name('student.download');
 });
-
 
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');

@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Support\Facades\DB;
 
@@ -16,71 +17,76 @@ class Report extends Model implements Auditable
     protected static function booted()
     {
         static::created(function(Report $report) {
-            $current_month_year = Carbon::today()->format('Y-m');
-            $report_month_year = $report->created_at->format('Y-m');
 
-            if ($current_month_year == $report_month_year){
-                $student_path = getStudentPath($report->student_id);
+            if (checkAbleToUpdateMonthlyScores($report)){
+                $current_month_year = Carbon::today()->format('Y-m');
+                $report_month_year = $report->created_at->format('Y-m');
 
-                $new_lessons_not_listened = getLessonsNotListenedCount($report->student_id);
-                $last_five_pages_not_listened = getLastFivePagesNotListenedCount($report->student_id);
-                $daily_revision_not_listened = getDailyRevisionNotListenedCount($report->student_id);
-                $absence_excuse_days = getAbsenceCount($report->student_id, -2);
-                $absence_unexcused_days = getAbsenceCount($report->student_id, -5);
+                if ($current_month_year == $report_month_year){
+                    $student_path = getStudentPath($report->student_id);
 
-                DB::table('monthly_scores')->updateOrInsert(
-                    [
-                        'user_id' => $report->student_id,
-                        'month_year' => $report->created_at->format('Y-m'),
-                    ],
-                    [
-                        'path' => $student_path,
-                        'new_lessons_not_listened' => $new_lessons_not_listened,
-                        'last_five_pages_not_listened' => $last_five_pages_not_listened,
-                        'daily_revision_not_listened' => $daily_revision_not_listened,
-                        'absence_excuse_days' => $absence_excuse_days,
-                        'absence_unexcused_days' => $absence_unexcused_days,
-                        'avg' => 100 + (
-                                ($new_lessons_not_listened * -getPathDefaultGrade($student_path, 'new_lesson')) +
-                                ($last_five_pages_not_listened * -getPathDefaultGrade($student_path, 'last_5_pages')) +
-                                ($daily_revision_not_listened * -getPathDefaultGrade($student_path, 'daily_revision')) +
-                                ($absence_excuse_days * -2) +
-                                ($absence_unexcused_days * -5)
-                            ),
-                    ]
-                );
-            }else{
-                $month = $report->created_at->format('m');
-                $month_year = $report->created_at->format('Y-m');
-                $student_path = getStudentPath($report->student_id, $month_year);
+                    $new_lessons_not_listened = getLessonsNotListenedCount($report->student_id);
+                    $last_five_pages_not_listened = getLastFivePagesNotListenedCount($report->student_id);
+                    $daily_revision_not_listened = getDailyRevisionNotListenedCount($report->student_id);
+                    $absence_excuse_days = getAbsenceCount($report->student_id, -2);
+                    $absence_unexcused_days = getAbsenceCount($report->student_id, -5);
 
-                $new_lessons_not_listened = getLessonsNotListenedCount($report->student_id, $month);
-                $last_five_pages_not_listened = getLastFivePagesNotListenedCount($report->student_id, $month);
-                $daily_revision_not_listened = getDailyRevisionNotListenedCount($report->student_id, $month);
-                $absence_excuse_days = getAbsenceCount($report->student_id, -2, $month);
-                $absence_unexcused_days = getAbsenceCount($report->student_id, -5, $month);
+                    DB::table('monthly_scores')->updateOrInsert(
+                        [
+                            'user_id' => $report->student_id,
+                            'month_year' => $report->created_at->format('Y-m'),
+                        ],
+                        [
+                            'path' => $student_path,
+                            'new_lessons_not_listened' => $new_lessons_not_listened,
+                            'last_five_pages_not_listened' => $last_five_pages_not_listened,
+                            'daily_revision_not_listened' => $daily_revision_not_listened,
+                            'absence_excuse_days' => $absence_excuse_days,
+                            'absence_unexcused_days' => $absence_unexcused_days,
+                            'avg' => 100 + (
+                                    ($new_lessons_not_listened * -getPathDefaultGrade($student_path, 'new_lesson')) +
+                                    ($last_five_pages_not_listened * -getPathDefaultGrade($student_path, 'last_5_pages')) +
+                                    ($daily_revision_not_listened * -getPathDefaultGrade($student_path, 'daily_revision')) +
+                                    ($absence_excuse_days * -2) +
+                                    ($absence_unexcused_days * -5)
+                                ),
+                        ]
+                    );
+                }else{
+                    $month = $report->created_at->format('m');
+                    $month_year = $report->created_at->format('Y-m');
+                    $student_path = getStudentPath($report->student_id, $month_year);
 
-                DB::table('monthly_scores')->updateOrInsert(
-                    [
-                        'user_id' => $report->student_id,
-                        'month_year' => $report->created_at->format('Y-m'),
-                    ],
-                    [
-                        'new_lessons_not_listened' => $new_lessons_not_listened,
-                        'last_five_pages_not_listened' => $last_five_pages_not_listened,
-                        'daily_revision_not_listened' => $daily_revision_not_listened,
-                        'absence_excuse_days' => $absence_excuse_days,
-                        'absence_unexcused_days' => $absence_unexcused_days,
-                        'avg' => 100 + (
-                                ($new_lessons_not_listened * -getPathDefaultGrade($student_path, 'new_lesson')) +
-                                ($last_five_pages_not_listened * -getPathDefaultGrade($student_path, 'last_5_pages')) +
-                                ($daily_revision_not_listened * -getPathDefaultGrade($student_path, 'daily_revision')) +
-                                ($absence_excuse_days * -2) +
-                                ($absence_unexcused_days * -5)
-                            ),
-                    ]
-                );
+                    $new_lessons_not_listened = getLessonsNotListenedCount($report->student_id, $month);
+                    $last_five_pages_not_listened = getLastFivePagesNotListenedCount($report->student_id, $month);
+                    $daily_revision_not_listened = getDailyRevisionNotListenedCount($report->student_id, $month);
+                    $absence_excuse_days = getAbsenceCount($report->student_id, -2, $month);
+                    $absence_unexcused_days = getAbsenceCount($report->student_id, -5, $month);
+
+                    DB::table('monthly_scores')->updateOrInsert(
+                        [
+                            'user_id' => $report->student_id,
+                            'month_year' => $report->created_at->format('Y-m'),
+                        ],
+                        [
+                            'new_lessons_not_listened' => $new_lessons_not_listened,
+                            'last_five_pages_not_listened' => $last_five_pages_not_listened,
+                            'daily_revision_not_listened' => $daily_revision_not_listened,
+                            'absence_excuse_days' => $absence_excuse_days,
+                            'absence_unexcused_days' => $absence_unexcused_days,
+                            'avg' => 100 + (
+                                    ($new_lessons_not_listened * -getPathDefaultGrade($student_path, 'new_lesson')) +
+                                    ($last_five_pages_not_listened * -getPathDefaultGrade($student_path, 'last_5_pages')) +
+                                    ($daily_revision_not_listened * -getPathDefaultGrade($student_path, 'daily_revision')) +
+                                    ($absence_excuse_days * -2) +
+                                    ($absence_unexcused_days * -5)
+                                ),
+                        ]
+                    );
+                }
+
             }
+
         });
 
 //        static::updated(function(Report $report) {

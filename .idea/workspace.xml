@@ -31,10 +31,7 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/InsertPreviousMonthlyScoresSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/InsertPreviousMonthlyScoresSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,6 +179,7 @@
       <path value="$PROJECT_DIR$/vendor/maximebf/debugbar" />
       <path value="$PROJECT_DIR$/vendor/symfony/debug" />
       <path value="$PROJECT_DIR$/vendor/predis/predis" />
+      <path value="$PROJECT_DIR$/vendor/setasign/fpdf" />
     </include_path>
   </component>
   <component name="ProjectId" id="1pr2sNwwpUMbe3CuJXvJzXjYHNR" />
@@ -192,7 +190,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/emails/admin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -206,11 +204,11 @@
       <recent name="B:\LMS\staging\lms_3_staging\public" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\request_services" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\teachers\request_services" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\teachers\emails" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\admins" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\settings" />
-      <recent name="B:\LMS\lms_hatim\public\dashboard\assets\img" />
-      <recent name="B:\LMS\lms_hatim\resources\views\teachers\emails" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.ExamRequestController.php">
@@ -442,7 +440,39 @@
       <workItem from="1646054096755" duration="13064000" />
       <workItem from="1646082333571" duration="3020000" />
       <workItem from="1646147183286" duration="25000" />
-      <workItem from="1646246184626" duration="10231000" />
+      <workItem from="1646246184626" duration="20516000" />
+      <workItem from="1646391540914" duration="1260000" />
+      <workItem from="1646574489684" duration="23222000" />
+      <workItem from="1646658376161" duration="21380000" />
+      <workItem from="1646720699321" duration="17043000" />
+      <workItem from="1646750846529" duration="1070000" />
+      <workItem from="1646756704896" duration="146000" />
+      <workItem from="1646827898448" duration="16719000" />
+      <workItem from="1646893637901" duration="1640000" />
+      <workItem from="1647157529633" duration="1380000" />
+      <workItem from="1647176973335" duration="712000" />
+      <workItem from="1647438913911" duration="4316000" />
+      <workItem from="1647892001039" duration="6699000" />
+      <workItem from="1647932754626" duration="510000" />
+      <workItem from="1648387575371" duration="11875000" />
+      <workItem from="1648556081306" duration="5478000" />
+      <workItem from="1648582793138" duration="8039000" />
+      <workItem from="1648641707443" duration="13523000" />
+      <workItem from="1648708215518" duration="1609000" />
+      <workItem from="1648710986753" duration="5951000" />
+      <workItem from="1648717079831" duration="5002000" />
+      <workItem from="1648802449764" duration="1369000" />
+      <workItem from="1648948394543" duration="657000" />
+      <workItem from="1649248034859" duration="8000" />
+      <workItem from="1649283122320" duration="38000" />
+      <workItem from="1649285471731" duration="9044000" />
+      <workItem from="1649327162918" duration="4099000" />
+      <workItem from="1649491667803" duration="892000" />
+      <workItem from="1649595689729" duration="35000" />
+      <workItem from="1649706106941" duration="3224000" />
+      <workItem from="1649748593304" duration="1803000" />
+      <workItem from="1649765531780" duration="964000" />
+      <workItem from="1650197901202" duration="18925000" />
     </task>
     <servers />
   </component>
@@ -474,37 +504,37 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1646293850501">
+    <state x="445" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1648806100483">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1646293850501" />
-    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1646293134926">
+    <state x="445" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1648806100483" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1648711861482">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1646293134926" />
-    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1646147205208">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1648711861482" />
+    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1650207735753">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1646147205208" />
-    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1643056324374">
+    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1650207735753" />
+    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1649767976606">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1643056324374" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1639515100922">
+    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1649767976606" />
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1646672497604">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1639515100922" />
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1646672497604" />
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1646249491722">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1646249491722" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1643108689451">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1650224833149">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1643108689451" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1646295981106">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1650224833149" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1650269251935">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1646295981106" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1650269251935" />
   </component>
 </project>

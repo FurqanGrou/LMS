@@ -16,13 +16,13 @@
                     </ul>
                 </div>
             </div>
-            <form action="/dashboard-admins/admins/audits" method="get">
-                <select name="teacher">
-                    @foreach(App\Teacher::get() as $tech)
-                    <option value="{{$tech->id}}">{{$tech->name}}</option>
+            <form action="{{ route('admins.audits.index') }}" method="GET" class="m-auto">
+                <select name="teacher" class="form-control">
+                    @foreach($teachers as $teacher)
+                        <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
                     @endforeach
                 </select>
-                <button type="submit">بحث</button>
+                <button type="submit" class="btn btn-primary form-control white mt-1">بحث</button>
             </form>
 
             <div class="card-content collapse show">
@@ -31,21 +31,39 @@
                         <table id="tables" class="table table-striped table-bordered dataTable">
                             <tbody>
                                 @foreach ($audits as $audit)
-                                <tr>
-                                    <td> <span>{{$audit->created_at}}</span> <strong>{{$audit->user->name}}</strong>  <span>{{substr($audit->auditable_type,4)}}</span> <strong>ID</strong> <span>{{$audit->auditable_id}}</span></td>
+                                    <tr>
+                                        <td>
+                                            <span>{{ $audit->created_at->timezone('asia/riyadh')->format('g:i A Y-m-d') }}</span>
+                                            <br>
+                                            <strong>
+                                                تم التعديل بواسطة:
+                                                {{ $audit->user->name }}
+                                            </strong>
+                                            <br>
+                                            <span>({{ substr($audit->auditable_type, 4) }})</span>
+                                            <br>
+                                            <strong>ID</strong>
+                                            <span>{{ $audit->auditable_id }}</span>
+                                        </td>
                                     <td>
-                                    <strong>{{$audit->event}}</strong><br>    
-                                    @foreach ($audit->getModified() as $attribute => $modified)
-                                        <ul>
-                                            <li> @if (isset($modified['new']))
-                                                {{$modified['new']}}
-                                                @endif
-                                                <strong>-</strong>
-                                                @if (isset($modified['old']))
-                                                {{$modified['old']}}
-                                                @endif
-                                            </li>
-                                        </ul>
+                                        <strong>نوع العملية: {{ $audit->event }}</strong>
+                                        <br>
+                                        @foreach ($audit->getModified() as $attribute => $modified)
+                                            <ul>
+                                                <li>
+                                                    العمود: {{ $attribute }}
+                                                    <br>
+                                                    <strong> القيمة السابقة</strong>
+                                                    @if(isset($modified['old']))
+                                                        {{$modified['old']}}
+                                                    @endif
+                                                    <br>
+                                                    <strong>القيمة الجديدة</strong>
+                                                    @if (isset($modified['new']))
+                                                        {{$modified['new']}}
+                                                    @endif
+                                                </li>
+                                            </ul>
                                         @endforeach
                                     </td>
                                     <td></td>
@@ -54,6 +72,7 @@
                             </tbody>
                         </table>
 
+                        {{ $audits->links() }}
                         <div class="box-body">
 
                         </div>

@@ -774,12 +774,16 @@
                 }
             });
 
-            $(document).on('keypress', 'table#lessons [name="listener_name[]"]', function (e) {
+            $(document).on("keypress", 'table#lessons [name="number_pages[]"],' +
+                'table#lessons [name="alert[]"],' +
+                'table#lessons [name="mistake[]"],' +
+                'table#lessons [name="daily_revision_from[]"],' +
+                'table#lessons [name="new_lesson_from[]"]', function (e) {
 
                 let charCode = !e.charCode ? e.which : e.charCode;
                 let array = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 47, 58, 92, 94, 96, 60, 61, 62, 63, 64, 123, 124, 125, 126, 1567];
 
-                if(charCode <= 57 && charCode >= 48 || array.includes(charCode) ){
+                if( !(charCode <= 57 && charCode >= 43) || array.includes(charCode) ){
                     e.preventDefault();
                 }
 
@@ -935,9 +939,12 @@
             });
 
             $(document).on('change', 'form#monthly_report #grades input, form#monthly_report #grades select[name="notes_to_parent[]"]', function (e) {
+
                 e.preventDefault();
-                let created_at = '{{ request()->date_filter ?? \Carbon\Carbon::now()->format('Y-m') }}';
-                let student_id = '{{ request()->student_id }}';
+
+                let report_date = $(this).parent().parent().find("input[name=created_at]").val();
+                let created_at  = '{{ request()->date_filter ?? \Carbon\Carbon::now()->format('Y-m') }}';
+                let student_id  = '{{ request()->student_id }}';
 
                 // fire update monthly scores event
                 $.ajax({
@@ -947,6 +954,7 @@
                     data: {
                         'student_id': student_id,
                         'created_at': created_at,
+                        'report_date': report_date,
                     },
                 });
             });

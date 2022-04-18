@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Log;
 
 function getPeriod($number){
     $name = '';
@@ -950,4 +949,58 @@ function clearCache()
 {
     Artisan::call('config:clear');
     Artisan::call('cache:clear');
+}
+
+function getClassName($class_number)
+{
+    return \App\Classes::query()->where('class_number', $class_number)->first()->title ?? '';
+}
+
+function getPeriodTimeAvailable($data){
+    $status = false;
+
+    $hour = Carbon::now()->timezone('Asia/Riyadh')->hour;
+    $date = Carbon::now()->format('Y-m-d');
+    $excuse_date = Carbon::createFromFormat('Y-m-d', $data['excuse_date'])->format('Y-m-d');
+
+    switch ($data['period']){
+        case 1: $status = ($hour <= 7 && $date == $excuse_date) || ($date < $excuse_date); // 09:00 AM
+            break;
+        case 2: $status = ($hour <= 13 && $date == $excuse_date) || ($date < $excuse_date); // 03:00 PM
+            break;
+        case 3: $status = ($hour <= 17 && $date == $excuse_date) || ($date < $excuse_date); // 07:00 PM
+            break;
+        case 4: $status = ($hour <= 21 && $date == $excuse_date) || ($date < $excuse_date); // 11:00 PM
+            break;
+        case 5:
+            $status = ($hour <= 0 && $date == $excuse_date) || ($date < $excuse_date); // 02:00 AM
+            break;
+    }
+    return $status;
+}
+
+function checkAbleToUpdateMonthlyScores($report)
+{
+    $report = Carbon::parse($report->report_date);
+
+    $report_date  = $report->format('Y-m-d');
+    $report_month = $report->format('m');
+    $report_year  = $report->format('Y');
+
+    $day   = env('SPECIFIC_DAY');
+    $month = substr(env('SPECIFIC_MONTH_YEAR'), -2);
+    $year  = substr(env('SPECIFIC_MONTH_YEAR'), 0, 4);
+
+    if(is_numeric($day) && $report_month == $month && $report_year == $year){
+        $day = intval(env('SPECIFIC_DAY'));
+        $date = Carbon::createFromDate($year, $month, $day); // SPECIFIC DATE TO SEND = 18
+
+        if ($date >= $report_date){
+            return true;
+        }
+
+        return false;
+    }
+
+    return true;
 }

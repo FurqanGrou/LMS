@@ -61,6 +61,12 @@
                     <li>
                         <a class="menu-item" href="{{ route('teachers.request_services.meetings.create') }}" data-i18n="nav.templates.vert.classic_menu">طلب اجتماع مع مراقب</a>
                     </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('teachers.request_services.attendanceAbsenceTeachers.create') }}" data-i18n="nav.templates.vert.classic_menu">طلب الاذونات</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('teachers.request_services.attendanceAbsenceTeachers.index') }}" data-i18n="nav.templates.vert.classic_menu">الاذونات المقدمة</a>
+                    </li>
                 </ul>
             </li>
 

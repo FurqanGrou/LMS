@@ -375,10 +375,12 @@ class ReportController extends Controller
 
     public function fireUpdateMonthlyScoresEvent(Request $request)
     {
-        $class_number = User::query()->find($request->student_id)->class_number;
+        if (checkAbleToUpdateMonthlyScores($request)){
+            $class_number = User::query()->find($request->student_id)->class_number;
+            $report = ['created_at' => $request->created_at, 'student_id' => $request->student_id, 'class_number' => $class_number];
+            Event::dispatch(new ReportUpdated($report));
+        }
 
-        $report = ['created_at' => $request->created_at, 'student_id' => $request->student_id, 'class_number' => $class_number];
-        Event::dispatch(new ReportUpdated($report));
     }
 
     public function changePageNumber(Request $request){
