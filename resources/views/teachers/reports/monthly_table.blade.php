@@ -783,7 +783,7 @@
                 let charCode = !e.charCode ? e.which : e.charCode;
                 let array = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 47, 58, 92, 94, 96, 60, 61, 62, 63, 64, 123, 124, 125, 126, 1567];
 
-                if( !(charCode <= 57 && charCode >= 43) || array.includes(charCode) ){
+                if(array.includes(charCode) ){
                     e.preventDefault();
                 }
 
