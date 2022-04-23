@@ -71,7 +71,7 @@ function getAbsenceCount($student_id, $type, $month = false){
 //            $student_path = getStudentPath($student_id, $month);
 //        }
     }else{
-        $today = Carbon::today();
+        $today = getAppropriateToday();
         $currentMonth = date('m');
         $currentYear = date('Y');
 
@@ -264,7 +264,7 @@ function isAchievedDefaultGrades($student_id, $month = false){
             $student_path = getStudentPath($student_id, $month);
         }
     }else{
-        $today = Carbon::today();
+        $today = getAppropriateToday();
         $currentMonth = date('m');
         $currentYear = date('Y');
 
@@ -306,7 +306,7 @@ function checkThirdCondition($student_id, $month = false){
         $myDate = "$currentMonth/01/$currentYear";
         $today = Carbon::createFromFormat('m/d/Y', $myDate)->lastOfMonth();
     }else{
-        $today = Carbon::today();
+        $today = getAppropriateToday();
         $currentMonth = date('m');
         $currentYear = date('Y');
 
@@ -344,7 +344,7 @@ function getLessonsNotListenedCount($student_id, $month = false){
             $student_path = getStudentPath($student_id, $month);
         }
     }else{
-        $today = Carbon::today(); // tomorrow
+        $today = getAppropriateToday(); // tomorrow
         $currentMonth = date('m');
         $currentYear = date('Y');
 
@@ -475,7 +475,7 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
             $student_path = getStudentPath($student_id, $month);
         }
     }else{
-        $today = Carbon::today(); // tomorrow
+        $today = getAppropriateToday(); // tomorrow
         $currentMonth = date('m');
         $currentYear = date('Y');
 
@@ -599,7 +599,7 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
             $student_path = getStudentPath($student_id, $month);
         }
     }else{
-        $today = Carbon::today(); // tomorrow
+        $today = getAppropriateToday(); // tomorrow
         $currentMonth = date('m');
         $currentYear = date('Y');
 
@@ -1003,4 +1003,24 @@ function checkAbleToUpdateMonthlyScores($report)
     }
 
     return true;
+}
+
+function getAppropriateToday()
+{
+
+    $today = Carbon::today();
+
+    $current_year  = $today->format('Y');
+    $current_month = $today->format('m');
+
+    $day   = env('SPECIFIC_DAY');
+    $month = substr(env('SPECIFIC_MONTH_YEAR'), -2);
+    $year  = substr(env('SPECIFIC_MONTH_YEAR'), 0, 4);
+
+    if(is_numeric($day) && $current_month == $month && $current_year == $year){
+        $day = intval(env('SPECIFIC_DAY'));
+        $today = Carbon::createFromDate($year, $month, $day); // SPECIFIC DATE TO SEND = 18
+    }
+
+    return $today;
 }
