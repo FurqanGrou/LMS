@@ -49,9 +49,19 @@ class TeacherLoginController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function showLoginForm()
+    public function showLoginFormOnline()
     {
-        return view('auth.teachers.login');
+        return view('auth.teachers.login_online');
+    }
+
+    /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showLoginFormFaceToFace()
+    {
+        return view('auth.teachers.login_face_to_face');
     }
 
     /**

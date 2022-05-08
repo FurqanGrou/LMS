@@ -1,17 +1,19 @@
 @extends('admins.layouts.master')
 
+<title>ادخال وتحديث بيانات طلاب - الاونلاين</title>
+
 @section('content')
 
     @include('admins.partials.errors')
     @include('admins.partials.success')
 
-    <form class="form" method="POST" action="{{ route('admins.import.students.store') }}" enctype="multipart/form-data">
+    <form class="form" method="POST" action="{{ route('admins.import.online_students.store') }}" enctype="multipart/form-data">
 
         @csrf
         @method('POST')
 
         <div class="form-body">
-            <h4 class="form-section"><i class="ft-user"></i> ادخال وتحديث بيانات الطلاب</h4>
+            <h4 class="form-section"><i class="ft-globe"></i> ادخال وتحديث بيانات طلاب - <span class="badge-warning badge">الاونلاين</span></h4>
             <div class="row">
 
                 {{--Disable Teachers Login--}}

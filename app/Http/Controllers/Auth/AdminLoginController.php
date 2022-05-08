@@ -46,9 +46,19 @@ class AdminLoginController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function showLoginForm()
+    public function showLoginFormOnline()
     {
-        return view('auth.admins.login');
+        return view('auth.admins.login_online');
+    }
+
+    /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showLoginFormFaceToFace()
+    {
+        return view('auth.admins.login_face_to_face');
     }
 
     /**
@@ -62,7 +72,7 @@ class AdminLoginController extends Controller
     }
 
     protected function loggedOut(Request $request) {
-        return redirect('/dashboard-admins/login');
+        return redirect('/');
     }
 
     public function logout(Request $request)
@@ -72,7 +82,7 @@ class AdminLoginController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect('/dashboard-admins/login');
+        return redirect('/');
     }
 
 

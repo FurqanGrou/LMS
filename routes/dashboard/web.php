@@ -22,8 +22,10 @@ use GuzzleHttp\Client;
 */
 
 Route::group(['prefix' => 'dashboard-admins', 'namespace' => '\App\Http\Controllers\Auth', 'as' => 'admins.'], function (){
-    Route::get('/login', 'AdminLoginController@showLoginForm')->name('login.form');
-    Route::post('/login', 'AdminLoginController@login')->name('login.post');
+    Route::get('/online/login', 'AdminLoginController@showLoginFormOnline')->name('login.form.online');
+    Route::get('/face_to_face/login', 'AdminLoginController@showLoginFormFaceToFace')->name('login.form.face_to_face');
+
+    Route::post('/login-post', 'AdminLoginController@login')->name('login.post');
 });
 
 Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web'], 'as' => 'admins.'], function (){
@@ -48,9 +50,13 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
 
     Route::get('/admins/audits', 'AuditController@index')->name('audits.index');
 
-    // import students
-    Route::get('importStudents', 'ImportExportController@importStudentsView')->name('import.students.view');
-    Route::post('importStudents', 'ImportExportController@importStudents')->name('import.students.store');
+    // import students online
+    Route::get('importOnlineStudents', 'ImportExportController@importOnlineStudentsView')->name('import.online_students.view');
+    Route::post('importOnlineStudents', 'ImportExportController@importOnlineStudents')->name('import.online_students.store');
+
+    // import students face to face
+    Route::get('importFaceStudents', 'ImportExportController@importFaceToFaceStudentsView')->name('import.face_students.view');
+    Route::post('importFaceStudents', 'ImportExportController@importFaceToFaceStudents')->name('import.face_students.store');
 
     // import lessons and chapters
     Route::get('importLessons', 'ImportExportController@importLessons')->name('import.lessons');

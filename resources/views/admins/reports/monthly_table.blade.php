@@ -111,6 +111,7 @@
             {{ getStudentDetails(request()->student_id)->name }}
             -
             <span class="badge badge-primary">{{ getStudentPath(request()->student_id, request()->date_filter) }}</span>
+            <span class="badge badge-danger">{{ getStudentDetails(request()->student_id)->study_type == 1 ? 'حضوري' : 'اونلاين' }}</span>
         </p>
         <p style="display: flex; flex-direction: row-reverse">
             &nbsp; {{ getStudentDetails(request()->student_id)->student_number }}

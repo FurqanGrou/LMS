@@ -15,7 +15,12 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
 {
     public $count = 0;
     public $students_count = 0;
+    public $study_type = 0;
 
+    public function __construct($study_type)
+    {
+        $this->study_type = $study_type;
+    }
     /**
      * @param array $row
      *
@@ -87,13 +92,14 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
 
                 $exists_student->update([
                     'class_number'    => $row['rkm_alhlk'],
-                    'name'    => $name,
+                    'name'            => $name,
                     'section'         => $section,
                     'login_time'      => $row['okt_aldkhol'],
                     'father_mail'     => $father_email,
                     'mother_mail'     => $mother_email,
                     'path'            => $path,
                     'status'          => $row['odaa_altalb'],
+                    'study_type'      => $this->study_type,
                 ]);
 
             }else{
@@ -116,6 +122,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'path'            => $path,
                     'password'        => \Hash::make('12345'),
                     'class_number'    => $row['rkm_alhlk'],
+                    'study_type'      => $this->study_type,
                 ]);
 
             }
@@ -203,9 +210,10 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
 
                 $exists_class->update([
                     'title'     => $row['alhlk'],
-                    'zoom_link' => $row['alrabt'],
+                    'zoom_link' => $row['alrabt'] ?? null,
                     'path'      => $row['almsar'],
                     'period'    => $row['alftr'],
+                    'study_type' => $this->study_type,
                 ]);
 
             }else{
@@ -214,9 +222,10 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                 $class = Classes::create([
                     'class_number' => $row['rkm_alhlk'],
                     'title'     => $row['alhlk'],
-                    'zoom_link' => $row['alrabt'],
+                    'zoom_link' => $row['alrabt'] ?? null,
                     'path'      => $row['almsar'],
                     'period'    => $row['alftr'],
+                    'study_type' => $this->study_type,
                 ]);
 
             }

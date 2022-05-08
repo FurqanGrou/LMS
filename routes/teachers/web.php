@@ -23,8 +23,10 @@ use Yajra\DataTables\DataTables;
 */
 
 Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Controllers\Auth', 'as' => 'teachers.'], function (){
-    Route::get('/login', 'TeacherLoginController@showLoginForm')->name('login.form');
-    Route::post('/login', 'TeacherLoginController@login')->name('login.post');
+    Route::get('/online/login', 'TeacherLoginController@showLoginFormOnline')->name('login.form.online');
+    Route::get('/face_to_face/login', 'TeacherLoginController@showLoginFormFaceToFace')->name('login.form.face_to_face');
+
+    Route::post('/login-post', 'TeacherLoginController@login')->name('login.post');
 });
 
 Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware' => ['auth:teacher_web', 'teacher.status']], function (){
@@ -96,8 +98,4 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     // ajax to check period of class
     Route::post('/request-services/attendanceAbsence/checkPeriod', 'RequestServiceController@checkPeriod')->name('request_services.attendanceAbsenceTeachers.checkPeriod');
 
-});
-
-Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Controllers\Auth'], function (){
-    Route::get('/login', 'TeacherLoginController@showLoginForm')->name('dashboard.login.form');
 });
