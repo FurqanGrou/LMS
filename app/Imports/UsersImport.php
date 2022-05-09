@@ -235,7 +235,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
 //Classes_Teachers
         if($this->count == 0){
             $section = ($row['alksm'] == 'بنات') ? 'female' : 'male';
-            ClassesTeachers::getQuery()->where('type', '=', $section, 'study_type', '=', $this->study_type)->delete();
+            ClassesTeachers::getQuery()->where('type', '=', $section)->where('study_type', '=', $this->study_type)->delete();
         }
 
         ++$this->count;
@@ -250,6 +250,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
             $exists_class_teacher = ClassesTeachers::where('class_number', '=', $row['rkm_alhlk'])
                 ->where('teacher_email', '=', $teacher_email)
                 ->where('role', '=', 'main')
+                ->where('study_type', '=', $this->study_type)
                 ->first();
 
             //if exists is true update current class_teacher data (teacher class)
@@ -261,6 +262,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'teacher_email' => $teacher_email,
                     'type'          => $type,
                     'role'          => 'main',
+                    'study_type'    => $this->study_type,
                 ]);
 
             }
@@ -268,6 +270,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
             $exists_class_supervisor = ClassesTeachers::where('class_number', '=', $row['rkm_alhlk'])
                 ->where('teacher_email', '=', $supervisor_email)
                 ->where('role', '=', 'supervisor')
+                ->where('study_type', '=', $this->study_type)
                 ->first();
 
             //if exists is true update current class_teacher data (class supervisor)
@@ -279,6 +282,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'teacher_email' => $supervisor_email,
                     'type'          => $type,
                     'role'          => 'supervisor',
+                    'study_type'    => $this->study_type,
                 ]);
 
             }
