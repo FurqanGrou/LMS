@@ -85,8 +85,9 @@
                 </div>
 
                 <div class="links">
-                    <a style="color: #FF4961; font-size: 20px; border: 2px solid; border-radius: 50px; margin-left: 10px; padding: 5px 20px" href="{{ route('welcome.online') }}">التعليم عن بعد - اونلاين</a>
-                    <a style="color: #ff8d14; font-size: 20px; border: 2px solid; border-radius: 50px; padding: 5px 20px" href="{{ route('welcome.face_to_face') }}">التعليم الحضوري</a>
+                    <a href="{{ url('dashboard-admins/online/login') }}">الإداريين</a>
+                    <a href="{{ url('dashboard-teachers/online/login') }}">المعلمين</a>
+                    <a href="{{ route('students.login.form') }}">الطلاب</a>
                 </div>
             </div>
         </div>

@@ -15,7 +15,12 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
 {
     public $count = 0;
     public $students_count = 0;
+    public $study_type = 0;
 
+    public function __construct($study_type)
+    {
+        $this->study_type = $study_type;
+    }
     /**
      * @param array $row
      *
@@ -70,12 +75,18 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
             if($this->students_count == 0){
                 $this->students_count++;
                 $section = ($row['alksm'] == 'بنات') ? 'female' : 'male';
-                User::query()->where('section', '=', $section)->update(['class_number' => null]);
+                User::query()
+                    ->where('section', '=', $section)
+                    ->where('study_type', '=', $this->study_type)
+                    ->update(['class_number' => null]);
             }
 
             $section = $row['alksm'] == 'بنات' ? 'female' : 'male';
             //check if this student is exists or not
-            $exists_student = User::where('student_number', '=', $row['rkm_altalb'])->where('section', '=', $section)->first();
+            $exists_student = User::where('student_number', '=', $row['rkm_altalb'])
+                ->where('section', '=', $section)
+                ->where('study_type', '=', $this->study_type)
+                ->first();
 
             $father_email = str_replace(' ', '', $row['bryd_alab']);
             $mother_email = str_replace(' ', '', $row['bryd_alam']);
@@ -87,13 +98,14 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
 
                 $exists_student->update([
                     'class_number'    => $row['rkm_alhlk'],
-                    'name'    => $name,
+                    'name'            => $name,
                     'section'         => $section,
                     'login_time'      => $row['okt_aldkhol'],
                     'father_mail'     => $father_email,
                     'mother_mail'     => $mother_email,
                     'path'            => $path,
                     'status'          => $row['odaa_altalb'],
+                    'study_type'      => $this->study_type,
                 ]);
 
             }else{
@@ -116,6 +128,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'path'            => $path,
                     'password'        => \Hash::make('12345'),
                     'class_number'    => $row['rkm_alhlk'],
+                    'study_type'      => $this->study_type,
                 ]);
 
             }
@@ -203,9 +216,10 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
 
                 $exists_class->update([
                     'title'     => $row['alhlk'],
-                    'zoom_link' => $row['alrabt'],
+                    'zoom_link' => $row['alrabt'] ?? null,
                     'path'      => $row['almsar'],
                     'period'    => $row['alftr'],
+                    'study_type' => $this->study_type,
                 ]);
 
             }else{
@@ -214,9 +228,10 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                 $class = Classes::create([
                     'class_number' => $row['rkm_alhlk'],
                     'title'     => $row['alhlk'],
-                    'zoom_link' => $row['alrabt'],
+                    'zoom_link' => $row['alrabt'] ?? null,
                     'path'      => $row['almsar'],
                     'period'    => $row['alftr'],
+                    'study_type' => $this->study_type,
                 ]);
 
             }
@@ -226,7 +241,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
 //Classes_Teachers
         if($this->count == 0){
             $section = ($row['alksm'] == 'بنات') ? 'female' : 'male';
-            ClassesTeachers::getQuery()->where('type', '=', $section)->delete();
+            ClassesTeachers::getQuery()->where('type', '=', $section)->where('study_type', '=', $this->study_type)->delete();
         }
 
         ++$this->count;
@@ -241,6 +256,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
             $exists_class_teacher = ClassesTeachers::where('class_number', '=', $row['rkm_alhlk'])
                 ->where('teacher_email', '=', $teacher_email)
                 ->where('role', '=', 'main')
+                ->where('study_type', '=', $this->study_type)
                 ->first();
 
             //if exists is true update current class_teacher data (teacher class)
@@ -252,6 +268,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'teacher_email' => $teacher_email,
                     'type'          => $type,
                     'role'          => 'main',
+                    'study_type'    => $this->study_type,
                 ]);
 
             }
@@ -259,6 +276,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
             $exists_class_supervisor = ClassesTeachers::where('class_number', '=', $row['rkm_alhlk'])
                 ->where('teacher_email', '=', $supervisor_email)
                 ->where('role', '=', 'supervisor')
+                ->where('study_type', '=', $this->study_type)
                 ->first();
 
             //if exists is true update current class_teacher data (class supervisor)
@@ -270,6 +288,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'teacher_email' => $supervisor_email,
                     'type'          => $type,
                     'role'          => 'supervisor',
+                    'study_type'    => $this->study_type,
                 ]);
 
             }

@@ -32,16 +32,25 @@ class ImportExportController extends Controller
 //        ini_set('upload_max_filesize', "512M");
     }
 
-    public function importStudentsView()
+    //    ==============================================
+    public function importFaceToFaceStudentsView()
     {
         $teachers_status= Teacher::query()->orderBy('updated_at', 'DESC')->first()->status;
 
-        return view('admins.import_export.import', compact('teachers_status'));
+        return view('admins.import_export.import_face_to_face_students', compact('teachers_status'));
+    }
+    public function importOnlineStudentsView()
+    {
+        $teachers_status= Teacher::query()->orderBy('updated_at', 'DESC')->first()->status;
+
+        return view('admins.import_export.import_online_students', compact('teachers_status'));
     }
 
-    public function importStudents()
+    public function importFaceToFaceStudents()
     {
-        Excel::import(new UsersImport, request()->file('file'));
+        $study_type = 1; // 0 is online, 1 is face to face
+
+        Excel::import(new UsersImport($study_type), request()->file('file'));
 
         // update student class number in reports table
 //        $students = User::query()->get();
@@ -57,6 +66,18 @@ class ImportExportController extends Controller
 
         return redirect()->back()->with('success', 'تم تحديث بيانات الطلاب بنجاح');
     }
+    public function importOnlineStudents()
+    {
+        $study_type = 0; // 0 is online, 1 is face to face
+
+        Excel::import(new UsersImport($study_type), request()->file('file'));
+
+        Teacher::query()->update(['status' => 1]);
+        Artisan::call('cache:clear');
+
+        return redirect()->back()->with('success', 'تم تحديث بيانات الطلاب بنجاح');
+    }
+    //    ==============================================
 
     public function importLessons()
     {

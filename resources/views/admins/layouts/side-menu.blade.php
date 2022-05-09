@@ -13,9 +13,13 @@
             <li class="nav-item open"><a href="#"><i class="la la-cogs"></i><span class="menu-title" data-i18n="nav.templates.main">التصدير والاستيراد</span></a>
                 <ul class="menu-content">
                     <li>
-                        <a class="menu-item" href="{{ route('admins.import.students.view') }}" data-i18n="nav.templates.vert.classic_menu">
-                            <i class="la la-cloud-upload"></i>
-                            ادخال وتحديث بيانات الطلاب
+                        <a class="menu-item" href="{{ route('admins.import.online_students.view') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="ft-globe"></i>
+                            ادخال وتحديث بيانات طلاب - الاونلاين
+                        </a>
+                        <a class="menu-item" href="{{ route('admins.import.face_students.view') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="ft-users"></i>
+                            ادخال وتحديث بيانات طلاب - الحضوري
                         </a>
                         <a class="menu-item" href="{{ route('admins.report.index') }}" data-i18n="nav.templates.vert.classic_menu">
                             <i class="la la-file-excel-o"></i>
