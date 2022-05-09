@@ -13,12 +13,6 @@
           </strong>
           <span style='font-size: 12pt; color: #ff0000;'> {{ $details['grades']->date }} </span>
         </span>
-        <br>
-        <span style='font-family: tahoma, arial, helvetica, sans-serif;font-size: 12pt;'>
-            ندعوكم لمتابعة حساباتنا على مواقع التواصل الاجتماعي للمشاركة في المسابقة الرمضانية اليومية والأسبوعية بجوائز مالية قيمة تصل إلى 300$
-            واشتراك سنوي لمدة عام كامل في تطبيق القاعدة النورانية "نسخة الويب"
-            (<a href="https://www.instagram.com/qaidahnuraniah/">انستجرام</a> – <a href="https://www.facebook.com/%D8%A7%D9%84%D8%B5%D9%81%D8%AD%D8%A9-%D8%A7%D9%84%D8%B1%D8%B3%D9%85%D9%8A%D8%A9-%D9%84%D9%84%D9%82%D8%A7%D8%B9%D8%AF%D8%A9-%D8%A7%D9%84%D9%86%D9%88%D8%B1%D8%A7%D9%86%D9%8A%D8%A9-101181804724675">فيسبوك</a> - <a href="https://twitter.com/QaidahNuraniah">تويتر</a>) بانتظار مشاركات أبنائكم بكل حماس!
-        </span>
     </div>
 
 <div id='chq_gmail_elements_commands' class='Lf a5s' data-chq-gmail-elements-table='chq_gmail_elements_commands'>

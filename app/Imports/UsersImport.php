@@ -235,7 +235,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
 //Classes_Teachers
         if($this->count == 0){
             $section = ($row['alksm'] == 'بنات') ? 'female' : 'male';
-            ClassesTeachers::getQuery()->where('type', '=', $section)->delete();
+            ClassesTeachers::getQuery()->where('type', '=', $section, 'study_type', '=', $this->study_type)->delete();
         }
 
         ++$this->count;
