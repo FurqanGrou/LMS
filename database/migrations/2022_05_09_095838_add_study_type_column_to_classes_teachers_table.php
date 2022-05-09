@@ -14,7 +14,7 @@ class AddStudyTypeColumnToClassesTeachersTable extends Migration
     public function up()
     {
         Schema::table('classes_teachers', function (Blueprint $table) {
-            $table->boolean('study_type')->comment('0 is online, 1 is face to face')->after('period');
+            $table->boolean('study_type')->comment('0 is online, 1 is face to face')->after('role');
         });
     }
 
