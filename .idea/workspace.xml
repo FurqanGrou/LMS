@@ -31,25 +31,22 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/AdminLoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/AdminLoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DataTables/AbsenceDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/AbsenceDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DataTables/AdminDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/AdminDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DataTables/ClassesDataTable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/ClassesDataTable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DataTables/UserDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/UserDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/AbsencesExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/AbsencesExport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/helpers.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/TeacherLoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/TeacherLoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Imports/UsersImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/UsersImport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/HolidayRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/HolidayRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/classes/btn/zoom_link.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/classes/btn/zoom_link.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/import_export/import.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/import_export/import_face_to_face_students.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/admins/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/admins/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/admins/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/admins/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/admins/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/admins/login_online.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/teachers/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/teachers/login_face_to_face.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/classes/btn/zoom_link.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/classes/btn/zoom_link.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/teachers/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/teachers/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,25 +205,25 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/auth/teachers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admins/admins/btn" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\auth\teachers" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\auth\admins" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\welcome" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\import_export" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\request_services" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="B:\LMS\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\LMS\lms_hatim\resources\views\admins\students\btn" />
       <recent name="B:\LMS\lms_hatim\app\Http\Controllers\Teachers" />
       <recent name="B:\LMS\lms_hatim\resources\views\teachers\reports\old_features" />
       <recent name="B:\LMS\staging\lms_3_staging\public" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\admins\btn" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\auth\teachers" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\auth\admins" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\welcome" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\import_export" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.ExamRequestController.php">
@@ -496,7 +493,9 @@
       <workItem from="1650699662681" duration="4517000" />
       <workItem from="1650878697559" duration="784000" />
       <workItem from="1651941476814" duration="7673000" />
-      <workItem from="1652019577210" duration="14913000" />
+      <workItem from="1652019577210" duration="15724000" />
+      <workItem from="1652102364847" duration="8776000" />
+      <workItem from="1652200118860" duration="11303000" />
     </task>
     <servers />
   </component>
@@ -536,14 +535,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1651943771010" />
-    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1652038690340">
+    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1652215051126">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1652038690340" />
-    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1650895889802">
+    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1652215051126" />
+    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1652124615154">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1650895889802" />
+    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1652124615154" />
     <state x="517" y="287" key="NewPhpFileDialog" timestamp="1646672497604">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -556,9 +555,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1652022203657" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1652042925272">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1652214022075">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1652042925272" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1652214022075" />
   </component>
 </project>

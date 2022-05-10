@@ -47,6 +47,7 @@ class AdminController extends Controller
             'employee_number' => 'required|unique:admins',
             'last_4_id' => 'required|unique:admins',
             'section'   => 'required',
+            'user_type'   => isHasUserType('super_admin') ? 'required|string|not_in:select' : 'sometimes|string',
         ];
 
         $messages = [
@@ -62,11 +63,17 @@ class AdminController extends Controller
             'last_4_id.unique' => 'يجب التأكد من إدخال أخر 4 ارقام من الهوية',
             'last_4_id.required' => 'رقم الهوية المدخل مستخدم مسبقا',
             'section.required' => 'يجب التأكد من إدخال القسم',
+            'user_type.required' => 'يجب التأكد من اختيار المؤسسة المناسبة',
+            'user_type.not_in' => 'يجب التأكد من اختيار المؤسسة المناسبة',
         ];
 
         $adminData = $this->validate($request, $rule, $messages);
 
         $adminData['password'] = bcrypt($request->password);
+
+        if (!isHasUserType('super_admin')){
+            $adminData['user_type'] = getUserType();
+        }
 
         Admin::create($adminData);
 
@@ -110,6 +117,7 @@ class AdminController extends Controller
             'name'     => 'required|string',
             'email'    => 'required|email|unique:admins,email,' . $admin->id,
             'password' => 'sometimes|nullable|min:6',
+            'user_type'   => isHasUserType('super_admin') ? 'required|string|not_in:select' : 'sometimes|string',
         ];
 
         $messages = [
@@ -120,6 +128,8 @@ class AdminController extends Controller
             'email.unique'   => 'البريد الإلكتروني المدخل مستخدم مسبقا',
             'password.required' => 'يجب التأكد من إدخال كلمة المرور',
             'password.min'      => 'يجب أن تكون كلمة المرور 6 حروف على الأقل ',
+            'user_type.required' => 'يجب التأكد من اختيار المؤسسة المناسبة',
+            'user_type.not_in' => 'يجب التأكد من اختيار المؤسسة المناسبة',
         ];
 
         $adminData = $this->validate($request, $rule, $messages);
@@ -131,6 +141,7 @@ class AdminController extends Controller
             $admin->update([
                 'name'  => $adminData['name'],
                 'email' => $adminData['email'],
+                'user_type' => isHasUserType('super_admin') ? $adminData['user_type'] : $admin->user_type,
             ]);
         }
 

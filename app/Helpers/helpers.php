@@ -1024,3 +1024,13 @@ function getAppropriateToday()
 
     return $today;
 }
+
+function isHasUserType($user_type)
+{
+    return auth()->user()->user_type == $user_type;
+}
+
+function getUserType()
+{
+    return auth()->user()->user_type;
+}

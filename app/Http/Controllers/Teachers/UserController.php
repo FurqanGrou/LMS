@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Teachers;
 
 use App\User;
 use App\DataTables\UserDatatable;

@@ -25,6 +25,21 @@
                         <input type="email" id="email" class="form-control" name="email" value="{{ old('email', $admin->email) }}" required>
                     </div>
                 </div>
+
+                @if(isHasUserType('super_admin'))
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="user_type">المؤسسة</label>
+                            <select name="user_type" class="form-control" id="user_type">
+                                <option value="select">-إختر-</option>
+                                <option value="super_admin" {{ $admin->user_type == 'super_admin' ? 'selected' : '' }}>إداري عام</option>
+                                <option value="furqan_group" {{ $admin->user_type == 'furqan_group' ? 'selected' : '' }}>مجموعة الفرقان</option>
+                                <option value="iksab" {{ $admin->user_type == 'iksab' ? 'selected' : '' }}>إكساب</option>
+                            </select>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="password">كلمة المرور</label>

@@ -39,18 +39,35 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <select name="section" id="section">
+                        <label for="section">القسم</label>
+                        <select name="section" class="form-control" id="section">
                             <option value="male">بنين</option>
                             <option value="female">بنات</option>
                         </select>
                     </div>
                 </div>
+
+                @if(isHasUserType('super_admin'))
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="user_type">المؤسسة</label>
+                            <select name="user_type" class="form-control" id="user_type">
+                                <option value="select" selected>-إختر-</option>
+                                <option value="super_admin">إداري عام</option>
+                                <option value="furqan_group">مجموعة الفرقان</option>
+                                <option value="iksab">إكساب</option>
+                            </select>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="password">كلمة المرور</label>
                         <input type="password" id="password" class="form-control" placeholder="كلمة المرور" name="password" required>
                     </div>
                 </div>
+
             </div>
         </div>
 
