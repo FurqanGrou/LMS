@@ -13,15 +13,22 @@
             <li class="nav-item open"><a href="#"><i class="la la-cogs"></i><span class="menu-title" data-i18n="nav.templates.main">التصدير والاستيراد</span></a>
                 <ul class="menu-content">
                     <li>
-                        <a class="menu-item" href="{{ route('admins.import.online_students.view') }}" data-i18n="nav.templates.vert.classic_menu">
-                            <i class="ft-globe"></i>
-                            ادخال وتحديث بيانات طلاب - الاونلاين
-                        </a>
-                        <a class="menu-item" href="{{ route('admins.import.face_students.view') }}" data-i18n="nav.templates.vert.classic_menu">
-                            <i class="ft-users"></i>
-                            ادخال وتحديث بيانات طلاب - الحضوري
-                        </a>
-                        <a class="menu-item" href="{{ route('admins.report.index') }}" data-i18n="nav.templates.vert.classic_menu">
+
+                        @if(isHasUserType('super_admin') || isHasUserType('furqan_group'))
+                            <a class="menu-item" href="{{ route('admins.import.online_students.view') }}" data-i18n="nav.templates.vert.classic_menu">
+                                <i class="ft-globe"></i>
+                                ادخال وتحديث بيانات طلاب - الاونلاين
+                            </a>
+                        @endif
+
+                        @if(isHasUserType('super_admin') || isHasUserType('iksab'))
+                            <a class="menu-item" href="{{ route('admins.import.face_students.view') }}" data-i18n="nav.templates.vert.classic_menu">
+                                <i class="ft-users"></i>
+                                ادخال وتحديث بيانات طلاب - الحضوري
+                            </a>
+                        @endif
+
+                            <a class="menu-item" href="{{ route('admins.report.index') }}" data-i18n="nav.templates.vert.classic_menu">
                             <i class="la la-file-excel-o"></i>
                             تصدير التقارير اليومية
                         </a>
@@ -121,12 +128,14 @@
                 </ul>
             </li>
 
-            <li class="nav-item">
-                <a href="{{ route('log-viewer::logs.list') }}">
-                    <i class="fa fa-bug"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">اخطاء النظام</span>
-                </a>
-            </li>
+            @if(isHasUserType('super_admin'))
+                <li class="nav-item">
+                    <a href="{{ route('log-viewer::logs.list') }}">
+                        <i class="fa fa-bug"></i>
+                        <span class="menu-title" data-i18n="nav.templates.main">اخطاء النظام</span>
+                    </a>
+                </li>
+            @endif
 
             <li class="nav-item">
                 <a href="{{ route('admins.audits.index') }}">

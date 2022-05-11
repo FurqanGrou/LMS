@@ -25,10 +25,12 @@ class AdminDatatable extends DataTable
             ->addColumn('checkbox', 'admins.admins.btn.checkbox')
             ->addColumn('edit', 'admins.admins.btn.edit')
             ->addColumn('delete', 'admins.admins.btn.delete')
+            ->addColumn('user_type', 'admins.admins.btn.user_type')
             ->rawColumns([
                 'checkbox',
                 'edit',
                 'delete',
+                'user_type',
             ]);
     }
 
@@ -40,7 +42,11 @@ class AdminDatatable extends DataTable
      */
     public function query()
     {
-        $admins = Admin::select('id', 'name', 'email', 'created_at');
+        $admins = Admin::select('id', 'name', 'email', 'user_type', 'created_at');
+        if(!isHasUserType('super_admin')){
+            $admins = $admins->where('user_type', '=', getUserType());
+        }
+
         return $admins;
     }
 
@@ -99,6 +105,9 @@ class AdminDatatable extends DataTable
                 ->title('اسم المشرف'),
             Column::make('email')
                 ->title('بريد المشرف'),
+            Column::computed('user_type')
+                ->title('المؤسسة')
+                ->width(50),
             Column::make('created_at')
                 ->title('تاريخ الأضافة'),
             Column::computed('edit')

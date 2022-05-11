@@ -37,7 +37,7 @@
                                 <h1><i class="ft-book font-large-1" title="Users"></i></h1>
                             </div>
                             <div class="col-6 pl-2">
-                                <h4>المعلمين</h4>
+                                <h4 style="color: red">المعلمين</h4>
                             </div>
                             <div class="col-4 text-center">
                                 <h4>{{ $statistics['teachers'] }}</h4>
@@ -131,7 +131,7 @@
                                 <h1><i class="ft-file-text font-large-1" title="وقت إدخال أخر تقرير"></i></h1>
                             </div>
                             <div class="col-6">
-                                <h4>وقت إدخال أخر تقرير</h4>
+                                <h4 style="color: red">وقت إدخال أخر تقرير</h4>
                             </div>
                             <div class="col-4 text-center">
                                 <h5 class="danger">{{ $statistics['last_report'] }}</h5>
@@ -154,7 +154,7 @@
                                 <h1><i class="ft-file-text font-large-1" title="الايميلات المرسلة"></i></h1>
                             </div>
                             <div class="col-6">
-                                <h4>الايميلات المرسلة</h4>
+                                <h4 style="color: red">الايميلات المرسلة</h4>
                             </div>
                             <div class="col-4 text-center">
                                 <h5 class="danger">{{ $statistics['sent_messages'] }}</h5>

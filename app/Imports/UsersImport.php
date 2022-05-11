@@ -82,10 +82,10 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
             }
 
             $section = $row['alksm'] == 'بنات' ? 'female' : 'male';
+
             //check if this student is exists or not
             $exists_student = User::where('student_number', '=', $row['rkm_altalb'])
                 ->where('section', '=', $section)
-                ->where('study_type', '=', $this->study_type)
                 ->first();
 
             $father_email = str_replace(' ', '', $row['bryd_alab']);

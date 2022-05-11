@@ -39,9 +39,13 @@ class AbsencesExport implements FromCollection, WithHeadings, WithStyles, Should
                         WHEN reports.absence = "-2" THEN "-2"
                         ELSE "-5"
                         END) AS absence')
-                    ) 
+                    )
                     ->join('users', 'users.id', '=', 'reports.student_id')
                     ->whereBetween('reports.created_at', [$this->date_from, $this->date_to]);
+
+        if(!isHasUserType('super_admin')){
+            $reports = $reports->where('users.study_type', '=', getUserType() == 'iksab' ? 1 : 0);
+        }
 
         if($this->absence_status == -1){
             $reports->where('reports.absence', '!=', '0');

@@ -23,10 +23,35 @@ class HomeController extends Controller
 
         $statistics = [];
         $statistics['teachers'] = Teacher::query()->count();
-        $statistics['students'] = User::query()->count();
-        $statistics['regular_students'] = User::query()->whereNotNull('class_number')->count();
-        $statistics['classes'] = Classes::query()->count();
-        $statistics['admins'] = Admin::query()->count();
+
+        $statistics['students'] = User::query();
+        if(isHasUserType('super_admin')){
+            $statistics['students'] = $statistics['students']->count();
+        }else{
+            $statistics['students'] = $statistics['students']->where('study_type', '=', getUserType() == 'iksab' ? 1 : 0)->count();
+        }
+
+        $statistics['regular_students'] = User::query()->whereNotNull('class_number');
+        if(isHasUserType('super_admin')){
+            $statistics['regular_students'] = $statistics['regular_students']->count();
+        }else{
+            $statistics['regular_students'] = $statistics['regular_students']->where('study_type', '=', getUserType() == 'iksab' ? 1 : 0)->count();
+        }
+
+        $statistics['classes'] = Classes::query();
+        if(isHasUserType('super_admin')){
+            $statistics['classes'] = $statistics['classes']->count();
+        }else{
+            $statistics['classes'] = $statistics['classes']->where('study_type', '=', getUserType() == 'iksab' ? 1 : 0)->count();
+        }
+
+        $statistics['admins'] = Admin::query();
+        if(isHasUserType('super_admin')){
+            $statistics['admins'] = $statistics['admins']->count();
+        }else{
+            $statistics['admins'] = $statistics['admins']->where('user_type', '=', getUserType())->count();
+        }
+
         $statistics['last_report'] = Report::query()->orderBy('updated_at', 'DESC')->first()->updated_at->timezone('Asia/Riyadh')->diffForHumans();
 
         $statistics['sent_messages'] = Report::query()

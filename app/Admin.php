@@ -18,7 +18,7 @@ class Admin extends Authenticatable implements Auditable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'employee_number', 'last_4_id', 'section'
+        'name', 'email', 'password', 'employee_number', 'last_4_id', 'section', 'user_type'
     ];
 
     /**

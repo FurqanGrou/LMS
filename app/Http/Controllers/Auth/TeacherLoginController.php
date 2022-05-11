@@ -75,7 +75,7 @@ class TeacherLoginController extends Controller
     }
 
     protected function loggedOut(Request $request) {
-        return redirect('/dashboard-teachers/login');
+        return redirect('/');
     }
 
     public function login(Request $request)
@@ -165,7 +165,7 @@ class TeacherLoginController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect('dashboard-teachers/login');
+        return redirect('/');
 
     }
 
