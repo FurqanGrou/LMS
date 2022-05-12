@@ -478,7 +478,6 @@ class ReportController extends Controller
 
         $notes_to_parents = request()->notes_to_parent[0];
 
-
         $request->validate([
             'new_lesson' => 'required|array',
             'new_lesson.*' => 'required|string|min:1',

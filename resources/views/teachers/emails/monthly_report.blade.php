@@ -3,28 +3,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <style>
-        @page
-        {
+        @page {
             font-family: arial, sans-serif;
         }
+
         * {
             font-family: arial, sans-serif;
         }
-        body{
+
+        body {
             direction: rtl;
             font-family: arial, sans-serif;
         }
+
         h1 {
             font-size: 24px;
             color: red;
             font-weight: bold;
         }
+
         table, td, th {
             border: 1px solid black;
         }
+
         table {
             border-collapse: collapse;
         }
+
         table thead td {
             font-size: 12px;
             padding-top: 5px;
@@ -38,11 +43,21 @@
     <thead>
     <tr style="border: none;">
         <td style="width: 20%;border: none; text-align: center">
-            <img src="{{ public_path('dashboard\assets\img\logo2.png') }}" style="width: 120px;display: inline-block" alt="">
-            <img src="{{ public_path('dashboard\assets\img\logo3.png') }}" style="width: 120px;display: inline-block" alt="">
+
+            @if(isOnlineStudent($student_id))
+                <img src="{{ public_path('dashboard\assets\img\logo2.png') }}"
+                     style="width: 120px;display: inline-block" alt="">
+                <img src="{{ public_path('dashboard\assets\img\logo3.png') }}"
+                     style="width: 120px;display: inline-block" alt="">
+            @else
+                <img src="{{ public_path('dashboard\assets\img\iksab_logo.png') }}"
+                     style="width: 320px; height: 250px !important; display: inline-block">
+            @endif
+
         </td>
         <td style="border: none;text-align: center; width: 80%;font-family: arial, sans-serif;">
-            <p style="font-family: arial, sans-serif;font-size: 28px;font-weight: bold;">الدليل الشهري لسير ومتابعة {{ getStudentDetails($student_id)->name }} في حلقات مركز الفرقان لتعليم القران الكريم</p>
+            <p style="font-family: arial, sans-serif;font-size: 28px;font-weight: bold;">الدليل الشهري لسير
+                ومتابعة {{ getStudentDetails($student_id)->name }} في حلقات مركز الفرقان لتعليم القران الكريم</p>
             <p style="font-size: 28px;">Monthly report for Students in AlFurqan Center for Quran Education</p>
         </td>
         <td style="width: 20%;border: none; text-align: center">
@@ -101,7 +116,7 @@
             <table style="width: 98%;">
                 <thead>
                 <tr style="min-height: 45px;height: 45px;max-height: 45px;background: #C6E0B4;font-weight: bold">
-                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold" >
+                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold">
                         التاريخ
                         <br>
                         <br>
@@ -349,5 +364,10 @@
     </tbody>
 </table>
 
+<p style="margin-top: 50px; text-align: center; width: 100%; font-weight: bold;">
+    جميع الحقوق محفوظة لمجموعة الفرقان للتعليم وتقنية المعلومات
+    <br>
+    All rights reserved by Furqan Group for Education and IT
+</p>
 </body>
 </html>
