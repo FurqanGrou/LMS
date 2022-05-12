@@ -1,14 +1,30 @@
-<html><head></head><body><img style='display:block;margin-left:auto;margin-right:auto' src='https://pbs.twimg.com/profile_images/1051962534604009473/XyW3M3qj.jpg' alt='Furqan Center' width='133' height='133' class='CToWUd'><div style='text-align: center;'>
+<html>
+<head></head>
+<body>
+
+@if(isOnlineStudent($details['student_info']->id))
+    <img style='display:block;margin-left:auto;margin-right:auto'
+         src='https://pbs.twimg.com/profile_images/1051962534604009473/XyW3M3qj.jpg' alt='Furqan Center' width='133'
+         height='133' class='CToWUd'>
+@else
+    <img style='display:block;margin-left:auto;margin-right:auto'
+         src='https://iksab.sa/wp-content/uploads/2021/11/300.png' alt='Furqan Center' width='133'
+         height='133' class='CToWUd'>
+@endif
+
+<div style='text-align: center;'>
  <span style='font-family: tahoma, arial, helvetica, sans-serif;'>
   <strong>
-   <span style='font-size: 14pt;'> Student Daily Report التقرير اليومي للطالب{{ getTitleName($details['student_info']->section) }} </span>
+   <span
+       style='font-size: 14pt;'> Student Daily Report التقرير اليومي للطالب{{ getTitleName($details['student_info']->section) }} </span>
  <br>
    </strong>
   <span style='font-size: 12pt; color: #ff0000;'> {{ $details['assignment']->date }} </span>
 </span>
 </div>
 <div id='chq_gmail_elements_commands' class='Lf a5s' data-chq-gmail-elements-table='chq_gmail_elements_commands'>
-    <table class='Lf' border='0' cellspacing='0' cellpadding='0' data-chq-gmail-elements-table='chq_gmail_elements_commands'>
+    <table class='Lf' border='0' cellspacing='0' cellpadding='0'
+           data-chq-gmail-elements-table='chq_gmail_elements_commands'>
         <tbody>
         <tr valign='top'>
             <td class='Le' width='2' height='2'>
@@ -45,7 +61,8 @@
     </tr>
     </tbody>
 </table>
-<table style='height: 137px;' cellspacing='1' cellpadding='1' align='center' table-layout: 'fixed' ;width: '100%'>
+<table style='height: 137px;' cellspacing='1' cellpadding='1' align='center' table-layout:
+'fixed' ;width: '100%'>
 <tbody>
 <tr>
     <td style='width: 49%;' valign='top'>
@@ -160,26 +177,31 @@
     <tr style='height: 51px;'>
         <td style='text-align: center; height: 51px; '>
             <h3>
-                <span style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'>0</span>
+                <span
+                    style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'>0</span>
             </h3>
         <td style='text-align: center; height: 51px; '>
             <h3>
-                <span style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'>0</span>
-            </h3>
-        </td>
-        <td style='text-align: center; height: 51px; '>
-            <h3>
-                <span style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'>0</span>
+                <span
+                    style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'>0</span>
             </h3>
         </td>
         <td style='text-align: center; height: 51px; '>
             <h3>
-                <span style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'>0</span>
+                <span
+                    style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'>0</span>
             </h3>
         </td>
         <td style='text-align: center; height: 51px; '>
             <h3>
-                <span style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'>0</span>
+                <span
+                    style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'>0</span>
+            </h3>
+        </td>
+        <td style='text-align: center; height: 51px; '>
+            <h3>
+                <span
+                    style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'>0</span>
             </h3>
         </td>
     </tr>
@@ -241,17 +263,20 @@
     <tr style='height: 51px;'>
         <td style='text-align: center; height: 51px; '>
             <h3>
-                <span style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'> {{ $details['assignment']->new_lesson_to }} </span>
+                <span
+                    style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'> {{ $details['assignment']->new_lesson_to }} </span>
             </h3>
         </td>
         <td style='text-align: center; height: 51px; '>
             <h3>
-                <span style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'> {{ $details['assignment']->new_lesson_from }} </span>
+                <span
+                    style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'> {{ $details['assignment']->new_lesson_from }} </span>
             </h3>
         </td>
         <td style='text-align: center; height: 51px; '>
             <h3>
-                <span style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'> {{ $details['assignment']->new_lesson }} </span>
+                <span
+                    style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'> {{ $details['assignment']->new_lesson }} </span>
             </h3>
         </td>
         <td style='text-align: center; height: 51px; '>
@@ -261,16 +286,19 @@
     <tr style='height: 51px;'>
         <td style='text-align: center; height: 51px; '>
             <h3>
-                <span style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'>{{ $details['assignment']->daily_revision_to }}</span>
+                <span
+                    style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'>{{ $details['assignment']->daily_revision_to }}</span>
             </h3>
         <td style='text-align: center; height: 51px; '>
             <h3>
-                <span style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'>{{ $details['assignment']->daily_revision_from }}</span>
+                <span
+                    style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'>{{ $details['assignment']->daily_revision_from }}</span>
             </h3>
         </td>
         <td style='text-align: center; height: 51px; '>
             <h3>
-                <span style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'> {{ $details['assignment']->daily_revision }} </span>
+                <span
+                    style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 12pt; color: #000000;'> {{ $details['assignment']->daily_revision }} </span>
             </h3>
         </td>
         <td style='text-align: center; height: 51px; '>
@@ -295,8 +323,8 @@
         <span style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 14pt; color: #ff0000;'>
     <strong> أهلاً وسهلاً بكم </strong>
   </span>
-        <br></div> </div>
+        <br></div>
+</div>
 <br>
 </body>
 </html>
-

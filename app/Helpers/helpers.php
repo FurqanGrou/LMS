@@ -1034,3 +1034,9 @@ function getUserType()
 {
     return auth()->user()->user_type;
 }
+
+function isOnlineStudent($student_id)
+{
+    // 0 is online, 1 is face to face
+    return getStudentDetails($student_id)->study_type == 0;
+}
