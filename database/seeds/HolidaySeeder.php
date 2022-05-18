@@ -14,7 +14,7 @@ class HolidaySeeder extends Seeder
     public function run()
     {
 
-        $users = \App\User::query()->whereNotNull('class_number')->where('study_type', '=', 0)->get()->toArray();
+        $users = \App\User::query()->whereNotNull('class_number')->get()->toArray();
 
         $data_to_insert = [];
 
