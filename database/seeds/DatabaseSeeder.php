@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
     {
 //         $this->call(AdminSeeder::class);
 //         $this->call(UserSeeder::class);
-         $this->call(InsertPreviousMonthlyScoresSeeder::class);
+//         $this->call(InsertPreviousMonthlyScoresSeeder::class);
 //         $this->call(ReportSeeder::class);
+         $this->call(HolidaySeeder::class);
     }
 }
