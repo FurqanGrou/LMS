@@ -3,4 +3,6 @@
     <span class="slider round"></span>
 
     <input type="hidden" class="report_id" value="{{ $id }}">
+    <input type="hidden" id="report_date_input" value="{{ $report_created_at }}">
+    <input type="hidden" id="report_student_id" value="{{ $student_id }}">
 </label>

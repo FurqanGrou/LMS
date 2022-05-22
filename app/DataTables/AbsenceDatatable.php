@@ -51,14 +51,13 @@ class AbsenceDatatable extends DataTable
         $absences = User::join('reports', 'users.id', '=', 'reports.student_id')
                         ->where('reports.date', '=', $date)
                         ->whereNotIn('reports.absence', [0, -1])
-                        ->select(['reports.id', 'users.student_number', 'reports.student_id', 'reports.absence', 'users.name']);
+                        ->select(['reports.id', 'users.student_number', 'reports.student_id', 'reports.absence', 'users.name', 'reports.created_at as report_created_at']);
 
         if(!isHasUserType('super_admin')){
             $absences = $absences->where('users.study_type', '=', getUserType() == 'iksab' ? 1 : 0);
         }
 
         return $absences;
-
     }
 
     /**
