@@ -66,12 +66,17 @@ class User extends Authenticatable implements Auditable
 
     public function reports()
     {
-        return $this->hasMany(Report::class);
+        return $this->hasMany(Report::class, 'student_id');
     }
 
     public function getAvgAttribute()
     {
         return $this->monthlyScores()->first()->avg ?? 0;
+    }
+
+    public function dropoutStudents()
+    {
+        return $this->hasMany(DropoutStudent::class, 'student_id');
     }
 
 }

@@ -31,10 +31,14 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/AbsenceDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/AbsenceDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/absences/btn/checkbox.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/absences/btn/checkbox.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/absences/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/absences/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/attendance/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/attendance/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/dashboard/app-assets/vendors/js/vendors.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/app-assets/vendors/js/vendors.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/holidays/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/holidays/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/layouts/footer-links.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/layouts/footer-links.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/layouts/head-links.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/layouts/head-links.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/layouts/master.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -200,19 +204,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student\btn" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student" />
+      <recent name="B:\Furqan Group\lms_hatim\app\DataTables" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\admins\btn" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Dashboard" />
       <recent name="B:\LMS\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\LMS\lms_hatim\resources\views\admins\students\btn" />
       <recent name="B:\LMS\lms_hatim\app\Http\Controllers\Teachers" />
       <recent name="B:\LMS\lms_hatim\resources\views\teachers\reports\old_features" />
-      <recent name="B:\LMS\staging\lms_3_staging\public" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\admins\btn" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\auth\teachers" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\auth\admins" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\welcome" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\import_export" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.ExamRequestController.php">
@@ -493,7 +497,14 @@
       <workItem from="1652779579249" duration="14039000" />
       <workItem from="1652972163718" duration="623000" />
       <workItem from="1653110066373" duration="28000" />
-      <workItem from="1653221015483" duration="1221000" />
+      <workItem from="1653221015483" duration="14332000" />
+      <workItem from="1653287215972" duration="23951000" />
+      <workItem from="1653377880667" duration="1796000" />
+      <workItem from="1653455482226" duration="64000" />
+      <workItem from="1653486219024" duration="5728000" />
+      <workItem from="1653554177693" duration="605000" />
+      <workItem from="1653952954299" duration="696000" />
+      <workItem from="1654001635117" duration="2771000" />
     </task>
     <servers />
   </component>
@@ -529,18 +540,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="445" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1648806100483" />
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1652870777170">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1653331710847">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1652870777170" />
-    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1652870417060">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1653331710847" />
+    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1653334337904">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1652870417060" />
-    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1653110092613">
+    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1653334337904" />
+    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1653517761965">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1653110092613" />
+    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1653517761965" />
     <state x="517" y="287" key="NewPhpFileDialog" timestamp="1646672497604">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -549,13 +560,13 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1646249491722" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1652881108824">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1653339522961">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1652881108824" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1652972182886">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1653339522961" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1654003889921">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1652972182886" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1654003889921" />
   </component>
 </project>

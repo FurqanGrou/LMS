@@ -177,20 +177,20 @@
                 let date_from  = new Date($('input#date_from').val()).getTime();
                 let date_to    = new Date($('input#date_to').val()).getTime();
 
-                if(date_from > CurrentDateTime){
-                    $('input#date_from').css('border-color', 'green');
-                    if (!isNaN(date_from) && date_to < date_from){
-                        alert('يجب ان يكون التاريخ أقل من التاريخ التالي');
-                        $('input#date_from').css('border-color', 'red');
-                        $('input#date_from').val('');
-                        $('input#date_from').focus();
-                    }
-                }else{
-                    alert('يجب ان يكون التاريخ مستقبلي');
-                    $('input#date_from').css('border-color', 'red');
-                    $('input#date_from').val('');
-                    $('input#date_from').focus();
-                }
+                // if(date_from > CurrentDateTime){
+                //     $('input#date_from').css('border-color', 'green');
+                //     if (!isNaN(date_from) && date_to < date_from){
+                //         alert('يجب ان يكون التاريخ أقل من التاريخ التالي');
+                //         $('input#date_from').css('border-color', 'red');
+                //         $('input#date_from').val('');
+                //         $('input#date_from').focus();
+                //     }
+                // }else{
+                //     alert('يجب ان يكون التاريخ مستقبلي');
+                //     $('input#date_from').css('border-color', 'red');
+                //     $('input#date_from').val('');
+                //     $('input#date_from').focus();
+                // }
             });
 
             $(document).on('change', 'input#date_to', function (e) {
@@ -198,23 +198,23 @@
                 let date_from  = new Date($('input#date_from').val()).getTime();
                 let date_to    = new Date($('input#date_to').val()).getTime();
 
-                if (isNaN(date_from)){
-                    alert('يجب ان يكون التاريخ السابق مدخل');
-                    $('input#date_to').css('border-color', 'red');
-                    $('input#date_to').val('');
-                    $('input#date_from').css('border-color', 'red');
-                    $('input#date_from').focus();
-                    return 0;
-                }
-
-                if(date_to > date_from){
-                    $('input#date_to').css('border-color', 'green');
-                }else{
-                    alert('يجب ان يكون التاريخ أكبر من السابق');
-                    $('input#date_to').css('border-color', 'red');
-                    $('input#date_to').val('');
-                    $('input#date_to').focus();
-                }
+                // if (isNaN(date_from)){
+                //     alert('يجب ان يكون التاريخ السابق مدخل');
+                //     $('input#date_to').css('border-color', 'red');
+                //     $('input#date_to').val('');
+                //     $('input#date_from').css('border-color', 'red');
+                //     $('input#date_from').focus();
+                //     return 0;
+                // }
+                //
+                // if(date_to > date_from){
+                //     $('input#date_to').css('border-color', 'green');
+                // }else{
+                //     alert('يجب ان يكون التاريخ أكبر من السابق');
+                //     $('input#date_to').css('border-color', 'red');
+                //     $('input#date_to').val('');
+                //     $('input#date_to').focus();
+                // }
             });
 
             $(document).on('change', 'select[name="student_id[]"]', function() {
