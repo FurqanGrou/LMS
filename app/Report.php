@@ -89,6 +89,27 @@ class Report extends Model implements Auditable
 
         });
 
+        static::updated(function(Report $report) {
+            $student_reports = $report->student->reports()->orderBy('created_at', 'desc')->skip(1)->take(5)->get()->where('absence', '=', '-5');
+            if ($student_reports->count() >= 5){
+                foreach ($student_reports as $row){
+                    DropoutStudent::query()->updateOrCreate([
+                            'report_id' => $row->id,
+                            'student_id' => $report->student->id,
+                        ],
+                        [
+                            'report_id' => $row->id,
+                            'student_id' => $report->student->id,
+                            'status' => '0'
+                        ]);
+                }
+            }else{
+                $report->student->dropoutStudents()->update([
+                    'status' => 1
+                ]);
+            }
+        });
+
 //        static::updated(function(Report $report) {
 //
 //            $current_month_year = Carbon::today()->format('Y-m');
@@ -163,6 +184,11 @@ class Report extends Model implements Auditable
     public function student()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function dropoutStudents()
+    {
+        return $this->hasMany(DropoutStudent::class, 'report_id');
     }
 
 }
