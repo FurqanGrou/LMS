@@ -79,10 +79,6 @@ class AssignHolidayImport implements ToModel, WithHeadingRow, WithChunkReading, 
                         'student_id' => $exists_student->id,
                         'date' => $date->format('l d-m-Y'),
                     ];
-
-                    if ($exists_student->student_number == '5558'){
-                        var_dump($date->format('l d-m-Y'));
-                    }
                 }
                 $date->addDay();
             }
