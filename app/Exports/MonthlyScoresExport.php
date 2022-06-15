@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\MonthlyScore;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -19,10 +20,12 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
 
     protected $month_year;
     protected $mail_status;
+    protected $study_type;
 
-    function __construct($month_year, $mail_status) {
+    function __construct($month_year, $mail_status, $study_type) {
         $this->month_year  = $month_year;
         $this->mail_status = $mail_status;
+        $this->study_type = $study_type;
     }
 
     /**
@@ -31,15 +34,27 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
     public function query()
     {
 
+        $study_type = $this->study_type;
+        Log::info($this->study_type);
+
+        Log::info($study_type);
+
         $monthly_scores = DB::table('monthly_scores')
             ->select([
                 DB::raw('substr(month_year, -2)'),
                 'users.name as student_name',
                 'users.student_number',
+//                DB::raw('(CASE
+//                                        WHEN users.section = "male" THEN "بنين"
+//                                        ELSE "بنات"
+//                                        END) as student_section'),
                 DB::raw('(CASE
-                                        WHEN users.section = "male" THEN "بنين"
-                                        ELSE "بنات"
-                                        END) as student_section'),
+                                        WHEN users.study_type = "0" and users.section = "male" THEN "بنين اونلاين"
+                                        WHEN users.study_type = "0" and users.section = "female" THEN "بنات اونلاين"
+                                        WHEN users.study_type = "1" and users.section = "male" THEN "بنين حضوري"
+                                        WHEN users.study_type = "1" and users.section = "female" THEN "بنات حضوري"
+                                        END) as study_type
+                                        '),
                 DB::raw('(CASE
                                         WHEN classes.period = 1 THEN "الفترة الصباحية"
                                         WHEN classes.period = 2 THEN "الفترة المسائية الأولى"
@@ -66,11 +81,11 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
                                         ELSE "ضعيف"
                                         END) AS rate'),
                 DB::raw('(CASE
-                                        WHEN lesson_pages.lesson_title IS NULL  THEN noorania_pages.lesson_title
+                                        WHEN lesson_pages.lesson_title IS NULL THEN noorania_pages.lesson_title
                                         ELSE lesson_pages.lesson_title
                                         END) AS lesson_title'),
                 DB::raw('(CASE
-                                        WHEN lesson_pages.page_number IS NULL  THEN noorania_pages.page_number
+                                        WHEN lesson_pages.page_number IS NULL THEN noorania_pages.page_number
                                         ELSE lesson_pages.page_number
                                         END) AS page_number'),
                 DB::raw('substr(month_year, 1, 4)')
@@ -83,6 +98,12 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
             ->leftJoin('noorania_pages', 'monthly_scores.noorania_page_id', '=', 'noorania_pages.id')
             ->where('month_year', '=', $this->month_year)
             ->where('classes_teachers.role', '=', 'main');
+
+            if ($study_type == 'iksab'){
+                $monthly_scores->where('users.study_type', '=', '1');
+            }elseif($study_type == 'furqan_group'){
+                $monthly_scores->where('users.study_type', '=', '0');
+            }
 
         if($this->mail_status != '-1'){
             $monthly_scores->where('monthly_scores.mail_status', '=', $this->mail_status);

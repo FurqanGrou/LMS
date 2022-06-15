@@ -28,12 +28,9 @@ class AssignHolidayImport implements ToModel, WithHeadingRow, WithChunkReading, 
             ->where('section', '=', $section)
             ->first();
 
-        if ( !empty(trim($row['tarykh_bday_alanttham'])) ){
-            $date = intval(trim($row['tarykh_bday_alanttham']));
-            $start_regular_date = Date::excelToDateTimeObject($date)->format('Y-m-d');
-        }
-
         $date_from = "2022-05-01";
+        $start_regular_date = "2022-05-08";
+
         $date_from_time = new \DateTime($date_from);
         $day   = substr($date_from, -2);
         $month = substr($date_from, 5, 2);

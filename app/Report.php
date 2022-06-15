@@ -90,10 +90,11 @@ class Report extends Model implements Auditable
         });
 
         static::updated(function(Report $report) {
-            $student_reports = $report->student->reports()->orderBy('created_at', 'desc')->skip(1)->take(5)->get()->where('absence', '=', '-5');
-            if ($student_reports->count() >= 5){
-                foreach ($student_reports as $row){
-                    DropoutStudent::query()->updateOrCreate([
+            if ($report->wasChanged('FIELD_NAME')) {
+                $student_reports = $report->student->reports()->orderBy('created_at', 'desc')->skip(1)->take(5)->get()->where('absence', '=', '-5');
+                if ($student_reports->count() >= 5){
+                    foreach ($student_reports as $row){
+                        DropoutStudent::query()->updateOrCreate([
                             'report_id' => $row->id,
                             'student_id' => $report->student->id,
                         ],
@@ -102,11 +103,16 @@ class Report extends Model implements Auditable
                             'student_id' => $report->student->id,
                             'status' => '0'
                         ]);
+                    }
+//                $report->student->update([
+//                    'internal_status' => 0
+//                ]);
+                }else{
+                    // add student internal_status in users table
+//                $report->student->update([
+//                    'internal_status' => 1
+//                ]);
                 }
-            }else{
-                $report->student->dropoutStudents()->update([
-                    'status' => 1
-                ]);
             }
         });
 

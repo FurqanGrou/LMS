@@ -35,8 +35,7 @@ class DropoutStudentDatatable extends DataTable
             })
             ->addColumn('send_alert_message', function($user) use ($alert_messages){
                 return view('admins.dropout_student.btn.send_alert_message', compact('alert_messages', 'user'));
-            })
-            ->rawColumns([
+            })->rawColumns([
                 'student_name',
                 'send_alert_message',
             ]);
@@ -50,9 +49,11 @@ class DropoutStudentDatatable extends DataTable
      */
     public function query()
     {
+        // student must be have class_number
         return DropoutStudent::query()
             ->join('users', 'users.id', '=', 'dropout_students.student_id')
             ->select('users.id', 'users.name', 'users.student_number')
+            ->whereNotNull('users.class_number')
             ->distinct();
     }
 
