@@ -32,13 +32,11 @@
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/DataTables/DropoutStudentDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/DropoutStudentDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exports/MonthlyScoresExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/MonthlyScoresExport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Imports/AssignHolidayImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/AssignHolidayImport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/ExportMonthlyScores.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/ExportMonthlyScores.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DataTables/DropoutStudentDetailsDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/DropoutStudentDetailsDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DropoutStudent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DropoutStudent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/helpers.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Report.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_04_11_153812_create_dropout_students_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_04_11_153812_create_dropout_students_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +49,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app/Report.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -513,7 +514,10 @@
       <workItem from="1654764458427" duration="684000" />
       <workItem from="1654767387911" duration="598000" />
       <workItem from="1654937929615" duration="18000" />
-      <workItem from="1655317286702" duration="3559000" />
+      <workItem from="1655317286702" duration="4160000" />
+      <workItem from="1655377757967" duration="4640000" />
+      <workItem from="1655544320190" duration="82000" />
+      <workItem from="1655619668837" duration="21241000" />
     </task>
     <servers />
   </component>
@@ -549,10 +553,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="445" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1648806100483" />
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1654031481165">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655655904235">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1654031481165" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1655655904235" />
     <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1654179323388">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -561,13 +565,17 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1654498429368" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1653339522961">
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1655656105790">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1653339522961" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1655320770162">
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1655656105790" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1655658134773">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1655320770162" />
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1655658134773" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1655658602748">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1655658602748" />
   </component>
 </project>

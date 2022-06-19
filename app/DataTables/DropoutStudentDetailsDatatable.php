@@ -36,8 +36,8 @@ class DropoutStudentDetailsDatatable extends DataTable
         return DropoutStudent::query()
             ->join('reports', 'reports.id', '=', 'dropout_students.report_id')
             ->where('reports.student_id', '=', $this->student_id)
-            ->where('dropout_students.status', '!=', 1)
-            ->select('reports.id', 'reports.date', 'reports.class_number');
+            ->select('reports.id', 'reports.date', 'reports.class_number', 'dropout_students.dropout_count')
+            ->orderBy('reports.created_at', 'desc');
     }
 
     /**
@@ -93,6 +93,8 @@ class DropoutStudentDetailsDatatable extends DataTable
                 ->title('#'),
             Column::make('date')
                 ->title('التاريخ'),
+            Column::make('dropout_count')
+                ->title('رقم الانقطاع'),
             Column::make('class_number')
                 ->title('رقم الحلقة'),
 //            Column::make('email')

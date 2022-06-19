@@ -1,5 +1,6 @@
 <?php
 
+use App\DropoutStudent;
 use App\Report;
 use App\User;
 use Carbon\Carbon;
@@ -1039,4 +1040,12 @@ function isOnlineStudent($student_id)
 {
     // 0 is online, 1 is face to face
     return getStudentDetails($student_id)->study_type == 0;
+}
+
+function getLastDropoutNumber($options)
+{
+    return DropoutStudent::query()
+            ->where('student_id', '=', $options['student_id'])
+            ->where('dropout_count', '=', $options['dropout_count'] )
+            ->count();
 }

@@ -26,6 +26,9 @@ class DropoutStudentDatatable extends DataTable
     public function dataTable($query)
     {
 
+        // update status of absence in dropouts table (delete on change from absence to normal)
+        // search about max value in dropouts table
+
         $alert_messages = AlertMessage::query()->get();
 
         return datatables()
@@ -35,9 +38,13 @@ class DropoutStudentDatatable extends DataTable
             })
             ->addColumn('send_alert_message', function($user) use ($alert_messages){
                 return view('admins.dropout_student.btn.send_alert_message', compact('alert_messages', 'user'));
+            })->addColumn('dropout_count', function($user){
+                $value = getLastDropoutNumber( ['dropout_count' => $user->dropout_count, 'student_id' => $user->id] );
+                return view('admins.dropout_student.btn.dropout_count', compact('value'));
             })->rawColumns([
                 'student_name',
                 'send_alert_message',
+                'dropout_count',
             ]);
     }
 
@@ -49,12 +56,18 @@ class DropoutStudentDatatable extends DataTable
      */
     public function query()
     {
+
+        return User::query()
+            ->select('id', 'name', 'student_number', 'dropout_count')
+            ->where('internal_status', '=', '0')
+            ->whereNotNull('users.class_number');
+
         // student must be have class_number
-        return DropoutStudent::query()
-            ->join('users', 'users.id', '=', 'dropout_students.student_id')
-            ->select('users.id', 'users.name', 'users.student_number')
-            ->whereNotNull('users.class_number')
-            ->distinct();
+//        return DropoutStudent::query()
+//            ->join('users', 'users.id', '=', 'dropout_students.student_id')
+//            ->select('users.id', 'users.name', 'users.student_number')
+//            ->whereNotNull('users.class_number')
+//            ->distinct();
     }
 
     /**
@@ -104,6 +117,10 @@ class DropoutStudentDatatable extends DataTable
                 ->title('رقم الطالب'),
             Column::computed('student_name')
                 ->title('اسم الطالب')
+                ->exportable(false)
+                ->printable(false),
+            Column::computed('dropout_count')
+                ->title('عدد ايام اخر انقطاع')
                 ->exportable(false)
                 ->printable(false),
             Column::computed('send_alert_message')

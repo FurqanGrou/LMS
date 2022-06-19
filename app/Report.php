@@ -90,30 +90,42 @@ class Report extends Model implements Auditable
         });
 
         static::updated(function(Report $report) {
-            if ($report->wasChanged('FIELD_NAME')) {
-                $student_reports = $report->student->reports()->orderBy('created_at', 'desc')->skip(1)->take(5)->get()->where('absence', '=', '-5');
+
+            if ($report->wasChanged(['total', 'absence'])) {
+                $is_active = true;
+
+                $student_reports = $report->student->reports()->orderBy('created_at', 'desc')->whereNotNull('total')->take(5)->get()->where('absence', '=', '-5')->pluck('id');
+
                 if ($student_reports->count() >= 5){
-                    foreach ($student_reports as $row){
-                        DropoutStudent::query()->updateOrCreate([
-                            'report_id' => $row->id,
-                            'student_id' => $report->student->id,
-                        ],
-                        [
-                            'report_id' => $row->id,
-                            'student_id' => $report->student->id,
-                            'status' => '0'
-                        ]);
+                    foreach ($student_reports as $student_report_id){
+                        $dropout_student = DropoutStudent::query()
+                            ->where('student_id', '=', $report->student->id)
+                            ->where('report_id', '=', $student_report_id)
+                            ->first();
+
+                        if (!$dropout_student){
+                            DropoutStudent::query()->create([
+                                'report_id' => $student_report_id,
+                                'student_id' => $report->student->id,
+                                'dropout_count' => $report->student->dropout_count,
+                            ]);
+                        }
                     }
-//                $report->student->update([
-//                    'internal_status' => 0
-//                ]);
-                }else{
-                    // add student internal_status in users table
-//                $report->student->update([
-//                    'internal_status' => 1
-//                ]);
+
+                    $report->student->update([
+                        'internal_status' => '0',
+                    ]);
+                    $is_active = false;
+                }
+
+                if ($is_active && $report->student->internal_status == '0'){
+                    $report->student->update([
+                        'internal_status' => '1',
+                        'dropout_count' => DB::raw('dropout_count+1'),
+                    ]);
                 }
             }
+
         });
 
 //        static::updated(function(Report $report) {
