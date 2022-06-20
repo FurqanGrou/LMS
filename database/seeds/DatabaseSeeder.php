@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
 //         $this->call(UserSeeder::class);
 //         $this->call(InsertPreviousMonthlyScoresSeeder::class);
 //         $this->call(ReportSeeder::class);
-         $this->call(HolidaySeeder::class);
+//         $this->call(HolidaySeeder::class);
+//         $this->call(DropoutStudentsSeeder::class);
+         $this->call(AssignHolidaysSeeder::class);
     }
 }

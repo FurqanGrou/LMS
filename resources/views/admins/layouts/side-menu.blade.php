@@ -80,10 +80,18 @@
                     <span class="menu-title" data-i18n="nav.templates.main">غياب الطلاب</span>
                 </a>
             </li>
+
             <li class="nav-item">
                 <a href="{{ route('admins.holidays.index') }}">
                     <i class="ft-sliders"></i>
                     <span class="menu-title" data-i18n="nav.templates.main">الاجازات</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('admins.dropout.students.index') }}">
+                    <i class="ft-activity"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">المنقطعين</span>
                 </a>
             </li>
 

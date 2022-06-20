@@ -92,14 +92,14 @@ class JoinRequestsDatatable extends DataTable
             Column::make('classes.title')
                 ->data('title')
                 ->title('اسم الحلقة'),
-            Column::make('teachers.name')
+            Column::make('main_teachers.name')
                 ->data('teacher_name')
                 ->title('اسم المعلم'),
             Column::make('students_count')
                 ->data('students_count')
                 ->title('عدد الطلاب')
                 ->orderable(false),
-            Column::make('spare_teachers.spare_teacher_name')
+            Column::make('spare_teachers.name')
                 ->data('spare_teacher_name')
                 ->title('مقدم الطلب'),
             Column::make('respond_request')

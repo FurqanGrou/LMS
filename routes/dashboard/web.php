@@ -129,6 +129,11 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
     Route::get('/attendanceAbsence/query-teacher/{attendanceAbsenceRequests}', 'RequestServiceController@assignTeacherQuery')->name('assign.teacher.query');
     Route::put('/attendanceAbsence/assign-teacher/{attendanceAbsenceRequests}', 'RequestServiceController@assignTeacher')->name('assign.teacher.update');
 
+    Route::get('dropout-students', 'DropoutStudentController@index')->name('dropout.students.index');
+    Route::get('dropout-students/{user}', 'DropoutStudentController@show')->name('dropout.student.show');
+    Route::post('dropout-students/send-alert', 'DropoutStudentController@sendAlert')->name('dropout.student.send.alert');
+//    Route::post('absences', 'DropoutStudebtController@export')->name('absence.export');
+
 });
 
 Route::get('clear-cache', function (){

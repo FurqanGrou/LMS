@@ -31,11 +31,12 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/AbsenceDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/AbsenceDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/absences/btn/checkbox.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/absences/btn/checkbox.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/absences/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/absences/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/attendance/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/attendance/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DataTables/DropoutStudentDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/DropoutStudentDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DataTables/DropoutStudentDetailsDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/DropoutStudentDetailsDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DropoutStudent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DropoutStudent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/helpers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_04_11_153812_create_dropout_students_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_04_11_153812_create_dropout_students_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +49,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app/Report.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -194,25 +198,25 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../freelancing/اجمل الهواتف/project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Dashboard" />
       <recent name="B:\LMS\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\LMS\lms_hatim\resources\views\admins\students\btn" />
       <recent name="B:\LMS\lms_hatim\app\Http\Controllers\Teachers" />
       <recent name="B:\LMS\lms_hatim\resources\views\teachers\reports\old_features" />
-      <recent name="B:\LMS\staging\lms_3_staging\public" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\admins\btn" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\auth\teachers" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\auth\admins" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\welcome" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\import_export" />
+      <recent name="B:\Furqan Group\lms_hatim\public" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student\btn" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student" />
+      <recent name="B:\Furqan Group\lms_hatim\app\DataTables" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.ExamRequestController.php">
@@ -493,7 +497,27 @@
       <workItem from="1652779579249" duration="14039000" />
       <workItem from="1652972163718" duration="623000" />
       <workItem from="1653110066373" duration="28000" />
-      <workItem from="1653221015483" duration="1221000" />
+      <workItem from="1653221015483" duration="14332000" />
+      <workItem from="1653287215972" duration="23951000" />
+      <workItem from="1653377880667" duration="1796000" />
+      <workItem from="1653455482226" duration="64000" />
+      <workItem from="1653486219024" duration="5728000" />
+      <workItem from="1653554177693" duration="605000" />
+      <workItem from="1653952954299" duration="696000" />
+      <workItem from="1654001635117" duration="31665000" />
+      <workItem from="1654101254116" duration="620000" />
+      <workItem from="1654169110680" duration="11123000" />
+      <workItem from="1654259866631" duration="31000" />
+      <workItem from="1654448197805" duration="678000" />
+      <workItem from="1654500215161" duration="1934000" />
+      <workItem from="1654719648878" duration="2236000" />
+      <workItem from="1654764458427" duration="684000" />
+      <workItem from="1654767387911" duration="598000" />
+      <workItem from="1654937929615" duration="18000" />
+      <workItem from="1655317286702" duration="4160000" />
+      <workItem from="1655377757967" duration="4640000" />
+      <workItem from="1655544320190" duration="82000" />
+      <workItem from="1655619668837" duration="21241000" />
     </task>
     <servers />
   </component>
@@ -529,33 +553,29 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="445" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1648806100483" />
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1652870777170">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655655904235">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1652870777170" />
-    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1652870417060">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1655655904235" />
+    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1654179323388">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1652870417060" />
-    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1653110092613">
+    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1654179323388" />
+    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1654498429368">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1653110092613" />
-    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1646672497604">
+    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1654498429368" />
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1655656105790">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1646672497604" />
-    <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1646249491722">
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1655656105790" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1655658134773">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1646249491722" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1652881108824">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1655658134773" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1655658602748">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1652881108824" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1652972182886">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1652972182886" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1655658602748" />
   </component>
 </project>
