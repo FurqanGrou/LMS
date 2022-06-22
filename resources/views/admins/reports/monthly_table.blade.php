@@ -255,9 +255,9 @@
                                 <td style="width: 50px;min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;" class="{{ getCurrentDayClass($now, $day) }}">
                                     <select name="notes_to_parent" {{ disableRecord($now, $day) }} id="" class="{{ getCurrentDayClass($now, $day) }} select2" style="width: 100%;height: 100%">
                                         <option value=""></option>
-                                        <option value="الطالب غائب">الطالب غائب</option>
+                                        <option value="الطالب غائب" {{ str_contains(\Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l') ,'Friday') || str_contains(\Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l') ,'Saturday') ? 'disabled' : '' }}>الطالب غائب</option>
                                         @foreach($notes as $note)
-                                            <option value="{{ $note->text }}">{{ $note->text }}</option>
+                                            <option value="{{ $note->text }}" {{ str_contains($note->text, 'دوام 3 أيام') && ( str_contains(\Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l') ,'Friday') || str_contains(\Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l') ,'Saturday') ) ? 'disabled' : '' }}>{{ $note->text }}</option>
                                         @endforeach
                                     </select>
                                 </td>

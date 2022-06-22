@@ -31,12 +31,7 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/DropoutStudentDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/DropoutStudentDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/DropoutStudentDetailsDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/DropoutStudentDetailsDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DropoutStudent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DropoutStudent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Report.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2022_04_11_153812_create_dropout_students_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_04_11_153812_create_dropout_students_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -517,7 +512,9 @@
       <workItem from="1655317286702" duration="4160000" />
       <workItem from="1655377757967" duration="4640000" />
       <workItem from="1655544320190" duration="82000" />
-      <workItem from="1655619668837" duration="21241000" />
+      <workItem from="1655619668837" duration="21902000" />
+      <workItem from="1655738957900" duration="3219000" />
+      <workItem from="1655882646324" duration="596000" />
     </task>
     <servers />
   </component>
@@ -573,9 +570,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1655658134773" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1655658602748">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1655882958945">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1655658602748" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1655882958945" />
   </component>
 </project>
