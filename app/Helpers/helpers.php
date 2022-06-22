@@ -1049,3 +1049,11 @@ function getLastDropoutNumber($options)
             ->where('dropout_count', '=', $options['dropout_count'] )
             ->count();
 }
+
+function banAbsenceSaturdayFriday($options)
+{
+    $three_days  = str_contains($options['note'], 'دوام 3 أيام') || str_contains($options['note'], 'الطالب غائب');
+    $is_friday_saturday   = str_contains($options['day'] ,'Friday') || str_contains($options['day'] ,'Saturday');
+
+    return $three_days && $is_friday_saturday;
+}
