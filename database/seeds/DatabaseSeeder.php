@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
 //         $this->call(ReportSeeder::class);
 //         $this->call(HolidaySeeder::class);
 //         $this->call(DropoutStudentsSeeder::class);
-         $this->call(AssignHolidaysSeeder::class);
+//        $this->call(AssignHolidaysSeeder::class);
+        $this->call(AlertMessagesSeeder::class);
     }
 }

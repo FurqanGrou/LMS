@@ -134,6 +134,7 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
     Route::post('dropout-students/send-alert', 'DropoutStudentController@sendAlert')->name('dropout.student.send.alert');
 //    Route::post('absences', 'DropoutStudebtController@export')->name('absence.export');
 
+    Route::resource('alert-messages', 'AlertMessageController');
 });
 
 Route::get('clear-cache', function (){

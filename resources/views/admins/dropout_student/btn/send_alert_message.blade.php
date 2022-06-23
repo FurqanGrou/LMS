@@ -5,7 +5,7 @@
         <input type="hidden" value="{{ $user->id }}" name="student_id">
         <select name="alert_message" class="w-100">
             @foreach($alert_messages as $alert_message)
-                <option value="{{ $alert_message->id }}">{{ $alert_message->content }}</option>
+                <option value="{{ $alert_message->id }}">{{ \Illuminate\Support\Str::limit($alert_message->content, 20) }}</option>
             @endforeach
         </select>
     </label>
