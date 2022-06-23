@@ -15,10 +15,11 @@ class CreateDropoutStudentsTable extends Migration
     {
         Schema::create('dropout_students', function (Blueprint $table) {
             $table->id();
-            $table->integer('report_id')->unique();
+            $table->integer('report_id');
             $table->integer('student_id');
-            $table->enum('status', [1, 0])->default(0);
             $table->timestamps();
+
+            $table->unique(['report_id', 'student_id']);
         });
     }
 

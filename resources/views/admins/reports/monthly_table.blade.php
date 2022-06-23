@@ -1,5 +1,6 @@
 @extends('admins.layouts.master')
 
+
 @section('content')
 
     <style>
@@ -382,6 +383,12 @@
 
     </form>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+
 @endsection
 
 @push('js')
@@ -740,6 +747,12 @@
                         'report_date': report_date,
                     },
                 });
+            });
+
+            jQuery("#month_report").datepicker( {
+                format: "mm-yyyy",
+                startView: "months",
+                minViewMode: "months"
             });
 
         });
