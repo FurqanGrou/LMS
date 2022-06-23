@@ -21,6 +21,7 @@
 
                 <div class="card-content collapse show">
                     <div class="card-body card-admins">
+
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
 
                             <div class="table-responsive">
@@ -75,6 +76,7 @@
                                 {{ $appliedRequests->links() }}
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -155,7 +157,7 @@
         <script>
             $(document).ready(function() {
 
-                $('.add_teacher_to_class_btn').removeClass('disabled');
+                _method: 'PUT',
 
                 $('.add_teacher_to_class_btn').on('click', function () {
 

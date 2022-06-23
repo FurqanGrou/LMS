@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Dashboard;
 use App\DataTables\DropoutStudentDatatable;
 use App\DataTables\DropoutStudentDetailsDatatable;
 use App\DropoutStudent;
+use App\Notifications\AlertMessageNotification;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Notification;
 
 class DropoutStudentController extends Controller
 {
@@ -24,6 +26,7 @@ class DropoutStudentController extends Controller
 
     public function sendAlert(Request $request)
     {
-        dd($request->all());
+        Notification::route('mail', ['hatim201499@gmail.com'])->notify(new AlertMessageNotification([]));
+        dd('Done');
     }
 }
