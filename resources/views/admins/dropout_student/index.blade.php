@@ -93,67 +93,9 @@
                                                 قائمة الطلاب المنقطعين عن الحضور
                                             </h4>
 
-{{--                                            <div class="input-group mb-3">--}}
-{{--                                                <div class="input-group-prepend">--}}
-{{--                                                    <span class="input-group-text" id="basic-addon1">عرض حسب التاريخ</span>--}}
-{{--                                                </div>--}}
-{{--                                                <input type="date" class="form-control" id="month_report" name="date_filter" value="{{ request()->date_filter }}" aria-label="التاريخ من">--}}
-{{--                                            </div>--}}
                                         </fieldset>
                                     </form>
                                 </div>
-{{--                                <div class="col-8">--}}
-{{--                                    <form class="form" method="POST" action="{{ route('admins.absence.export') }}" enctype="multipart/form-data">--}}
-
-{{--                                        @csrf--}}
-{{--                                        @method('POST')--}}
-
-{{--                                        <div class="form-body">--}}
-{{--                                            <h4 class="form-section">--}}
-{{--                                                <i class="la la-file-excel-o"></i>--}}
-{{--                                                تصدير تقرير شامل بالغياب حسب التاريخ--}}
-{{--                                            </h4>--}}
-
-{{--                                            <div class="row">--}}
-{{--                                                <div class="col-4">--}}
-{{--                                                    <div class="input-group mb-3">--}}
-{{--                                                        <div class="input-group-prepend">--}}
-{{--                                                            <span class="input-group-text" id="basic-addon1">من</span>--}}
-{{--                                                        </div>--}}
-{{--                                                        <input type="date" class="form-control" name="date_from" aria-label="التاريخ من" required>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="col-4">--}}
-{{--                                                    <div class="input-group mb-3">--}}
-{{--                                                        <div class="input-group-prepend">--}}
-{{--                                                            <span class="input-group-text" id="basic-addon1">إلى</span>--}}
-{{--                                                        </div>--}}
-{{--                                                        <input type="date" class="form-control" name="date_to" aria-label="التاريخ إلى" required>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="col-4">--}}
-{{--                                                    <div class="input-group mb-3">--}}
-{{--                                                        <div class="input-group-prepend">--}}
-{{--                                                            <span class="input-group-text" id="basic-addon1">حالة الغياب</span>--}}
-{{--                                                        </div>--}}
-{{--                                                        <select name="absence_status" id="" class="form-control">--}}
-{{--                                                            <option value="">الكل</option>--}}
-{{--                                                            <option value="-2">بعذر</option>--}}
-{{--                                                            <option value="-5">بدون عذر</option>--}}
-{{--                                                        </select>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-
-{{--                                            <button type="submit" class="btn btn-primary">--}}
-{{--                                                <i class="la la-file"></i>--}}
-{{--                                                تصدير--}}
-{{--                                            </button>--}}
-
-{{--                                        </div>--}}
-
-{{--                                    </form>--}}
-{{--                                </div>--}}
                             </div>
 
                             <div class="box-body">
@@ -172,40 +114,27 @@
         {!! $dataTable->scripts() !!}
 
         <script>
-            $(document).on('change', '.toggle-absence-type', function() {
-                var absence_type = $(this).prop('checked') == true ? -2 : -5;
-                var report_id = $(this).closest('label').find('.report_id').val();
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: '{{ route('admins.absence.type', ['date_filter' => request()->date_filter]) }}',
-                    data: {'absence_type': absence_type, 'report_id': report_id},
-                    success: function (data) {
-                        // console.log(data.status);
-                    }
-                });
+            $(document).ready(function (){
+                $(document).on('submit', '.form-send-mail', function (e){
+                   e.preventDefault();
+                   let student_id = $(this).find('.student_id').val(),
+                       message_id = $(this).find('.alert-message').val();
 
-                // fire update monthly scores event
-                let report_date = $('#report_date_input').val();
-                let created_at = '{{ request()->date_filter ? substr(request()->date_filter, 0, -3) : \Carbon\Carbon::now()->format('Y-m') }}';
-                let student_id = $('#report_student_id').val();
-
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    url: '{{ route('admins.report.updateMonthlyScoresEvent') }}',
-                    data: {
-                        'student_id': student_id,
-                        'created_at': created_at,
-                        'report_date': report_date,
-                    },
-                });
-
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            student_id,
+                            message_id,
+                        },
+                        url: '{{ route('admins.dropout.student.send.alert') }}',
+                        success: function (data) {
+                            alert('test');
+                        }
+                    });
+               }) ;
             });
-
-            $(document).on('change', 'form input#month_report', function (e) {
-                window.location.href = "{{ route('admins.absences.index') }}?date_filter=" + $(this).val() + "";
-            })
         </script>
     @endpush
 

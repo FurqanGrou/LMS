@@ -31,12 +31,102 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/DropoutStudentDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/DropoutStudentDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/DropoutStudentDetailsDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/DropoutStudentDetailsDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DropoutStudent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DropoutStudent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AttendanceAbsenceRequests.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AttendanceAbsenceRequests.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Report.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2022_04_11_153812_create_dropout_students_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_04_11_153812_create_dropout_students_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/AlertMessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/AlertMessageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/DropoutStudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/DropoutStudentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/RequestServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/RequestServiceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/RequestServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/RequestServiceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Imports/UsersImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/UsersImport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Notifications/AlertMessageNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/AlertMessageNotification.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Teacher.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Teacher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/AlertMessagesSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/AlertMessagesSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/HolidaySeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/HolidaySeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/alert_messages/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/alert_messages/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/dropout_student/btn/send_alert_message.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/dropout_student/btn/send_alert_message.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/dropout_student/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/dropout_student/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/layouts/footer-links.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/layouts/footer-links.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/request_services/show_attendanceAbsence.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/request_services/show_attendanceAbsence.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/emails/user/dropout_students.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/admin/dropout_students.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/teachers/request_services/attendanceAbsence.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/request_services/attendanceAbsence.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/teachers/request_services/show_attendanceAbsence.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/request_services/show_attendanceAbsence.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/teachers/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/teachers/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-0zfCmqRW9CCSSdDPQ1EEyg1np92JZSPU.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-16Uc9rMcAjCuybaTid5aLAnVQUNOtqoc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-2V67ZrcO7kwCJWpAFQNy2L4aObbNc5N1.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-2XfPqXJkiiDqOmwM2F0G992oWHW6joaP.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-2pI2oArO0Nv5zDdUZSixtFHK8tMhQicx.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-3NHZWEDOKP6Cgq5kchpGJkZD5wyd0OZ3.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-4rcsir2a21D3UxBZ3JLtEPgZFbnukYt5.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-4xzBpauVh1iekeReRX850nnuyGaB5bfv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-66KPmBemqrctCX95k4uqi99kV0NrHRTg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-7AEXg7EUAePJcXcxMtQMLkk63Y2sPWS1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-9HfOLe6Tep0KUnp9HgbK6WnU7sYPf9vc.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-AHPABGCVRhchTwxk55HwFLVuB2apB999.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-CsVuGLpF1iVCVoLmR3ojuiEiJrSeYfpF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-D6s6h1ml2Uh6lxbskdCerCN97EUS4HPC" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-DLalAbJO8dUoI4Cc3iGqZWpmaNtRB0dq" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-DQYZRzMNhRxLi6x9LKDvrnpF2r5juVMn.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-FJAdGPCEshUNnoiHOCFHJvVo0b1rILYW" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-JcVlfDdPGrxie1n9X79zZxuQ0jC0b6dG.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-KgZBpz1mxrkubQjVc2QPhTvweCqVLvPz.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-MBH3KkkC5KzUkQArqlPFB7x4KYT9XOv3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-MYom4x9i08sC1v0ryiw1vDPFVXpgqC9e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-NfLsOM2rMFD5KtK5xVJ1GMqlfNZKntPp.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-NxunlLmCAGARDJjU7uYOP0yCReCZb714.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-QC4O1u47dMRhkguSUUDY5FZ9NIxwOsY8.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-R23BMZ4YAHeh2KaudsgxUh5DCTTTxizM.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-RXutqEbKOo1pO2obWoboFPIwGdf4FKtq" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-Ro3nZC9XedrRhS6pEWUZWafe6Tm7eZlI.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-RulA6nCIeUOvSadBhft9NQYHfxB1r5g0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-SYk9W6U6bZT2gDgAh639pOqliM8Ne300" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-SZmKE55aetYb0Rk1pe8UaQ1a4poMZNK8.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-SfgXqf5LNNTWXnu52qpjnBMJ3AaCpibA.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-T1uLiYdX907yO6eUigoMsJmcRIVR00MB.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-TGs9zA9UZwV28fvWEx8v8KM3wDRnrKvb.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-W5cV61FpxA2Dmzd3LM7OeU8u47knAFKa.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-WYWrdwf4qkYdT1Nw8WQBH5rhAxfFZS9P.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-X0flhWV4gCI9z34Gi2yncQuFFcsDhTIm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-Ycohg6R8NsIM4CdQP0l2X82d7jIirOIw.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-Yt3rrfKb9Ks2Pfa3nvCDFBzjlBSEDUlj.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-ajhWRWthi4hMRUoDQTin3WMOXenRcjN8.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-bOFZxPSeJL6tGMEYSKcgS6PSgxoO1fNj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-c9i2MjfAzP3uyS3J1QlslppIlZEtEIPz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-cO8wQYS2DBdP1wJnpe49NZldyEK7Ruye.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-dBYIptY4uVFlVvSJYQkELQnOyiLeT2PN.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-dxbMF7mWvJ8wL1X3E48Ir2hEJhc3TOEO" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-e7jdjcE7qvOO58lV2y69OeZ9wcYOk5ov.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-eaxUXg0GVbrluwiPNszcnHxlGHBpabP9.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-fseq8CrOYpHIFcYaKCE4fRBnHERayilb.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-fvh796QtsVVYZPOjJ8TXVnrqi6A5vrus.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-gHV7cHfEKOYRSPWmmFXN6erxLwxVgQLe.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-ggVDBUwGElp2GK5tXW6OEu22a7Rv2Ejt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-hXSaqnW8l7EXwDahGceAsZZqa5ceC0QQ.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-i6AGEo3lRA745S2Vsn03am1UjL8gbP6t.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-lRm4mCUlLiO8f4HPww6wS83HHHW03mN3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-mMQUvVP6XasXMf3SAPlVEitL1fYCyKrX.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-mn6v5JceGE4OhbSD7m4fEmPwiXFeFt6H.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-naFegxDIB7ov1svFDEEuRtJCj1KsPaXe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-nkLet0YWCt0noAup8CjU2ZckDHLKaphI.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-o7OUv0PlY0eo4CVFwq30w37lGRUagkcL" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-oZIgIDYVHMbE5XultTR2inqYHkMMN4Bj.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-p3EGMYt2Kpc1oJM0xmkLIHkPurIvOCAU.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-pZJA3pf9uUvlvyr0CaEZXgRVgW8e5sQP.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-pwYufBERctt1rOMqFtGk8CSZoQXSUtCE.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-qFJMNAth3wAJIwZ6C7aVlGUvgM125wEr.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-qJsb3ydE3OE19WHAolI0LWJAEMjIyU7o.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-s34KnAz2xJW5DWrihMbmMDh7P4u6M9bH.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-v9vyVhkCYKtOp0ztsOEQHqfuUKRzw2zC.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-wQjfKLm8zxx4R8lZ5EUHhqjQElhZAA0M.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-wl66AUqyJXCuqTVb6mgiwu227wZe6MuR.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-xp2VKrmg4ZbkBKHMS4tESi00juxqaXPQ.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-yDcps85L15Q7inTvIZdWFJoCeYnWIapL.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-yO3FQWji8OTPhefDMTYZIUkjl3lpbXe5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/laravel-excel/laravel-excel-zeNWDCA9Q0GhAok6ZMLTzlLvTJqzD96w" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,6 +278,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/debug" />
       <path value="$PROJECT_DIR$/vendor/predis/predis" />
       <path value="$PROJECT_DIR$/vendor/setasign/fpdf" />
+      <path value="$PROJECT_DIR$/vendor/php-http/message-factory" />
     </include_path>
   </component>
   <component name="ProjectId" id="1pr2sNwwpUMbe3CuJXvJzXjYHNR" />
@@ -205,18 +296,18 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Dashboard" />
       <recent name="B:\LMS\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\LMS\lms_hatim\resources\views\admins\students\btn" />
       <recent name="B:\LMS\lms_hatim\app\Http\Controllers\Teachers" />
-      <recent name="B:\LMS\lms_hatim\resources\views\teachers\reports\old_features" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\alert_messages" />
       <recent name="B:\Furqan Group\lms_hatim\public" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student\btn" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student" />
       <recent name="B:\Furqan Group\lms_hatim\app\DataTables" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.ExamRequestController.php">
@@ -517,7 +608,18 @@
       <workItem from="1655317286702" duration="4160000" />
       <workItem from="1655377757967" duration="4640000" />
       <workItem from="1655544320190" duration="82000" />
-      <workItem from="1655619668837" duration="21241000" />
+      <workItem from="1655619668837" duration="21902000" />
+      <workItem from="1655738957900" duration="3219000" />
+      <workItem from="1655882646324" duration="3245000" />
+      <workItem from="1655929376032" duration="602000" />
+      <workItem from="1655936310455" duration="35000" />
+      <workItem from="1655967088503" duration="25377000" />
+      <workItem from="1656183193774" duration="1629000" />
+      <workItem from="1656314802461" duration="8649000" />
+      <workItem from="1656427540886" duration="11775000" />
+      <workItem from="1656479576505" duration="53000" />
+      <workItem from="1656579073067" duration="8946000" />
+      <workItem from="1656875599285" duration="19468000" />
     </task>
     <servers />
   </component>
@@ -553,29 +655,29 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="445" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1648806100483" />
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655655904235">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655997559778">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1655655904235" />
-    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1654179323388">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1655997559778" />
+    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1656932157287">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1654179323388" />
-    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1654498429368">
+    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1656932157287" />
+    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1656594640456">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1654498429368" />
+    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1656594640456" />
     <state x="517" y="287" key="NewPhpFileDialog" timestamp="1655656105790">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1655656105790" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1655658134773">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1656584173111">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1655658134773" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1655658602748">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1656584173111" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1656955551295">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1655658602748" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1656955551295" />
   </component>
 </project>

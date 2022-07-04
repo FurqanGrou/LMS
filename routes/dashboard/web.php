@@ -143,11 +143,6 @@ Route::get('clear-cache', function (){
 });
 
 Route::get('test-code', function (){
-    $reports = \App\Report::query()
-        ->where('date', 'like', '%-05-2022%')
-        ->pluck('student_id')->unique()->toArray();
-
-    $users = \App\User::query()->whereIn('id', $reports)->whereNotNull('class_number')->get();
-    dd($users);
+    dd(disableRecordGrade(1, 2));
 });
 

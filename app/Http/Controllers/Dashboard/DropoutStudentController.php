@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\AlertMessage;
 use App\DataTables\DropoutStudentDatatable;
 use App\DataTables\DropoutStudentDetailsDatatable;
 use App\DropoutStudent;
@@ -26,7 +27,17 @@ class DropoutStudentController extends Controller
 
     public function sendAlert(Request $request)
     {
-        Notification::route('mail', ['hatim201499@gmail.com'])->notify(new AlertMessageNotification([]));
-        dd('Done');
+        $request->validate([
+           'student_id' => 'required|numeric|exists:users,id',
+           'message_id' => 'required|numeric|exists:alert_messages,id',
+        ]);
+
+        $message = AlertMessage::query()->findOrFail($request->message_id);
+        $student = User::query()->findOrFail($request->student_id);
+
+//        Notification::route('mail', [$student->father_mail, $student->mother_mail])->notify(new AlertMessageNotification($student));
+        Notification::route('mail', ['hatim201499@gmail.com'])->notify(new AlertMessageNotification($student, $message));
+
+        return ['status' => true];
     }
 }

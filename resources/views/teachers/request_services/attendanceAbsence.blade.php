@@ -69,7 +69,7 @@
 
                         <fieldset class="form-group floating-label-form-group">
                             <label for="title"><span class="required">*</span> الحلقة</label>
-                            <select class="form-control select2" name="class_number" id="class_number" required>
+                            <select class="form-control select2" name="class_numbers[]" id="class_number" multiple required>
                                     <option value=""></option>
                                 @foreach($classes as $class)
                                     <option value="{{ $class->class_number }}">{{ $class->title }}</option>
@@ -141,7 +141,7 @@
 
                         <fieldset class="form-group floating-label-form-group">
                             <label for="title"><span class="required">*</span> الحلقة</label>
-                            <select class="form-control select2" name="class_number" id="class_number" required>
+                            <select class="form-control select2" name="class_numbers[]" id="class_number" multiple required>
                                 <option value=""></option>
                                 @foreach($classes as $class)
                                     <option value="{{ $class->class_number }}">{{ $class->title }}</option>
@@ -202,7 +202,7 @@
 
                         <fieldset class="form-group floating-label-form-group">
                             <label for="title"><span class="required">*</span> الحلقة</label>
-                            <select class="form-control select2" name="class_number" id="class_number" required>
+                            <select class="form-control select2" name="class_numbers[]" id="class_number" multiple required>
                                 <option value=""></option>
                                 @foreach($classes as $class)
                                     <option value="{{ $class->class_number }}">{{ $class->title }}</option>
@@ -352,7 +352,9 @@
                 // }
 
                 let date = element.find('[name="date_excuse"]').val();
-                let class_number = element.find('select#class_number').val();
+                let class_numbers = element.find('select#class_number option:selected')
+                    .toArray().map(item => item.value);
+
                 let duration_delay = element.find('.duration_delay').val();
                 let exit_time = element.find('.exit_time').val();
 
@@ -360,8 +362,9 @@
 
                 var fd = new FormData();
 
+                console.log(class_numbers);
                 // Append data
-                fd.append('class_number', class_number);
+                fd.append('class_numbers', class_numbers);
                 fd.append('date_excuse', date);
                 fd.append('type', request_type);
 

@@ -13,15 +13,17 @@ class AlertMessageNotification extends Notification
     use Queueable;
 
     public $student;
+    public $message;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($student)
+    public function __construct($student, $message)
     {
         $this->student = $student;
+        $this->message = $message;
     }
 
     /**
@@ -43,9 +45,9 @@ class AlertMessageNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $subject = "تنبيه إنقطاع رقم 1";
+        $subject = "تنبيه إنقطاع عن حضور حلقات مركز الفرقان";
 
-        return (new MailMessage)->bcc('lmsfurqan1@gmail.com')->subject($subject)->view('emails.user.dropout_students', ['student' => $this->student]);
+        return (new MailMessage)->bcc('lmsfurqan1@gmail.com')->subject($subject)->view('emails.admin.dropout_students', ['student' => $this->student, 'message' => $this->message]);
     }
 
     /**

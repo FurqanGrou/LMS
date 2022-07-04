@@ -98,4 +98,7 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     // ajax to check period of class
     Route::post('/request-services/attendanceAbsence/checkPeriod', 'RequestServiceController@checkPeriod')->name('request_services.attendanceAbsenceTeachers.checkPeriod');
 
+    //ajax to cancel requests
+    Route::post('/request-services/cancel-request/{attendanceAbsenceRequests}', 'RequestServiceController@cancelRequest')->name('request_services.cancel-request');
+
 });

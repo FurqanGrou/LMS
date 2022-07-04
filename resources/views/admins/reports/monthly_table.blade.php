@@ -61,6 +61,44 @@
             text-align: right !important;
         }
 
+        .titles-head {
+            min-height: 45px;
+            height: 45px;
+            max-height: 45px;
+            background: #C6E0B4;
+            font-weight: bold
+        }
+
+        .td-styles {
+            min-height: 45px;
+            height: 45px;
+            max-height: 45px;
+            text-align:center;
+            font-size:10px;
+        }
+
+        .tr-styles {
+            min-height: 45px;
+            height: 45px;
+            max-height: 45px;
+        }
+
+        .day-number {
+            text-align:center;
+            font-size:10px;
+            padding-left:5px;
+            padding-right:5px;
+            font-weight:bold;
+        }
+
+        .day-name {
+            padding-left: 5px;
+            padding-right: 5px;
+            background: #C6E0B4;
+            font-weight: bold;
+            font-size: 12px;
+            color: black;
+        }
     </style>
 
     <table style="width: 100%; border: none;font-family: arial, sans-serif;">
@@ -144,29 +182,29 @@
                 <td style="border: none; width: 60%">
                     <table style="width: 98%;" id="lessons">
                         <thead>
-                        <tr style="min-height: 45px;height: 45px;max-height: 45px;background: #C6E0B4;font-weight: bold">
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold" >التاريخ</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold">اليوم</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 120px">الدرس الجديد</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">من</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">إلى</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 50px;">اخر 5 صفحات</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold">المراجعة اليومية</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">من</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">إلى</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">خطأ</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">تنبيه</td>
-                            <td style="min-height: 45px; height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 40px;">عدد الصفحات</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold">اسم المستمع</td>
+                        <tr class="titles-head">
+                            <td>التاريخ</td>
+                            <td class="text-center">اليوم</td>
+                            <td class="text-center">الدرس الجديد</td>
+                            <td class="text-center" style="width: 35px;">من</td>
+                            <td class="text-center" style="width: 35px;">إلى</td>
+                            <td class="text-center" style="width: 50px;">اخر 5 صفحات</td>
+                            <td class="text-center">المراجعة اليومية</td>
+                            <td class="text-center" style="width: 35px;">من</td>
+                            <td class="text-center" style="width: 35px;">إلى</td>
+                            <td class="text-center" style="width: 35px;">خطأ</td>
+                            <td class="text-center" style="width: 35px;">تنبيه</td>
+                            <td class="text-center" style="width: 40px;">عدد الصفحات</td>
+                            <td class="text-center">اسم المستمع</td>
                         </tr>
                         </thead>
 
                         <tbody>
                         @for($day=1; $day < \Carbon\Carbon::create()->year($year)->month($month)->daysInMonth + 1; ++$day)
-                            <tr style="min-height: 45px;height: 45px;max-height: 45px;" class="{{ str_contains(\Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l') ,'Friday') ? 'custom-border' : ''  }} {{ getCurrentDayClass($now, $day) . ' ' .getTodayMailStatusClass($now, $day, request()->student_id) }}">
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;padding-left: 5px;padding-right: 5px;font-weight: bold">{{ $day }}</td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;padding-left: 5px;padding-right: 5px;background: #C6E0B4;font-weight: bold;font-size: 12px;color: black;" class="day-name {{ getCurrentDayClass($now, $day) }}">{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->translatedFormat('l') }}</td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;width: 120px">
+                            <tr class="{{ str_contains(\Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l') ,'Friday') ? 'custom-border' : ''  }} {{ getCurrentDayClass($now, $day) . ' ' .getTodayMailStatusClass($now, $day, request()->student_id) }}">
+                                <td style="" class="day-number">{{ $day }}</td>
+                                <td class="day-name td-styles {{ getCurrentDayClass($now, $day) }}">{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->translatedFormat('l') }}</td>
+                                <td style="width: 120px" class="td-styles">
                                     <input type="hidden" name="date" {{ disableRecord($now, $day) }} value="{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l d-m-Y') }}">
                                     <input type="hidden" name="created_at" {{ disableRecord($now, $day) }} value="{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('Y-m-d') }}">
 
@@ -177,16 +215,16 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                <td class="td-styles">
                                     <input style="width: 100%;" type="text" name="new_lesson_from" {{ disableRecord($now, $day) }} value="" class="{{ getCurrentDayClass($now, $day) }}">
                                 </td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                <td class="td-styles">
                                     <input style="width: 100%;" type="text" name="new_lesson_to" {{ disableRecord($now, $day) }} value="" class="{{ getCurrentDayClass($now, $day) }}">
                                 </td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                <td class="td-styles">
                                     <input style="width: 100%;" type="text" name="last_5_pages" {{ disableRecord($now, $day) }} value="" class="{{ getCurrentDayClass($now, $day) }}">
                                 </td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                <td class="td-styles">
                                     <select name="daily_revision" {{ disableRecord($now, $day) }} id="daily_revision" class="{{ getCurrentDayClass($now, $day) }} select2 js-select2-daily-revision-tags" style="width: 100%;height: 100%">
                                         <option value=""></option>
                                         @foreach($daily_revision as $revision)
@@ -194,22 +232,22 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                <td class="td-styles">
                                     <input style="width: 100%;" type="text" name="daily_revision_from" {{ disableRecord($now, $day) }} value="" class="{{ getCurrentDayClass($now, $day) }}">
                                 </td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                <td class="td-styles">
                                     <input style="width: 100%;" type="text" name="daily_revision_to" {{ disableRecord($now, $day) }} value="" class="{{ getCurrentDayClass($now, $day) }}">
                                 </td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                <td class="td-styles">
                                     <input style="width: 100%;" type="text" name="mistake" value="" {{ disableRecord($now, $day) }} class="{{ getCurrentDayClass($now, $day) }}">
                                 </td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                <td class="td-styles">
                                     <input style="width: 100%;" type="text" name="alert" value="" {{ disableRecord($now, $day) }} class="{{ getCurrentDayClass($now, $day) }}">
                                 </td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                <td class="td-styles">
                                     <input style="width: 100%;" type="text" name="number_pages" {{ disableRecord($now, $day) }} value="" class="{{ getCurrentDayClass($now, $day) }}">
                                 </td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                <td class="td-styles">
                                     <input style="width: 100%;" type="text" name="listener_name" {{ disableRecord($now, $day) }} value="" class="{{ getCurrentDayClass($now, $day) }}">
                                 </td>
                             </tr>
@@ -223,36 +261,36 @@
                 <td style="border: none; width: 40%">
                     <table style="width: 100%;" id="grades">
                         <thead>
-                        <tr style="min-height: 45px;height: 45px;max-height: 45px; background: #C6E0B4; font-weight: bold">
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold;width: 60px;">الدرس</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold">اخر 5 صفحات</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold">المراجعة اليومية</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold">السلوك والأخرى</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold">المجموع</td>
-                            <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold;width: 50px;">ملاحظات المعلم لولي الأمر</td>
+                        <tr class="titles-head">
+                            <td class="text-center" style="width: 60px;">الدرس</td>
+                            <td class="text-center">اخر 5 صفحات</td>
+                            <td class="text-center">المراجعة اليومية</td>
+                            <td class="text-center">السلوك والأخرى</td>
+                            <td class="text-center">المجموع</td>
+                            <td class="text-center" style="width: 50px;">ملاحظات المعلم لولي الأمر</td>
                         </tr>
                         </thead>
                         <tbody>
                         @for($day=1; $day < \Carbon\Carbon::create()->year($year)->month($month)->daysInMonth + 1; ++$day)
-                            <tr style="min-height: 45px;height: 45px;max-height: 45px;" class="{{ str_contains(\Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l') ,'Friday') ? 'custom-border' : '' }}">
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                            <tr class="{{ str_contains(\Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l') ,'Friday') ? 'custom-border' : '' }} tr-styles">
+                                <td class="td-styles">
                                     <input type="hidden" name="date" {{ disableRecord($now, $day) }} value="{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l d-m-Y') }}">
                                     <input type="hidden" name="created_at" {{ disableRecord($now, $day) }} value="{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('Y-m-d') }}">
                                     <input style="width: 100%;" type="text" name="lesson_grade" {{ disableRecord($now, $day) }} value="" class="{{ getCurrentDayClass($now, $day) }}">
                                 </td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                <td class="td-styles">
                                     <input style="width: 100%;" type="text" name="last_5_pages_grade" {{ disableRecord($now, $day) }} value="" class="{{ getCurrentDayClass($now, $day) }}">
                                 </td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                <td class="td-styles">
                                     <input style="width: 100%;" type="text" name="daily_revision_grade" {{ disableRecord($now, $day) }} value="" class="{{ getCurrentDayClass($now, $day) }}">
                                 </td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                <td class="td-styles">
                                     <input style="width: 100%;" type="text" name="behavior_grade" {{ disableRecord($now, $day) }} value="" class="{{ getCurrentDayClass($now, $day) }}">
                                 </td>
-                                <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;" class="{{ getCurrentDayClass($now, $day) }}">
+                                <td class="{{ getCurrentDayClass($now, $day) }} td-styles">
                                     <span class="total"></span>
                                 </td>
-                                <td style="width: 50px;min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;" class="{{ getCurrentDayClass($now, $day) }}">
+                                <td style="width: 50px;" class="{{ getCurrentDayClass($now, $day) }} td-styles">
                                     <select name="notes_to_parent" {{ disableRecord($now, $day) }} id="" class="{{ getCurrentDayClass($now, $day) }} select2" style="width: 100%;height: 100%">
                                         <option value=""></option>
                                         <option value="الطالب غائب">الطالب غائب</option>
