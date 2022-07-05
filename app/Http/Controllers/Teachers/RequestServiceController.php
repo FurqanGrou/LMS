@@ -275,6 +275,33 @@ class RequestServiceController extends Controller
         return view('teachers.request_services.edit_attendanceAbsence', ['attendanceAbsenceRequest' => $attendanceAbsenceRequests, 'classes' => $classes]);
     }
 
+    public function updateAttendanceAbsence(Request $request, AttendanceAbsenceRequests $attendanceAbsenceRequests)
+    {
+
+        $request->validate([
+            'type' => 'required',
+            'class_number' => 'required|numeric',
+            'date_excuse'  => 'required|date',
+            'reason_excuse' => 'required|string',
+            'absence_reason' => ($request->reason_excuse == 'other' && $request->type == 'absence') ? 'required|string' : 'nullable',
+            'duration_delay' => ($request->type == 'delay') ? 'required' : 'nullable',
+            'exit_time' => ($request->type == 'exit') ? 'required' : 'nullable',
+        ], [
+            'class_number.required' => 'يجب عليك اختيار حلقة صحيحة',
+            'class_number.numeric' => 'يجب عليك اختيار حلقة صحيحة',
+            'date_excuse.required' => 'يجب عليك التأكد من إدخال تاريخ العذر',
+            'date_excuse.date'     => 'يجب عليك التأكد من صحة تاريخ العذر',
+            'reason_excuse.required'  => 'يجب عليك التأكد من إدخال العذر/السبب',
+            'absence_reason.required' => 'يجب عليك التأكد من إدخال العذر/السبب',
+            'duration_delay.required' => 'يجب عليك التأكد من إدخال مدة التأخير',
+            'exit_time.required'      => 'يجب عليك التأكد من إدخال موعد الخروج',
+        ]);
+
+        $attendanceAbsenceRequests->update($request->except(['type']));
+
+        return back()->withSuccess('تم تعديل الطلب بنجاح');
+    }
+
     public function cancelRequest(Request $request, AttendanceAbsenceRequests $attendanceAbsenceRequests)
     {
 
