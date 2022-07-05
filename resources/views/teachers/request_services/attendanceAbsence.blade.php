@@ -338,6 +338,7 @@
                 // $('button[type="submit"] i.fa-check').css('display', 'none');
 
                 let element = $(this).parent().parent();
+                let form = $(this);
 
                 let request_type = element.find('form').data('request-type');
                 let reason_excuse = element.find('.reason_excuse').val();
@@ -362,7 +363,6 @@
 
                 var fd = new FormData();
 
-                console.log(class_numbers);
                 // Append data
                 fd.append('class_numbers', class_numbers);
                 fd.append('date_excuse', date);
@@ -395,6 +395,8 @@
                         element.find('.class-number-danger').addClass('d-none');
                         element.find('form').trigger("reset");
                         element.parent().modal('hide');
+                        $('.form').trigger("reset");
+                        $('.form select, .form input').trigger("change");
                         alert('تم تقديم الطلب بنجاح');
                     },
                     error: function (data) {
