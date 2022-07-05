@@ -147,7 +147,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                 $exists_teacher->update([
                     'name'      => $teacher_name,
                     'section'   => $row['alksm'] == 'بنات' ? 'female' : 'male',
-                    'last_4_id' => $row['akhr_4_arkam_mn_alhoy_llmaalm'] ?? '00',
+                    'last_4_id' => substr($row['akhr_4_arkam_mn_alhoy_llmaalm'], 1) ?? '00',
                     'teacher_number' => $teacher_number,
                 ]);
 
@@ -160,7 +160,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'email'          => $email,
                     'password'       => \Hash::make('12345'),
                     'section'        => $row['alksm'] == 'بنات' ? 'female' : 'male',
-                    'last_4_id'      => $row['akhr_4_arkam_mn_alhoy_llmaalm'] ?? '00',
+                    'last_4_id'      => substr($row['akhr_4_arkam_mn_alhoy_llmaalm'], 1) ?? '00',
                 ]);
 
             }
@@ -182,7 +182,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                 $exists_supervisor->update([
                     'name'      => $supervisor_name,
                     'section'   => $row['alksm'] == 'بنات' ? 'female' : 'male',
-                    'last_4_id' => '00',
+                    'last_4_id' => substr($row['akhr_4_arkam_mn_alhoy_llmaalm'], 1) ?? '00',
                     'teacher_number' => $supervisor_number,
                 ]);
 
@@ -195,7 +195,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'email'             => $email,
                     'password'          => \Hash::make('12345'),
                     'section'           => $row['alksm'] == 'بنات' ? 'female' : 'male',
-                    'last_4_id'         => '00',
+                    'last_4_id'         => substr($row['akhr_4_arkam_mn_alhoy_llmaalm'], 1) ?? '00',
                 ]);
 
             }

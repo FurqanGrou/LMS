@@ -14,6 +14,8 @@ class HolidaySeeder extends Seeder
     public function run()
     {
 
+        \App\Report::query()->whereMonth('created_at', '=', 7)->delete();
+
         $users = \App\User::query()->whereNotNull('class_number')->get()->toArray();
 
         $data_to_insert = [];
@@ -22,8 +24,13 @@ class HolidaySeeder extends Seeder
         {
             foreach ($result as $value){
 
-                $date = Carbon::createFromDate(2022, 05, 1);
-                for($i = 1; $i <= 5; $i++){
+                $date = Carbon::createFromDate(2022, 07, 6);
+                for($i = 6; $i <= 16; $i++){
+
+                    if (str_contains($date->format('l') ,'Friday') || str_contains($date->format('l'), 'Saturday')){
+                        $date->addDay();
+                        continue;
+                    }
 
                     $data_to_insert[] = [
                         'new_lesson' => '-',

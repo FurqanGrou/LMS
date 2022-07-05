@@ -103,6 +103,7 @@ class RequestServiceController extends Controller
                 $teacher_spare = DB::table('classes_teachers')
                         ->where('class_number', '=', $attendanceAbsenceRequests->class_number)
                         ->where('role', '=', 'spare');
+
                 $teacher_result = $teacher_spare->first();
 
                 // send email to previous spare teachers
@@ -113,11 +114,14 @@ class RequestServiceController extends Controller
                     $teacher_spare->delete();
                 }
 
+                $class = Classes::query()->where('class_number', '=', $attendanceAbsenceRequests->class_number)->first();
+
                 ClassesTeachers::query()->create([
                         'class_number'  => $attendanceAbsenceRequests->class_number,
                         'teacher_email' => $teacher->email,
                         'type' => $teacher->section,
                         'role' => 'spare',
+                        'study_type' => $class->study_type,
                     ]);
 
                  $attendanceAbsenceRequests->update([
@@ -135,7 +139,7 @@ class RequestServiceController extends Controller
             DB::commit();
         }catch (\Throwable $e){
             DB::rollBack();
-            return response()->json(['msg' => "حدث خطأ ما"], 500);
+            return response()->json(['msg' => $e->getMessage()], 500);
         }
 
         return response()->json(['attendanceAbsenceRequest' => $attendanceAbsenceRequests]);

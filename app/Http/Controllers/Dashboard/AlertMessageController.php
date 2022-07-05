@@ -59,7 +59,7 @@ class AlertMessageController extends Controller
      */
     public function edit(AlertMessage $alertMessage)
     {
-        return ['id' => $alertMessage->id, 'content' => $alertMessage->content];
+        return ['id' => $alertMessage->id, 'content' => $alertMessage->content, 'content_en' => $alertMessage->content_en];
     }
 
     /**
@@ -73,13 +73,15 @@ class AlertMessageController extends Controller
     {
         $request->validate([
             'message_content' => 'required|string',
+            'message_content_en' => 'required|string',
         ]);
 
         $alertMessage->update([
-            'content' => $request->message_content
+            'content' => $request->message_content,
+            'content_en' => $request->message_content_en,
         ]);
 
-        return ['status' => true, 'content' => $alertMessage->content];
+        return ['status' => true, 'content' => $alertMessage->content, 'content_en' => $alertMessage->content_en];
     }
 
     /**
@@ -92,4 +94,5 @@ class AlertMessageController extends Controller
     {
         //
     }
+
 }
