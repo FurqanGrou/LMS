@@ -21,6 +21,7 @@
 
                 <div class="card-content collapse show">
                     <div class="card-body card-admins">
+
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
 
                             <div class="table-responsive">
@@ -58,7 +59,7 @@
                                                     <span class="badge badge-status-request @if($appliedRequest->status == 'pending') {{ 'badge-danger' }} @elseif($appliedRequest->status == 'processing') {{ 'badge-success' }} @else {{ 'badge-primary' }} @endif">{{ $appliedRequest->status_title }}</span>
                                                 </td>
                                                 <td>
-                                                    @if( (!getPeriodTimeAvailable(['period' => @$appliedRequest->classNumber->period, 'excuse_date' => $appliedRequest->date_excuse])) || $appliedRequest->status == 'completed')
+                                                    @if( (getPeriodTimeAvailable(['excuse_date' => $appliedRequest->date_excuse])) || $appliedRequest->status == 'completed')
                                                         <a href="#" class="btn btn-success disabled" data-toggle="modal" data-target="#">
                                                             <i class="fa fa-plus-circle"></i>
                                                         </a>
@@ -75,6 +76,7 @@
                                 {{ $appliedRequests->links() }}
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -155,9 +157,9 @@
         <script>
             $(document).ready(function() {
 
-                $('.add_teacher_to_class_btn').removeClass('disabled');
+                    $('.add_teacher_to_class_btn.disabled').removeClass('disabled');
 
-                $('.add_teacher_to_class_btn').on('click', function () {
+                    $('.add_teacher_to_class_btn').on('click', function () {
 
                     let current_row = $(this).closest('tr'),
                         attendanceAbsenceRequest = current_row.find("input[name=attendanceAbsenceRequest_id]").val();

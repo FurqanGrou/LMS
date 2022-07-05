@@ -134,6 +134,7 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
     Route::post('dropout-students/send-alert', 'DropoutStudentController@sendAlert')->name('dropout.student.send.alert');
 //    Route::post('absences', 'DropoutStudebtController@export')->name('absence.export');
 
+    Route::resource('alert-messages', 'AlertMessageController');
 });
 
 Route::get('clear-cache', function (){
@@ -142,11 +143,6 @@ Route::get('clear-cache', function (){
 });
 
 Route::get('test-code', function (){
-    $reports = \App\Report::query()
-        ->where('date', 'like', '%-05-2022%')
-        ->pluck('student_id')->unique()->toArray();
-
-    $users = \App\User::query()->whereIn('id', $reports)->whereNotNull('class_number')->get();
-    dd($users);
+    dd(disableRecordGrade(1, 2));
 });
 

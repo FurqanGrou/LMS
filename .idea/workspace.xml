@@ -31,12 +31,9 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/DropoutStudentDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/DropoutStudentDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/DropoutStudentDetailsDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/DropoutStudentDetailsDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DropoutStudent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DropoutStudent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Report.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2022_04_11_153812_create_dropout_students_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2022_04_11_153812_create_dropout_students_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/RequestServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/RequestServiceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/teachers/request_services/attendanceAbsence.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/request_services/attendanceAbsence.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/teachers/request_services/edit_attendanceAbsence.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/request_services/edit_attendanceAbsence.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,6 +185,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/debug" />
       <path value="$PROJECT_DIR$/vendor/predis/predis" />
       <path value="$PROJECT_DIR$/vendor/setasign/fpdf" />
+      <path value="$PROJECT_DIR$/vendor/php-http/message-factory" />
     </include_path>
   </component>
   <component name="ProjectId" id="1pr2sNwwpUMbe3CuJXvJzXjYHNR" />
@@ -205,18 +203,18 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Dashboard" />
       <recent name="B:\LMS\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\LMS\lms_hatim\resources\views\admins\students\btn" />
       <recent name="B:\LMS\lms_hatim\app\Http\Controllers\Teachers" />
-      <recent name="B:\LMS\lms_hatim\resources\views\teachers\reports\old_features" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\alert_messages" />
       <recent name="B:\Furqan Group\lms_hatim\public" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student\btn" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student" />
       <recent name="B:\Furqan Group\lms_hatim\app\DataTables" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.ExamRequestController.php">
@@ -517,7 +515,18 @@
       <workItem from="1655317286702" duration="4160000" />
       <workItem from="1655377757967" duration="4640000" />
       <workItem from="1655544320190" duration="82000" />
-      <workItem from="1655619668837" duration="21241000" />
+      <workItem from="1655619668837" duration="21902000" />
+      <workItem from="1655738957900" duration="3219000" />
+      <workItem from="1655882646324" duration="3245000" />
+      <workItem from="1655929376032" duration="602000" />
+      <workItem from="1655936310455" duration="35000" />
+      <workItem from="1655967088503" duration="25377000" />
+      <workItem from="1656183193774" duration="1629000" />
+      <workItem from="1656314802461" duration="8649000" />
+      <workItem from="1656427540886" duration="11775000" />
+      <workItem from="1656479576505" duration="53000" />
+      <workItem from="1656579073067" duration="8946000" />
+      <workItem from="1656875599285" duration="26806000" />
     </task>
     <servers />
   </component>
@@ -553,29 +562,29 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="445" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1648806100483" />
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655655904235">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655997559778">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1655655904235" />
-    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1654179323388">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1655997559778" />
+    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1657009561809">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1654179323388" />
-    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1654498429368">
+    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1657009561809" />
+    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1656594640456">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1654498429368" />
+    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1656594640456" />
     <state x="517" y="287" key="NewPhpFileDialog" timestamp="1655656105790">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1655656105790" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1655658134773">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1656584173111">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1655658134773" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1655658602748">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1656584173111" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1657005023887">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1655658602748" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1657005023887" />
   </component>
 </project>

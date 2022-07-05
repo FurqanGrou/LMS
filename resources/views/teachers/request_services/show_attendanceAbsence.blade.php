@@ -47,26 +47,35 @@
                                             <td>{{ $appliedRequest->date_excuse }}</td>
                                             <td>{{ $appliedRequest->created_at->format('g:i A Y-m-d') }}</td>
                                             <td>
-                                                <span class="badge badge-status-request @if($appliedRequest->status == 'pending') {{ 'badge-danger' }} @elseif($appliedRequest->status == 'processing') {{ 'badge-success' }} @else {{ 'badge-primary' }} @endif">{{ $appliedRequest->status_title }}</span>
+                                                <span class="badge badge-status-request @if($appliedRequest->status == 'pending') {{ 'badge-success' }} @elseif($appliedRequest->status == 'processing') {{ 'badge-warning' }} @elseif($appliedRequest->status == 'canceled') {{ 'badge-danger' }} @else {{ 'badge-primary' }} @endif">{{ $appliedRequest->status_title }}</span>
                                             </td>
-                                            <td>
-                                                <a href="{{ route('teachers.request_services.attendanceAbsenceTeachers.show', $appliedRequest) }}" class="btn btn-info mr-1">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                                @if($appliedRequest->date_excuse < \Carbon\Carbon::today() || $appliedRequest->status != 'pending')
-                                                    <a href="#" class="btn btn-warning disabled mr-1">
-                                                        <i class="fa fa-edit"></i>
+                                            <td class="d-flex" style="border-top: 1px solid #E3EBF3;">
+                                                <div class="form-group" title="عرض الطلب" data-toggle="tooltip" data-placement="top">
+                                                    <a href="{{ route('teachers.request_services.attendanceAbsenceTeachers.show', $appliedRequest) }}" class="btn btn-info mr-1">
+                                                        <i class="fa fa-eye"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-danger disabled mr-1">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                </div>
+
+                                                @if($appliedRequest->date_excuse < \Carbon\Carbon::today())
+
+                                                    <div class="form-group" title="تعديل الطلب" data-toggle="tooltip" data-placement="top">
+                                                        <a href="#" class="btn btn-warning disabled mr-1">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    </div>
+
+                                                    <div class="form-group" title="إلغاء الطلب" data-toggle="tooltip" data-placement="top">
+                                                        <input type="checkbox" id="switcherySize3" class="switchery" disabled data-size="xs" {{ $appliedRequest->status == 'canceled' ? 'checked' : '' }} />
+                                                    </div>
                                                 @else
-                                                    <a href="{{ route('teachers.request_services.attendanceAbsenceTeachers.edit', $appliedRequest) }}" class="btn btn-warning mr-1">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                                    <a href="#" class="btn btn-danger mr-1">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div class="form-group" title="تعديل الطلب" data-toggle="tooltip" data-placement="top">
+                                                        <a href="{{ route('teachers.request_services.attendanceAbsenceTeachers.edit', $appliedRequest) }}" class="btn btn-warning mr-1">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="form-group cancel-request" title="إلغاء الطلب" data-toggle="tooltip" data-placement="top">
+                                                        <input type="checkbox" id="switcherySize3" class="switchery" data-size="xs" {{ $appliedRequest->status == 'canceled' ? 'checked' : '' }} data-request-id="{{ $appliedRequest->id }}"/>
+                                                    </div>
                                                 @endif
                                             </td>
                                         </tr>
@@ -85,7 +94,39 @@
 
     @push('js')
 
+        <script>
+            $(document).ready(function() {
+                $(document).on('click', 'div.cancel-request', function (e) {
 
+                    let element = $(this).parent();
+
+                    let url = '{{ route("teachers.request_services.cancel-request", ":attendanceAbsenceRequests") }}';
+                        url = url.replace(':attendanceAbsenceRequests', element.find('.switchery').data('request-id'));
+
+                    let request_status = element.find('.switchery:checked').length > 0;
+
+                    var fd = new FormData();
+
+                    // Append data
+                    fd.append('status', request_status);
+
+                    $.ajax({
+                        type: "POST",
+                        contentType: false,
+                        processData: false,
+                        dataType: 'json',
+                        url: url,
+                        data: fd,
+                        success: function (data) {
+                            alert('تم تقديم الطلب بنجاح');
+                        },
+                        error: function (data) {
+
+                        }
+                    });
+                });
+            });
+        </script>
     @endpush
 
 @endsection

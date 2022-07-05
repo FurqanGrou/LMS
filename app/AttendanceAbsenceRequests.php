@@ -94,6 +94,9 @@ class AttendanceAbsenceRequests extends Model
             case 'completed':
                 $status_title = 'انتهى';
                 break;
+            case 'canceled':
+                $status_title = 'ملغي';
+                break;
         }
 
         return $status_title;

@@ -1,12 +1,10 @@
     <!-- BEGIN VENDOR JS-->
 
-
     <script src="{{ asset('dashboard/app-assets/vendors/js/vendors.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('dashboard/app-assets/vendors/js/extensions/sweetalert.min.js') }}" type="text/javascript"></script>
 
     <script src="{{ asset('dashboard/app-assets/vendors/js/forms/toggle/bootstrap-switch.min.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('dashboard/app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js')}}"
-            type="text/javascript"></script>
+    <script src="{{ asset('dashboard/app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js')}}" type="text/javascript"></script>
 
     <script src="{{ asset('dashboard/app-assets/vendors/js/forms/toggle/switchery.min.js')}}" type="text/javascript"></script>
 

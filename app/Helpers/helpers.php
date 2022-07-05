@@ -854,6 +854,9 @@ function disableRecordGrade($date, $day)
     $tomorrow = Carbon::tomorrow();
     $status = true;
 
+//    $myDate = '17/07/2022';
+//    $tomorrow = Carbon::createFromFormat('m/d/Y', $myDate);
+
     if(str_contains($tomorrow->format('l') ,'Friday')){
         $tomorrow->addDays(2);
     }
@@ -960,23 +963,29 @@ function getClassName($class_number)
 function getPeriodTimeAvailable($data){
     $status = false;
 
-    $hour = Carbon::now()->timezone('Asia/Riyadh')->hour;
+//    $hour = Carbon::now()->timezone('Asia/Riyadh')->hour;
     $date = Carbon::now()->format('Y-m-d');
     $excuse_date = Carbon::createFromFormat('Y-m-d', $data['excuse_date'])->format('Y-m-d');
 
-    switch ($data['period']){
-        case 1: $status = ($hour <= 7 && $date == $excuse_date) || ($date < $excuse_date); // 09:00 AM
-            break;
-        case 2: $status = ($hour <= 13 && $date == $excuse_date) || ($date < $excuse_date); // 03:00 PM
-            break;
-        case 3: $status = ($hour <= 17 && $date == $excuse_date) || ($date < $excuse_date); // 07:00 PM
-            break;
-        case 4: $status = ($hour <= 21 && $date == $excuse_date) || ($date < $excuse_date); // 11:00 PM
-            break;
-        case 5:
-            $status = ($hour <= 0 && $date == $excuse_date) || ($date < $excuse_date); // 02:00 AM
-            break;
+    if ($excuse_date <= $date){
+        $status = true;
     }
+
+//    switch ($data['period']){
+//        case 1: $status = ($hour <= 7 && $date == $excuse_date) || ($date < $excuse_date); // 09:00 AM
+//            break;
+//        case 2: $status = ($hour <= 13 && $date == $excuse_date) || ($date < $excuse_date); // 03:00 PM
+//            break;
+//        case 3: $status = ($hour <= 17 && $date == $excuse_date) || ($date < $excuse_date); // 07:00 PM
+//            break;
+//        case 4: $status = ($hour <= 21 && $date == $excuse_date) || ($date < $excuse_date); // 11:00 PM
+//            break;
+//        case 5:
+//            $status = ($hour <= 0 && $date == $excuse_date) || ($date < $excuse_date); // 02:00 AM
+//            break;
+//    }
+
+
     return $status;
 }
 

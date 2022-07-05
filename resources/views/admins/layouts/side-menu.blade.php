@@ -10,7 +10,11 @@
                 </a>
             </li>
 
-            <li class="nav-item open"><a href="#"><i class="la la-cogs"></i><span class="menu-title" data-i18n="nav.templates.main">التصدير والاستيراد</span></a>
+            <li class="nav-item open">
+                <a href="#">
+                    <i class="la la-cogs"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">التصدير والاستيراد</span>
+                </a>
                 <ul class="menu-content">
                     <li>
 
@@ -89,10 +93,28 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('admins.dropout.students.index') }}">
+
+                <a href="#">
                     <i class="ft-activity"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">المنقطعين</span>
+                    <span class="menu-title" data-i18n="nav.templates.main">قسم المنقطعين</span>
                 </a>
+
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{ route('admins.dropout.students.index') }}">
+                            <i class="ft-activity"></i>
+                            الطلاب المنقطعين
+                        </a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('admins.alert-messages.index') }}">
+                            <i class="ft-message-square"></i>
+                            رسائل المنقطعين
+                        </a>
+                    </li>
+                </ul>
+
+
             </li>
 
             <li class="nav-item">

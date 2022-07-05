@@ -21,21 +21,41 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="chapter_name" class="w-100">تاريخ الإذن المطلوب</label>
-                        <input type="date" class="form-control" value="{{ $attendanceAbsenceRequest->date_excuse }}">
+                        <input type="date" class="form-control" name="date_excuse" value="{{ old('date_excuse', $attendanceAbsenceRequest->date_excuse) }}">
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="chapter_name" class="w-100">سبب الإذن - العذر</label>
-                        <textarea class="form-control" >{!! $attendanceAbsenceRequest->reason_excuse !!}</textarea>
+
+                @if(in_array($attendanceAbsenceRequest->reason_excuse, ['مرض', 'أجازة', 'سفر', 'اختبارات']))
+                    <div class="col-md-4">
+                        <label class="w-100">سبب الإذن - العذر</label>
+                        <select class="form-control select2 reason_excuse" name="reason_excuse" id="absence_reason" required>
+                            <option value=""></option>
+                            <option value="مرض" {{ $attendanceAbsenceRequest->reason_excuse == 'مرض' ? 'selected' : '' }}>مرض</option>
+                            <option value="أجازة" {{ $attendanceAbsenceRequest->reason_excuse == 'أجازة' ? 'selected' : '' }}>أجازة</option>
+                            <option value="سفر" {{ $attendanceAbsenceRequest->reason_excuse == 'سفر' ? 'selected' : '' }}>سفر</option>
+                            <option value="اختبارات" {{ $attendanceAbsenceRequest->reason_excuse == 'اختبارات' ? 'selected' : '' }}>اختبارات</option>
+                            <option value="other">أخرى</option>
+                        </select>
                     </div>
-                </div>
+                @else
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="chapter_name" class="w-100">سبب الإذن - العذر</label>
+                            <div class="position-relative has-icon-left">
+                                <textarea id="timesheetinput7" rows="5" class="form-control" name="reason_excuse" placeholder="سبب الإذن - العذر">{!! old('reason_excuse', $attendanceAbsenceRequest->reason_excuse) !!}</textarea>
+                                <div class="form-control-position">
+                                    <i class="ft-file"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
 
                 @if($attendanceAbsenceRequest->duration_delay)
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="chapter_name" class="w-100">مدة التأخير - دقائق</label>
-                            <input type="number" class="form-control" value="{{ @$attendanceAbsenceRequest->duration_delay }}">
+                            <input type="number" class="form-control" name="duration_delay" value="{{ old('duration_delay', @$attendanceAbsenceRequest->duration_delay) }}">
                         </div>
                     </div>
                 @endif
@@ -44,7 +64,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="chapter_name" class="w-100">موعد الخروج</label>
-                            <input type="time" class="form-control" value="{{ @$attendanceAbsenceRequest->exit_time }}">
+                            <input type="time" class="form-control" name="exit_time" value="{{ old('exit_time', @$attendanceAbsenceRequest->exit_time) }}">
                         </div>
                     </div>
                 @endif
@@ -57,8 +77,8 @@
                     </div>
                 @endif
 
-                <div class="col-md-8">
-                    <label class="w-100">الحلقات</label>
+                <div class="col-md-4">
+                    <label class="w-100" for="class_numbers">الحلقة</label>
                     <select class="form-control select2" name="class_number" id="class_numbers">
                         @foreach($classes as $class)
                             <option value="{{ $class->class_number }}" {{ $class->class_number == $attendanceAbsenceRequest->class_number ? 'selected' : ''  }}>{{ $class->title }}</option>
