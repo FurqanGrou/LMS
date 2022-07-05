@@ -92,6 +92,8 @@ class Report extends Model implements Auditable
         static::updated(function(Report $report) {
 
             if ($report->wasChanged(['total', 'absence'])) {
+                Log::info($report->getOriginal('absence') . ' - ' . $report->absence);
+
                 $is_active = true;
 
                 $student_reports = $report->student->reports()->orderBy('created_at', 'desc')->whereNotNull('total')->take(5)->get()->where('absence', '=', '-5')->pluck('id');
@@ -122,6 +124,22 @@ class Report extends Model implements Auditable
                     $report->student->update([
                         'internal_status' => '1',
                         'dropout_count' => DB::raw('dropout_count+1'),
+                    ]);
+                }
+
+                if ($report->getOriginal('absence') == '-5' && $report->absence == '0'){
+                    $dropout_student = DropoutStudent::query()
+                        ->where('student_id', '=', $report->student->id)
+                        ->where('report_id', '=', $report->id)
+                        ->first();
+                    $dropout_student->delete();
+
+                    $dropout_count = DropoutStudent::query()
+                        ->where('student_id', '=', $report->student->id)
+                        ->max('dropout_count');
+
+                    $report->student->update([
+                        'dropout_count' => $dropout_count,
                     ]);
                 }
             }
