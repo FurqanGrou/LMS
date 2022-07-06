@@ -36,7 +36,7 @@ class DropoutStudentController extends Controller
         $student = User::query()->findOrFail($request->student_id);
 
 //        Notification::route('mail', [$student->father_mail, $student->mother_mail])->notify(new AlertMessageNotification($student));
-        Notification::route('mail', ['hatim201499@gmail.com'])->notify(new AlertMessageNotification($student, $message));
+        Notification::route('mail', ['lmsfurqan1@gmail.com'])->notify(new AlertMessageNotification($student, $message));
 
         return ['status' => true];
     }
