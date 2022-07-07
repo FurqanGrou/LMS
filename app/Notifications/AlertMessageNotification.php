@@ -47,7 +47,9 @@ class AlertMessageNotification extends Notification
     {
         $subject = "تنبيه إنقطاع عن حضور حلقات مركز الفرقان";
 
-        return (new MailMessage)->bcc('lmsfurqan1@gmail.com')->subject($subject)->view('emails.admin.dropout_students', ['student' => $this->student, 'message' => $this->message]);
+        return (new MailMessage)
+            ->subject($subject)
+            ->view('emails.admin.dropout_students', ['student' => $this->student, 'message' => $this->message]);
     }
 
     /**

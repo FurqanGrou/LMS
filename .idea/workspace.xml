@@ -31,9 +31,12 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/DataTables/DropoutStudentDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/DropoutStudentDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/helpers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/DropoutStudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/DropoutStudentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Notifications/AlertMessageNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/AlertMessageNotification.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Report.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/dropout_student/btn/send_alert_message.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/dropout_student/btn/send_alert_message.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/dropout_student/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/dropout_student/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/emails/admin/dropout_students.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/admin/dropout_students.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -526,7 +529,8 @@
       <workItem from="1656427540886" duration="11775000" />
       <workItem from="1656479576505" duration="53000" />
       <workItem from="1656579073067" duration="8946000" />
-      <workItem from="1656875599285" duration="36647000" />
+      <workItem from="1656875599285" duration="37505000" />
+      <workItem from="1657107640682" duration="11028000" />
     </task>
     <servers />
   </component>
@@ -566,10 +570,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1655997559778" />
-    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1657009561809">
+    <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1657138048964">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1657009561809" />
+    <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1657138048964" />
     <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1656594640456">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -582,9 +586,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1657052281041" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1657047632905">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1657142671891">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1657047632905" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1657142671891" />
   </component>
 </project>

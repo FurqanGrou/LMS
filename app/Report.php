@@ -4,7 +4,6 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Support\Facades\DB;
 
@@ -92,7 +91,6 @@ class Report extends Model implements Auditable
         static::updated(function(Report $report) {
 
             if ($report->wasChanged(['total', 'absence'])) {
-                Log::info($report->getOriginal('absence') . ' - ' . $report->absence);
 
                 $is_active = true;
 
