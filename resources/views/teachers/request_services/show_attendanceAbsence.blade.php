@@ -45,7 +45,7 @@
                                                 <span class="badge @if($appliedRequest->request_type == 'absence') {{ 'badge-danger' }} @elseif($appliedRequest->request_type == 'delay') {{ 'badge-warning' }} @else {{ 'badge-info' }} @endif">{{ $appliedRequest->type }}</span>
                                             </td>
                                             <td>{{ $appliedRequest->date_excuse }}</td>
-                                            <td>{{ $appliedRequest->created_at->format('g:i A Y-m-d') }}</td>
+                                            <td>{{ $appliedRequest->created_at->format('Y-m-d (g:i) A') }}</td>
                                             <td>
                                                 <span class="badge badge-status-request @if($appliedRequest->status == 'pending') {{ 'badge-success' }} @elseif($appliedRequest->status == 'processing') {{ 'badge-warning' }} @elseif($appliedRequest->status == 'canceled') {{ 'badge-danger' }} @else {{ 'badge-primary' }} @endif">{{ $appliedRequest->status_title }}</span>
                                             </td>
@@ -56,7 +56,7 @@
                                                     </a>
                                                 </div>
 
-                                                @if($appliedRequest->date_excuse < \Carbon\Carbon::today())
+                                                @if($appliedRequest->date_excuse < \Carbon\Carbon::now()->format('Y-m-d'))
 
                                                     <div class="form-group" title="تعديل الطلب" data-toggle="tooltip" data-placement="top">
                                                         <a href="#" class="btn btn-warning disabled mr-1">
