@@ -1058,3 +1058,12 @@ function getLastDropoutNumber($options)
             ->where('dropout_count', '=', $options['dropout_count'] )
             ->count();
 }
+
+function dropoutCounts($student_id)
+{
+    $dropouts_student = DropoutStudent::query()->where('student_id', '=', $student_id);
+    $dropout_count = clone $dropouts_student;
+    $dropout_count = $dropout_count->max('dropout_count');
+    return $dropouts_student->where('dropout_count', '=', $dropout_count)->count();
+}
+

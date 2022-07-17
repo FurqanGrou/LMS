@@ -125,6 +125,7 @@ class DropoutStudentDatatable extends DataTable
                 ->printable(false),
             Column::computed('send_alert_message')
                 ->title('رسالة التنبيه')
+                ->className('text-center')
                 ->exportable(false)
                 ->printable(false),
         ];
