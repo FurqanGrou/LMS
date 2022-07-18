@@ -119,7 +119,6 @@
                    e.preventDefault();
                    let student_id = $(this).find('.student_id').val(),
                        message_id = $(this).find('.alert-message').val();
-
                     $.ajax({
                         type: "POST",
                         dataType: "json",
@@ -130,7 +129,9 @@
                         },
                         url: '{{ route('admins.dropout.student.send.alert') }}',
                         success: function (data) {
-                            alert('test');
+                            alert('تم ارسال التنبيه بنجاح');
+                        },
+                        error: function (data){
                         }
                     });
                }) ;

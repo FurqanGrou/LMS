@@ -202,7 +202,7 @@
 
                         <fieldset class="form-group floating-label-form-group">
                             <label for="title"><span class="required">*</span> الحلقة</label>
-                            <select class="form-control select2" name="class_numbers[]" id="class_number" multiple required>
+                            <select class="form-control select2" name="class_numbers" id="class_number" required>
                                 <option value=""></option>
                                 @foreach($classes as $class)
                                     <option value="{{ $class->class_number }}">{{ $class->title }}</option>

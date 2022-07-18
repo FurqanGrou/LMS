@@ -33,6 +33,7 @@
                                             <th>اسم المعلم</th>
                                             <th>رقم المعلم</th>
                                             <th>نوع الطلب</th>
+                                            <th>تاريخ تقديم الطلب</th>
                                             <th>تاريخ الإذن المطلوب</th>
                                             <th>اسم الحلقة</th>
                                             <th>حالة الطلب</th>
@@ -52,14 +53,14 @@
                                                 <td>
                                                     <span class="badge @if($appliedRequest->request_type == 'absence') {{ 'badge-danger' }} @elseif($appliedRequest->request_type == 'delay') {{ 'badge-warning' }} @else {{ 'badge-info' }} @endif">{{ $appliedRequest->type }}</span>
                                                 </td>
+                                                <td>{{ $appliedRequest->created_at->format('Y-m-d (g:i) A') }}</td>
                                                 <td>{{ $appliedRequest->date_excuse }}</td>
-{{--                                                <td>{{ $appliedRequest->created_at->format('g:i A Y-m-d') }}</td>--}}
                                                 <td>{{ @$appliedRequest->classNumber->title }}</td>
                                                 <td>
                                                     <span class="badge badge-status-request @if($appliedRequest->status == 'pending') {{ 'badge-danger' }} @elseif($appliedRequest->status == 'processing') {{ 'badge-success' }} @else {{ 'badge-primary' }} @endif">{{ $appliedRequest->status_title }}</span>
                                                 </td>
                                                 <td>
-                                                    @if( (getPeriodTimeAvailable(['excuse_date' => $appliedRequest->date_excuse])) || $appliedRequest->status == 'completed')
+                                                    @if($appliedRequest->date_excuse < \Carbon\Carbon::now()->format('Y-m-d') || $appliedRequest->status == 'completed')
                                                         <a href="#" class="btn btn-success disabled" data-toggle="modal" data-target="#">
                                                             <i class="fa fa-plus-circle"></i>
                                                         </a>
