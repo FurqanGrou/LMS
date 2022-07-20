@@ -31,10 +31,10 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/DropoutStudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/DropoutStudentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Notifications/AlertMessageNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/AlertMessageNotification.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeds/HolidaySeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/HolidaySeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/request_services/show_attendanceAbsence.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/request_services/show_attendanceAbsence.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/request_services/attendanceAbsence.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/request_services/attendanceAbsence.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/request_services/show_attendanceAbsence.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/request_services/show_attendanceAbsence.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/emails/admin/dropout_students.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/admin/dropout_students.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +197,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="F:/laragon/www/fundorex/project" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -531,7 +531,10 @@
       <workItem from="1657107640682" duration="11457000" />
       <workItem from="1657178031880" duration="1197000" />
       <workItem from="1657196486964" duration="2876000" />
-      <workItem from="1657980114030" duration="4866000" />
+      <workItem from="1657980114030" duration="15909000" />
+      <workItem from="1658070689465" duration="622000" />
+      <workItem from="1658133353364" duration="1904000" />
+      <workItem from="1658326002818" duration="3177000" />
     </task>
     <servers />
   </component>
@@ -571,10 +574,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1657983024927" />
-    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1657440217449">
+    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1658258634956">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1657440217449" />
+    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1658258634956" />
     <state x="517" y="287" key="NewPhpFileDialog" timestamp="1655656105790">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -583,9 +586,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1657052281041" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1657986957291">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1658327877067">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1657986957291" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1658327877067" />
   </component>
 </project>

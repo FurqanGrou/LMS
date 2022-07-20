@@ -22,6 +22,7 @@ class DropoutStudentController extends Controller
     public function show(User $user)
     {
         $studentDetailsDatatable = new DropoutStudentDetailsDatatable();
+
         return $studentDetailsDatatable->with(['student_id' => $user->id])->render('admins.dropout_student.show', ['student_name' => $user->name]);
     }
 
