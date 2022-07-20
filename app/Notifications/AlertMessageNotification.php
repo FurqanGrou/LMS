@@ -45,11 +45,12 @@ class AlertMessageNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $subject = "تنبيه إنقطاع عن حضور حلقات مركز الفرقان";
+        $subject = "تنبيه إنقطاع عن حضور حلقات مركز الفرقان | Absence from attending Al-Furqan Center sessions";
 
         return (new MailMessage)
             ->subject($subject)
-            ->view('emails.admin.dropout_students', ['student' => $this->student, 'message' => $this->message]);
+            ->cc(['hatim201499@gmail.com', 'hatimfurqan99@gmail.com'])
+            ->view('emails.admin.dropout_students', ['student' => $this->student, 'message_content' => $this->message]);
     }
 
     /**
