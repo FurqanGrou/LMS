@@ -31,10 +31,10 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/DropoutStudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/DropoutStudentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/RequestServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/RequestServiceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Imports/UsersImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/UsersImport.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Notifications/AlertMessageNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/AlertMessageNotification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/HolidaySeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/HolidaySeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/emails/admin/dropout_students.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/admin/dropout_students.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Report.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,25 +197,25 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="F:/laragon/www/fundorex/project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/emails/admin" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\emails\admin" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\alert_messages" />
+      <recent name="B:\Furqan Group\lms_hatim\public" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student\btn" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="B:\Furqan Group\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Dashboard" />
       <recent name="B:\LMS\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\LMS\lms_hatim\resources\views\admins\students\btn" />
       <recent name="B:\LMS\lms_hatim\app\Http\Controllers\Teachers" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\alert_messages" />
-      <recent name="B:\Furqan Group\lms_hatim\public" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student\btn" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student" />
-      <recent name="B:\Furqan Group\lms_hatim\app\DataTables" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.ExamRequestController.php">
@@ -534,7 +534,10 @@
       <workItem from="1657980114030" duration="15909000" />
       <workItem from="1658070689465" duration="622000" />
       <workItem from="1658133353364" duration="1904000" />
-      <workItem from="1658326002818" duration="3177000" />
+      <workItem from="1658326002818" duration="3779000" />
+      <workItem from="1658385923178" duration="2015000" />
+      <workItem from="1658661657678" duration="1267000" />
+      <workItem from="1658765924103" duration="7488000" />
     </task>
     <servers />
   </component>
@@ -566,10 +569,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655997559778">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1658766596943">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1655997559778" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1658766596943" />
     <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1657983024927">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -586,9 +589,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1657052281041" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1658327877067">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1658770343160">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1658327877067" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1658770343160" />
   </component>
 </project>
