@@ -174,9 +174,9 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
         if(!is_null($row['bryd_almshrf']) && !is_null($row['rkm_almshrf']) && !is_null($row['asm_almshrf'])){
 
             //check if this supervisor is exists or not
-            $email = str_replace(' ', '', $row['bryd_almshrf']);
+            $email             = str_replace(' ', '', $row['bryd_almshrf']);
             $exists_supervisor = Teacher::where('email', '=', $email)->first();
-            $supervisor_name = trim($row['asm_almshrf']);
+            $supervisor_name   = trim($row['asm_almshrf']);
             $supervisor_number = trim($row['rkm_almshrf']);
 
             //if exists is true update current supervisor data
