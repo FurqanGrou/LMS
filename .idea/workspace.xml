@@ -31,10 +31,13 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/RequestServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/RequestServiceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/RequestServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/RequestServiceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ReportController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/ReportController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Imports/UsersImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/UsersImport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notifications/AlertMessageNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/AlertMessageNotification.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/NoteParent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/NoteParent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,25 +200,25 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../checkout_plateform/checkout" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admins/note_parents/btn" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\emails\admin" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\alert_messages" />
-      <recent name="B:\Furqan Group\lms_hatim\public" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student\btn" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="B:\Furqan Group\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Dashboard" />
       <recent name="B:\LMS\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\LMS\lms_hatim\resources\views\admins\students\btn" />
       <recent name="B:\LMS\lms_hatim\app\Http\Controllers\Teachers" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\note_parents\btn" />
+      <recent name="B:\Furqan Group\lms_hatim\app\DataTables" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\note_parents" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\emails\admin" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\alert_messages" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.ExamRequestController.php">
@@ -542,6 +545,8 @@
       <workItem from="1658949018578" duration="5693000" />
       <workItem from="1659005593831" duration="295000" />
       <workItem from="1659247276509" duration="1202000" />
+      <workItem from="1659896442628" duration="11448000" />
+      <workItem from="1660033307092" duration="14231000" />
     </task>
     <servers />
   </component>
@@ -573,29 +578,37 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1658766596943">
+    <state x="428" y="188" key="#Notifications" timestamp="1659966399355">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1658766596943" />
+    <state x="428" y="188" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1659966399355" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1660043737697">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1660043737697" />
     <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1657983024927">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1657983024927" />
-    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1658840199703">
+    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1659964208418">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1658840199703" />
-    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1655656105790">
+    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1659964208418" />
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1659943754273">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1655656105790" />
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1659943754273" />
+    <state x="184" y="9" key="SettingsEditor" timestamp="1660036529509">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1660036529509" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1657052281041">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1657052281041" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1659005886191">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1660056403436">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1659005886191" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1660056403436" />
   </component>
 </project>
