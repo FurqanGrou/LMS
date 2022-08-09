@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use App\Mail\AttendanceAbsenceRequestMail;
 use App\Mail\MeetingMail;
 use App\Meeting;
+use App\Notifications\AlertMessageNotification;
+use App\Notifications\RequestServiceExcuseNotification;
 use App\Service;
 use App\SuggestComplaintBox;
 use App\Teacher;
@@ -19,6 +21,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 
 class RequestServiceController extends Controller
@@ -42,7 +45,6 @@ class RequestServiceController extends Controller
 
     public function exam()
     {
-
         $students = User::all();
         $teachers = Teacher::all();
         $chapters = Chapter::all();
@@ -51,7 +53,6 @@ class RequestServiceController extends Controller
     }
     public function store(Request $request)
     {
-
         unset($request['_token']);
 
         $form_id = Form::query()->where('title', '=', $request->form_title)->first()->id ?? null;
@@ -73,7 +74,6 @@ class RequestServiceController extends Controller
     }
     public function showExam(Request $request)
     {
-
         $request_type = Service::query()->where('request_code', '=', $request->service)->with('form')->first();
         $request_type = $request_type->form->title;
 
@@ -84,7 +84,6 @@ class RequestServiceController extends Controller
 
     public function createMeeting()
     {
-
         $teachers = DB::table('classes_teachers')
                     ->where('teacher_email', '=', auth('teacher_web')->user()->email)
                     ->pluck('class_number')
@@ -137,7 +136,6 @@ class RequestServiceController extends Controller
 
     public function createMeetingWithAdmin()
     {
-
         $teachers = DB::table('classes_teachers')
                     ->where('teacher_email', '=', auth('teacher_web')->user()->email)
                     ->pluck('class_number')
@@ -249,6 +247,8 @@ class RequestServiceController extends Controller
                 'class_number' => $class_number,
             ]);
         }
+
+        Notification::route('mail', ['alfurqangroup2020@gmail.com'])->notify(new RequestServiceExcuseNotification($request->all()));
 
         return response()->json(['status' => true, 'errors' => []], 200);
     }

@@ -329,8 +329,12 @@
                                         <select name="notes_to_parent[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} id="" class="{{ getCurrentDayClass($now, $day) }} select2" style="width: 100%;height: 100%">
                                             <option value=""></option>
                                             <option value="الطالب غائب">الطالب غائب</option>
+                                            <option value="Absent Student">Absent Student</option>
                                             @foreach($notes as $note)
                                                 <option value="{{ $note->text }}">{{ $note->text }}</option>
+                                                @if(!empty($note->text_en))
+                                                    <option value="{{ $note->text_en }}">{{ $note->text_en }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </td>
@@ -619,9 +623,13 @@
                 current_row.find('td.day-name').removeClass('custom-bg-gray');
             }
 
-            if(current_row.find('select[name="notes_to_parent[]"]').val() == 'الطالب غائب'
-                || current_row.find('select[name="notes_to_parent[]"]').val() == 'دوام 3 أيام'
-                || current_row.find('select[name="notes_to_parent[]"]').val() == 'نشاط لا صفي'
+            if(
+                current_row.find('select[name="notes_to_parent"]').val() == 'الطالب غائب'
+                || current_row.find('select[name="notes_to_parent"]').val() == 'Absent Student'
+                || current_row.find('select[name="notes_to_parent"]').val() == 'دوام 3 أيام'
+                || current_row.find('select[name="notes_to_parent"]').val() == '3 days work'
+                || current_row.find('select[name="notes_to_parent"]').val() == 'نشاط لا صفي'
+                || current_row.find('select[name="notes_to_parent"]').val() == 'Extracurricular Activity'
             ){
 
                 let grades_row = date.closest('#grades tr'),
@@ -753,7 +761,7 @@
                     ];
 
                     let sum = 0;
-                    if(notes_to_parent != 'الطالب غائب'){
+                    if(notes_to_parent != 'الطالب غائب' || notes_to_parent != 'Absent Student'){
                         grades.forEach(sumTotal);
                     }
                     function sumTotal(item) {
@@ -860,12 +868,16 @@
                     behavior_grade = current_row.find('input[name="behavior_grade[]"]'),
                     total = current_row.find(".total");
 
-                if(notes_to_parent == 'الطالب غائب'
+                if(
+                    notes_to_parent == 'الطالب غائب'
+                    || notes_to_parent == 'Absent Student'
                     || notes_to_parent == 'دوام 3 أيام'
+                    || notes_to_parent == '3 days work'
                     || notes_to_parent == 'نشاط لا صفي'
+                    || notes_to_parent == 'Extracurricular Activity'
                 ){
                     current_row.find("input").attr('disabled', true);
-                    if(notes_to_parent == 'نشاط لا صفي') {
+                    if(notes_to_parent == 'نشاط لا صفي' || notes_to_parent == 'Extracurricular Activity') {
                         lesson_grade.val(1);
                         last_5_pages_grade.val(2);
                         daily_revision_grade.val(1);

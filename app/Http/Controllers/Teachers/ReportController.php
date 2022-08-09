@@ -146,7 +146,7 @@ class ReportController extends Controller
 
             $total = 0;
 
-            if ($request->notes_to_parent == 'الطالب غائب'){
+            if ($request->notes_to_parent == 'الطالب غائب' || $request->notes_to_parent == 'Absent Student'){
                 $absence_grade = -5;
                 if (getStudentDetails(request()->student_id)->path == 'قسم التلاوة'){
                     $absence_grade = getAbsenceCount($request->student_id, -2) >= 8 ? -5 : -2;
@@ -162,14 +162,14 @@ class ReportController extends Controller
                         'last_5_pages_grade' => 0,
                         'daily_revision_grade' => 0,
                         'behavior_grade' => 0,
-                        'notes_to_parent' => 'الطالب غائب',
+                        'notes_to_parent' => $request->notes_to_parent,
                         'absence' => $absence_grade,
                         'total' => $total,
                         'mail_status' => 0,
                         'class_number' => getStudentDetails(request()->student_id)->class_number,
                     ]
                 );
-            }elseif($request->notes_to_parent == 'دوام 3 أيام'){
+            }elseif($request->notes_to_parent == 'دوام 3 أيام' || $request->notes_to_parent == '3 days work'){
                 $report = Report::updateOrCreate(
                     [
                         'student_id' => $request->student_id,
@@ -181,14 +181,14 @@ class ReportController extends Controller
                         'last_5_pages_grade' => '-',
                         'daily_revision_grade' => '-',
                         'behavior_grade' => '-',
-                        'notes_to_parent' => 'دوام 3 أيام',
+                        'notes_to_parent' => $request->notes_to_parent,
                         'absence' => '-1',
                         'total' => $total,
                         'mail_status' => 0,
                         'class_number' => getStudentDetails(request()->student_id)->class_number,
                     ]
                 );
-            }elseif($request->notes_to_parent == 'نشاط لا صفي'){
+            }elseif($request->notes_to_parent == 'نشاط لا صفي' || $request->notes_to_parent == 'Extracurricular Activity'){
                 $student_path = getStudentPath($request->student_id);
                 $default_grade = [
                     'lesson_grade'         => getPathDefaultGrade($student_path, 'new_lesson'),
@@ -208,7 +208,7 @@ class ReportController extends Controller
                         'last_5_pages_grade' => $default_grade['last_5_pages_grade'],
                         'daily_revision_grade' => $default_grade['daily_revision_grade'],
                         'behavior_grade' => $default_grade['behavior_grade'],
-                        'notes_to_parent' => 'نشاط لا صفي',
+                        'notes_to_parent' => $request->notes_to_parent,
                         'absence' => 0,
                         'total' => $default_grade['lesson_grade'] + $default_grade['last_5_pages_grade'] + $default_grade['daily_revision_grade'] + $default_grade['behavior_grade'],
                         'mail_status' => 0,
@@ -478,6 +478,8 @@ class ReportController extends Controller
 
         $notes_to_parents = request()->notes_to_parent[0];
 
+        $notes_to_parents_values = ['الطالب غائب', 'دوام 3 أيام', 'نشاط لا صفي', 'Absent Student', '3 days work', 'Extracurricular Activity'];
+
         $request->validate([
             'new_lesson' => 'required|array',
             'new_lesson.*' => 'required|string|min:1',
@@ -493,15 +495,15 @@ class ReportController extends Controller
             'daily_revision_from.*' => 'required',
             'daily_revision_to' => 'required|array',
             'daily_revision_to.*' => 'required',
-            'mistake.' . 0  => $notes_to_parents == 'الطالب غائب' || $notes_to_parents == 'دوام 3 أيام' || $notes_to_parents == 'نشاط لا صفي' ? '' : 'required' ,
-            'alert.' . 0  => $notes_to_parents == 'الطالب غائب' || $notes_to_parents == 'دوام 3 أيام' || $notes_to_parents == 'نشاط لا صفي' ? '' : 'required' ,
+            'mistake.' . 0  => in_array($notes_to_parents, $notes_to_parents_values) ? '' : 'required' ,
+            'alert.' . 0  => in_array($notes_to_parents, $notes_to_parents_values) ? '' : 'required' ,
             'number_pages' => 'required',
             'number_pages.*' => 'required',
-            'listener_name.' . 0  => $notes_to_parents == 'الطالب غائب' || $notes_to_parents == 'دوام 3 أيام' || $notes_to_parents == 'نشاط لا صفي' ? '' : 'required|string' ,
-            'lesson_grade.' . 0  => $notes_to_parents == 'الطالب غائب' || $notes_to_parents == 'دوام 3 أيام' || $notes_to_parents == 'نشاط لا صفي' ? '' : 'required|numeric' ,
-            'last_5_pages_grade.' . 0  => $notes_to_parents == 'الطالب غائب' || $notes_to_parents == 'دوام 3 أيام' || $notes_to_parents == 'نشاط لا صفي' ? '' : 'required' ,
-            'daily_revision_grade.' . 0  => $notes_to_parents == 'الطالب غائب' || $notes_to_parents == 'دوام 3 أيام' || $notes_to_parents == 'نشاط لا صفي' ? '' : 'required' ,
-            'behavior_grade.' . 0  => $notes_to_parents == 'الطالب غائب' || $notes_to_parents == 'دوام 3 أيام' || $notes_to_parents == 'نشاط لا صفي' ? '' : 'required' ,
+            'listener_name.' . 0  => in_array($notes_to_parents, $notes_to_parents_values) ? '' : 'required|string' ,
+            'lesson_grade.' . 0  => in_array($notes_to_parents, $notes_to_parents_values) ? '' : 'required|numeric' ,
+            'last_5_pages_grade.' . 0  => in_array($notes_to_parents, $notes_to_parents_values) ? '' : 'required' ,
+            'daily_revision_grade.' . 0  => in_array($notes_to_parents, $notes_to_parents_values) ? '' : 'required' ,
+            'behavior_grade.' . 0  => in_array($notes_to_parents, $notes_to_parents_values) ? '' : 'required' ,
         ], [
             'new_lesson.' . 0 . '.required' => '"الدرس الجديد" لهذا اليوم غير مدخل',
             'new_lesson.' . 1 . '.required' => '"الدرس الجديد" ليوم غد غير مدخل',

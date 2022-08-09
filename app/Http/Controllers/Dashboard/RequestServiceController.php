@@ -131,7 +131,7 @@ class RequestServiceController extends Controller
                     'is_overtime' => $request->overtime_checkbox == "true" ? 1 : 0,
                 ]);
 
-                // here will send mail to spare teachers
+                // here will send mail to new spare teachers
 //                Mail::to($teacher->email)
 //                    ->bcc(['lmsfurqan1@gmail.com'])
 //                    ->send(new AttendanceAbsenceRequestMail(['details' => $attendanceAbsenceRequests, 'type' => 'add']));

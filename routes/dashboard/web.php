@@ -135,6 +135,7 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
 //    Route::post('absences', 'DropoutStudebtController@export')->name('absence.export');
 
     Route::resource('alert-messages', 'AlertMessageController');
+    Route::resource('note-parents', 'NoteParentController');
 });
 
 Route::get('clear-cache', function (){
