@@ -2,28 +2,25 @@
 
 namespace App\Notifications;
 
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class AlertMessageNotification extends Notification
+class RequestServiceExcuseNotification extends Notification
 {
     use Queueable;
 
-    public $student;
-    public $message;
+    public $data;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($student, $message)
+    public function __construct($data)
     {
-        $this->student = $student;
-        $this->message = $message;
+        $this->data = $data;
     }
 
     /**
@@ -45,12 +42,19 @@ class AlertMessageNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $subject = "تنبيه إنقطاع عن حضور حلقات مركز الفرقان | Absence from attending Al-Furqan Center sessions";
+
+        $subjects = [
+            'absence' => 'طلب اذن غياب معلم عن حلقة',
+            'delay' => 'طلب اذن تأخير معلم عن حلقة',
+            'exit' => 'طلب اذن خروج معلم من حلقة',
+        ];
+
+        $view_name = 'emails.admin.excuse_teachers_' . $this->data['type'];
 
         return (new MailMessage)
-            ->subject($subject)
-            ->cc(['admission@furqangroup.com', 'thamer@furqangroup.com', 'wisam.morsi@furqangroup.com'])
-            ->view('emails.admin.dropout_students', ['student' => $this->student, 'message_content' => $this->message]);
+            ->subject($subjects[$this->data['type']])
+//            ->cc(['admission@furqangroup.com', 'thamer@furqangroup.com', 'wisam.morsi@furqangroup.com'])
+            ->view($view_name, ['data' => $this->data]);
     }
 
     /**
