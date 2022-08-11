@@ -130,7 +130,9 @@ class Report extends Model implements Auditable
                         ->where('student_id', '=', $report->student->id)
                         ->where('report_id', '=', $report->id)
                         ->first();
-                    $dropout_student->delete();
+                    if ($dropout_student){
+                        $dropout_student->delete();
+                    }
 
                     $dropout_count = DropoutStudent::query()
                         ->where('student_id', '=', $report->student->id)

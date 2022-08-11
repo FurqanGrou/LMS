@@ -31,10 +31,7 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/HolidaySeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/HolidaySeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/request_services/show_attendanceAbsence.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/request_services/show_attendanceAbsence.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/request_services/attendanceAbsence.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/request_services/attendanceAbsence.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/request_services/show_attendanceAbsence.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/request_services/show_attendanceAbsence.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,9 +194,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admins/note_parents/btn" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -211,11 +208,11 @@
       <recent name="B:\LMS\lms_hatim\app\Http\Controllers\Teachers" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\alert_messages" />
-      <recent name="B:\Furqan Group\lms_hatim\public" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student\btn" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\dropout_student" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\note_parents\btn" />
       <recent name="B:\Furqan Group\lms_hatim\app\DataTables" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\note_parents" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\emails\admin" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\alert_messages" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.ExamRequestController.php">
@@ -531,7 +528,20 @@
       <workItem from="1657107640682" duration="11457000" />
       <workItem from="1657178031880" duration="1197000" />
       <workItem from="1657196486964" duration="2876000" />
-      <workItem from="1657980114030" duration="4866000" />
+      <workItem from="1657980114030" duration="15909000" />
+      <workItem from="1658070689465" duration="622000" />
+      <workItem from="1658133353364" duration="1904000" />
+      <workItem from="1658326002818" duration="3779000" />
+      <workItem from="1658385923178" duration="2015000" />
+      <workItem from="1658661657678" duration="1267000" />
+      <workItem from="1658765924103" duration="7945000" />
+      <workItem from="1658836453405" duration="3681000" />
+      <workItem from="1658949018578" duration="5693000" />
+      <workItem from="1659005593831" duration="295000" />
+      <workItem from="1659247276509" duration="1202000" />
+      <workItem from="1659896442628" duration="11448000" />
+      <workItem from="1660033307092" duration="14252000" />
+      <workItem from="1660130518489" duration="3905000" />
     </task>
     <servers />
   </component>
@@ -563,29 +573,37 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655997559778">
+    <state x="428" y="188" key="#Notifications" timestamp="1659966399355">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1655997559778" />
+    <state x="428" y="188" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1659966399355" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1660043737697">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1660043737697" />
     <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1657983024927">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1657983024927" />
-    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1657440217449">
+    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1659964208418">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1657440217449" />
-    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1655656105790">
+    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1659964208418" />
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1659943754273">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1655656105790" />
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1659943754273" />
+    <state x="184" y="9" key="SettingsEditor" timestamp="1660036529509">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1660036529509" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1657052281041">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1657052281041" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1657986957291">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1660148248728">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1657986957291" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1660148248728" />
   </component>
 </project>

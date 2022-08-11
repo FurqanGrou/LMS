@@ -124,7 +124,7 @@ class ReportController extends Controller
 
             $total = 0;
 
-            if ($request->notes_to_parent == 'الطالب غائب'){
+            if ($request->notes_to_parent == 'الطالب غائب' || $request->notes_to_parent == 'Absent Student'){
                 $absence_grade = -5;
                 if (getStudentDetails(request()->student_id)->path == 'قسم التلاوة'){
                     $absence_grade = getAbsenceCount($request->student_id, -2) >= 8 ? -5 : -2;
@@ -141,14 +141,14 @@ class ReportController extends Controller
                         'last_5_pages_grade' => 0,
                         'daily_revision_grade' => 0,
                         'behavior_grade' => 0,
-                        'notes_to_parent' => 'الطالب غائب',
+                        'notes_to_parent' => $request->notes_to_parent,
                         'absence' => $absence_grade,
                         'total' => $total,
                         'mail_status' => 0,
                         'class_number' => getStudentDetails(request()->student_id)->class_number,
                     ]
                 );
-            }elseif($request->notes_to_parent == 'دوام 3 أيام'){
+            }elseif($request->notes_to_parent == 'دوام 3 أيام' || $request->notes_to_parent == '3 days work'){
                 $report = Report::updateOrCreate(
                     [
                         'student_id' => $request->student_id,
@@ -160,14 +160,14 @@ class ReportController extends Controller
                         'last_5_pages_grade' => '-',
                         'daily_revision_grade' => '-',
                         'behavior_grade' => '-',
-                        'notes_to_parent' => 'دوام 3 أيام',
+                        'notes_to_parent' => $request->notes_to_parent,
                         'absence' => '-1',
                         'total' => $total,
                         'mail_status' => 0,
                         'class_number' => getStudentDetails(request()->student_id)->class_number,
                     ]
                 );
-            }elseif($request->notes_to_parent == 'نشاط لا صفي'){
+            }elseif($request->notes_to_parent == 'نشاط لا صفي' || $request->notes_to_parent == 'Extracurricular Activity'){
                 $report = Report::updateOrCreate(
                     [
                         'student_id' => $request->student_id,
@@ -179,7 +179,7 @@ class ReportController extends Controller
                         'last_5_pages_grade' => $default_grade['last_5_pages_grade'],
                         'daily_revision_grade' => $default_grade['daily_revision_grade'],
                         'behavior_grade' => $default_grade['behavior_grade'],
-                        'notes_to_parent' => 'نشاط لا صفي',
+                        'notes_to_parent' => $request->notes_to_parent,
                         'absence' => 0,
                         'total' => $default_grade['lesson_grade'] + $default_grade['last_5_pages_grade'] + $default_grade['daily_revision_grade'] + $default_grade['behavior_grade'],
                         'mail_status' => 0,
