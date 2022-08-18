@@ -5,11 +5,19 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>تنبيه إنقطاع عن حضور حلقات مركز الفرقان | Absence from attending Al-Furqan Center sessions</title>
+    <title>تنبيه إنقطاع عن حضور فصول مجموعة الفرقان | Absence from attending Furqan Group sessions</title>
 </head>
 <body dir="rtl">
 
     <table width="100%">
+        <tr>
+            <td style="margin-bottom: 15px;">
+                <p style="color: red;font-weight: bold;">إتذار إنقطاع رقم {{ $student->dropoutStudents()->pluck('dropout_count')->max() }}</p>
+            </td>
+            <td style="margin-bottom: 15px;" dir="ltr">
+                <p style="color: red;font-weight: bold;">Absence No. {{ $student->dropoutStudents()->pluck('dropout_count')->max() }}</p>
+            </td>
+        </tr>
         <tr>
             <td>
                 <p> <span style="font-weight: bold">المكرم ولي أمر الطالب:</span> {{ $student->name . ' - ' . $student->student_number}}</p>
@@ -22,9 +30,6 @@
             <td>
                 <p>السلام عليكم ورحمة الله وبركاته...أما بعد:</p>
             </td>
-{{--            <td>--}}
-{{--                <p>السلام عليكم ورحمة الله وبركاته...أما بعد:</p>--}}
-{{--            </td>--}}
         </tr>
         <tr>
             <td>
