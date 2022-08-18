@@ -136,6 +136,10 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
 
     Route::resource('alert-messages', 'AlertMessageController');
     Route::resource('note-parents', 'NoteParentController');
+    Route::resource('forms-service', 'FormEmbeddedController');
+    Route::resource('top-tracker-reports', 'TopTrackerController');
+    Route::get('top-tracker-employees', 'TopTrackerController@import');
+
 });
 
 Route::get('clear-cache', function (){

@@ -352,7 +352,6 @@ class ReportController extends Controller
             $pageNumber = $user->monthlyScores()->first()->lesson_page_id ?? false;
         }
 
-        $is_new_student = false;
         $previous_date = Carbon::createFromDate($year, $month)->subMonth(); // subtract one month from current month
         $previous_month      = $previous_date->month;
         $previous_month_year = $previous_date->year;
@@ -420,7 +419,6 @@ class ReportController extends Controller
 
             $workingDays = $this->getWorkingDaysCount($first_report_this_month->year, $first_report_this_month->month, $first_report_this_month->day);
         }
-
 
         if($reportsCount < $workingDays){
             $all_days_filled = false;
