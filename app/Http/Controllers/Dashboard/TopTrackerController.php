@@ -5,80 +5,77 @@ namespace App\Http\Controllers\Dashboard;
 use App\Exports\TopTrackerExport;
 use App\Http\Controllers\Controller;
 use App\Imports\TopTrackerImport;
+use App\TopTrackerEmployee;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Maatwebsite\Excel\Facades\Excel;
 
 class TopTrackerController extends Controller
 {
-    public function index()
+
+    public function importTopTrackerIndex()
     {
-        $url = "https://tracker-api.toptal.com/reports/activities";
-        $response = Http::get($url, [
-            "start_date" => '2022-08-15',
-            "end_date" => '2022-08-16',
-            "access_token" => "WFhlMFJlQnBPWEI4TmpXYk5FcjUwRXNxNURFbXUwamFkNlpZYnRPNGE5MzBZdEs2TkErWFA4YUcyMzFoeEltRy0tK2NZQlZ6YjQxTG12T0sxYmh1aFN6dz09--81bd154eb4841cf93f17f4294c8175ed0ce8461c",
-            "project_ids" => 'all',
-            "worker_ids" => 'all',
+        return view('admins.import_export.import_top_tracker_employees');
+    }
+
+    public function importEmployees(Request $request)
+    {
+        Excel::import(new TopTrackerImport(), $request->file);
+        return redirect()->back()->with('success', 'تم تحديث بيانات المعلمين بنجاح');
+    }
+
+    public function exportTopTrackerIndex()
+    {
+        return view('admins.import_export.export_top_tracker_report');
+    }
+
+    public function exportReports(Request $request)
+    {
+
+        $endpoint = config('services.top_tracker.endpoint');
+
+        $response = Http::get($endpoint, [
+            "start_date" => $request->start_date,
+            "end_date"   => $request->end_date,
+            "access_token" => config('services.top_tracker.access_token'),
+            "project_ids"  => 'all',
+            "worker_ids"   => 'all',
         ]);
 
-        $result = collect($response->json()['activities'])->map(function ($value){
+        $result = collect($response->json()['activities'])->groupBy(['worker.name', function($data){
+            return Carbon::parse($data['start_time'])->format('d-m-Y');
+        }])->map(function ($value){
 
-            dd($value);
-            $last_index = count($value)-1;
-            return [
-//                'employee_id' => $value[0]['worker']['name'],
-//                'nationality_no' => $value[0]['worker']['name'],
+            $employees = [];
+            foreach ($value as $key => $item){
+                $last_index  = count($item)-1;
+                $worker_name = $item[0]['worker']['name'];
 
-                'worker_name' => $value[0]['worker']['name'],
-                'start_time'  =>  $value[$last_index]['start_time'],
-                'end_time'    =>  $value[0]['end_time'],
-                'total_seconds' =>  $value->pluck('seconds')->sum(),
-            ];
+                $start_time  = Carbon::parse($item[$last_index]['start_time'])->setTimezone('Asia/Riyadh');
+                $start_time  = $start_time->format('d-m-Y h:i:s');
+
+                $end_time    = Carbon::parse($item[0]['end_time'])->setTimezone('Asia/Riyadh');
+                $end_time    = $end_time->format('d-m-Y h:i:s');
+
+                $total_seconds = $item->pluck('seconds')->sum();
+
+                array_push($employees, [
+                    'Nationality No.' => getEmployeeInfo($worker_name, 'nationality_no'),
+                    'Employee No.'    => getEmployeeInfo($worker_name, 'employee_no'),
+                    'Name' => $worker_name,
+                    'Start Time' => $start_time,
+                    'End Time'   => $end_time,
+                    'Duration'   => $total_seconds,
+                    'Period'     => getStartTimePeriod($item[$last_index]['start_time']),
+//                    dd($item[$last_index]['start_time'])
+                ]);
+            }
+
+            return $employees;
         });
 
         return Excel::download(new TopTrackerExport($result), 'top-tracker-report.xlsx');
-
-        return $result;
-
-//        $total_seconds = collect($response->json()['activities'])->where('worker.id', '=', 257853)->pluck('seconds')->sum();
-//        $start_time = collect($response->json()['activities'])->where('worker.id', '=', 257853)->last()['start_time'];
-//        $end_time = collect($response->json()['activities'])->where('worker.id', '=', 257853)->first()['end_time'];
-//
-//        return ['start_time' => $start_time, 'end_time' => $end_time, 'total_seconds' => $total_seconds];
-
-
-
-//        $results = $response->json()['reports']['workers']['data'];
-//
-//        $new_results = [];
-//        foreach ($results as $key_1 => $result){
-////            dd(count($result['dates']));
-//
-//            foreach ($result['dates'] as $key_2 => $date){
-//                if ($date['seconds'] == 0){
-//                    unset($results[$key_1]['dates'][$key_2]);
-//                }
-//            }
-//
-//
-//            if ( count($results[$key_1]['dates']) == 0 ){
-//                unset($results[$key_1]);
-//            }
-//
-//        }
-//
-//        return ['workers' => $results];
     }
 
-    public function getWorkers()
-    {
-        $url = "https://tracker-api.toptal.com/reports/filters?access_token=WFhlMFJlQnBPWEI4TmpXYk5FcjUwRXNxNURFbXUwamFkNlpZYnRPNGE5MzBZdEs2TkErWFA4YUcyMzFoeEltRy0tK2NZQlZ6YjQxTG12T0sxYmh1aFN6dz09--81bd154eb4841cf93f17f4294c8175ed0ce8461c";
-
-    }
-
-    public function import()
-    {
-        Excel::import(new TopTrackerImport(), 'employees-toptracker.xlsx');
-    }
 }

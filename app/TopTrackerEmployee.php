@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class TopTrackerEmployee extends Model
 {
-    //
+    protected $guarded = [];
 }
