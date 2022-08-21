@@ -27,10 +27,13 @@ class TopTrackerExport implements FromCollection, WithHeadings, WithStyles, Shou
     public function headings(): array
     {
         return [
+            'Nationality No.',
+            'Employee No.',
             'Name',
             'Start Time',
             'End Time',
             'Duration',
+            'Period',
         ];
     }
 
