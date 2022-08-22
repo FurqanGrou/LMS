@@ -31,12 +31,13 @@
   <component name="ChangeListManager">
     <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/ReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Imports/UsersImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/UsersImport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/NoteParent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/NoteParent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/reports/monthly_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/TopTrackerExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/TopTrackerExport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/helpers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/TopTrackerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/TopTrackerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Imports/TopTrackerImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/TopTrackerImport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/TopTrackerEmployee.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/TopTrackerEmployee.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -200,25 +201,25 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admins/note_parents/btn" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admins/import_export" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Teachers" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Dashboard" />
       <recent name="B:\LMS\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\LMS\lms_hatim\resources\views\admins\students\btn" />
-      <recent name="B:\LMS\lms_hatim\app\Http\Controllers\Teachers" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\import_export" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\form_embeddes" />
+      <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Dashboard" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\teachers\form-embedded" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\note_parents\btn" />
-      <recent name="B:\Furqan Group\lms_hatim\app\DataTables" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\note_parents" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\emails\admin" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\alert_messages" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.ExamRequestController.php">
@@ -546,7 +547,13 @@
       <workItem from="1659005593831" duration="295000" />
       <workItem from="1659247276509" duration="1202000" />
       <workItem from="1659896442628" duration="11448000" />
-      <workItem from="1660033307092" duration="14231000" />
+      <workItem from="1660033307092" duration="14252000" />
+      <workItem from="1660130518489" duration="13891000" />
+      <workItem from="1660255307328" duration="496000" />
+      <workItem from="1660475434034" duration="41700000" />
+      <workItem from="1660684908260" duration="26745000" />
+      <workItem from="1661016161201" duration="115000" />
+      <workItem from="1661066752063" duration="10934000" />
     </task>
     <servers />
   </component>
@@ -582,18 +589,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="428" y="188" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1659966399355" />
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1660043737697">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1660827295355">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1660043737697" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1660827295355" />
     <state x="459" y="276" key="ComposerInitDialogKey" timestamp="1657983024927">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="459" y="276" key="ComposerInitDialogKey/0.0.1366.728@0.0.1366.728" timestamp="1657983024927" />
-    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1659964208418">
+    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1661016275361">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1659964208418" />
+    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1661016275361" />
     <state x="517" y="287" key="NewPhpFileDialog" timestamp="1659943754273">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -602,13 +609,13 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1660036529509" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1657052281041">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1660820639429">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1657052281041" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1660056403436">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1660820639429" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1661099628527">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1660056403436" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1661099628527" />
   </component>
 </project>

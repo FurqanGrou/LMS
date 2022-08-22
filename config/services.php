@@ -30,4 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'top_tracker' => [
+        'access_token' => env('TOP_TRACKER_ACCESS_TOKEN'),
+        'endpoint' => env('TOP_TRACKER_END_POINT'),
+    ],
+
 ];

@@ -101,4 +101,7 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
     //ajax to cancel requests
     Route::post('/request-services/cancel-request/{attendanceAbsenceRequests}', 'RequestServiceController@cancelRequest')->name('request_services.cancel-request');
 
+    //form embedded
+    Route::get('/form-service/{formEmbedd}', 'FormEmbeddedController@show')->name('form_service.show');
+
 });
