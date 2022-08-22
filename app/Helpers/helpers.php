@@ -1067,3 +1067,63 @@ function dropoutCounts($student_id)
     return $dropouts_student->where('dropout_count', '=', $dropout_count)->count();
 }
 
+function getEmployeeInfo($worker_name, $column)
+{
+    $employees = Cache::remember('TopTrackerEmployees',60 * 60 * 60,function(){
+        return TopTrackerEmployee::query()->get();
+    });
+
+    $employee = $employees->where('name', '=', $worker_name)->first();
+
+    if ($employee){
+        $employee = $employee->{$column};
+    }else{
+        $employee = '-';
+    }
+
+    return $employee;
+}
+
+function getStartTimePeriod($time)
+{
+
+    $periods = ['دخول الفترة الصباحية', 'دخول المسائية 1', 'دخول المسائية 2', 'دخول المسائية 3', 'دخول المسائية 4'];
+    $time   = Carbon::parse($time)->setTimezone('Asia/Riyadh');
+
+    $hour   = $time->hour;
+    $minute = $time->minute;
+
+    $period = '-';
+
+    if ( ($hour >= 7 && $hour <= 10) || ($hour == 11 && $minute == 0) ){
+        $period = 'دخول الفترة الصباحية';
+    }elseif( ($hour == 13 && $minute >= 30) || ($hour >= 14 && $hour <= 16) || ($hour == 17 && $minute == 0) ){
+        $period = 'دخول المسائية 1';
+    }elseif( ($hour >= 18 && $hour <= 20) || ($hour == 21 && $minute == 0) ){
+        $period = 'دخول المسائية 2';
+    }elseif( ($hour == 21 && $minute >= 30) || ($hour >= 22 && $hour <= 23) || ($hour == 1 && $minute == 0) ) {
+        $period = 'دخول المسائية 3';
+    }elseif( ($hour == 1 && $minute >= 1) || ($hour >= 2 && $hour <= 3) || ($hour == 4 && $minute == 0) ) {
+        $period = 'دخول المسائية 4';
+    }
+
+    return $period;
+}
+
+function getNoteParent($text)
+{
+    $note = \App\NoteParent::query()
+        ->where('text', 'LIKE', '%' . $text . '%')
+        ->orWhere('text_en', 'LIKE', '%' . $text . '%')
+        ->first();
+
+    if ($note){
+        return ['ar' => $note->text, 'en' => $note->text_en];
+    }
+
+    if ($text == 'Absent Student' || $text == 'الطالب غائب'){
+        return ['ar' => 'الطالب غائب', 'en' => 'Absent Student'];
+    }
+
+    return ['ar' => $text, 'en' => $text];
+}
