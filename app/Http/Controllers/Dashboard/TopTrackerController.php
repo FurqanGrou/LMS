@@ -43,39 +43,59 @@ class TopTrackerController extends Controller
             "worker_ids"   => 'all',
         ]);
 
-        $result = collect($response->json()['activities'])->groupBy(['worker.name', function($data){
-            return Carbon::parse($data['start_time'])->format('d-m-Y');
-        }])->map(function ($value){
+        $activities = collect($response->json()['activities'])->groupBy('project.name');
 
-            $employees = [];
-            foreach ($value as $key => $item){
-                $last_index  = count($item)-1;
-                $worker_name = $item[0]['worker']['name'];
+        $result = [];
 
-                $start_time  = Carbon::parse($item[$last_index]['start_time'])->setTimezone('Asia/Riyadh');
-                $start_time  = $start_time->format('d-m-Y h:i:s');
+        foreach ($activities as $activity) {
 
-                $end_time    = Carbon::parse($item[0]['end_time'])->setTimezone('Asia/Riyadh');
-                $end_time    = $end_time->format('d-m-Y h:i:s');
+            $sheet  = $activity->groupBy(['worker.name', function ($data) {
+                        return Carbon::parse($data['start_time'])->format('d-m-Y');
+                    }])->map(function ($value) {
 
-                $total_seconds = $item->pluck('seconds')->sum();
+                        $employees = [];
+                        foreach ($value as $key => $item) {
 
-                array_push($employees, [
-                    'Nationality No.' => getEmployeeInfo($worker_name, 'nationality_no'),
-                    'Employee No.'    => getEmployeeInfo($worker_name, 'employee_no'),
-                    'Name' => $worker_name,
-                    'Start Time' => $start_time,
-                    'End Time'   => $end_time,
-                    'Duration'   => $total_seconds,
-                    'Period'     => getStartTimePeriod($item[$last_index]['start_time']),
-//                    dd($item[$last_index]['start_time'])
-                ]);
+                            $last_index = count($item) - 1;
+                            $worker_name = $item[0]['worker']['name'];
+
+                            $start_time = Carbon::parse($item[$last_index]['start_time'])->setTimezone('Asia/Riyadh');
+                            $start_time = $start_time->format('d-m-Y h:i:s');
+
+                            $end_time = Carbon::parse($item[0]['end_time'])->setTimezone('Asia/Riyadh');
+                            $end_time = $end_time->format('d-m-Y h:i:s');
+
+                            $total_seconds = $item->pluck('seconds')->sum();
+
+                            array_push($employees, [
+                                'Nationality No.' => getEmployeeInfo($worker_name, 'nationality_no'),
+                                'Employee No.' => getEmployeeInfo($worker_name, 'employee_no'),
+                                'Project' => $item[0]['project']['name'],
+                                'Name' => $worker_name,
+                                'Start Time' => $start_time,
+                                'End Time' => $end_time,
+                                'Duration' => $total_seconds,
+                                'Period' => getStartTimePeriod($item[$last_index]['start_time']),
+                                //                    dd($item[$last_index]['start_time'])
+                            ]);
+                        }
+
+                        return $employees;
+                    });
+
+            array_push($result, $sheet->toArray());
+        }
+
+        $www = [];
+        foreach ($result as $key => $items){
+            foreach ($items as $item){
+                foreach ($item as $value){
+                    array_push($www, $value);
+                }
             }
+        }
 
-            return $employees;
-        });
-
-        return Excel::download(new TopTrackerExport($result), 'top-tracker-report.xlsx');
+        return Excel::download(new TopTrackerExport(collect($www)), 'top-tracker-report.xlsx');
     }
 
 }
