@@ -107,6 +107,13 @@
             </li>
 
             <li class="nav-item">
+                <a href="{{ route('admins.forms-service.index') }}">
+                    <i class="fa fa-file"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">الطلبات - Forms</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
 
                 <a href="#">
                     <i class="ft-activity"></i>

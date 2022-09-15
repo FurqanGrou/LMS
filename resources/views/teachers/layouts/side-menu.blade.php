@@ -67,6 +67,9 @@
                     <li>
                         <a class="menu-item" href="{{ route('teachers.request_services.attendanceAbsenceTeachers.index') }}" data-i18n="nav.templates.vert.classic_menu">الاذونات المقدمة</a>
                     </li>
+
+                    <x-form-embeddes-links></x-form-embeddes-links>
+
                 </ul>
             </li>
 
