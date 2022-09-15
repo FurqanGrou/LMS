@@ -1112,12 +1112,14 @@ function getStartTimePeriod($time)
 
 function getNoteParent($text)
 {
-    $note = \App\NoteParent::query()
-        ->where('text', 'LIKE', '%' . $text . '%')
-        ->orWhere('text_en', 'LIKE', '%' . $text . '%')
-        ->first();
+    if (!is_null($text)){
+        $note = \App\NoteParent::query()
+            ->where('text', 'LIKE', '%' . $text . '%')
+            ->orWhere('text_en', 'LIKE', '%' . $text . '%')
+            ->first();
+    }
 
-    if ($note){
+    if (!is_null($text) && $note){
         return ['ar' => $note->text, 'en' => $note->text_en];
     }
 
