@@ -24,6 +24,8 @@
 
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
 
+                            <a href="{{ route('admins.request_services.attendanceAbsenceTeachers.export') }}" class="btn btn-primary mb-2">تصدير - Excel</a>
+
                             <div class="table-responsive">
                                 <table class="table">
 

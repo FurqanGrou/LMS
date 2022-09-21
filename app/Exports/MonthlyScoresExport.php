@@ -35,9 +35,9 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
     {
 
         $study_type = $this->study_type;
-        Log::info($this->study_type);
-
-        Log::info($study_type);
+//        Log::info($this->study_type);
+//
+//        Log::info($study_type);
 
         $monthly_scores = DB::table('monthly_scores')
             ->select([
