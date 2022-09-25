@@ -301,11 +301,7 @@
     <div style='text-align: center;'>
         <br>
         <span style='font-family: tahoma, arial, helvetica, sans-serif; font-size: 14pt; color: #ff0000;'>
-    <strong>
-        {{ getNoteParent($details['grades']->notes_to_parent)['ar'] }}
-        <br>
-        {{ getNoteParent($details['grades']->notes_to_parent)['en'] }}
-    </strong>
+    <strong> {{ $details['grades']->notes_to_parent }} </strong>
   </span>
         <br></div> </div>
 <br>
