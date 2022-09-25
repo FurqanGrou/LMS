@@ -32,7 +32,7 @@ class ExportMonthlyScores implements ShouldQueue
         $this->month_year = $month_year;
         $this->mail_status = $mail_status;
         $this->file_name = $file_name;
-        $this->email_to = $email_to;
+        $this->email_to  = $email_to;
         $this->study_type = $study_type;
     }
 

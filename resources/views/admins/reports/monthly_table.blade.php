@@ -151,6 +151,12 @@
             -
             <span class="badge badge-primary">{{ getStudentPath(request()->student_id, request()->date_filter) }}</span>
             <span class="badge badge-danger">{{ getStudentDetails(request()->student_id)->study_type == 1 ? 'حضوري' : 'اونلاين' }}</span>
+
+            <br>
+
+            <span style="color:#C65911;">رقم الصف / Class Number:</span>
+            <a style="display: inline-block;" href="{{ route('admins.classes.students', $user_student->class_number) }}" target="_blank">{{ $user_student->class_number }}</a>
+
         </p>
         <p style="display: flex; flex-direction: row-reverse">
             &nbsp; {{ getStudentDetails(request()->student_id)->student_number }}
@@ -164,6 +170,7 @@
         <p>
             <a href="#" id="edit-repo" class="btn btn-info"> تعديل</a>
         </p>
+
     </div>
 
     <form id="monthly_report" action="#">

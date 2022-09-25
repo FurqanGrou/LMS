@@ -1110,3 +1110,23 @@ function getStartTimePeriod($time)
 
     return $period;
 }
+
+function getNoteParent($text)
+{
+    if (!is_null($text)){
+        $note = \App\NoteParent::query()
+            ->where('text', 'LIKE', '%' . $text . '%')
+            ->orWhere('text_en', 'LIKE', '%' . $text . '%')
+            ->first();
+    }
+
+    if (!is_null($text) && $note){
+        return ['ar' => $note->text, 'en' => $note->text_en];
+    }
+
+    if ($text == 'Absent Student' || $text == 'الطالب غائب'){
+        return ['ar' => 'الطالب غائب', 'en' => 'Absent Student'];
+    }
+
+    return ['ar' => $text, 'en' => $text];
+}

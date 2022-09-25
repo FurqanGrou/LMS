@@ -248,7 +248,7 @@ class RequestServiceController extends Controller
             ]);
         }
 
-        Notification::route('mail', ['alfurqangroup2020@gmail.com'])->notify(new RequestServiceExcuseNotification($request->all()));
+//        Notification::route('mail', ['alfurqangroup2020@gmail.com'])->notify(new RequestServiceExcuseNotification($request->all()));
 
         return response()->json(['status' => true, 'errors' => []], 200);
     }
