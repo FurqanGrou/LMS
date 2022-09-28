@@ -67,24 +67,10 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="#">
+                <a href="{{ route('admins.student.index') }}">
                     <i class="fa fa-user-graduate"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">الطلاب والملاحظات</span>
+                    <span class="menu-title" data-i18n="nav.templates.main">الطلاب</span>
                 </a>
-
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="{{ route('admins.student.index') }}" data-i18n="nav.templates.vert.classic_menu">
-                            <i class="fa fa-user-graduate"></i>
-                            الطلاب
-                        </a>
-                        <a class="menu-item" href="{{ route('admins.note-parents.index') }}" data-i18n="nav.templates.vert.classic_menu">
-                            <i class="fa fa-book"></i>
-                            ملاحظات أولياء الأمور
-                        </a>
-                    </li>
-                </ul>
-
             </li>
             <li class="nav-item">
                 <a href="{{ route('admins.admins.index') }}">
@@ -103,6 +89,13 @@
                 <a href="{{ route('admins.holidays.index') }}">
                     <i class="ft-sliders"></i>
                     <span class="menu-title" data-i18n="nav.templates.main">الاجازات</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('admins.forms-service.index') }}">
+                    <i class="fa fa-file"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">الطلبات - Forms</span>
                 </a>
             </li>
 

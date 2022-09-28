@@ -137,6 +137,14 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
 
     Route::resource('alert-messages', 'AlertMessageController');
     Route::resource('note-parents', 'NoteParentController');
+    Route::resource('forms-service', 'FormEmbeddedController');
+
+    Route::get('import-top-tracker-employees', 'TopTrackerController@importTopTrackerIndex')->name('import-top-tracker-employees');
+    Route::post('import-top-tracker-employees', 'TopTrackerController@importEmployees')->name('import-top-tracker-employees');
+
+    Route::get('export-top-tracker-reports', 'TopTrackerController@exportTopTrackerIndex')->name('export-top-tracker-reports');
+    Route::post('export-top-tracker-reports', 'TopTrackerController@exportReports')->name('export-top-tracker-reports');
+
 });
 
 Route::get('clear-cache', function (){
@@ -145,6 +153,7 @@ Route::get('clear-cache', function (){
 });
 
 Route::get('test-code', function (){
-    dd(disableRecordGrade(1, 2));
+
+    dd(getStartTimePeriod('2022-08-18T16:17:22.000+03:00'));
 });
 
