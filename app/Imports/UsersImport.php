@@ -94,7 +94,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
             $mother_email = str_replace(' ', '', $row['bryd_alam']);
             $path = trim($row['almsar']);
             $name = trim($row['altalb']);
-            $regular_date = trim(Date::excelToDateTimeObject($row['tarykh_alanttham'])->format('Y-m-d'));
+//            $regular_date = trim(Date::excelToDateTimeObject($row['tarykh_alanttham'])->format('Y-m-d'));
 
             //if exists is true update current student data
             if($exists_student){
@@ -109,7 +109,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'path'            => $path,
                     'status'          => $row['odaa_altalb'],
                     'study_type'      => $this->study_type,
-                    'regular_date'    => $regular_date,
+//                    'regular_date'    => $regular_date,
                 ]);
 
             }else{
@@ -118,14 +118,11 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                 $user = User::create([
                     'student_number'  => $row['rkm_altalb'],
                     'name'            => $name,
-                    'father_phone'    => '-',
-                    'mother_phone'    => '-',
 //                    'father_phone'    => $row['goal_alab'],
 //                    'mother_phone'    => $row['goal_alam'],
                     'father_mail'     => $father_email,
                     'mother_mail'     => $mother_email,
 //                    'language'        => $row['allgh'],
-                    'language'        => '-',
                     'status'          => $row['odaa_altalb'],
                     'section'         => $row['alksm'] == 'بنات' ? 'female' : 'male' ,
                     'login_time'      => $row['okt_aldkhol'],
@@ -133,7 +130,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'password'        => \Hash::make('12345'),
                     'class_number'    => $row['rkm_alhlk'],
                     'study_type'      => $this->study_type,
-                    'regular_date'    => $regular_date,
+//                    'regular_date'    => $regular_date,
                 ]);
 
             }
