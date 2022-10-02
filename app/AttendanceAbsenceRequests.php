@@ -31,7 +31,6 @@ class AttendanceAbsenceRequests extends Model
                 ->bcc(self::$bcc)
                 ->send(new AttendanceAbsenceRequestMail($absenceRequests));
 
-//            Cache::forget('appliedRequests');
         });
 
         static::updated(function(AttendanceAbsenceRequests $absenceRequests) {
