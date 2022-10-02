@@ -155,7 +155,11 @@
             <br>
 
             <span style="color:#C65911;">رقم الصف / Class Number:</span>
-            <a style="display: inline-block;" href="{{ route('admins.classes.students', $user_student->class_number) }}" target="_blank">{{ $user_student->class_number }}</a>
+            @if($user_student->class_number)
+                <a style="display: inline-block;" href="{{ route('admins.classes.students', $user_student->class_number) }}" target="_blank">{{ $user_student->class_number }}</a>
+            @else
+                <a style="display: inline-block;" href="#" target="_blank">-</a>
+            @endif
 
         </p>
         <p style="display: flex; flex-direction: row-reverse">
