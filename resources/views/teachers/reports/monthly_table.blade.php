@@ -462,7 +462,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">تاريخ:</span>
                                 </div>
-                                <input type="date" name="" id="seal_quran_date" value="{{ $user_student->monthlyScores->first()->seal_quran_date }}">
+                                <input type="date" name="" id="seal_quran_date" value="{{ $user_student->monthlyScores->first()->seal_quran_date ?? '-' }}">
                             </div>
                         </fieldset>
                         <button class="btn btn-primary d-block" id="btn-save-data" style="width: 50%;margin: 5px auto;">حفظ</button>

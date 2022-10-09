@@ -16,7 +16,7 @@ class NoteParentController extends Controller
 
     public function create()
     {
-
+        return view('admins.note_parents.create');
     }
 
     public function edit(NoteParent $noteParent)
@@ -48,4 +48,32 @@ class NoteParentController extends Controller
         return redirect(route('admins.note-parents.edit', $noteParent->id));
     }
 
+    public function store(Request $request)
+    {
+        $rule = [
+            'text'     => 'required|string',
+            'text_en'  => 'required|string',
+            'section'  => 'required|in:1,2|not_in:0',
+        ];
+
+        $messages = [
+            'text.required'    => 'يجب التأكد من إدخال نص الرسالة بالعربية',
+            'text_en.required' => 'يجب التأكد من إدخال نص الرسالة بالانجليزية',
+            'section.required' => 'يجب التأكد من اختيار القسم المناسب',
+            'section.in' => 'يجب التأكد من اختيار القسم المناسب',
+            'section.not_in' => 'يجب التأكد من اختيار القسم المناسب',
+        ];
+
+        $this->validate($request, $rule, $messages);
+
+        NoteParent::query()->create([
+            'text'    => $request->text,
+            'text_en' => $request->text_en,
+            'gender'  => $request->section == '1' ? 'male' : 'female',
+        ]);
+
+        session()->flash('success', 'تم ادخال البيانات بنجاح');
+
+        return redirect(route('admins.note-parents.index'));
+    }
 }
