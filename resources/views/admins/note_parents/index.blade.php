@@ -19,6 +19,12 @@
 
                 @include('admins.partials.success')
 
+                <div class="row ml-5">
+                    <div class="col-6">
+                        <a href="{{ route('admins.note-parents.create') }}" class="btn btn-primary ">إضافة ملاحظة جديدة</a>
+                    </div>
+                </div>
+
                 <div class="card-content collapse show">
                     <div class="card-body card-dashboard">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
