@@ -66,10 +66,19 @@ class NoteParentController extends Controller
 
         $this->validate($request, $rule, $messages);
 
+        $section = $request->section == '1' ? 'male' : 'female';
+
+        $notes_count = NoteParent::query()->where('gender', '=', $section)->count();
+
+        if ($notes_count >= 25){
+            session()->flash('error', 'نأسف، لا يمكن إضافة ملاحظات جديدة لهذا القسم بسبب الوصول للحد المسموح به');
+            return redirect(route('admins.note-parents.create'));
+        }
+
         NoteParent::query()->create([
             'text'    => $request->text,
             'text_en' => $request->text_en,
-            'gender'  => $request->section == '1' ? 'male' : 'female',
+            'gender'  => $section,
         ]);
 
         session()->flash('success', 'تم ادخال البيانات بنجاح');
