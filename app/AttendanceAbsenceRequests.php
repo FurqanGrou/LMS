@@ -4,7 +4,6 @@ namespace App;
 
 use App\Mail\AttendanceAbsenceRequestMail;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 
 class AttendanceAbsenceRequests extends Model
@@ -48,7 +47,6 @@ class AttendanceAbsenceRequests extends Model
 //                ->bcc(self::$bcc)
 //                ->send(new AttendanceAbsenceRequestMail($absenceRequests));
 //
-            Cache::forget('appliedRequests');
         });
     }
 
