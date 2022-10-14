@@ -124,6 +124,15 @@
             text-align: right !important;
         }
 
+        .end-month-results-select2 + .select2.select2-container {
+            width: 100% !important;
+            overflow: hidden !important;
+        }
+
+        .end-month-results-select2 + .select2.select2-container .select2-selection__rendered {
+            text-align: center !important;
+        }
+
     </style>
 
     <table style="width: 100%; border: none;font-family: arial, sans-serif;">
@@ -352,11 +361,10 @@
         <table style="width: 100%; font-weight: bold">
             <tbody>
             <tr style="height: 40px">
-                <td rowspan="9" style="text-align: center; width: 40%;font-size: 15px">
-
-                    <br>
-                    <br>
-
+                <td colspan="3" style="text-align: center; width: 40%;font-size: 15px">
+                    الخطة التقديرية للطالب - <button type="button" class="btn btn-warning" data-toggle="modal"
+                                                     data-target="#warning" style="border-radius: 37px;padding: 5px;font-weight: bold;">فتح الحاسبة</button>
+{{--                    <a href="#" target="_blank" class="btn btn-warning" style="border-radius: 37px;padding: 5px;font-weight: bold;">فتح الحاسبة</a>--}}
                 </td>
 
                 <td colspan="4" style="text-align: center; background: #C6E0B4;">
@@ -364,6 +372,103 @@
                 </td>
             </tr>
             <tr style="height: 40px">
+
+                <td colspan="3" rowspan="7" style="font-size: 14px">
+
+                    <form action="">
+                        <div>
+                            <p class="d-block text-center mb-0">الانجاز في نهاية الشهر</p>
+                        </div>
+                        <fieldset style="width: 50%;margin: auto;">
+                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">سورة:</span>
+                                </div>
+
+                                <select name="" id="lessons-month-data-ajax" class="select2 end-month-results-select2 lessons-data-ajax">
+                                    <option value="{{ $user_student->monthlyScores->first()->final_month_lesson_id ?? '-' }}">{{ $user_student->monthlyScores->first()->finalMonthLesson->name ?? '-' }}</option>
+                                </select>
+                            </div>
+                        </fieldset>
+                        <fieldset style="width: 50%;margin: auto;">
+                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">اية:</span>
+                                </div>
+
+                                <select name="" id="ayat-month-result" class="select2 end-month-results-select2">
+                                    <option value="{{ $user_student->monthlyScores->first()->final_month_aya_id ?? '-' }}">{{ $user_student->monthlyScores->first()->final_month_aya_id ?? '-' }}</option>
+                                </select>
+                            </div>
+                        </fieldset>
+
+                        <div>
+                            <p class="d-block text-center mb-0">الانجاز في نهاية الفصل</p>
+                        </div>
+                        <fieldset style="width: 50%;margin: auto;">
+                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">سورة:</span>
+                                </div>
+
+                                <select name="" id="lessons-semester-data-ajax" class="select2 end-month-results-select2 lessons-data-ajax">
+                                    <option value="{{ $user_student->monthlyScores->first()->final_semester_lesson_id ?? '-' }}">{{ $user_student->monthlyScores->first()->finalSemesterLesson->name ?? '-' }}</option>
+                                </select>
+                            </div>
+                        </fieldset>
+                        <fieldset style="width: 50%;margin: auto;">
+                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">اية:</span>
+                                </div>
+
+                                <select name="" id="ayat-semester-result" class="select2 end-month-results-select2">
+                                    <option value="{{ $user_student->monthlyScores->first()->final_semester_aya_id ?? '-' }}">{{ $user_student->monthlyScores->first()->final_semester_aya_id ?? '-' }}</option>
+                                </select>
+                            </div>
+                        </fieldset>
+
+                        <div>
+                            <p class="d-block text-center mb-0">الانجاز في نهاية السنة</p>
+                        </div>
+                        <fieldset style="width: 50%;margin: auto;">
+                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">سورة:</span>
+                                </div>
+
+                                <select name="" id="lessons-year-data-ajax" class="select2 end-month-results-select2 lessons-data-ajax">
+                                    <option value="{{ $user_student->monthlyScores->first()->final_year_lesson_id ?? '-' }}">{{ $user_student->monthlyScores->first()->finalYearLesson->name ?? '-' }}</option>
+                                </select>
+                            </div>
+                        </fieldset>
+                        <fieldset style="width: 50%;margin: auto;">
+                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">اية:</span>
+                                </div>
+
+                                <select name="" id="ayat-year-result" class="select2 end-month-results-select2">
+                                    <option value="{{ $user_student->monthlyScores->first()->final_year_aya_id ?? '-' }}">{{ $user_student->monthlyScores->first()->final_year_aya_id ?? '-' }}</option>
+                                </select>
+                            </div>
+                        </fieldset>
+
+                        <div>
+                            <p class="d-block text-center mb-0">موعد حفظ المصحف الشريف</p>
+                        </div>
+                        <fieldset style="width: 50%;margin: auto;">
+                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">تاريخ:</span>
+                                </div>
+                                <input type="date" name="" id="seal_quran_date" value="{{ $user_student->monthlyScores->first()->seal_quran_date ?? '-' }}">
+                            </div>
+                        </fieldset>
+                        <button class="btn btn-primary d-block" id="btn-save-data" style="width: 50%;margin: 5px auto;">حفظ</button>
+                    </form>
+                </td>
+
                 <td colspan="2" style="font-size: 14px">
                     عدد مرات عدم تسميع الدرس الجديد / Number of not recite the new lesson
                 </td>
@@ -459,6 +564,26 @@
             </tbody>
         </table>
     </form>
+
+    <div class="modal fade text-left" id="warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel12"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document" style="max-width: 800px;">
+            <div class="modal-content">
+                <div class="modal-header bg-warning white">
+                    <h4 class="modal-title white" id="myModalLabel12"><i class="la la-calculator"></i> حساب الخطة التقديرية للطلاب</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="height: 78vh !important;">
+                    <iframe src="https://docs.google.com/spreadsheets/d/15fpD3QtzGl-FMQSnnaKqbSeLRihieAVSte51TNhGxaQ/edit?usp=sharing" title="حساب الخطة التقديرية للطلاب" style="width: 100%; height: 100%"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 
@@ -561,90 +686,90 @@
             },2000);
 
             @foreach($reports as $report)
-            var date = $(document).find("input[value='{{ $report->date }}']");
-            var current_row = date.closest('tr');
+                var date = $(document).find("input[value='{{ $report->date }}']");
+                var current_row = date.closest('tr');
 
-            var data = {
-                id: '{{ stripslashes($report->new_lesson) }}',
-                text: '{{ stripslashes($report->new_lesson) }}',
-            };
-            var newOption = new Option(data.text, data.id, true, true);
-            current_row.find('.js-select2-tags').prepend(newOption).trigger('change');
-            current_row.find('input[name="new_lesson_from[]"]').val('{{ $report->new_lesson_from }}');
-            current_row.find('input[name="new_lesson_from[]"]').attr('title', '{{ $report->new_lesson_from }}');
-            current_row.find('input[name="new_lesson_to[]"]').val('{{ $report->new_lesson_to }}');
-            current_row.find('input[name="new_lesson_to[]"]').attr('title', '{{ $report->new_lesson_to }}');
-            current_row.find('input[name="last_5_pages[]"]').val('{{ $report->last_5_pages }}');
-            current_row.find('input[name="last_5_pages[]"]').attr('title', '{{ $report->last_5_pages }}');
+                var data = {
+                    id: '{{ stripslashes($report->new_lesson) }}',
+                    text: '{{ stripslashes($report->new_lesson) }}',
+                };
+                var newOption = new Option(data.text, data.id, true, true);
+                current_row.find('.js-select2-tags').prepend(newOption).trigger('change');
+                current_row.find('input[name="new_lesson_from[]"]').val('{{ $report->new_lesson_from }}');
+                current_row.find('input[name="new_lesson_from[]"]').attr('title', '{{ $report->new_lesson_from }}');
+                current_row.find('input[name="new_lesson_to[]"]').val('{{ $report->new_lesson_to }}');
+                current_row.find('input[name="new_lesson_to[]"]').attr('title', '{{ $report->new_lesson_to }}');
+                current_row.find('input[name="last_5_pages[]"]').val('{{ $report->last_5_pages }}');
+                current_row.find('input[name="last_5_pages[]"]').attr('title', '{{ $report->last_5_pages }}');
 
-            var data = {
-                id: '{{ stripslashes($report->daily_revision) }}',
-                text: '{{ stripslashes($report->daily_revision) }}',
-            };
-            var newOption = new Option(data.text, data.id, true, true);
-            current_row.find('.js-select2-daily-revision-tags').prepend(newOption).trigger('change');
+                var data = {
+                    id: '{{ stripslashes($report->daily_revision) }}',
+                    text: '{{ stripslashes($report->daily_revision) }}',
+                };
+                var newOption = new Option(data.text, data.id, true, true);
+                current_row.find('.js-select2-daily-revision-tags').prepend(newOption).trigger('change');
 
-            current_row.find('input[name="daily_revision_from[]"]').val('{{ $report->daily_revision_from }}');
-            current_row.find('input[name="daily_revision_from[]"]').attr('title', '{{ $report->daily_revision_from }}');
-            current_row.find('input[name="daily_revision_to[]"]').val('{{ $report->daily_revision_to }}');
-            current_row.find('input[name="daily_revision_to[]"]').attr('title', '{{ $report->daily_revision_to }}');
+                current_row.find('input[name="daily_revision_from[]"]').val('{{ $report->daily_revision_from }}');
+                current_row.find('input[name="daily_revision_from[]"]').attr('title', '{{ $report->daily_revision_from }}');
+                current_row.find('input[name="daily_revision_to[]"]').val('{{ $report->daily_revision_to }}');
+                current_row.find('input[name="daily_revision_to[]"]').attr('title', '{{ $report->daily_revision_to }}');
 
-            current_row.find('input[name="mistake[]"]').val('{{ $report->mistake }}');
-            current_row.find('input[name="mistake[]"]').attr('title', '{{ $report->mistake }}');
-            current_row.find('input[name="alert[]"]').val('{{ $report->alert }}');
-            current_row.find('input[name="alert[]"]').attr('title', '{{ $report->alert }}');
-            current_row.find('input[name="number_pages[]"]').val('{{ $report->number_pages }}');
-            current_row.find('input[name="number_pages[]"]').attr('title', '{{ $report->number_pages }}');
+                current_row.find('input[name="mistake[]"]').val('{{ $report->mistake }}');
+                current_row.find('input[name="mistake[]"]').attr('title', '{{ $report->mistake }}');
+                current_row.find('input[name="alert[]"]').val('{{ $report->alert }}');
+                current_row.find('input[name="alert[]"]').attr('title', '{{ $report->alert }}');
+                current_row.find('input[name="number_pages[]"]').val('{{ $report->number_pages }}');
+                current_row.find('input[name="number_pages[]"]').attr('title', '{{ $report->number_pages }}');
 
-            current_row.find('input[name="listener_name[]"]').val('{{ $report->listener_name }}');
-            current_row.find('input[name="listener_name[]"]').attr('title', '{{ $report->listener_name }}');
+                current_row.find('input[name="listener_name[]"]').val('{{ $report->listener_name }}');
+                current_row.find('input[name="listener_name[]"]').attr('title', '{{ $report->listener_name }}');
 
-            {{--var listener_name_data = {--}}
-            {{--    id: '{{ stripslashes($report->listener_name) }}',--}}
-            {{--    text: '{{ stripslashes($report->listener_name) }}',--}}
-            {{--};--}}
-            {{--var newOptionListenerMame = new Option(listener_name_data.text, listener_name_data.id, true, true);--}}
-            {{--current_row.find('.js-select2-listener-name-tags').prepend(newOptionListenerMame).trigger('change');--}}
+                {{--var listener_name_data = {--}}
+                {{--    id: '{{ stripslashes($report->listener_name) }}',--}}
+                {{--    text: '{{ stripslashes($report->listener_name) }}',--}}
+                {{--};--}}
+                {{--var newOptionListenerMame = new Option(listener_name_data.text, listener_name_data.id, true, true);--}}
+                {{--current_row.find('.js-select2-listener-name-tags').prepend(newOptionListenerMame).trigger('change');--}}
 
-            current_row.find('input[name="lesson_grade[]"]').val('{{ $report->lesson_grade }}');
-            current_row.find('input[name="lesson_grade[]"]').attr('title', '{{ $report->lesson_grade }}');
-            current_row.find('input[name="last_5_pages_grade[]"]').val('{{ $report->last_5_pages_grade }}');
-            current_row.find('input[name="last_5_pages_grade[]"]').attr('title', '{{ $report->last_5_pages_grade }}');
-            current_row.find('input[name="daily_revision_grade[]"]').val('{{ $report->daily_revision_grade }}');
-            current_row.find('input[name="daily_revision_grade[]"]').attr('title', '{{ $report->daily_revision_grade }}');
-            current_row.find('input[name="behavior_grade[]"]').val('{{ $report->behavior_grade }}');
-            current_row.find('input[name="behavior_grade[]"]').attr('title', '{{ $report->behavior_grade }}');
-            current_row.find('select[name="notes_to_parent[]"]').val('{{ $report->notes_to_parent }}');
-            current_row.find('select[name="notes_to_parent[]"]').trigger('change');
-            current_row.find(".total").html('{{ $report->total }}');
+                current_row.find('input[name="lesson_grade[]"]').val('{{ $report->lesson_grade }}');
+                current_row.find('input[name="lesson_grade[]"]').attr('title', '{{ $report->lesson_grade }}');
+                current_row.find('input[name="last_5_pages_grade[]"]').val('{{ $report->last_5_pages_grade }}');
+                current_row.find('input[name="last_5_pages_grade[]"]').attr('title', '{{ $report->last_5_pages_grade }}');
+                current_row.find('input[name="daily_revision_grade[]"]').val('{{ $report->daily_revision_grade }}');
+                current_row.find('input[name="daily_revision_grade[]"]').attr('title', '{{ $report->daily_revision_grade }}');
+                current_row.find('input[name="behavior_grade[]"]').val('{{ $report->behavior_grade }}');
+                current_row.find('input[name="behavior_grade[]"]').attr('title', '{{ $report->behavior_grade }}');
+                current_row.find('select[name="notes_to_parent[]"]').val('{{ $report->notes_to_parent }}');
+                current_row.find('select[name="notes_to_parent[]"]').trigger('change');
+                current_row.find(".total").html('{{ $report->total }}');
 
-            if('{{$report->mail_status}}' != 1){
-                current_row.find('td.day-name').addClass('bg-danger');
-                current_row.find('td.day-name').removeClass('custom-bg-gray');
-            }
+                if('{{$report->mail_status}}' != 1){
+                    current_row.find('td.day-name').addClass('bg-danger');
+                    current_row.find('td.day-name').removeClass('custom-bg-gray');
+                }
 
-            if(
-                current_row.find('select[name="notes_to_parent"]').val() == 'الطالب غائب'
-                || current_row.find('select[name="notes_to_parent"]').val() == 'Absent Student'
-                || current_row.find('select[name="notes_to_parent"]').val() == 'دوام 3 أيام'
-                || current_row.find('select[name="notes_to_parent"]').val() == '3 days work'
-                || current_row.find('select[name="notes_to_parent"]').val() == 'نشاط لا صفي'
-                || current_row.find('select[name="notes_to_parent"]').val() == 'Extracurricular Activity'
-            ){
+                if(
+                    current_row.find('select[name="notes_to_parent"]').val() == 'الطالب غائب'
+                    || current_row.find('select[name="notes_to_parent"]').val() == 'Absent Student'
+                    || current_row.find('select[name="notes_to_parent"]').val() == 'دوام 3 أيام'
+                    || current_row.find('select[name="notes_to_parent"]').val() == '3 days work'
+                    || current_row.find('select[name="notes_to_parent"]').val() == 'نشاط لا صفي'
+                    || current_row.find('select[name="notes_to_parent"]').val() == 'Extracurricular Activity'
+                ){
 
-                let grades_row = date.closest('#grades tr'),
-                    total = grades_row.find('.total');
-                grades_row.find("input").attr('disabled', true);
+                    let grades_row = date.closest('#grades tr'),
+                        total = grades_row.find('.total');
+                    grades_row.find("input").attr('disabled', true);
 
-                if(current_row.find('select[name="notes_to_parent[]"]').val() != 'نشاط لا صفي') {
-                    if({{$report->absence}} == -2){
-                        total.parent().addClass('bg-success');
-                    }
-                    if({{$report->absence}} == -5){
-                        total.parent().addClass('bg-danger');
+                    if(current_row.find('select[name="notes_to_parent[]"]').val() != 'نشاط لا صفي') {
+                        if({{$report->absence}} == -2){
+                            total.parent().addClass('bg-success');
+                        }
+                        if({{$report->absence}} == -5){
+                            total.parent().addClass('bg-danger');
+                        }
                     }
                 }
-            }
             @endforeach
 
             setTimeout(function() {
@@ -1084,4 +1209,91 @@
 
         });
     </script>
+
+    <script>
+
+        function appendAyatToOptions(on_change, add_options_to){
+            $(document).on('change', on_change, function (){
+                let element = $(this);
+                let lesson_id = element.val();
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: "{{ route('api.ayat') }}?lesson_id=" + lesson_id,
+                    success: function (data, textStatus, xhr) {
+                        for (let i = 1; i <= data.ayat_count; i++){
+
+                            let values = {
+                                id: i,
+                                text: i
+                            };
+
+                            var newOption = new Option(values.text, values.id, false, false);
+                            $(add_options_to).append(newOption).trigger('change');
+                        }
+                    },
+                });
+
+                // $(this).closest('.end-month-ayat').append('<option>Test</option>');
+            });
+        }
+
+        $(document).ready(function(){
+
+            $(".lessons-data-ajax").select2({
+                ajax: {
+                    url: "{{ route('api.lessons') }}",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term // search term
+                        };
+                    },
+                    processResults: function (response) {
+                        return {
+                            results: response
+                        };
+                    },
+                    cache: true
+                },
+
+                placeholder: 'ابحث باستخدام اسم السورة',
+                minimumInputLength: 2,
+                language: {
+                    inputTooShort: function() {
+                        return 'ابحث بجزء من اسم السورة';
+                    }
+                }
+            });
+
+            appendAyatToOptions('#lessons-month-data-ajax', '#ayat-month-result');
+            appendAyatToOptions('#lessons-semester-data-ajax', '#ayat-semester-result');
+            appendAyatToOptions('#lessons-year-data-ajax', '#ayat-year-result');
+
+            $(document).on('click', '#btn-save-data', function (e){
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "{{ route('api.student.plan') }}",
+                    data:{
+                        'student_id': '{{ request()->student_id }}',
+                        'month_year': '{{ isset(request()->date_filter) ? request()->date_filter : date('Y') . '-' . date('m') }}',
+                        'final_month_lesson_id': $('#lessons-month-data-ajax').val(),
+                        'final_month_aya_id': $('#ayat-month-result').val(),
+                        'final_semester_lesson_id': $('#lessons-semester-data-ajax').val(),
+                        'final_semester_aya_id': $('#ayat-semester-result').val(),
+                        'final_year_lesson_id': $('#lessons-year-data-ajax').val(),
+                        'final_year_aya_id': $('#ayat-year-result').val(),
+                        'seal_quran_date': $('#seal_quran_date').val(),
+                    },
+                    success: function (data, textStatus, xhr) {
+                    },
+                });
+            });
+        });
+
+    </script>
+
 @endpush

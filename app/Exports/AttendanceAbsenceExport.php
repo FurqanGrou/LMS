@@ -26,6 +26,11 @@ class AttendanceAbsenceExport implements FromCollection, WithHeadings, WithStyle
                 'attendance_absence_requests.date_excuse',
                 'attendance_absence_requests.reason_excuse',
                 'teachers.name',
+                'teachersB.name as spare_name',
+                DB::raw('(CASE
+                                        WHEN attendance_absence_requests.is_overtime = "0" THEN "غير معتمد"
+                                        WHEN attendance_absence_requests.is_overtime = "1" THEN "معتمد"
+                                        END)'),
                 DB::raw('(CASE
                                         WHEN attendance_absence_requests.request_type = "absence" THEN "اذن غياب"
                                         WHEN attendance_absence_requests.request_type = "delay" THEN "اذن تأخير"
@@ -39,6 +44,7 @@ class AttendanceAbsenceExport implements FromCollection, WithHeadings, WithStyle
                                         END)'),
             ])
             ->join('teachers', 'teachers.id', '=', 'attendance_absence_requests.teacher_id')
+            ->leftJoin('teachers as teachersB', 'teachersB.id', '=', 'attendance_absence_requests.spare_teacher_id')
             ->orderByDesc('attendance_absence_requests.id')
             ->get();
 
@@ -52,6 +58,8 @@ class AttendanceAbsenceExport implements FromCollection, WithHeadings, WithStyle
             'تاريخ العذر',
             'السبب - العذر',
             'مقدم الطلب',
+            'المعلم الاحتياطي',
+            'الوقت الاضافي',
             'نوع الاذن',
             'حالة الطلب',
         ];

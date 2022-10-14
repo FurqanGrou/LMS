@@ -19,4 +19,25 @@ class MonthlyScore extends Model
         }
         return $this->belongsTo(LessonPage::class, 'lesson_page_id');
     }
+
+    public function finalMonthLesson(){
+        if (getStudentPath(request()->student_id, request()->date_filter) == "قسم الهجاء"){
+            return $this->belongsTo(NooraniaPage::class, 'final_month_lesson_id');
+        }
+        return $this->belongsTo(Lesson::class, 'final_month_lesson_id');
+    }
+
+    public function finalSemesterLesson(){
+        if (getStudentPath(request()->student_id, request()->date_filter) == "قسم الهجاء"){
+            return $this->belongsTo(NooraniaPage::class, 'final_month_lesson_id');
+        }
+        return $this->belongsTo(Lesson::class, 'final_semester_lesson_id');
+    }
+
+    public function finalYearLesson(){
+        if (getStudentPath(request()->student_id, request()->date_filter) == "قسم الهجاء"){
+            return $this->belongsTo(NooraniaPage::class, 'final_month_lesson_id');
+        }
+        return $this->belongsTo(Lesson::class, 'final_year_lesson_id');
+    }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\ChapterImport;
 use App\Imports\ClassesTeachersImport;
 use App\Imports\LessonImport;
+use App\Imports\LessonsAyatImport;
 use App\Imports\PartImport;
 use App\Jobs\ExportMonthlyScores;
 use App\Report;
@@ -81,6 +82,7 @@ class ImportExportController extends Controller
 
     public function importLessons()
     {
+//        Excel::import(new LessonsAyatImport(), 'lessons_ayat.xlsx');
         Excel::import(new LessonImport(), 'noorania_pages.xlsx');
         return 'Done';
     }

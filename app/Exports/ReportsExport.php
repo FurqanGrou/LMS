@@ -68,6 +68,14 @@ class ReportsExport implements FromCollection, WithHeadings, WithStyles, ShouldA
             $reports->where('reports.mail_status', '=', $this->mail_status);
         }
 
+        $user_type = auth()->user()->user_type;
+
+        if ($user_type == 'iksab'){
+            $reports->where('users.study_type', '=', '1');
+        }elseif($user_type == 'furqan_group'){
+            $reports->where('users.study_type', '=', '0');
+        }
+
         return $reports->get();
     }
 
