@@ -10,6 +10,7 @@
         @csrf
         @method('POST')
 
+        <a href="{{ route('admins.import-top-tracker-employees') }}" class="btn btn-success">استيراد بيانات الموظفين</a>
         <div class="form-body">
             <h4 class="form-section">
                 <i class="la la-file-excel-o"></i>

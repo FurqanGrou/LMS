@@ -8,6 +8,7 @@ use App\Imports\TopTrackerImport;
 use App\TopTrackerEmployee;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -22,6 +23,8 @@ class TopTrackerController extends Controller
     public function importEmployees(Request $request)
     {
         Excel::import(new TopTrackerImport(), $request->file);
+
+        Artisan::call('cache:clear');
         return redirect()->back()->with('success', 'تم تحديث بيانات المعلمين بنجاح');
     }
 
@@ -63,6 +66,8 @@ class TopTrackerController extends Controller
                 array_push($employees, [
                     'Nationality No.' => getEmployeeInfo($worker_name, 'nationality_no'),
                     'Employee No.'    => getEmployeeInfo($worker_name, 'employee_no'),
+                    'Employee Section'    => getEmployeeInfo($worker_name, 'section'),
+                    'Employee Type'    => getEmployeeInfo($worker_name, 'type'),
                     'Name' => $worker_name,
                     'Start Time' => $start_time,
                     'End Time'   => $end_time,
