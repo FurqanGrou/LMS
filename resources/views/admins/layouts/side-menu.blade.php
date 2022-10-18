@@ -1,5 +1,5 @@
 <div class="main-menu menu-fixed menu-light menu-accordion  menu-shadow " data-scroll-to-active="true" >
-    <div class="main-menu-content">
+    <div class="main-menu-content ps-container ps-theme-dark ps-active-y">
 
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
 
@@ -107,6 +107,35 @@
             </li>
 
             <li class="nav-item">
+                <a href="#">
+                    <i class="ft-file-text"></i>
+                    <span class="menu-title" data-i18n="nav.templates.main">التقارير</span>
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{ route('admins.request_services.attendanceAbsenceTeachers.index') }}" data-i18n="nav.templates.vert.classic_menu">
+                            الاذونات
+                        </a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('admins.export-top-tracker-reports') }}" data-i18n="nav.templates.vert.classic_menu">
+                            حضور الموظفين - البصمة
+                        </a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('admins.request_services.exams.export') }}" data-i18n="nav.templates.vert.classic_menu">
+                            طلبات الاختبارات
+                        </a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('admins.attendance.export') }}" data-i18n="nav.templates.vert.classic_menu">
+                            الحضور والانصراف - قديم
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
 
                 <a href="#">
                     <i class="ft-activity"></i>
@@ -128,65 +157,26 @@
                     </li>
                 </ul>
 
-
-            </li>
-
-            <li class="nav-item">
-                <a href="{{ route('admins.request_services.attendanceAbsenceTeachers.index') }}">
-                    <i class="ft-sliders"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">الاذونات</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="#">
-                    <i class="ft-log-in"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">الحضور والانصراف</span>
-                </a>
-                <ul class="menu-content">
-                    <li>
-{{--                        <a class="menu-item" href="{{ route('admins.attendance.index') }}" data-i18n="nav.templates.vert.classic_menu">--}}
-{{--                            <i class="ft-log-in"></i>--}}
-{{--                            تسجيل الحضور والانصراف--}}
-{{--                        </a>--}}
-                        <a class="menu-item" href="{{ route('admins.attendance.export') }}" data-i18n="nav.templates.vert.classic_menu">
-                            <i class="ft-file-text"></i>
-                            تصدير تقرير الحضور والانصراف
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="nav-item">
-                <a href="#">
-                    <i class="ft-folder"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">تصدير طلبات الاختبارات</span>
-                </a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="{{ route('admins.request_services.exams.export') }}" data-i18n="nav.templates.vert.classic_menu">
-                            <i class="ft-folder"></i>
-                            تصدير طلبات الاختبارات
-                        </a>
-                    </li>
-                </ul>
             </li>
 
             @if(isHasUserType('super_admin'))
-                <li class="nav-item">
-                    <a href="{{ route('log-viewer::logs.list') }}">
-                        <i class="fa fa-bug"></i>
-                        <span class="menu-title" data-i18n="nav.templates.main">اخطاء النظام</span>
-                    </a>
-                </li>
-            @endif
 
-            <li class="nav-item">
-                <a href="{{ route('admins.audits.index') }}">
-                    <i class="fa fa-server"></i>
-                    <span class="menu-title" data-i18n="nav.templates.main">فاعليات المستخدم</span>
-                </a>
-            </li>
+                <li class=" nav-item">
+                    <a href="#">
+                        <i class="fa fa-bug"></i>
+                        <span class="menu-title" data-i18n="nav.navbars.main">مراقبة النظام</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li>
+                            <a class="menu-item" href="{{ route('log-viewer::logs.list') }}" data-i18n="nav.navbars.nav_light">اخطاء النظام</a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('admins.audits.index') }}" data-i18n="nav.navbars.nav_light">حركات المستخدم</a>
+                        </li>
+                    </ul>
+                </li>
+
+            @endif
 
         </ul>
 
