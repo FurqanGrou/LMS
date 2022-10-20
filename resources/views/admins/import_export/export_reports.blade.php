@@ -45,6 +45,21 @@
                         </select>
                     </div>
                 </div>
+
+                @if(auth()->user()->user_type == 'super_admin')
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">نوع الطلاب</span>
+                            </div>
+                            <select name="study_type" id="" class="form-control">
+                                <option value="2">الكل</option>
+                                <option value="1">حضوري</option>
+                                <option value="0">اونلاين</option>
+                            </select>
+                        </div>
+                    </div>
+                @endif
             </div>
 
         </div>
