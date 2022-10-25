@@ -33,33 +33,20 @@ class AttendanceAbsenceRequestMail extends Mailable
     public function build()
     {
 
-        if ($this->options['type'] == 'remove') {
-//            $subject = 'تم تغيير المعلم الاحتياط - نعتذر لكم على الأزعاج';
-//
-//            Mail::raw('نعتذر منكم، تم تغييركم من دور معلم احتياطي الخاص بحلقة رقم - ' . $this->options['details']->class_number,
-//                function ($message) use ($subject) {
-//                $message->to('')
-//                ->subject($subject);
-//            });
-//
-//            return $this->subject($subject)
-//                ->html();
-        }else{
-            $subject = '';
-            switch ($this->options->request_type){
-                case 'absence':
-                    $subject = 'طلب - اذن غياب';
-                    break;
-                case 'delay':
-                    $subject = 'طلب - اذن تأخير';
-                    break;
-                case 'exit':
-                    $subject = 'طلب - اذن خروج';
-                    break;
-            }
+        $subject = '';
+        switch ($this->options->request_type){
+            case 'absence':
+                $subject = 'طلب - اذن غياب';
+                break;
+            case 'delay':
+                $subject = 'طلب - اذن تأخير';
+                break;
+            case 'exit':
+                $subject = 'طلب - اذن خروج';
+                break;
         }
 
         return $this->subject($subject)
-            ->view('teachers.emails.request_service', ['details' => $this->options['details']]);
+            ->view('teachers.emails.request_service', ['details' => $this->options]);
     }
 }

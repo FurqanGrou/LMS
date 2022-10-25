@@ -10,12 +10,12 @@ use App\Exports\AttendanceAbsenceExport;
 use App\Form;
 use App\Http\Controllers\Controller;
 use App\Mail\AttendanceAbsenceRequestMail;
+use App\Mail\SpareTeacherMail;
 use App\Notifications\userReportMonthlyNotification;
 use App\Service;
 use App\Teacher;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
@@ -23,6 +23,10 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class RequestServiceController extends Controller
 {
+
+    protected static $to_mails = ['male' => 'Ibrahim.Sani@furqancenter.com', 'female' => 'salma@furqancenter.com'];
+    protected static $bcc      = ['lmsfurqan1@gmail.com'];
+
 //    public function index()
 //    {
 //
@@ -68,13 +72,8 @@ class RequestServiceController extends Controller
 
     public function showAppliedRequests()
     {
-        $appliedRequests = Cache::remember('appliedRequests', 60 * 60 * 24, function(){
-            return AttendanceAbsenceRequests::query()->orderByDesc('id')->paginate(15);
-        });
-
-        $teachers = Cache::remember('teachers_attendance_absence_requests', 60 * 60 * 24, function(){
-            return Teacher::query()->get();
-        });
+        $appliedRequests = AttendanceAbsenceRequests::query()->orderByDesc('id')->paginate(15);
+        $teachers = Teacher::query()->get();
 
         return view('admins.request_services.show_attendanceAbsence', ['appliedRequests' => $appliedRequests, 'teachers' => $teachers]);
     }
@@ -149,16 +148,20 @@ class RequestServiceController extends Controller
                     'is_overtime' => $request->overtime_checkbox == "true" ? 1 : 0,
                 ]);
 
-            $subject = 'تمت اضافتك كمعلم احتياط لحلقة رقم ' . $attendanceAbsenceRequests->class_number;
             $teacher_spare = Teacher::find($attendanceAbsenceRequests->spare_teacher_id);
 
             // here will send mail to new spare teachers
-            Mail::raw('نبلغكم بأنه تم تعيينكم بدور معلم احتياط في حلقة رقم - ' . $attendanceAbsenceRequests->class_number,
-                function ($message) use ($subject, $teacher_spare) {
-                    $message->to($teacher_spare->email)
-                        ->bcc(['lmsfurqan1@gmail.com'])
-                        ->subject($subject);
-                });
+            Mail::to($teacher_spare->email)
+                ->cc([self::$to_mails[$attendanceAbsenceRequests->teacher->section]])
+                ->bcc('lmsfurqan1@gmail.com')
+                ->send(new SpareTeacherMail($attendanceAbsenceRequests));
+
+//            Mail::raw('نبلغكم بأنه تم تعيينكم بدور معلم احتياط في حلقة رقم - ' . $attendanceAbsenceRequests->class_number,
+//                function ($message) use ($subject, $teacher_spare) {
+//                    $message->to($teacher_spare->email)
+//                        ->bcc(['lmsfurqan1@gmail.com'])
+//                        ->subject($subject);
+//                });
 
             // here will send mail to new spare teachers
 //                Mail::to($teacher->email)

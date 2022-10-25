@@ -19,6 +19,8 @@ use App\Teacher;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
@@ -249,6 +251,8 @@ class RequestServiceController extends Controller
         }
 
 //        Notification::route('mail', ['alfurqangroup2020@gmail.com'])->notify(new RequestServiceExcuseNotification($request->all()));
+
+        Artisan::call('cache:clear');
 
         return response()->json(['status' => true, 'errors' => []], 200);
     }
