@@ -16,11 +16,13 @@ class ReportsExport implements FromCollection, WithHeadings, WithStyles, ShouldA
     protected $date_from;
     protected $date_to;
     protected $mail_status;
+    protected $study_type;
 
-    function __construct($date_from, $date_to, $mail_status) {
+    function __construct($date_from, $date_to, $mail_status, $study_type) {
         $this->date_from = $date_from;
         $this->date_to = $date_to;
         $this->mail_status = $mail_status;
+        $this->study_type = $study_type;
     }
 
     /**
@@ -70,9 +72,9 @@ class ReportsExport implements FromCollection, WithHeadings, WithStyles, ShouldA
 
         $user_type = auth()->user()->user_type;
 
-        if ($user_type == 'iksab'){
+        if ($user_type == 'iksab' || ($user_type == 'super_admin' && $this->study_type == 1) ){
             $reports->where('users.study_type', '=', '1');
-        }elseif($user_type == 'furqan_group'){
+        }elseif($user_type == 'furqan_group' || ($user_type == 'super_admin' && $this->study_type == 0) ){
             $reports->where('users.study_type', '=', '0');
         }
 

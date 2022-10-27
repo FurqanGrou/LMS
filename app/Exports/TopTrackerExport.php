@@ -29,6 +29,8 @@ class TopTrackerExport implements FromCollection, WithHeadings, WithStyles, Shou
         return [
             'Nationality No.',
             'Employee No.',
+            'Employee Section',
+            'Employee Type',
             'Name',
             'Start Time',
             'End Time',

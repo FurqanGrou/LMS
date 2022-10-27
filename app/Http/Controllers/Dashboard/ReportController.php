@@ -236,7 +236,25 @@ class ReportController extends Controller
         if (!isset($request->mail_status)){
             $request->mail_status = 2;
         }
-        return Excel::download(new ReportsExport($request->date_from, $request->date_to, $request->mail_status), 'reports.xlsx');
+
+        if (!isset($request->study_type)){
+            $request->study_type = 2;
+        }
+
+        $title = 'التقارير اليومية للطلاب';
+        switch ($request->study_type){
+            case 2:
+                $title = 'التقارير اليومية لجميع الطلاب';
+                break;
+            case 1:
+                $title = 'التقارير اليومية لطلاب الحضوري';
+                break;
+            case 0:
+                $title = 'التقارير اليومية لطلاب الاونلاين';
+                break;
+        }
+
+        return Excel::download(new ReportsExport($request->date_from, $request->date_to, $request->mail_status, $request->study_type), $title . '.xlsx');
     }
 
     public function sendReport($grades = null, $assignment){

@@ -12,6 +12,8 @@
         @csrf
         @method('POST')
 
+        <a href="{{ route('admins.export-top-tracker-reports') }}" class="btn btn-success">تصدير بيانات حضور الموظفين</a>
+
         <div class="form-body">
             <h4 class="form-section"><i class="ft-globe"></i> ادخال وتحديث بيانات الموظفين - <span class="badge-success badge font-weight-bold">Top Tracker</span></h4>
                 <div class="row">

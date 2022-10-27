@@ -386,7 +386,7 @@
                                 </div>
 
                                 <select name="" id="lessons-month-data-ajax" class="select2 end-month-results-select2 lessons-data-ajax">
-                                    <option value="{{ $user_student->monthlyScores->first()->final_month_lesson_id ?? '-' }}">{{ $user_student->monthlyScores->first()->finalMonthLesson->name ?? '-' }}</option>
+                                    <option value="{{ $user_student->monthlyScores->first()->final_month_lesson_id ?? '0' }}">{{ $user_student->monthlyScores->first()->finalMonthLesson->name ?? '-' }}</option>
                                 </select>
                             </div>
                         </fieldset>
@@ -397,7 +397,7 @@
                                 </div>
 
                                 <select name="" id="ayat-month-result" class="select2 end-month-results-select2">
-                                    <option value="{{ $user_student->monthlyScores->first()->final_month_aya_id ?? '-' }}">{{ $user_student->monthlyScores->first()->final_month_aya_id ?? '-' }}</option>
+                                    <option value="{{ $user_student->monthlyScores->first()->final_month_aya_id ?? '0' }}">{{ $user_student->monthlyScores->first()->final_month_aya_id ?? '-' }}</option>
                                 </select>
                             </div>
                         </fieldset>
@@ -412,7 +412,7 @@
                                 </div>
 
                                 <select name="" id="lessons-semester-data-ajax" class="select2 end-month-results-select2 lessons-data-ajax">
-                                    <option value="{{ $user_student->monthlyScores->first()->final_semester_lesson_id ?? '-' }}">{{ $user_student->monthlyScores->first()->finalSemesterLesson->name ?? '-' }}</option>
+                                    <option value="{{ $user_student->monthlyScores->first()->final_semester_lesson_id ?? '0' }}">{{ $user_student->monthlyScores->first()->finalSemesterLesson->name ?? '-' }}</option>
                                 </select>
                             </div>
                         </fieldset>
@@ -423,7 +423,7 @@
                                 </div>
 
                                 <select name="" id="ayat-semester-result" class="select2 end-month-results-select2">
-                                    <option value="{{ $user_student->monthlyScores->first()->final_semester_aya_id ?? '-' }}">{{ $user_student->monthlyScores->first()->final_semester_aya_id ?? '-' }}</option>
+                                    <option value="{{ $user_student->monthlyScores->first()->final_semester_aya_id ?? '0' }}">{{ $user_student->monthlyScores->first()->final_semester_aya_id ?? '-' }}</option>
                                 </select>
                             </div>
                         </fieldset>
@@ -438,7 +438,7 @@
                                 </div>
 
                                 <select name="" id="lessons-year-data-ajax" class="select2 end-month-results-select2 lessons-data-ajax">
-                                    <option value="{{ $user_student->monthlyScores->first()->final_year_lesson_id ?? '-' }}">{{ $user_student->monthlyScores->first()->finalYearLesson->name ?? '-' }}</option>
+                                    <option value="{{ $user_student->monthlyScores->first()->final_year_lesson_id ?? '0' }}">{{ $user_student->monthlyScores->first()->finalYearLesson->name ?? '-' }}</option>
                                 </select>
                             </div>
                         </fieldset>
@@ -449,7 +449,7 @@
                                 </div>
 
                                 <select name="" id="ayat-year-result" class="select2 end-month-results-select2">
-                                    <option value="{{ $user_student->monthlyScores->first()->final_year_aya_id ?? '-' }}">{{ $user_student->monthlyScores->first()->final_year_aya_id ?? '-' }}</option>
+                                    <option value="{{ $user_student->monthlyScores->first()->final_year_aya_id ?? '0' }}">{{ $user_student->monthlyScores->first()->final_year_aya_id ?? '-' }}</option>
                                 </select>
                             </div>
                         </fieldset>
