@@ -29,16 +29,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87292e1f-98d6-4206-89df-989af6579422" name="Default Changelist" comment="">
+    <list default="true" id="a47350e6-8576-4c66-b281-f87cf7605acb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exports/TopTrackerExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/TopTrackerExport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/TopTrackerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/TopTrackerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Imports/TopTrackerImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/TopTrackerImport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/employees-toptracker.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/public/employees-toptracker.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/import_export/export_attendance.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/import_export/export_attendance.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/import_export/export_top_tracker_report.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/import_export/export_top_tracker_report.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/import_export/import_top_tracker_employees.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/import_export/import_top_tracker_employees.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/AuditController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/AuditController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/audits/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/audits/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,25 +196,25 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admins/import_export" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admins/audits" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\audits" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\import_export" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\form_embeddes" />
+      <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Dashboard" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\teachers\form-embedded" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Teachers" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Dashboard" />
       <recent name="B:\LMS\lms_hatim\resources\views\emails\admin" />
       <recent name="B:\LMS\lms_hatim\resources\views\admins\students\btn" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\import_export" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\form_embeddes" />
-      <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Dashboard" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\teachers\form-embedded" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\note_parents\btn" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.ExamRequestController.php">

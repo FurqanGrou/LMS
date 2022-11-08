@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Events\ReportUpdated;
 use App\Report;
 use App\User;
 use Carbon\Carbon;
@@ -10,8 +11,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Arr;
+use App\Http\Controllers\Dashboard\ReportController;
 
 class HolidayRequest implements ShouldQueue
 {
@@ -25,7 +30,10 @@ class HolidayRequest implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param $student_ids
+     * @param $date_from
+     * @param $date_to
+     * @param $email_to
      */
     public function __construct($student_ids, $date_from, $date_to, $email_to)
     {
@@ -48,6 +56,7 @@ class HolidayRequest implements ShouldQueue
 
         $date_from = new \DateTime($this->date_from);
         $date_to  = new \DateTime($this->date_to);
+
         $interval = $date_from->diff($date_to);
         $days     = $interval->format('%a');
 
@@ -58,45 +67,31 @@ class HolidayRequest implements ShouldQueue
             $students = $students->whereIn('id', $this->student_ids)->get();
         }
 
+        $sql = '';
         foreach($students as $student){
             $date = Carbon::createFromDate($year, $month, $day);
 
-//            $last_report = Report::query()
-//                ->where('student_id', '=', $student->id)
-//                ->whereMonth('created_at', '=', $month)
-//                ->whereYear('created_at', '=', $year)
-//                ->latest()
-//                ->first();
-
             for($i = 1; $i <= $days+1; $i++){
-                $report = Report::query()->updateOrCreate(
-                    [
-                        'student_id' => $student->id,
-                        'date' => $date->format('l d-m-Y'),
-                        'created_at' => $date->format('Y-m-d')
-                    ],
-                    [
-                        'new_lesson' => '-',
-                        'new_lesson_from' => '-',
-                        'new_lesson_to' => '-',
-                        'last_5_pages' => '-',
-                        'daily_revision' => '-',
-                        'daily_revision_from' => '-',
-                        'daily_revision_to' => '-',
-                        'number_pages' => '-',
-                        'lesson_grade' => 'غ',
-                        'last_5_pages_grade' => '-',
-                        'daily_revision_grade' => '-',
-                        'behavior_grade' => '-',
-                        'notes_to_parent' => 'دوام 3 أيام',
-                        'absence' => '-1',
-                        'total' => 0,
-                        'mail_status' => 0,
-                        'class_number' => $student->class_number,
-                    ]
-                );
+                if(str_contains($date->format('l') ,'Friday')){
+                    $date->addDays(2);
+                    continue;
+                }
+
+                $sql .= "INSERT INTO reports (notes_to_parent, absence, date, student_id, created_at, class_number) VALUES ('دوام 3 أيام', '-1',";
+                $sql .= " '" . $date->format('l d-m-Y') . "', " . $student->id . ", '" . $date->format('Y-m-d') . "', " . $student->class_number .") ON DUPLICATE KEY UPDATE notes_to_parent='دوام 3 أيام', absence='-1', created_at='" . $date->format('Y-m-d') . "', class_number=" . $student->class_number . "; ";
+
                 $date->addDay();
             }
+
+        }
+
+        DB::unprepared($sql);
+
+        foreach ($students as $student){
+            $report_event_data = ['created_at' => $year . '-' . $month, 'student_id' => $student->id, 'class_number' => $student->class_number];
+            $reportController = new ReportController;
+            $request = new \Illuminate\Http\Request($report_event_data);
+            $reportController->fireUpdateMonthlyScoresEvent($request);
         }
 
         $data = [
