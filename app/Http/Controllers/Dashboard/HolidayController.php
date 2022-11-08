@@ -29,8 +29,14 @@ class HolidayController extends Controller
            'date_from' => 'required|date',
            'date_to'   => 'required|date',
            'action_type'  => 'required',
-           'student_id'   => 'required|array|exists:users,id'
+           'student_id'   => 'required|array'
         ]);
+
+        if ($request->student_id[0] != '-1'){
+            $request->validate([
+                'student_id'   => 'required|array|exists:users,id'
+            ]);
+        }
 
         if($request->action_type == 'null'){
             return redirect()->back()->withError('يجب عليك إختيار نوع الحركة');

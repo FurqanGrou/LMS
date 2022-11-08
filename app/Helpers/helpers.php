@@ -86,7 +86,6 @@ function getAbsenceCount($student_id, $type, $month = false){
     $absence_times = Report::query()
         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
         ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-        ->whereDate('created_at', '>=', '2022-09-04')
         ->whereDate('created_at', '<=', $today)
         ->where('date', 'not like', '%Saturday%')
         ->where('date', 'not like', '%Friday%')
@@ -149,7 +148,6 @@ function getAbsenceCount($student_id, $type, $month = false){
         $compensation_days = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '>=', '2022-09-04')
             ->whereDate('created_at', '<=', $today)
             ->where(function ($query){
                 $query->where('date', 'like', '%Friday%');
@@ -161,7 +159,6 @@ function getAbsenceCount($student_id, $type, $month = false){
         $excuse_days = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '>=', '2022-09-04')
             ->whereDate('created_at', '<=', $today)
             ->where('date', 'not like', '%Saturday%')
             ->where('date', 'not like', '%Friday%')
@@ -172,7 +169,6 @@ function getAbsenceCount($student_id, $type, $month = false){
         $unexcused_days = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '>=', '2022-09-04')
             ->whereDate('created_at', '<=', $today)
             ->where('date', 'not like', '%Saturday%')
             ->where('date', 'not like', '%Friday%')
@@ -368,7 +364,6 @@ function getLessonsNotListenedCount($student_id, $month = false){
     $monthly_report_statistics = Report::query()
         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
         ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-        ->whereDate('created_at', '>=', '2022-09-04')
         ->whereDate('created_at', '<=', $today)
         ->where('date', 'not like', '%Saturday%')
         ->where('date', 'not like', '%Friday%')
@@ -411,7 +406,6 @@ function getLessonsNotListenedCount($student_id, $month = false){
         $absence_times = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '>=', '2022-09-04')
             ->whereDate('created_at', '<=', $today)
             ->where('date', 'not like', '%Saturday%')
             ->where('date', 'not like', '%Friday%')
@@ -425,7 +419,6 @@ function getLessonsNotListenedCount($student_id, $month = false){
         $over_count = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '>=', '2022-09-04')
             ->whereDate('created_at', '<=', $today)
             ->where(function ($query){
                 $query->where('date', 'like', '%Friday%');
@@ -439,7 +432,6 @@ function getLessonsNotListenedCount($student_id, $month = false){
         $over_count_total = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '>=', '2022-09-04')
             ->whereDate('created_at', '<=', $today)
             ->where(function ($query){
                 $query->where('date', 'like', '%Friday%');
@@ -457,7 +449,6 @@ function getLessonsNotListenedCount($student_id, $month = false){
     $over_count_total_sat = Report::query()
         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
         ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-        ->whereDate('created_at', '>=', '2022-09-04')
         ->whereDate('created_at', '<=', $today)
         ->where(function ($query){
             $query->where('date', 'like', '%Friday%');
@@ -504,7 +495,6 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
     $monthly_report_statistics = Report::query()
         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
         ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-        ->whereDate('created_at', '>=', '2022-09-04')
         ->whereDate('created_at', '<=', $today)
         ->where('date', 'not like', '%Saturday%')
         ->where('date', 'not like', '%Friday%')
@@ -537,7 +527,6 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
         $absence_times = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '>=', '2022-09-04')
             ->whereDate('created_at', '<=', $today)
             ->where('date', 'not like', '%Saturday%')
             ->where('date', 'not like', '%Friday%')
@@ -550,7 +539,6 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
         $over_count = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '>=', '2022-09-04')
             ->whereDate('created_at', '<=', $today)
             ->where(function ($query){
                 $query->where('date', 'like', '%Friday%');
@@ -565,7 +553,6 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
         $over_count_total = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '>=', '2022-09-04')
             ->whereDate('created_at', '<=', $today)
             ->where(function ($query){
                 $query->where('date', 'like', '%Friday%');
@@ -583,7 +570,6 @@ function getLastFivePagesNotListenedCount($student_id, $month = false){
     $over_count_total_sat = Report::query()
         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
         ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-        ->whereDate('created_at', '>=', '2022-09-04')
         ->whereDate('created_at', '<=', $today)
         ->where(function ($query){
             $query->where('date', 'like', '%Friday%');
@@ -635,7 +621,6 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
     $monthly_report_statistics = Report::query()
         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
         ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-        ->whereDate('created_at', '>=', '2022-09-04')
         ->whereDate('created_at', '<=', $today)
         ->where('date', 'not like', '%Saturday%')
         ->where('date', 'not like', '%Friday%')
@@ -686,7 +671,6 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
         $absence_times = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '>=', '2022-09-04')
             ->whereDate('created_at', '<=', $today)
             ->where('date', 'not like', '%Saturday%')
             ->where('date', 'not like', '%Friday%')
@@ -700,7 +684,6 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
         $over_count = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '>=', '2022-09-04')
             ->whereDate('created_at', '<=', $today)
             ->where(function ($query){
                 $query->where('date', 'like', '%Friday%');
@@ -716,7 +699,6 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
         $over_count_total = Report::query()
             ->whereRaw('YEAR(created_at) = ?', [$currentYear])
             ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-            ->whereDate('created_at', '>=', '2022-09-04')
             ->whereDate('created_at', '<=', $today)
             ->where(function ($query){
                 $query->where('date', 'like', '%Friday%');
@@ -734,7 +716,6 @@ function getDailyRevisionNotListenedCount($student_id, $month = false){
     $over_count_total_sat = Report::query()
         ->whereRaw('YEAR(created_at) = ?', [$currentYear])
         ->whereRaw('MONTH(created_at) = ?', [$currentMonth])
-        ->whereDate('created_at', '>=', '2022-09-04')
         ->whereDate('created_at', '<=', $today)
         ->where(function ($query){
             $query->where('date', 'like', '%Friday%');
@@ -799,7 +780,6 @@ function getTodayMailStatusClass($date, $today, $student_id)
             $class = 'bg-danger white';
         }
     }
-
 
     return $class;
 }

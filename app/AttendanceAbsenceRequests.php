@@ -11,7 +11,7 @@ class AttendanceAbsenceRequests extends Model
     protected $guarded = [];
     protected $appends = ['type', 'status_title'];
 
-    protected static $to_mails = ['male' => 'Ibrahim.Sani@furqancenter.com', 'female' => 'salma@furqancenter.com'];
+    protected static $to_mails = ['attendance.permissions@furqancenter.com'];
     protected static $bcc      = ['lmsfurqan1@gmail.com'];
 
     protected static function booted()
@@ -26,7 +26,7 @@ class AttendanceAbsenceRequests extends Model
                 ->toArray();
 
             Mail::to($supervisor_emails)
-                ->cc([self::$to_mails[$absenceRequests->teacher->section]])
+                ->cc(self::$to_mails)
                 ->bcc(self::$bcc)
                 ->send(new AttendanceAbsenceRequestMail($absenceRequests));
 
