@@ -261,8 +261,8 @@ class RequestServiceController extends Controller
 
         Mail::raw('ورد لديكم طلب اذن مقدم من المعلم/ة (' . auth('teacher_web')->user()->name . ') عبر لوحة التحكم الخاصة بالاذونات يمكنكم النظر فيه والافادة',
             function ($message) use ($subjects, $request) {
-                $message->to('alfurqangroup2020@gmail.com')
-                    ->cc(['attendance.permissions@furqancenter.com'])
+                $message->to('attendance.permissions@furqancenter.com')
+//                     ->cc(['attendance.permissions@furqancenter.com'])
                     ->subject($subjects[$request->type]);
             });
 
