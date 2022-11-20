@@ -251,24 +251,11 @@ class RequestServiceController extends Controller
             ];
         }
 
-        DB::table('attendance_absence_requests')->insert($data);
+        AttendanceAbsenceRequests::query()->insert($data);
 
-        $subjects = [
-            'absence' => 'طلب اذن غياب معلم عن حلقة',
-            'delay' => 'طلب اذن تأخير معلم عن حلقة',
-            'exit' => 'طلب اذن خروج معلم من حلقة',
-        ];
-
-        Mail::raw('ورد لديكم طلب اذن مقدم من المعلم/ة (' . auth('teacher_web')->user()->name . ') عبر لوحة التحكم الخاصة بالاذونات يمكنكم النظر فيه والافادة',
-            function ($message) use ($subjects, $request) {
-                $message->to('alfurqangroup2020@gmail.com')
-                    ->cc(['attendance.permissions@furqancenter.com'])
-                    ->subject($subjects[$request->type]);
-            });
-
-//        Notification::route('mail', ['alfurqangroup2020@gmail.com'])->notify(new RequestServiceExcuseNotification($request->all()));
-
-//        Artisan::call('cache:clear');
+        Mail::to(['attendance.permissions@furqancenter.com'])
+            ->bcc(['hatim201499@gmail.com'])
+            ->send(new AttendanceAbsenceRequestMail($request->all()));
 
         return response()->json(['status' => true, 'errors' => []], 200);
     }

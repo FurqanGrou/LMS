@@ -34,7 +34,7 @@ class AttendanceAbsenceRequestMail extends Mailable
     {
 
         $subject = '';
-        switch ($this->options->request_type){
+        switch ($this->options['type']){
             case 'absence':
                 $subject = 'طلب - اذن غياب';
                 break;
@@ -45,6 +45,8 @@ class AttendanceAbsenceRequestMail extends Mailable
                 $subject = 'طلب - اذن خروج';
                 break;
         }
+
+        $this->options['type'] = $subject;
 
         return $this->subject($subject)
             ->view('teachers.emails.request_service', ['details' => $this->options]);
