@@ -1,5 +1,6 @@
 <div>
-    <form class="form" method="POST" action="{{ route('teachers.attendance.store') }}" enctype="multipart/form-data">
+
+    <form class="form" method="POST" action="{{ $route }}" enctype="multipart/form-data">
 
         @csrf
         @method('POST')
@@ -15,4 +16,10 @@
         </div>
 
     </form>
+
+    <div style="position: absolute;top: 100%;right: 44%;z-index: 999999;">
+        @include('admins.partials.success')
+        @include('admins.partials.errors')
+    </div>
+
 </div>
