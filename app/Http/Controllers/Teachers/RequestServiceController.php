@@ -251,7 +251,7 @@ class RequestServiceController extends Controller
             ];
         }
 
-        DB::table('attendance_absence_requests')->insert($data);
+        AttendanceAbsenceRequests::query()->insert($data);
 
         Mail::to(['attendance.permissions@furqancenter.com'])
             ->bcc(['hatim201499@gmail.com'])
