@@ -6,6 +6,7 @@ use Illuminate\View\Component;
 
 class Attendance extends Component
 {
+
     /**
      * Create a new component instance.
      *
@@ -13,7 +14,6 @@ class Attendance extends Component
      */
     public function __construct()
     {
-        //
     }
 
     /**
@@ -23,6 +23,12 @@ class Attendance extends Component
      */
     public function render()
     {
-        return view('components.attendance');
+        if (auth()->guard('admin_web')->check()){
+            $route = route('admins.attendance.store');
+        }else{
+            $route = route('teachers.attendance.store');
+        }
+
+        return view('components.attendance',  ['route' => $route]);
     }
 }

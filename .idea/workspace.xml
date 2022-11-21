@@ -29,9 +29,15 @@
   <component name="ChangeListManager">
     <list default="true" id="a47350e6-8576-4c66-b281-f87cf7605acb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/RequestServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/RequestServiceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/AttendanceAbsenceRequestMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/AttendanceAbsenceRequestMail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/emails/request_service.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/emails/request_service.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Attendance.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Attendance.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/AttendanceExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/AttendanceExport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/helpers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/AttendanceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/AttendanceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/AttendanceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/AttendanceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/View/Components/Attendance.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/View/Components/Attendance.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/layouts/header-navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/layouts/header-navbar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/components/attendance.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/attendance.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/teachers/layouts/header-navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/layouts/header-navbar.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -558,7 +564,9 @@
       <workItem from="1668716034589" duration="34000" />
       <workItem from="1668953508051" duration="5709000" />
       <workItem from="1668973569041" duration="639000" />
-      <workItem from="1668974277130" duration="1839000" />
+      <workItem from="1668974277130" duration="2442000" />
+      <workItem from="1669026342558" duration="8769000" />
+      <workItem from="1669044320032" duration="5339000" />
     </task>
     <servers />
   </component>
@@ -578,10 +586,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1660827295355">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1669045444121">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1660827295355" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1669045444121" />
     <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1668568126147">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -590,9 +598,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1660820639429" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1668974477089">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1669050140137">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1668974477089" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1669050140137" />
   </component>
 </project>

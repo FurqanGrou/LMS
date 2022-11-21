@@ -1129,3 +1129,53 @@ function getNoteParent($text)
 
     return ['ar' => $text, 'en' => $text];
 }
+
+function getAttendancePeriod($login_btn, $time)
+{
+    $period = '';
+    if (isset($login_btn)){
+        if($time >= '23:00' && $time <= '3:00'){
+            $period = 'الفترة الصباحية';
+        }
+
+        if($time >= '5:30' && $time <= '9:00'){
+            $period = 'الفترة المسائية 1';
+        }
+
+        if($time >= '10:00' && $time <= '13:00'){
+            $period = 'الفترة المسائية 2';
+        }
+
+        if($time >= '13:30' && $time <= '17:00'){
+            $period = 'الفترة المسائية 3';
+        }
+
+        if($time >= '17:01' && $time <= '20:00'){
+            $period = 'الفترة المسائية 4';
+        }
+        session()->flash('success', 'تم تسجيل بصمة الدخول بنجاح');
+    }else{
+        if($time >= '1:55' && $time <= '6:00'){
+            $period = 'الفترة الصباحية';
+        }
+
+        if($time >= '7:55' && $time <= '11:30'){
+            $period = 'الفترة المسائية 1';
+        }
+
+        if($time >= '11:55' && $time <= '15:55'){
+            $period = 'الفترة المسائية 2';
+        }
+
+        if($time >= '16:00' && $time <= '18:50'){
+            $period = 'الفترة المسائية 3';
+        }
+
+        if($time >= '18:55' && $time <= '22:30'){
+            $period = 'الفترة المسائية 4';
+        }
+        session()->flash('success', 'تم تسجيل بصمة الخروج بنجاح');
+    }
+
+    return $period;
+}
