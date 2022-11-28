@@ -11,24 +11,24 @@ class AttendanceAbsenceRequests extends Model
     protected $guarded = [];
     protected $appends = ['type', 'status_title'];
 
-    protected static $to_mails = ['attendance.permissions@furqancenter.com'];
-    protected static $bcc      = ['lmsfurqan1@gmail.com'];
+//    protected static $to_mails = ['attendance.permissions@furqancenter.com'];
+//    protected static $bcc      = ['lmsfurqan1@gmail.com'];
 
     protected static function booted()
     {
         static::created(function(AttendanceAbsenceRequests $absenceRequests) {
 
-            $supervisor_emails = ClassesTeachers::query()
-                ->where('role', '=', 'supervisor')
-                ->where('class_number', '=', $absenceRequests->class_number)
-                ->distinct()
-                ->pluck('teacher_email')
-                ->toArray();
-
-            Mail::to($supervisor_emails)
-                ->cc(self::$to_mails)
-                ->bcc(self::$bcc)
-                ->send(new AttendanceAbsenceRequestMail($absenceRequests));
+//            $supervisor_emails = ClassesTeachers::query()
+//                ->where('role', '=', 'supervisor')
+//                ->where('class_number', '=', $absenceRequests->class_number)
+//                ->distinct()
+//                ->pluck('teacher_email')
+//                ->toArray();
+//
+//            Mail::to($supervisor_emails)
+//                ->cc(self::$to_mails)
+//                ->bcc(self::$bcc)
+//                ->send(new AttendanceAbsenceRequestMail($absenceRequests));
 
         });
 

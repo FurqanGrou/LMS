@@ -50,7 +50,7 @@ class AuditController extends Controller
             $audits = Audit::with('user')
                 ->whereIn('auditable_id', $reports->pluck('id')->toArray())
                 ->where('auditable_type', 'like', '%Report%')
-                ->orderBy('updated_at', 'desc')
+//                ->orderBy('updated_at', 'desc')
                 ->paginate(30);
         }else{
             $audits = Audit::with('user')

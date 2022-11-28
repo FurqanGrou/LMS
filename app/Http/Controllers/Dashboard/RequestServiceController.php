@@ -45,7 +45,6 @@ class RequestServiceController extends Controller
 
     public function show(Request $request)
     {
-
         $request_type = Service::query()->where('request_code', '=', $request->service)->with('form')->first();
         $request_type = $request_type->form->title;
 
@@ -90,6 +89,7 @@ class RequestServiceController extends Controller
         return view('admins.request_services.show_single_attendanceAbsence', ['attendanceAbsenceRequest' => $attendanceAbsenceRequests]);
     }
 
+    // just used for get data and show it in pop-up front-end
     public function assignTeacherQuery(AttendanceAbsenceRequests $attendanceAbsenceRequests)
     {
         $class = Classes::query()
@@ -100,46 +100,40 @@ class RequestServiceController extends Controller
         return response()->json(['attendanceAbsenceRequest' => $attendanceAbsenceRequests, 'class' => $class]);
     }
 
+    // assign new spare teacher, remove old spare teachers then send mail to old and new spare teachers
     public function assignTeacher(Request $request, AttendanceAbsenceRequests $attendanceAbsenceRequests)
     {
-
         try {
             DB::beginTransaction();
                 $teacher = Teacher::find($request->teacher_id);
-                $teacher_spare = Teacher::find($attendanceAbsenceRequests->spare_teacher_id);
-
-//                $teacher_spare = DB::table('classes_teachers')
-//                        ->where('class_number', '=', $attendanceAbsenceRequests->class_number)
-//                        ->where('role', '=', 'spare');
+                $previous_teacher_spare = Teacher::find($attendanceAbsenceRequests->spare_teacher_id);
 
                 // send email to previous spare teachers
-                if ($teacher_spare){
+                if ($previous_teacher_spare){
 
                     $subject = 'تم تغيير المعلم الاحتياط - نعتذر لكم على الأزعاج';
 
                     Mail::raw('نعتذر منكم، تم تغييركم من دور معلم احتياطي الخاص بحلقة رقم - ' . $attendanceAbsenceRequests->class_number,
-                        function ($message) use ($subject, $teacher_spare) {
-                            $message->to($teacher_spare->email)
+                        function ($message) use ($subject, $previous_teacher_spare) {
+                            $message->to($previous_teacher_spare->email)
+                            ->cc(['attendance.permissions@furqancenter.com'])
                             ->bcc(['lmsfurqan1@gmail.com'])
                             ->subject($subject);
                     });
 
-//                    Mail::to($teacher_result->teacher_email)
-//                        ->bcc(['lmsfurqan1@gmail.com'])
-//                        ->send(new AttendanceAbsenceRequestMail(['details' => $attendanceAbsenceRequests, 'type' => 'remove']));
-
-//                    $teacher_spare->delete();
                 }
 
-                $class = Classes::query()->where('class_number', '=', $attendanceAbsenceRequests->class_number)->first();
+                $class = Classes::query()
+                                ->where('class_number', '=', $attendanceAbsenceRequests->class_number)
+                                ->first();
 
                 ClassesTeachers::query()->create([
-                        'class_number'  => $attendanceAbsenceRequests->class_number,
-                        'teacher_email' => $teacher->email,
-                        'type' => $teacher->section,
-                        'role' => 'spare',
-                        'study_type' => $class->study_type,
-                    ]);
+                    'class_number'  => $attendanceAbsenceRequests->class_number,
+                    'teacher_email' => $teacher->email,
+                    'type' => $teacher->section,
+                    'role' => 'spare',
+                    'study_type' => $class->study_type,
+                ]);
 
                 $attendanceAbsenceRequests->update([
                     'spare_teacher_id' => $request->teacher_id,
@@ -152,21 +146,9 @@ class RequestServiceController extends Controller
 
             // here will send mail to new spare teachers
             Mail::to($teacher_spare->email)
-                ->cc([self::$to_mails[$attendanceAbsenceRequests->teacher->section]])
+                ->cc(['attendance.permissions@furqancenter.com'])
                 ->bcc('lmsfurqan1@gmail.com')
                 ->send(new SpareTeacherMail($attendanceAbsenceRequests));
-
-//            Mail::raw('نبلغكم بأنه تم تعيينكم بدور معلم احتياط في حلقة رقم - ' . $attendanceAbsenceRequests->class_number,
-//                function ($message) use ($subject, $teacher_spare) {
-//                    $message->to($teacher_spare->email)
-//                        ->bcc(['lmsfurqan1@gmail.com'])
-//                        ->subject($subject);
-//                });
-
-            // here will send mail to new spare teachers
-//                Mail::to($teacher->email)
-//                    ->bcc(['lmsfurqan1@gmail.com'])
-//                    ->send(new AttendanceAbsenceRequestMail(['details' => $attendanceAbsenceRequests, 'type' => 'add']));
 
             DB::commit();
         }catch (\Throwable $e){

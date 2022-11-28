@@ -29,7 +29,14 @@
                     </li>
                 </ul>
 
-{{--                @if(\Route::currentRouteName() == 'admins.report.table')--}}
+                @if(\Route::currentRouteName() == 'admins.home')
+                    <div style="width: 320px; margin: auto; margin-top: 20px; max-width: 320px; display: flex; justify-content: center;">
+                        <x-attendance />
+                    </div>
+                @endif
+
+
+                {{--                @if(\Route::currentRouteName() == 'admins.report.table')--}}
 {{--                    <div style="width: 320px; margin: auto; margin-top: 20px; max-width: 320px; display: flex; justify-content: center;">--}}
 {{--                        <form action="{{ route('admins.send.report', request()->student_id) }}" id="form-report-send" method="POST" class="mr-5">--}}
 {{--                            @csrf--}}

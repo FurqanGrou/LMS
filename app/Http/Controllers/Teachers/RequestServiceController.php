@@ -237,8 +237,9 @@ class RequestServiceController extends Controller
 
         $class_numbers = explode(',', $request->class_numbers);
 
+        $data = [];
         foreach ($class_numbers as $class_number){
-            AttendanceAbsenceRequests::query()->create([
+            $data[] = [
                 'request_type' => $request->type,
                 'date_excuse' => $request->date_excuse,
                 'reason_excuse' => ($request->reason_excuse == 'other' && $request->type == 'absence') ? $request->absence_reason : $request->reason_excuse,
@@ -247,26 +248,30 @@ class RequestServiceController extends Controller
                 'exit_time' => $request->exit_time,
                 'teacher_id' => auth('teacher_web')->user()->id,
                 'class_number' => $class_number,
-            ]);
+            ];
         }
 
-//        Notification::route('mail', ['alfurqangroup2020@gmail.com'])->notify(new RequestServiceExcuseNotification($request->all()));
+        AttendanceAbsenceRequests::query()->insert($data);
 
-        Artisan::call('cache:clear');
+        Mail::to(['attendance.permissions@furqancenter.com'])
+            ->bcc(['hatim201499@gmail.com'])
+            ->send(new AttendanceAbsenceRequestMail($request->all()));
 
         return response()->json(['status' => true, 'errors' => []], 200);
     }
 
     public function showAppliedRequests()
     {
-        $appliedRequests = AttendanceAbsenceRequests::query()->where('teacher_id', auth('teacher_web')->user()->id)->orderByDesc('id')->paginate(15);
+        $appliedRequests = AttendanceAbsenceRequests::query()
+            ->where('teacher_id', auth('teacher_web')->user()->id)
+            ->orderByDesc('id')
+            ->paginate(15);
 
         return view('teachers.request_services.show_attendanceAbsence', ['appliedRequests' => $appliedRequests]);
     }
 
     public function showSingleAppliedRequest(AttendanceAbsenceRequests $attendanceAbsenceRequests)
     {
-
         return view('teachers.request_services.show_single_attendanceAbsence', ['attendanceAbsenceRequest' => $attendanceAbsenceRequests]);
     }
 
