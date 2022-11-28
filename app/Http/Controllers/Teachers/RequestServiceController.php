@@ -228,13 +228,6 @@ class RequestServiceController extends Controller
             return response()->json(['errors' => $validator->errors()->all()], 404);
         }
 
-//        $class = Classes::query()->select(['period', 'title', 'class_number'])->where('class_number', '=', $request->class_number)->first();
-//        $status = getPeriodTimeAvailable(['period' => $class->period, 'excuse_date' => $request->date_excuse]);
-//
-//        if(!$status){
-//            return response()->json(['status' => $status, 'errors' => ['لا يمكنك طلب الاذن إلا قبل موعد الحلقة بساعتين أو أكثر']], 404);
-//        }
-
         $class_numbers = explode(',', $request->class_numbers);
 
         $data = [];
@@ -248,13 +241,13 @@ class RequestServiceController extends Controller
                 'exit_time' => $request->exit_time,
                 'teacher_id' => auth('teacher_web')->user()->id,
                 'class_number' => $class_number,
+                'created_at' => Carbon::now(),
             ];
         }
 
         AttendanceAbsenceRequests::query()->insert($data);
 
         Mail::to(['attendance.permissions@furqancenter.com'])
-            ->bcc(['hatim201499@gmail.com'])
             ->send(new AttendanceAbsenceRequestMail($request->all()));
 
         return response()->json(['status' => true, 'errors' => []], 200);
