@@ -42,7 +42,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>سبب الإذن - العذر:</label>
-                    <p style="display: inline-block">{!! ($details['reason_excuse'] == 'other' && $details['type'] == 'absence') ? $details['absence_reason'] : $details['reason_excuse'] !!}</p>
+                    <p style="display: inline-block">{!! $details['reason_excuse'] !!}</p>
                 </div>
             </div>
 

@@ -30,7 +30,6 @@
     <list default="true" id="a47350e6-8576-4c66-b281-f87cf7605acb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/RequestServiceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/RequestServiceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admins/request_services/show_attendanceAbsence.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/request_services/show_attendanceAbsence.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/teachers/emails/request_service.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/emails/request_service.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -566,7 +565,7 @@
       <workItem from="1669324102854" duration="36000" />
       <workItem from="1669554486774" duration="87000" />
       <workItem from="1669557840140" duration="743000" />
-      <workItem from="1669661460246" duration="1842000" />
+      <workItem from="1669661460246" duration="4198000" />
     </task>
     <servers />
   </component>

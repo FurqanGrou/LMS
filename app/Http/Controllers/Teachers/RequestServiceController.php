@@ -247,6 +247,12 @@ class RequestServiceController extends Controller
 
         AttendanceAbsenceRequests::query()->insert($data);
 
+        if ($request->reason_excuse == 'other' && $request->type == 'absence'){
+            $request['reason_excuse'] = $request->absence_reason;
+        }else{
+            $request['reason_excuse'] = $request->reason_excuse;
+        }
+
         Mail::to(['attendance.permissions@furqancenter.com'])
             ->send(new AttendanceAbsenceRequestMail($request->all()));
 
