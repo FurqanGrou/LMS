@@ -53,7 +53,7 @@ class RequestServiceExcuseNotification extends Notification
 
         return (new MailMessage)
             ->subject($subjects[$this->data['type']])
-            ->cc(['admission@furqangroup.com', 'thamer@furqangroup.com', 'wisam.morsi@furqangroup.com'])
+            ->cc(['attendance.permissions@furqancenter.com'])
             ->view($view_name, ['data' => $this->data]);
     }
 

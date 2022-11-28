@@ -89,7 +89,7 @@ Route::group(['prefix' => 'dashboard-teachers', 'as' => 'teachers.', 'middleware
 
     //Attendance Absence
     Route::get('/request-services/attendanceAbsence', 'RequestServiceController@attendanceAbsenceTeachers')->name('request_services.attendanceAbsenceTeachers.create');
-    Route::post('/request-services/attendanceAbsence', 'RequestServiceController@attendanceAbsenceTeachersStore')->name('request_services.attendanceAbsenceTeachers.store');
+//    Route::post('/request-services/attendanceAbsence', 'RequestServiceController@attendanceAbsenceTeachersStore')->name('request_services.attendanceAbsenceTeachers.store');
     Route::get('/request-services/all-attendanceAbsence/', 'RequestServiceController@showAppliedRequests')->name('request_services.attendanceAbsenceTeachers.index');
     Route::get('/request-services/attendanceAbsence/{attendanceAbsenceRequests}', 'RequestServiceController@showSingleAppliedRequest')->name('request_services.attendanceAbsenceTeachers.show');
     Route::get('/request-services/attendanceAbsence/{attendanceAbsenceRequests}/edit', 'RequestServiceController@editAttendanceAbsence')->name('request_services.attendanceAbsenceTeachers.edit');
