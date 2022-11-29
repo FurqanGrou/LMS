@@ -55,7 +55,7 @@
                                                 <td>
                                                     <span class="badge @if($appliedRequest->request_type == 'absence') {{ 'badge-danger' }} @elseif($appliedRequest->request_type == 'delay') {{ 'badge-warning' }} @else {{ 'badge-info' }} @endif">{{ $appliedRequest->type }}</span>
                                                 </td>
-                                                <td>{{ $appliedRequest->created_at->format('Y-m-d (g:i) A') }}</td>
+                                                <td>{{ @$appliedRequest->created_at->format('Y-m-d (g:i) A') }}</td>
                                                 <td>{{ $appliedRequest->date_excuse }}</td>
                                                 <td>{{ @$appliedRequest->classNumber->title }}</td>
                                                 <td>
