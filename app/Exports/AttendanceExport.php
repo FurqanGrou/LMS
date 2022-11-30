@@ -63,7 +63,8 @@ class AttendanceExport implements FromCollection, WithHeadings, WithStyles, Shou
                         END) AS job_title')
             )
             ->leftJoin('admins', 'admins.id', '=', 'attendances.admin_id')
-            ->leftJoin('teachers', 'teachers.id', '=', 'attendances.teacher_id');
+            ->leftJoin('teachers', 'teachers.id', '=', 'attendances.teacher_id')
+            ->whereBetween('attendances.created_at', [$this->date_from, $this->date_to]);
 
         if($this->type != '-1'){
             $attendances->where('type', '=', $this->type);
