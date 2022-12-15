@@ -28,14 +28,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a47350e6-8576-4c66-b281-f87cf7605acb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/API/StudentPlan.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/API/StudentPlan.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/lessons_ayat.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/teachers/reports/monthly_table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2022_10_06_061857_add_monthly_results_columns_to_monthly_scores_table.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -577,7 +570,7 @@
       <workItem from="1670250966764" duration="663000" />
       <workItem from="1670939569674" duration="11566000" />
       <workItem from="1671024101844" duration="18022000" />
-      <workItem from="1671111762122" duration="13318000" />
+      <workItem from="1671111762122" duration="13618000" />
     </task>
     <servers />
   </component>
