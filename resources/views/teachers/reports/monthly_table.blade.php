@@ -376,96 +376,37 @@
                 <td colspan="3" rowspan="7" style="font-size: 14px">
 
                     <form action="">
-                        <div>
-                            <p class="d-block text-center mb-0">الانجاز في نهاية الشهر</p>
+                        <div class="text-center mb-1 mt-1">
+                            <h5>الانجاز المتوقع في نهاية الشهر</h5>
+                            <div>
+                                <p class="mb-0">السورة: <span id="month-plan-lesson">{{ $user_student->planForcasts->first()->month_lesson ?? '-' }}</span></p>
+                                <p class="mb-0">الاية: <span id="month-plan-aya">{{ $user_student->planForcasts->first()->month_aya ?? '-' }}</span></p>
+                            </div>
                         </div>
-                        <fieldset style="width: 50%;margin: auto;">
-                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">سورة:</span>
-                                </div>
 
-                                <select name="" id="lessons-month-data-ajax" class="select2 end-month-results-select2 lessons-data-ajax">
-                                    <option value="{{ $user_student->monthlyScores->first()->final_month_lesson_id ?? '0' }}">{{ $user_student->monthlyScores->first()->finalMonthLesson->name ?? '-' }}</option>
-                                </select>
+                        <div class="text-center mb-1">
+                            <h5>الانجاز المتوقع في نهاية الفصل</h5>
+                            <div>
+                                <p class="mb-0">السورة: <span id="semester-plan-lesson">{{ $user_student->planForcasts->first()->semester_lesson ?? '-' }}</span></p>
+                                <p class="mb-0">الاية: <span id="semester-plan-aya">{{ $user_student->planForcasts->first()->semester_aya ?? '-' }}</span></p>
                             </div>
-                        </fieldset>
-                        <fieldset style="width: 50%;margin: auto;">
-                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">اية:</span>
-                                </div>
-
-                                <select name="" id="ayat-month-result" class="select2 end-month-results-select2">
-                                    <option value="{{ $user_student->monthlyScores->first()->final_month_aya_id ?? '0' }}">{{ $user_student->monthlyScores->first()->final_month_aya_id ?? '-' }}</option>
-                                </select>
-                            </div>
-                        </fieldset>
-
-                        <div>
-                            <p class="d-block text-center mb-0">الانجاز في نهاية الفصل</p>
                         </div>
-                        <fieldset style="width: 50%;margin: auto;">
-                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">سورة:</span>
-                                </div>
 
-                                <select name="" id="lessons-semester-data-ajax" class="select2 end-month-results-select2 lessons-data-ajax">
-                                    <option value="{{ $user_student->monthlyScores->first()->final_semester_lesson_id ?? '0' }}">{{ $user_student->monthlyScores->first()->finalSemesterLesson->name ?? '-' }}</option>
-                                </select>
+                        <div class="text-center mb-1">
+                            <h5>الانجاز المتوقع في نهاية السنة</h5>
+                            <div>
+                                <p class="mb-0">السورة: <span id="year-plan-lesson">{{ $user_student->planForcasts->first()->year_lesson ?? '-' }}</span></p>
+                                <p class="mb-0">الاية: <span id="year-plan-aya">{{ $user_student->planForcasts->first()->year_aya ?? '-' }}</span></p>
                             </div>
-                        </fieldset>
-                        <fieldset style="width: 50%;margin: auto;">
-                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">اية:</span>
-                                </div>
-
-                                <select name="" id="ayat-semester-result" class="select2 end-month-results-select2">
-                                    <option value="{{ $user_student->monthlyScores->first()->final_semester_aya_id ?? '0' }}">{{ $user_student->monthlyScores->first()->final_semester_aya_id ?? '-' }}</option>
-                                </select>
-                            </div>
-                        </fieldset>
-
-                        <div>
-                            <p class="d-block text-center mb-0">الانجاز في نهاية السنة</p>
                         </div>
-                        <fieldset style="width: 50%;margin: auto;">
-                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">سورة:</span>
-                                </div>
 
-                                <select name="" id="lessons-year-data-ajax" class="select2 end-month-results-select2 lessons-data-ajax">
-                                    <option value="{{ $user_student->monthlyScores->first()->final_year_lesson_id ?? '0' }}">{{ $user_student->monthlyScores->first()->finalYearLesson->name ?? '-' }}</option>
-                                </select>
+                        <div class="text-center mb-0">
+                            <h5>موعد حفظ المصحف الشريف</h5>
+                            <div>
+                                <p class="mb-0"><span id="final-plan-date">{{ $user_student->planForcasts->first()->seal_quran_date ?? '-' }}</span></p>
                             </div>
-                        </fieldset>
-                        <fieldset style="width: 50%;margin: auto;">
-                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">اية:</span>
-                                </div>
-
-                                <select name="" id="ayat-year-result" class="select2 end-month-results-select2">
-                                    <option value="{{ $user_student->monthlyScores->first()->final_year_aya_id ?? '0' }}">{{ $user_student->monthlyScores->first()->final_year_aya_id ?? '-' }}</option>
-                                </select>
-                            </div>
-                        </fieldset>
-
-                        <div>
-                            <p class="d-block text-center mb-0">موعد حفظ المصحف الشريف</p>
                         </div>
-                        <fieldset style="width: 50%;margin: auto;">
-                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">تاريخ:</span>
-                                </div>
-                                <input type="date" name="" id="seal_quran_date" value="{{ $user_student->monthlyScores->first()->seal_quran_date ?? '-' }}">
-                            </div>
-                        </fieldset>
-                        <button class="btn btn-primary d-block" id="btn-save-data" style="width: 50%;margin: 5px auto;">حفظ</button>
+
                     </form>
                 </td>
 
@@ -565,9 +506,9 @@
         </table>
     </form>
 
-    <div class="modal fade text-left" id="warning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel12"
+    <div class="modal fade text-left" id="warning" role="dialog" aria-labelledby="myModalLabel12"
          aria-hidden="true">
-        <div class="modal-dialog" role="document" style="max-width: 800px;">
+        <div class="modal-dialog" role="document" style="max-width: 550px;">
             <div class="modal-content">
                 <div class="modal-header bg-warning white">
                     <h4 class="modal-title white" id="myModalLabel12"><i class="la la-calculator"></i> حساب الخطة التقديرية للطلاب</h4>
@@ -575,8 +516,35 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body" style="height: 78vh !important;">
-                    <iframe src="https://docs.google.com/spreadsheets/d/15fpD3QtzGl-FMQSnnaKqbSeLRihieAVSte51TNhGxaQ/edit?usp=sharing" title="حساب الخطة التقديرية للطلاب" style="width: 100%; height: 100%"></iframe>
+                <div class="modal-body d-flex justify-content-center align-items-center flex-column" style="height: 50vh !important;">
+
+                    <form class="w-100">
+                        <fieldset style="width: 50%;margin: auto;">
+                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">سورة:</span>
+                                </div>
+
+                                <select name="" id="lessons-popup-data-ajax" class="select2 end-month-results-select2 lessons-data-ajax">
+                                    <option>-</option>
+                                </select>
+                            </div>
+                        </fieldset>
+                        <fieldset style="width: 50%;margin: auto;">
+                            <div class="input-group" style="flex-wrap: nowrap;width: 100%;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">اية:</span>
+                                </div>
+
+                                <select name="" id="ayat-popup-result" class="select2 end-month-results-select2">
+                                    <option value="0">-</option>
+                                </select>
+                            </div>
+                        </fieldset>
+
+                        <button class="btn btn-primary d-block" id="btn-calc-plan" style="width: 50%;margin: 5px auto;">حساب النتيجة</button>
+                    </form>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">إغلاق</button>
@@ -1221,6 +1189,10 @@
                     dataType: "json",
                     url: "{{ route('api.ayat') }}?lesson_id=" + lesson_id,
                     success: function (data, textStatus, xhr) {
+                        $(add_options_to).empty().trigger("change");
+                        var defaultOption = new Option('-', '-', false, false);
+                        $(add_options_to).append(defaultOption).trigger('change');
+
                         for (let i = 1; i <= data.ayat_count; i++){
 
                             let values = {
@@ -1266,29 +1238,38 @@
                     }
                 }
             });
-
             appendAyatToOptions('#lessons-month-data-ajax', '#ayat-month-result');
             appendAyatToOptions('#lessons-semester-data-ajax', '#ayat-semester-result');
             appendAyatToOptions('#lessons-year-data-ajax', '#ayat-year-result');
 
-            $(document).on('click', '#btn-save-data', function (e){
+            //get ayat based on lesson selected in popuo
+            appendAyatToOptions('#lessons-popup-data-ajax', '#ayat-popup-result');
+
+            $(document).on('click', '#btn-calc-plan', function (e){
                 e.preventDefault();
                 $.ajax({
                     type: "POST",
                     dataType: "json",
-                    url: "{{ route('api.student.plan') }}",
+                    url: "{{ route('api.student.calc') }}",
                     data:{
                         'student_id': '{{ request()->student_id }}',
                         'month_year': '{{ isset(request()->date_filter) ? request()->date_filter : date('Y') . '-' . date('m') }}',
-                        'final_month_lesson_id': $('#lessons-month-data-ajax').val(),
-                        'final_month_aya_id': $('#ayat-month-result').val(),
-                        'final_semester_lesson_id': $('#lessons-semester-data-ajax').val(),
-                        'final_semester_aya_id': $('#ayat-semester-result').val(),
-                        'final_year_lesson_id': $('#lessons-year-data-ajax').val(),
-                        'final_year_aya_id': $('#ayat-year-result').val(),
-                        'seal_quran_date': $('#seal_quran_date').val(),
+                        'lesson_id': $('#lessons-popup-data-ajax').val(),
+                        'aya_num': $('#ayat-popup-result').val(),
                     },
                     success: function (data, textStatus, xhr) {
+                        $('#month-plan-lesson').html(data.month.lesson);
+                        $('#month-plan-aya').html(data.month.aya_num);
+
+                        $('#semester-plan-lesson').html(data.semester.lesson);
+                        $('#semester-plan-aya').html(data.semester.aya_num);
+
+                        $('#year-plan-lesson').html(data.year.lesson);
+                        $('#year-plan-aya').html(data.year.aya_num);
+
+                        $('#final-plan-date').html(data.final_date);
+
+                        $('#warning').modal('hide');
                     },
                 });
             });
