@@ -17,5 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'v1', 'as' => 'api.'], function (){
     Route::get('/get-lessons', 'StudentPlan@lessons')->name('lessons');
     Route::get('/get-ayat', 'StudentPlan@ayat')->name('ayat');
+    Route::post('/calc-student-plan', 'StudentPlan@calc')->name('student.calc');
     Route::post('/save-student-plan', 'StudentPlan@update')->name('student.plan');
 });
