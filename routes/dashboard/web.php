@@ -54,6 +54,8 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
     Route::get('importOnlineStudents', 'ImportExportController@importOnlineStudentsView')->name('import.online_students.view');
     Route::post('importOnlineStudents', 'ImportExportController@importOnlineStudents')->name('import.online_students.store');
 
+        Route::get('importQuranLines', 'ImportExportController@importQuranLines');
+
     // import students face to face
     Route::get('importFaceStudents', 'ImportExportController@importFaceToFaceStudentsView')->name('import.face_students.view');
     Route::post('importFaceStudents', 'ImportExportController@importFaceToFaceStudents')->name('import.face_students.store');

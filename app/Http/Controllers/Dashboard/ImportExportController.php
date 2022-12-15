@@ -10,6 +10,7 @@ use App\Imports\ClassesTeachersImport;
 use App\Imports\LessonImport;
 use App\Imports\LessonsAyatImport;
 use App\Imports\PartImport;
+use App\Imports\QuranLine;
 use App\Jobs\ExportMonthlyScores;
 use App\Report;
 use App\Teacher;
@@ -26,7 +27,7 @@ use Illuminate\Support\Facades\Auth;
 class ImportExportController extends Controller
 {
     public function __construct(){
-//        ini_set('max_execution_time', 600);
+        ini_set('max_execution_time', 800);
 //        ini_set('memory_limit', '60m');
 
 //        ini_set('post_max_size', "516M");
@@ -140,5 +141,10 @@ class ImportExportController extends Controller
         return back()->withSuccess('بدأت عملية إستخراج نتائج التقارير الشهرية بنجاح ستصلك رسالة عبر البريد الالكتروني تحمل رابط التنزيل');
     }
 
+    public function importQuranLines()
+    {
+        Excel::import(new QuranLine(), 'quran_lines.xlsx');
+        return 'Done';
+    }
 
 }

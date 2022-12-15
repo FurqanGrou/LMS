@@ -78,4 +78,15 @@ class User extends Authenticatable implements Auditable
         return $this->hasMany(DropoutStudent::class, 'student_id');
     }
 
+    public function planForcasts()
+    {
+        $month_year = request()->date_filter;
+
+        if(empty($month_year)){
+            $month_year = date('Y') . '-' . date('m');
+        }
+
+        return $this->hasMany(PlanForcast::class, 'user_id')->where('month_year', '=', $month_year);;
+    }
+
 }
