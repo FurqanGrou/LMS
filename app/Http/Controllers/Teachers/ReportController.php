@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Teachers;
 use App\Chapter;
-use App\Classes;
 use App\ClassesTeachers;
 use App\Events\ReportUpdated;
 use App\Http\Controllers\Controller;
@@ -17,7 +16,6 @@ use App\Notifications\userReportMonthlyNotification;
 use App\Report;
 use App\Teacher;
 use App\User;
-use App\Year;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
@@ -98,23 +96,6 @@ class ReportController extends Controller
 
     public function reportTableStore(Request $request)
     {
-
-//        $today = Carbon::today();
-//        $date = Carbon::today()->format('Y-m-d');
-//
-//        $yesterday = Carbon::createFromDate($today->year, $today->month, $today->day)->format('l d-m-Y');
-//        if($date != $request->created_at){
-//            $report = Report::updateOrCreate(
-//                [
-//                    'student_id' => $request->student_id,
-//                    'date'       => $yesterday,
-//                    'created_at' => $date,
-//                ],
-//                [
-//                    'mail_status' => 0,
-//                ]
-//            );
-//        }
 
         if($request->type == 'lessons'){
 
@@ -244,7 +225,6 @@ class ReportController extends Controller
                 );
             }
 
-//            Event::dispatch(new ReportUpdated($report));
         }
 
         return response()->json(['report' => $report], 200);
@@ -456,7 +436,6 @@ class ReportController extends Controller
             $report = $user->monthlyScores()->first();
             $report->update(['mail_status' => '1']);
         }catch(\Exception $e){
-            dd($e);
             session()->flash('error', 'فشلت عملية ارسال التقرير الشهري!');
             return redirect()->route('teachers.report.table', $request->student_id);
         }
@@ -624,7 +603,7 @@ class ReportController extends Controller
                 'student_info' => $student,
             ];
             Mail::to($to_mails)
-                ->bcc(['lmsfurqan1@gmail.com'])
+//                ->bcc(['lmsfurqan1@gmail.com'])
                 ->send(new ReportMail($details));
 
             if(empty(Mail::failures())) {
@@ -679,7 +658,7 @@ class ReportController extends Controller
             ]);
 
         Mail::to($to_mails)
-            ->bcc(['lmsfurqan1@gmail.com'])
+//            ->bcc(['lmsfurqan1@gmail.com'])
             ->send(new ReportMail($details, $pdf));
 
         if(empty(Mail::failures())) {
