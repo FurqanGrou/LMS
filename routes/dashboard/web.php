@@ -155,7 +155,6 @@ Route::get('clear-cache', function (){
 });
 
 Route::get('test-code', function (){
-
-    dd(getStartTimePeriod('2022-08-18T16:17:22.000+03:00'));
+    return getAppropriateToday();
 });
 
