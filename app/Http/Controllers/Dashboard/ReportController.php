@@ -238,13 +238,13 @@ class ReportController extends Controller
         }
 
         if (!isset($request->study_type)){
-            $request->study_type = 2;
+            $request->study_type = 3;
         }
 
-        $title = 'التقارير اليومية للطلاب';
+        $title = 'التقارير اليومية لجميع الطلاب';
         switch ($request->study_type){
             case 2:
-                $title = 'التقارير اليومية لجميع الطلاب';
+                $title = 'التقارير اليومية لطلاب فرع مصر';
                 break;
             case 1:
                 $title = 'التقارير اليومية لطلاب الحضوري';

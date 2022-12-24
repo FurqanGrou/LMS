@@ -1009,7 +1009,7 @@ function checkAbleToUpdateMonthlyScores($report)
             return true;
         }
 
-        return false;
+        return false; //temp
     }
 
     return true;

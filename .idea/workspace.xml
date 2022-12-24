@@ -29,7 +29,35 @@
   <component name="ChangeListManager">
     <list default="true" id="a47350e6-8576-4c66-b281-f87cf7605acb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Teachers/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Teachers/ReportController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DataTables/AbsenceDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/AbsenceDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DataTables/ClassStudentsDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/ClassStudentsDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DataTables/ClassesDataTable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/ClassesDataTable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DataTables/UserDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DataTables/UserDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/MonthlyScoresExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/MonthlyScoresExport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/ReportsExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/ReportsExport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/helpers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/AdminLoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/AdminLoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/TeacherLoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/TeacherLoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ClassesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ClassesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/HolidayController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/HolidayController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ReportController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/admins/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/admins/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/admins/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/admins/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/admins/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/admins/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/import_export/export_reports.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/import_export/export_reports.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/import_export/import_face_to_face_students.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/import_export/import_online_students.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/import_export/import_students.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome/face_to_face_welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome/face_to_face_welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome/online_welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome/online_welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/teachers/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/teachers/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +220,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admins/audits" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/auth/admins" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -206,11 +234,11 @@
       <recent name="B:\LMS\lms_hatim\resources\views\admins\students\btn" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\auth\admins" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\welcome" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\auth\teachers" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\audits" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\import_export" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\form_embeddes" />
-      <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Dashboard" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\teachers\form-embedded" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.ExamRequestController.php">
@@ -576,7 +604,10 @@
       <workItem from="1671261323741" duration="667000" />
       <workItem from="1671464541143" duration="608000" />
       <workItem from="1671465335619" duration="67000" />
-      <workItem from="1671470689444" duration="3019000" />
+      <workItem from="1671470689444" duration="4820000" />
+      <workItem from="1671631575176" duration="43000" />
+      <workItem from="1671704562579" duration="3651000" />
+      <workItem from="1671885345767" duration="15981000" />
     </task>
     <servers />
   </component>
@@ -608,9 +639,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1671115430116" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1671476435518">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1671914943889">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1671476435518" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1671914943889" />
   </component>
 </project>

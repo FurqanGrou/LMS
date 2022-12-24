@@ -7,13 +7,13 @@
     @include('admins.partials.errors')
     @include('admins.partials.success')
 
-    <form class="form" method="POST" action="{{ route('admins.import.online_students.store') }}" enctype="multipart/form-data">
+    <form class="form" method="POST" action="{{ route('admins.import.students.store') }}" enctype="multipart/form-data">
 
         @csrf
         @method('POST')
 
         <div class="form-body">
-            <h4 class="form-section"><i class="ft-globe"></i> ادخال وتحديث بيانات طلاب - <span class="badge-warning badge">الاونلاين</span></h4>
+            <h4 class="form-section"><i class="ft-globe"></i> ادخال وتحديث بيانات الطلاب</h4>
             <div class="row">
 
                 {{--Disable Teachers Login--}}
@@ -41,6 +41,22 @@
                     </div>
                 </div>
 
+                @if(auth()->user()->user_type == 'super_admin')
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">نوع الطلاب</span>
+                            </div>
+                            <select name="study_type" id="" class="form-control">
+                                <option value="3">الكل</option>
+                                <option value="2">مصر</option>
+                                <option value="1">حضوري</option>
+                                <option value="0">اونلاين</option>
+                            </select>
+                        </div>
+                    </div>
+                @endif
+
                 {{--Upload File--}}
                 <div class="col-6 col-md-4">
                     <div class="card crypto-card-3 pull-up">
@@ -49,7 +65,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <input type="file" name="file" class="form-control">
+                                        <input type="file" name="file" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -57,6 +73,7 @@
                         </div>
                     </div>
                 </div>
+
 
                 </div>
             </div>
