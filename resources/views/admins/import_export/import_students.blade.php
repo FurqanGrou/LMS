@@ -16,6 +16,21 @@
             <h4 class="form-section"><i class="ft-globe"></i> ادخال وتحديث بيانات الطلاب</h4>
             <div class="row">
 
+                @if(auth()->user()->user_type == 'super_admin')
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">نوع الطلاب</span>
+                            </div>
+                            <select name="study_type" class="form-control" required>
+                                <option value="2">مصر</option>
+                                <option value="1">حضوري</option>
+                                <option value="0">اونلاين</option>
+                            </select>
+                        </div>
+                    </div>
+                @endif
+
                 {{--Disable Teachers Login--}}
                 <div class="col-6 col-md-4">
                     <div class="card crypto-card-3 pull-up">
@@ -40,22 +55,6 @@
                         </div>
                     </div>
                 </div>
-
-                @if(auth()->user()->user_type == 'super_admin')
-                    <div class="col-3">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">نوع الطلاب</span>
-                            </div>
-                            <select name="study_type" id="" class="form-control">
-                                <option value="3">الكل</option>
-                                <option value="2">مصر</option>
-                                <option value="1">حضوري</option>
-                                <option value="0">اونلاين</option>
-                            </select>
-                        </div>
-                    </div>
-                @endif
 
                 {{--Upload File--}}
                 <div class="col-6 col-md-4">
