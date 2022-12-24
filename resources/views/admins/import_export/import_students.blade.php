@@ -23,6 +23,7 @@
                                 <span class="input-group-text" id="basic-addon1">نوع الطلاب</span>
                             </div>
                             <select name="study_type" class="form-control" required>
+                                <option disabled>اختر من القائمة</option>
                                 <option value="2">مصر</option>
                                 <option value="1">حضوري</option>
                                 <option value="0">اونلاين</option>
