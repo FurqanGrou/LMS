@@ -14,7 +14,6 @@ class HolidayController extends Controller
 {
     public function index()
     {
-
         $students = Cache::remember('students.holidays',60 * 60 * 24, function(){
             return User::query()->whereNotNull('class_number')->orderBy('student_number', 'ASC')->get();
         });
@@ -24,7 +23,6 @@ class HolidayController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
            'date_from' => 'required|date',
            'date_to'   => 'required|date',

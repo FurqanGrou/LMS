@@ -36,24 +36,34 @@ class ImportExportController extends Controller
     }
 
     //    ==============================================
-    public function importFaceToFaceStudentsView()
+    public function importStudentsView()
     {
         $teachers_status= Teacher::query()->orderBy('updated_at', 'DESC')->first()->status;
 
-        return view('admins.import_export.import_face_to_face_students', compact('teachers_status'));
-    }
-    public function importOnlineStudentsView()
-    {
-        $teachers_status= Teacher::query()->orderBy('updated_at', 'DESC')->first()->status;
-
-        return view('admins.import_export.import_online_students', compact('teachers_status'));
+        return view('admins.import_export.import_students', compact('teachers_status'));
     }
 
-    public function importFaceToFaceStudents()
+    public function importStudents(Request $request)
     {
-        $study_type = '1'; // 0 is online, 1 is face to face
+        $request->validate([
+            'file' => 'required|file',
+        ]);
 
-        Excel::import(new UsersImport($study_type), request()->file('file'));
+        $user_type = auth()->user()->user_type;
+
+        if ($user_type == 'super_admin'){
+            $request->validate([
+                'study_type' => 'required|in:0,1,2',
+            ]);
+        }elseif($user_type == 'furqan_group'){
+            $request['study_type'] = 0;
+        }elseif($user_type == 'iksab'){
+            $request['study_type'] = 1;
+        }elseif($user_type == 'egypt'){
+            $request['study_type'] = 2;
+        }
+
+        Excel::import(new UsersImport($request->study_type), request()->file('file'));
 
         // update student class number in reports table
 //        $students = User::query()->get();
@@ -63,17 +73,6 @@ class ImportExportController extends Controller
 //                    ->update(['class_number' => $student->class_number]);
 //            }
 //        }
-
-        Teacher::query()->update(['status' => 1]);
-        Artisan::call('cache:clear');
-
-        return redirect()->back()->with('success', 'تم تحديث بيانات الطلاب بنجاح');
-    }
-    public function importOnlineStudents()
-    {
-        $study_type = '0'; // 0 is online, 1 is face to face
-
-        Excel::import(new UsersImport($study_type), request()->file('file'));
 
         Teacher::query()->update(['status' => 1]);
         Artisan::call('cache:clear');
