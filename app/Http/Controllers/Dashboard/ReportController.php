@@ -241,6 +241,8 @@ class ReportController extends Controller
             $request->study_type = 3;
         }
 
+        return $request->study_type;
+        
         $title = 'التقارير اليومية لجميع الطلاب';
         switch ($request->study_type){
             case 2:
