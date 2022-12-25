@@ -237,21 +237,20 @@ class ReportController extends Controller
             $request->mail_status = 2;
         }
 
-        if (!isset($request->study_type)){
-            $request->study_type = 3;
+        $user_type = auth()->user()->user_type;
+        if ($user_type == 'super_admin' && !isset($request->study_type)){
+            $request['study_type'] = 3;
         }
 
-        $title = 'التقارير اليومية لجميع الطلاب';
-        switch ($request->study_type){
-            case 2:
-                $title = 'التقارير اليومية لطلاب فرع مصر';
-                break;
-            case 1:
-                $title = 'التقارير اليومية لطلاب الحضوري';
-                break;
-            case 0:
-                $title = 'التقارير اليومية لطلاب الاونلاين';
-                break;
+        //study_type (0 => furqan_group, 1 => iksab, 2 => egypt)
+        if ($user_type == 'furqan_group'){
+            $title = 'التقارير اليومية لطلاب الاونلاين';
+        }elseif($user_type == 'iksab'){
+            $title = 'التقارير اليومية لطلاب الحضوري';
+        }elseif($user_type == 'egypt'){
+            $title = 'التقارير اليومية لطلاب فرع مصر';
+        }else{
+            $title = 'التقارير اليومية للطلاب';
         }
 
         return Excel::download(new ReportsExport($request->date_from, $request->date_to, $request->mail_status, $request->study_type), $title . '.xlsx');
