@@ -3,13 +3,8 @@
 namespace App\DataTables;
 
 use App\User;
-use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\ButtonsServiceProvider;
 
 class UserDatatable extends DataTable
 {
@@ -42,8 +37,16 @@ class UserDatatable extends DataTable
 
         $students = User::query();
 
-        if(!isHasUserType('super_admin')){
-            $students = $students->where('study_type', '=', getUserType() == 'iksab' ? 1 : 0 );
+        if(isHasUserType('furqan_group')){
+            return $students->where('study_type', '=', '0');
+        }
+
+        if(isHasUserType('iksab')){
+            return $students->where('study_type', '=', '1');
+        }
+
+        if(isHasUserType('egypt')){
+            return $students->where('study_type', '=', '2');
         }
 
 //        $classes = Classes::join('classes_teachers', 'classes.class_number', '=', 'classes_teachers.class_number')

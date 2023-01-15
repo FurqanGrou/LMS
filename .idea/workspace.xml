@@ -196,7 +196,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admins/audits" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/auth/admins" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -210,11 +210,11 @@
       <recent name="B:\LMS\lms_hatim\resources\views\admins\students\btn" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\auth\admins" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\welcome" />
+      <recent name="B:\Furqan Group\lms_hatim\resources\views\auth\teachers" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\audits" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\import_export" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\form_embeddes" />
-      <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Dashboard" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\teachers\form-embedded" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Script.ExamRequestController.php">
