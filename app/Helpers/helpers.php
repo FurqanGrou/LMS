@@ -1179,3 +1179,29 @@ function getAttendancePeriod($login_btn, $time)
 
     return $period;
 }
+
+function getStudentTime($time, $type)
+{
+    //09:35PM-10:10PM
+    $time = preg_replace("/\s+/", "", $time);
+
+    $login_hour = substr($time, 0, 2);
+    $login_minutes = substr($time, 3, 2);
+    $login_period = substr($time, 5, 2);
+
+    $exit_hour = substr($time, 8, 2);
+    $exit_minutes = substr($time, 11, 2);
+    $exit_period = substr($time, 13, 2);
+
+    if ($type == 'login'){
+        if ($login_period == 'PM')
+            return ($login_hour+12) . ":" . $login_minutes;
+
+        return ($login_hour) . ":" . $login_minutes;
+    }
+
+    if ($exit_period == 'PM')
+        return ($exit_hour+12) . ":" . $exit_minutes;
+
+    return ($exit_hour) . ":" . $exit_minutes;
+}

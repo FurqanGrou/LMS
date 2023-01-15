@@ -81,15 +81,15 @@
         #daily_revision,
         #new_lesson + .select2 .select2-selection,
         #daily_revision + .select2 .select2-selection {
-            max-width: 160px !important;
-            max-height: 45px !important;
-            height: 45px !important;
+            /*max-width: 160px !important;*/
+            /*max-height: 45px !important;*/
+            /*height: 45px !important;*/
         }
 
         #new_lesson + .select2 .select2-selection--single,
         #daily_revision + .select2 .select2-selection--single {
-            min-width: 160px !important;
-            max-width: 160px !important;
+            min-width: 100% !important;
+            max-width: 100% !important;
             max-height: 45px !important;
             height: 45px !important;
             display: flex;
@@ -98,10 +98,16 @@
             align-items: center;
         }
 
+        #new_lesson + .select2.select2-container,
+        #daily_revision + .select2.select2-container,
+        select[name="notes_to_parent[]"] + .select2.select2-container {
+            width: 100% !important;
+        }
+
         select[name="notes_to_parent[]"] + .select2 .select2-selection--single,
         select[name="listener_name[]"] + .select2 .select2-selection--single {
-            min-width: 140px !important;
-            max-width: 140px !important;
+            min-width: 100% !important;
+            max-width: 100% !important;
             max-height: 45px !important;
             height: 45px !important;
             display: flex;
@@ -112,7 +118,7 @@
 
         select[name="notes_to_parent[]"] + .select2 .select2-selection,
         select[name="listener_name[]"] + .select2 .select2-selection {
-            max-width: 140px !important;
+            max-width: 100% !important;
             max-height: 45px !important;
             height: 45px !important;
         }
@@ -133,6 +139,102 @@
             text-align: center !important;
         }
 
+        #new_lesson + .select2.select2-container{
+            width: 100% !important;
+        }
+
+        /*----------------*/
+        .switches {
+            padding: 0 !important;
+            margin: 0 !important;
+            display: flex;
+            justify-content: center;
+        }
+
+        .switches li {
+            position: relative;
+            counter-increment: switchCounter;
+        }
+
+        .switches li:not(:last-child) {
+            border-bottom: 1px solid #434257;
+        }
+
+        .switches li::before {
+            /*content: counter(switchCounter);*/
+            position: absolute;
+            top: 50%;
+            left: -30px;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff4b77;
+        }
+
+        .switches label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0;
+            padding: 0;
+            width: 35px;
+        }
+
+        .switches span:last-child {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            border-radius: 15px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+            background: #fe5268;
+            transition: all 0.3s;
+        }
+
+        .switches span:last-child::before,
+        .switches span:last-child::after {
+            content: "";
+            position: absolute;
+        }
+
+        .switches span:last-child::before {
+            display: none;
+        }
+
+        .switches span:last-child::after {
+            top: 50%;
+            right: 11px;
+            width: 12px;
+            height: 12px;
+            transform: translateY(-50%);
+            background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/uncheck-switcher.svg);
+            background-size: 12px 12px;
+        }
+
+        .switches [type="checkbox"] {
+            display: none;
+        }
+
+        .switches [type="checkbox"]:checked + label
+        span:last-child {
+            background: #00d084;
+        }
+
+        .switches [type="checkbox"]:checked + label
+        span:last-child::before {
+            transform: translateX(24px);
+        }
+
+        .switches [type="checkbox"]:checked + label
+        span:last-child::after {
+            width: 38px;
+            height: 23px;
+            right: auto;
+            left: 8px;
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/checkmark-switcher.svg);
+            background-size: 17px 22px;
+            background-repeat: no-repeat;
+        }
+    /*------------------------------------*/
     </style>
 
     <table style="width: 100%; border: none;font-family: arial, sans-serif;">
@@ -218,22 +320,26 @@
                 <tr style="border: none; display: flex;align-items: flex-start;" id="lessons-tables">
 
                     {{-- Lessons--}}
-                    <td style="border: none; width: 70%">
+                    <td style="border: none; width: 84%">
                         <table style="width: 98%;" id="lessons">
 
                             <tr style="min-height: 45px;height: 45px;max-height: 45px;background: #C6E0B4;font-weight: bold">
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold" >التاريخ</th>
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold">اليوم</th>
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 120px">الدرس الجديد</th>
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">من</th>
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">إلى</th>
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 50px;">اخر 5 صفحات</th>
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 120px;">المراجعة اليومية</th>
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">من</th>
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">إلى</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 40px;" >التاريخ</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 40px;">اليوم</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 40px">الجلسة</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 40px">الكاميرا</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 30px">دخول</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 40px">خروج</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 100px">الدرس الجديد</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 40px;">من</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 40px;">إلى</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 20px;white-space: pre-wrap;">اخر 5 صفحات</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 100px;">المراجعة اليومية</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 40px;">من</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 40px;">إلى</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">خطأ</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 35px;">تنبيه</th>
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 40px;">عدد الصفحات</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold;width: 25px;white-space: pre-wrap;">عدد الصفحات</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align: center;font-weight: bold; width: 20px">اسم المستمع</th>
                             </tr>
 
@@ -241,7 +347,36 @@
                                 <tr style="min-height: 45px;height: 45px;max-height: 45px;" class="{{ str_contains(\Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l') ,'Friday') ? 'custom-border' : ''  }} {{ getCurrentDayClass($now, $day) . ' ' .getTodayMailStatusClass($now, $day, request()->student_id) }}">
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;padding-left: 5px;padding-right: 5px;font-weight: bold">{{ $day }}</td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;padding-left: 5px;padding-right: 5px;background: #C6E0B4;font-weight: bold;font-size: 12px;color: black;" class="day-name {{ getCurrentDayClass($now, $day) }}">{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->translatedFormat('l') }}</td>
-                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;width: 120px">
+
+                                    {{-- start new columns--}}
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 40px;">
+                                        <ol class="switches">
+                                            <li>
+                                                <input style="width: 100%;" id="sitting_status{{ $day }}" type="checkbox" checked name="sitting_status[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($now, $day) }} checkbox-icon">
+                                                <label for="sitting_status{{ $day }}">
+                                                    <span></span>
+                                                </label>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 40px;">
+                                        <ol class="switches">
+                                            <li>
+                                                <input style="width: 100%;" id="camera_status{{ $day }}"  type="checkbox" checked name="camera_status[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($now, $day) }} checkbox-icon">
+                                                <label for="camera_status{{ $day }}">
+                                                    <span></span>
+                                                </label>
+                                            </li>
+                                        </ol>
+                                    </td>
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 40px;">
+                                        <input style="width: 100%;" type="time" name="entry_time[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($now, $day) }}">
+                                    </td>
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 30px;">
+                                        <input style="width: 100%;" type="time" name="exit_time[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($now, $day) }}">
+                                    </td>
+                                    {{-- end new columns--}}
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;width: 100px">
                                         <input type="hidden" name="date" {{ disableRecord($now, $day) }} value="{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l d-m-Y') }}">
                                         <input type="hidden" name="created_at" {{ disableRecord($now, $day) }} value="{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('Y-m-d') }}">
 
@@ -269,30 +404,23 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 30px;">
                                         <input style="width: 100%;" type="text" name="daily_revision_from[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
                                     </td>
-                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 30px;">
                                         <input style="width: 100%;" type="text" name="daily_revision_to[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
                                     </td>
-                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 25px;">
                                         <input style="width: 100%;" type="text" name="mistake[]" value="" title="" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($now, $day) }}">
                                     </td>
-                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 25px;">
                                         <input style="width: 100%;" type="text" name="alert[]" value="" title="" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($now, $day) }}">
                                     </td>
-                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 25px;">
                                         <input style="width: 100%;" type="text" name="number_pages[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
                                         <input style="width: 100%;" type="text" name="listener_name[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
-
-{{--                                        <select name="listener_name[]" {{ disableRecord($now, $day) }} id="listener_name" class="{{ getCurrentDayClass($now, $day) }} select2 js-select2-listener-name-tags" style="width: 100%;height: 100%">--}}
-{{--                                            <option value=""></option>--}}
-{{--                                            @foreach($listener_names as $listener_name)--}}
-{{--                                                <option value="{{ $listener_name }}">{{ $listener_name }}</option>--}}
-{{--                                            @endforeach--}}
-{{--                                        </select>--}}
                                     </td>
                                 </tr>
                                 @endfor
@@ -302,15 +430,15 @@
                     </td>
 
                     {{-- Grades--}}
-                    <td style="border: none; width: 30%">
+                    <td style="border: none; width: 14%">
                         <table style="width: 100%;" id="grades">
 
                             <tr style="min-height: 45px;height: 45px;max-height: 45px; background: #C6E0B4; font-weight: bold">
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold;width: 60px;">الدرس</th>
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold">اخر 5 صفحات</th>
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold">المراجعة اليومية</th>
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold">السلوك والأخرى</th>
-                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold">المجموع</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold; width: 50px;">الدرس</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold; width: 50px; white-space: pre-wrap;">اخر 5 صفحات</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold; white-space: pre-wrap;">المراجعة اليومية</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold; white-space: pre-wrap;">السلوك والأخرى</th>
+                                <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold; width: 50px;">المجموع</th>
                                 <th style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-weight: bold;">ملاحظات المعلم لولي الأمر</th>
                             </tr>
 
@@ -322,13 +450,13 @@
                                         <input type="hidden" name="created_at" {{ disableRecord($now, $day) }} value="{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('Y-m-d') }}">
                                         <input style="width: 100%;" type="text" name="lesson_grade[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
                                     </td>
-                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; max-width: 50px">
                                         <input style="width: 100%;" type="text" name="last_5_pages_grade[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
                                     </td>
-                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; max-width: 50px">
                                         <input style="width: 100%;" type="text" name="daily_revision_grade[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
                                     </td>
-                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; max-width: 50px">
                                         <input style="width: 100%;" type="text" name="behavior_grade[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;" class="{{ getCurrentDayClass($now, $day) }}">
@@ -686,18 +814,38 @@
                 current_row.find('input[name="mistake[]"]').attr('title', '{{ $report->mistake }}');
                 current_row.find('input[name="alert[]"]').val('{{ $report->alert }}');
                 current_row.find('input[name="alert[]"]').attr('title', '{{ $report->alert }}');
+
                 current_row.find('input[name="number_pages[]"]').val('{{ $report->number_pages }}');
                 current_row.find('input[name="number_pages[]"]').attr('title', '{{ $report->number_pages }}');
 
+                current_row.find('input[name="entry_time[]"]').val('{{ $report->entry_time }}');
+                current_row.find('input[name="entry_time[]"]').attr('title', '{{ $report->entry_time }}');
+
+                current_row.find('input[name="exit_time[]"]').val('{{ $report->exit_time }}');
+                current_row.find('input[name="exit_time[]"]').attr('title', '{{ $report->exit_time }}');
+
+                @if(!$report->sitting_status)
+                    current_row.find('input[name="sitting_status[]"]').attr('checked', false).triggerHandler('click');
+                @endif
+
+                @if(!$report->camera_status)
+                    current_row.find('input[name="camera_status[]"]').attr('checked', false).triggerHandler('click');
+                @endif
+
+                @if($report->entry_time)
+                    current_row.find('input[name="entry_time[]"]').val('{{ $report->entry_time }}');
+                @else
+                    current_row.find('input[name="entry_time[]"]').val('{{ $report->student->login_time }}');
+                @endif
+
+                @if($report->exit_time)
+                    current_row.find('input[name="exit_time[]"]').val('{{ $report->exit_time }}');
+                @else
+                    current_row.find('input[name="exit_time[]"]').val('{{ $report->student->exit_time }}');
+                @endif
+
                 current_row.find('input[name="listener_name[]"]').val('{{ $report->listener_name }}');
                 current_row.find('input[name="listener_name[]"]').attr('title', '{{ $report->listener_name }}');
-
-                {{--var listener_name_data = {--}}
-                {{--    id: '{{ stripslashes($report->listener_name) }}',--}}
-                {{--    text: '{{ stripslashes($report->listener_name) }}',--}}
-                {{--};--}}
-                {{--var newOptionListenerMame = new Option(listener_name_data.text, listener_name_data.id, true, true);--}}
-                {{--current_row.find('.js-select2-listener-name-tags').prepend(newOptionListenerMame).trigger('change');--}}
 
                 current_row.find('input[name="lesson_grade[]"]').val('{{ $report->lesson_grade }}');
                 current_row.find('input[name="lesson_grade[]"]').attr('title', '{{ $report->lesson_grade }}');
@@ -765,7 +913,10 @@
                         mistake = current_row.find('input[name="mistake[]"]').val(),
                         alert = current_row.find('input[name="alert[]"]').val(),
                         number_pages = current_row.find('input[name="number_pages[]"]').val(),
-                        // listener_name = current_row.find('select[name="listener_name[]"]').val();
+                        entry_time = current_row.find('input[name="entry_time[]"]').val(),
+                        exit_time = current_row.find('input[name="exit_time[]"]').val(),
+                        sitting_status = current_row.find('input[name="sitting_status[]"]').prop('checked'),
+                        camera_status = current_row.find('input[name="camera_status[]"]').prop('checked'),
                         listener_name = current_row.find('input[name="listener_name[]"]').val();
 
                     current_row.find('input[name="new_lesson_from[]"]').attr('title', new_lesson_from);
@@ -776,8 +927,9 @@
                     current_row.find('input[name="daily_revision_to[]"]').attr('title', daily_revision_to);
                     current_row.find('input[name="mistake[]"]').attr('title', mistake);
                     current_row.find('input[name="alert[]"]').attr('title', alert);
+                    current_row.find('input[name="entry_time[]"]').attr('title', entry_time);
+                    current_row.find('input[name="exit_time[]"]').attr('title', exit_time);
                     current_row.find('input[name="number_pages[]"]').attr('title', number_pages);
-                    // current_row.find('input[select="listener_name[]"]').attr('title', listener_name);
                     current_row.find('input[name="listener_name[]"]').attr('title', listener_name);
 
                     $.ajax({
@@ -798,6 +950,10 @@
                             'mistake': mistake,
                             'alert': alert,
                             'number_pages': number_pages,
+                            'entry_time': entry_time,
+                            'exit_time': exit_time,
+                            'sitting_status': sitting_status,
+                            'camera_status': camera_status,
                             'listener_name': listener_name,
                         },
                         success: function (data) {
@@ -817,7 +973,6 @@
                         daily_revision_grade = current_row.find('input[name="daily_revision_grade[]"]').val(),
                         behavior_grade = current_row.find('input[name="behavior_grade[]"]').val(),
                         notes_to_parent = current_row.find('select[name="notes_to_parent[]"]').val();
-                    let input_field = $(this);
 
                     $.ajax({
                         type: "POST",
@@ -836,14 +991,6 @@
                         success: function (data, textStatus, xhr) {
 
                         },
-                        // error: function(jqXHR, textStatus, errorThrown) {
-                        //     if(jqXHR.status == 400){
-                        //         alert(jqXHR.responseJSON.error);
-                        //         input_field.val('');
-                        //         input_field.change();
-                        //         input_field.focus();
-                        //     }
-                        // }
                     });
 
                     let grades = [
@@ -994,7 +1141,9 @@
                         daily_revision = lesson_row.find('select[name="daily_revision[]"] + .select2 #select2-daily_revision-container').attr('title'),
                         daily_revision_from = lesson_row.find('input[name="daily_revision_from[]"]').val(),
                         daily_revision_to   = lesson_row.find('input[name="daily_revision_to[]"]').val(),
-                        number_pages = lesson_row.find('input[name="number_pages[]"]').val();
+                        number_pages = lesson_row.find('input[name="number_pages[]"]').val(),
+                        exit_time = lesson_row.find('input[name="exit_time[]"]').val(),
+                        entry_time = lesson_row.find('input[name="entry_time[]"]').val();
 
                     let next_lesson_row = lesson_row.next(),
                         next_row_status = next_lesson_row.find('input[name="new_lesson_from[]"]').is(':disabled');
@@ -1014,6 +1163,8 @@
                     next_lesson_row.find('input[name="daily_revision_from[]"]').val(daily_revision_from);
                     next_lesson_row.find('input[name="daily_revision_to[]"]').val(daily_revision_to);
                     next_lesson_row.find('input[name="number_pages[]"]').val(number_pages);
+                    next_lesson_row.find('input[name="exit_time[]"]').val(exit_time);
+                    next_lesson_row.find('input[name="entry_time[]"]').val(entry_time);
 
                     var data_revision = {
                         id: daily_revision,
