@@ -22,6 +22,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
     {
         $this->study_type = $study_type;
     }
+
     /**
      * @param array $row
      *

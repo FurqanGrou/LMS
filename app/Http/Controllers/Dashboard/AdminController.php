@@ -36,18 +36,18 @@ class AdminController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $rule = [
             'name' => 'required|string',
-            'email' => 'required|email|unique:admins,email',
+            'email' => 'required|email|unique:admins',
             'password' => 'required|min:6',
-            'employee_number' => 'required|unique:admins,employee_number',
-            'last_4_id' => 'required|digits:4|unique:admins,last_4_id',
-            'section'   => 'required|in:male,female',
-            'user_type'   => isHasUserType('super_admin') ? 'required|string|in:super_admin,furqan_group,iksab,egypt' : 'sometimes|string',
+            'employee_number' => 'required|unique:admins',
+            'last_4_id' => 'required|unique:admins',
+            'section'   => 'required',
+            'user_type'   => isHasUserType('super_admin') ? 'required|string|not_in:select' : 'sometimes|string',
         ];
 
         $messages = [
@@ -60,32 +60,44 @@ class AdminController extends Controller
             'password.min' => 'يجب أن تكون كلمة المرور 6 حروف على الأقل ',
             'employee_number.required' => 'يجب التأكد من إدخال رقم الموظف',
             'employee_number.unique' => 'رقم الموظف المدخل مستخدم مسبقا',
-            'last_4_id.required' => 'يجب التأكد من إدخال أخر 4 ارقام من الهوية',
-            'last_4_id.digits' => 'رقم الهوية المدخل غير صالح',
-            'last_4_id.unique' => 'رقم الهوية المدخل مستخدم مسبقا',
+            'last_4_id.unique' => 'يجب التأكد من إدخال أخر 4 ارقام من الهوية',
+            'last_4_id.required' => 'رقم الهوية المدخل مستخدم مسبقا',
             'section.required' => 'يجب التأكد من إدخال القسم',
-            'section.in' => 'يجب التأكد من إدخال القسم',
             'user_type.required' => 'يجب التأكد من اختيار المؤسسة المناسبة',
-            'user_type.in' => 'يجب التأكد من اختيار المؤسسة المناسبة',
+            'user_type.not_in' => 'يجب التأكد من اختيار المؤسسة المناسبة',
         ];
 
         $adminData = $this->validate($request, $rule, $messages);
 
         $adminData['password'] = bcrypt($request->password);
-        $adminData['user_type'] = isHasUserType('super_admin') ? $request->user_type : auth()->user()->user_type;
+
+        if (!isHasUserType('super_admin')){
+            $adminData['user_type'] = getUserType();
+        }
 
         Admin::create($adminData);
 
-        session()->flash('success', 'تمت الاضافة بنجاح');
+        session()->flash('success', 'تمت الأضافة بنجاح');
 
-        return redirect()->route('admins.admins.index');
+        return redirect(route('admins.admins.index'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
     public function edit(Admin $admin)
     {
@@ -97,18 +109,15 @@ class AdminController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Admin $admin)
     {
         $rule = [
             'name'     => 'required|string',
             'email'    => 'required|email|unique:admins,email,' . $admin->id,
-            'employee_number' => 'required|unique:admins,employee_number,' . $admin->id,
-            'last_4_id' => 'required|digits:4|unique:admins,last_4_id,' . $admin->id,
             'password' => 'sometimes|nullable|min:6',
-            'section'   => 'required|in:male,female',
-            'user_type'   => isHasUserType('super_admin') ? 'required|string|in:super_admin,furqan_group,iksab,egypt' : 'sometimes|string',
+            'user_type'   => isHasUserType('super_admin') ? 'required|string|not_in:select' : 'sometimes|string',
         ];
 
         $messages = [
@@ -116,18 +125,11 @@ class AdminController extends Controller
             'name.string'    => 'يجب التأكد من إدخال الأسم بالكامل بشكل صحيح',
             'email.required' => 'يجب التأكد من إدخال البريد الإلكتروني',
             'email.email'    => 'يجب التأكد من إدخال البريد الإلكتروني',
-            'email.unique'   => 'البريد الإلكتروني المدخل مستخدم مسبقاً لموظف آخر',
+            'email.unique'   => 'البريد الإلكتروني المدخل مستخدم مسبقا',
             'password.required' => 'يجب التأكد من إدخال كلمة المرور',
             'password.min'      => 'يجب أن تكون كلمة المرور 6 حروف على الأقل ',
-            'employee_number.required' => 'يجب التأكد من إدخال رقم الموظف',
-            'employee_number.unique' => 'رقم الموظف المدخل مستخدم مسبقاَ لموظف آخر',
-            'last_4_id.unique' => 'أخر 4 ارقام من الهوية مدخلة هي مستخدمة بالفعل لموظف آخر',
-            'last_4_id.required' => 'يجب التأكد من إدخال أخر 4 ارقام من الهوية',
-            'last_4_id.digits' => 'رقم الهوية المدخل غير صالح',
-            'section.required' => 'يجب التأكد من إدخال القسم',
-            'section.in' => 'يجب التأكد من إدخال القسم',
             'user_type.required' => 'يجب التأكد من اختيار المؤسسة المناسبة',
-            'user_type.in' => 'يجب التأكد من اختيار المؤسسة المناسبة',
+            'user_type.not_in' => 'يجب التأكد من اختيار المؤسسة المناسبة',
         ];
 
         $adminData = $this->validate($request, $rule, $messages);
@@ -137,9 +139,6 @@ class AdminController extends Controller
             $admin->update($adminData);
         }else{
             $admin->update([
-                'employee_number'  => $adminData['employee_number'],
-                'section'  => $adminData['section'],
-                'last_4_id'  => $adminData['last_4_id'],
                 'name'  => $adminData['name'],
                 'email' => $adminData['email'],
                 'user_type' => isHasUserType('super_admin') ? $adminData['user_type'] : $admin->user_type,
@@ -148,19 +147,19 @@ class AdminController extends Controller
 
         session()->flash('success', 'تم تحديث البيانات بنجاح');
 
-        return redirect()->route('admins.admins.edit', $admin->id);
+        return redirect(route('admins.admins.edit', $admin->id));
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
         Admin::find($id)->delete();
         session()->flash('success', trans('تم الحذف بنجاح'));
-        return redirect()->route('admins.admins.index');
+        return redirect(route('admins.admins.index'));
     }
 
     public function deleteAll() {

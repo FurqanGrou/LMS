@@ -25,10 +25,6 @@ Route::get('/face_to_face_welcome', function () {
     return view('welcome.face_to_face_welcome');
 })->name('welcome.face_to_face');
 
-Route::get('/egypt_welcome', function () {
-    return view('welcome.egypt_welcome');
-})->name('welcome.egypt');
-
 Route::group(['prefix' => 'dashboard_students', 'namespace' => '\App\Http\Controllers\Auth', 'as' => 'students.'], function (){
     Route::get('/login', 'LoginController@showLoginForm')->name('login.form');
     Route::post('/login', 'LoginController@login')->name('login.post');

@@ -1,11 +1,17 @@
 @extends('admins.layouts.master')
 
+<style>
+    #students + .select2.select2-container,
+    #commitment_type + .select2.select2-container {
+        width: 90% !important;
+    }
+</style>
 @section('content')
 
     @include('admins.partials.errors')
     @include('admins.partials.success')
 
-    <form class="form" method="POST" action="{{ route('admins.report.export') }}" enctype="multipart/form-data">
+    <form class="form" method="POST" action="{{ route('admins.export.commitment-report.store') }}" enctype="multipart/form-data">
 
         @csrf
         @method('POST')
@@ -13,7 +19,7 @@
         <div class="form-body">
             <h4 class="form-section">
                 <i class="la la-file-excel-o"></i>
-                تصدير تقارير متابعة الطلاب حسب التاريخ
+                تصدير تقرير إلتزام الطلاب
             </h4>
 
             <div class="row">
@@ -33,33 +39,34 @@
                         <input type="date" required class="form-control" name="date_to" aria-label="التاريخ إلى">
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="input-group mb-3">
+                <div class="col-4">
+                    <div class="input-group mb-3 flex-nowrap">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">حالة التقرير</span>
+                            <span class="input-group-text" id="basic-addon1">نوع الإلتزام</span>
                         </div>
-                        <select name="mail_status" id="" class="form-control">
-                            <option value="2">الكل</option>
-                            <option value="1">مرسل</option>
-                            <option value="0">غير مرسل</option>
+                        <select name="commitment_type[]" id="commitment_type" class="select2" multiple="multiple" required>
+                            <option value="camera">الكاميرا</option>
+                            <option value="sitting">الجلسة</option>
+                            <option value="login_exit">الدخول والخروج</option>
                         </select>
                     </div>
                 </div>
+            </div>
 
-                @if(auth()->user()->user_type == 'super_admin')
-                    <div class="col-3">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">نوع الطلاب</span>
-                            </div>
-                            <select name="study_type" id="" class="form-control">
-                                <option value="2">الكل</option>
-                                <option value="1">حضوري</option>
-                                <option value="0">اونلاين</option>
-                            </select>
+            <div class="row">
+                <div class="col-6">
+                    <div class="input-group mb-3 flex-nowrap">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon2">الرقم التسلسلي</span>
                         </div>
+                        <select name="students[]" id="students" class="form-control select2" multiple="multiple" required>
+                            <option value="all">الكل</option>
+                            @foreach($students as $student)
+                                <option value="{{ $student->id }}">{{ $student->student_number . ' - ' . $student->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                @endif
+                </div>
             </div>
 
         </div>

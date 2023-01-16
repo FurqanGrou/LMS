@@ -80,14 +80,13 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md" style="font-size: 70px;">
+                <div class="title m-b-md">
                      مجموعة الفرقان لتعليم القرآن الكريم
                 </div>
 
                 <div class="links">
                     <a style="color: #FF4961; font-size: 20px; border: 2px solid; border-radius: 50px; margin-left: 10px; padding: 5px 20px" href="{{ route('welcome.online') }}">التعليم عن بعد - اونلاين</a>
-                    <a style="color: #ff8d14; font-size: 20px; border: 2px solid; border-radius: 50px; margin-left: 10px; padding: 5px 20px" href="{{ route('welcome.face_to_face') }}">التعليم الحضوري</a>
-                    <a style="color: #5a7203; font-size: 20px; border: 2px solid; border-radius: 50px; padding: 5px 20px" href="{{ route('welcome.egypt') }}">التعليم عن بعد - مصر</a>
+                    <a style="color: #ff8d14; font-size: 20px; border: 2px solid; border-radius: 50px; padding: 5px 20px" href="{{ route('welcome.face_to_face') }}">التعليم الحضوري</a>
                 </div>
             </div>
         </div>
