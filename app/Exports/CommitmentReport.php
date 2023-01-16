@@ -20,10 +20,10 @@ class CommitmentReport implements FromCollection, WithHeadings, WithStyles, Shou
 
     public function __construct($request)
     {
-        $this->date_from = $request->date_from;
-        $this->date_to = $request->date_to;
-        $this->students = $request->students;
-        $this->commitment_type = $request->commitment_type;
+        $this->date_from = $request['date_from'];
+        $this->date_to = $request['date_to'];
+        $this->students = $request['students'];
+        $this->commitment_type = $request['commitment_type'];
     }
 
     /**
@@ -49,6 +49,20 @@ class CommitmentReport implements FromCollection, WithHeadings, WithStyles, Shou
             )
             ->join('users', 'users.id', '=', 'reports.student_id')
             ->whereBetween('reports.created_at', [$this->date_from, $this->date_to]);
+
+        if (in_array('camera', $this->commitment_type)){
+            $reports->where('reports.camera_status', '=', '1');
+        }
+
+        if (in_array('sitting', $this->commitment_type)){
+            $reports->where('reports.sitting_status', '=', '1');
+        }
+
+//        if (in_array('login_exit', $this->commitment_type)){
+//            $reports->where('reports.entry_time', '<=', '1')
+//                    ->where('reports.exit_time', '<=', '1');
+//        }
+
         return $reports->get();
     }
 

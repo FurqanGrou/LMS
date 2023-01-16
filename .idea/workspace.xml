@@ -23,17 +23,16 @@
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:new-updates-NL-834" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a47350e6-8576-4c66-b281-f87cf7605acb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exports/ReportsExport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/ReportsExport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exports/CommitmentReport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exports/CommitmentReport.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Dashboard/ImportExportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Imports/UsersImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/UsersImport.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admins/layouts/side-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/dashboard/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,13 +201,6 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\import_export" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\audits" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\form_embeddes" />
-      <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Dashboard" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\teachers\form-embedded" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="B:\Furqan Group\lms_hatim\app\Http\Controllers\Teachers" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\emails\admin" />

@@ -176,7 +176,7 @@ class ImportExportController extends Controller
             'commitment_type' => 'required',
         ]);
 
-        return Excel::download(new CommitmentReport($request), 'commitment-report.xlsx');
+        return Excel::download(new CommitmentReport($request->except(['_token', '_method'])), 'commitment-report.xlsx');
     }
 
 }
