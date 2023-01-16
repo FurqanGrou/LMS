@@ -80,7 +80,7 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md" style="font-size: 70px;">
+                <div class="title m-b-md" style="color: #56310d;">
                     جمعية إكساب المهارات اللغوية
                 </div>
 

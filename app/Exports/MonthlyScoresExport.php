@@ -99,17 +99,11 @@ class MonthlyScoresExport implements WithHeadings, WithStyles, ShouldAutoSize, S
             ->where('month_year', '=', $this->month_year)
             ->where('classes_teachers.role', '=', 'main');
 
-        if($this->study_type == 'furqan_group'){
-            $monthly_scores->where('users.study_type', '=', '0');
-        }
-
-        if($this->study_type == 'iksab'){
-            $monthly_scores->where('users.study_type', '=', '1');
-        }
-
-        if($this->study_type == 'egypt'){
-            $monthly_scores->where('users.study_type', '=', '2');
-        }
+            if ($study_type == 'iksab'){
+                $monthly_scores->where('users.study_type', '=', '1');
+            }elseif($study_type == 'furqan_group'){
+                $monthly_scores->where('users.study_type', '=', '0');
+            }
 
         if($this->mail_status != '-1'){
             $monthly_scores->where('monthly_scores.mail_status', '=', $this->mail_status);

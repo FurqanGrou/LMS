@@ -6,9 +6,13 @@ use App\ClassesTeachers;
 use App\DataTables\ClassesDataTable;
 use App\DataTables\ClassStudentsDatatable;
 use App\DataTables\JoinRequestsDatatable;
+use App\DataTables\UserDatatable;
 use App\Http\Controllers\Controller;
 use App\JoinRequest;
+use App\Report;
 use App\Teacher;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ClassesController extends Controller

@@ -25,7 +25,6 @@ use Yajra\DataTables\DataTables;
 Route::group(['prefix' => 'dashboard-teachers', 'namespace' => '\App\Http\Controllers\Auth', 'as' => 'teachers.'], function (){
     Route::get('/online/login', 'TeacherLoginController@showLoginFormOnline')->name('login.form.online');
     Route::get('/face_to_face/login', 'TeacherLoginController@showLoginFormFaceToFace')->name('login.form.face_to_face');
-    Route::get('/egypt/login', 'TeacherLoginController@showLoginFormEgypt')->name('login.form.egypt');
 
     Route::post('/login-post', 'TeacherLoginController@login')->name('login.post');
 });

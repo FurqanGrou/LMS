@@ -2,10 +2,16 @@
 
 namespace App\DataTables;
 
+use App\Admin;
+use App\Report;
 use App\User;
 use Carbon\Carbon;
+use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Yajra\DataTables\Html\Editor\Editor;
+use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\ButtonsServiceProvider;
 
 class AbsenceDatatable extends DataTable
 {
@@ -47,16 +53,8 @@ class AbsenceDatatable extends DataTable
                         ->whereNotIn('reports.absence', [0, -1])
                         ->select(['reports.id', 'users.student_number', 'reports.student_id', 'reports.absence', 'users.name', 'reports.created_at as report_created_at']);
 
-        if(isHasUserType('furqan_group')){
-            return $absences->where('users.study_type', '=', '0');
-        }
-
-        if(isHasUserType('iksab')){
-            return $absences->where('users.study_type', '=', '1');
-        }
-
-        if(isHasUserType('egypt')){
-            return $absences->where('users.study_type', '=', '2');
+        if(!isHasUserType('super_admin')){
+            $absences = $absences->where('users.study_type', '=', getUserType() == 'iksab' ? 1 : 0);
         }
 
         return $absences;

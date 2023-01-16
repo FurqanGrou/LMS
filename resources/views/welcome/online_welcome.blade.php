@@ -80,14 +80,14 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md" style="font-size: 70px;">
+                <div class="title m-b-md">
                      مجموعة الفرقان لتعليم القرآن الكريم
                 </div>
 
                 <div class="links">
                     <a href="{{ url('dashboard-admins/online/login') }}">الإداريين</a>
                     <a href="{{ url('dashboard-teachers/online/login') }}">المعلمين</a>
-{{--                    <a href="{{ route('students.login.form') }}">الطلاب</a>--}}
+                    <a href="{{ route('students.login.form') }}">الطلاب</a>
                 </div>
             </div>
         </div>
