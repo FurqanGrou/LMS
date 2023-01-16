@@ -144,14 +144,14 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
     Route::get('export-top-tracker-reports', 'TopTrackerController@exportTopTrackerIndex')->name('export-top-tracker-reports');
     Route::post('export-top-tracker-reports', 'TopTrackerController@exportReports')->name('export-top-tracker-reports');
 
+    // export students commitment report
+    Route::get('export-commitment-report', 'ImportExportController@exportCommitmentReport')->name('export.commitment-report.view');
+    Route::post('export-commitment-report', 'ImportExportController@exportCommitmentReportStore')->name('export.commitment-report.store');
+
 });
 
-Route::get('clear-cache', function (){
-    clearCache();
-    echo "Clear Done";
-});
 
 Route::get('test-code', function (){
-    return getAppropriateToday();
+
 });
 

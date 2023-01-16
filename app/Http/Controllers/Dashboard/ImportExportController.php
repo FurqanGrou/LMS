@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Exports\CommitmentReport;
 use App\Exports\ExamRequestsExport;
 use App\Exports\MonthlyScoresExport;
 use App\Http\Controllers\Controller;
@@ -78,6 +79,18 @@ class ImportExportController extends Controller
 
         return redirect()->back()->with('success', 'تم تحديث بيانات الطلاب بنجاح');
     }
+
+    public function importOnlineStudents()
+    {
+        $study_type = 0; // 0 is online, 1 is face to face
+
+        Excel::import(new UsersImport($study_type), request()->file('file'));
+
+        Teacher::query()->update(['status' => 1]);
+        Artisan::call('cache:clear');
+
+        return redirect()->back()->with('success', 'تم تحديث بيانات الطلاب بنجاح');
+    }
     //    ==============================================
 
     public function importLessons()
@@ -144,6 +157,37 @@ class ImportExportController extends Controller
     {
         Excel::import(new QuranLine(), 'quran_lines.xlsx');
         return 'Done';
+    }
+
+    public function exportCommitmentReport()
+    {
+        $study_type = auth('admin_web')->user()->user_type;
+
+        $students = Cache::remember('export_commitment_report.' . $study_type,60 * 60 * 24, function() use ($study_type){
+
+            $students = User::query();
+            if ($study_type == 'iksab'){
+                $students->where('study_type', '=', '1');
+            }elseif($study_type == 'furqan_group'){
+                $students->where('study_type', '=', '0');
+            }
+
+            return $students->get();
+        });
+
+        return view('admins.import_export.export_commitment_report', ['students' => $students]);
+    }
+
+    public function exportCommitmentReportStore(Request $request)
+    {
+        $request->validate([
+            'date_from' => 'required|date',
+            'date_to' => 'required|date',
+            'students' => 'required',
+            'commitment_type' => 'required',
+        ]);
+
+        return Excel::download(new CommitmentReport($request), 'commitment-report.xlsx');
     }
 
 }

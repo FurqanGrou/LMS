@@ -23,6 +23,13 @@
                             ادخال وتحديث بيانات الطلاب
                         </a>
 
+                        @if(isHasUserType('super_admin') || isHasUserType('iksab'))
+                            <a class="menu-item" href="{{ route('admins.import.face_students.view') }}" data-i18n="nav.templates.vert.classic_menu">
+                                <i class="ft-users"></i>
+                                ادخال وتحديث بيانات طلاب - الحضوري
+                            </a>
+                        @endif
+
                         <a class="menu-item" href="{{ route('admins.report.index') }}" data-i18n="nav.templates.vert.classic_menu">
                             <i class="la la-file-excel-o"></i>
                             تصدير التقارير اليومية
@@ -32,7 +39,10 @@
                             <i class="la la-file-excel-o"></i>
                             تصدير التقارير الشهرية
                         </a>
-
+                        <a class="menu-item" href="{{ route('admins.export.commitment-report.view') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="la la-file-excel-o"></i>
+                            تصدير تقرير الإلتزام
+                        </a>
                         <a class="menu-item" href="{{ route('admins.change_send_monthly_report_status.index') }}" data-i18n="nav.templates.vert.classic_menu">
                             <i class="la la-send"></i>
                             تفعيل الارسال للشهر السابق
