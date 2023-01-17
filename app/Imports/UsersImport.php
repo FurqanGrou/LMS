@@ -6,6 +6,7 @@ use App\Classes;
 use App\ClassesTeachers;
 use App\Teacher;
 use App\User;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
@@ -16,7 +17,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
 {
     public $count = 0;
     public $students_count = 0;
-    public $study_type = 0;
+    public $study_type = '0';
 
     public function __construct($study_type)
     {
@@ -104,8 +105,8 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
                     'class_number'    => $row['rkm_alhlk'],
                     'name'            => $name,
                     'section'         => $section,
-                    'login_time'      => getStudentTime($row['okt_aldkhol'], 'login'),
-                    'exit_time'       => getStudentTime($row['okt_aldkhol'], 'exit'),
+                    'login_time'      => Carbon::parse(getStudentTime($row['okt_aldkhol'], 'login'))->format('H:i'),
+                    'exit_time'       => Carbon::parse(getStudentTime($row['okt_aldkhol'], 'exit'))->format('H:i'),
                     'father_mail'     => $father_email,
                     'mother_mail'     => $mother_email,
                     'path'            => $path,
@@ -127,8 +128,8 @@ class UsersImport implements ToModel, WithHeadingRow, WithChunkReading, WithBatc
 //                    'language'        => $row['allgh'],
                     'status'          => $row['odaa_altalb'],
                     'section'         => $row['alksm'] == 'بنات' ? 'female' : 'male' ,
-                    'login_time'      => getStudentTime($row['okt_aldkhol'], 'login'),
-                    'exit_time'       => getStudentTime($row['okt_aldkhol'], 'exit'),
+                    'login_time'      => Carbon::parse(getStudentTime($row['okt_aldkhol'], 'login'))->format('h:i'),
+                    'exit_time'       => Carbon::parse(getStudentTime($row['okt_aldkhol'], 'exit'))->format('h:i'),
                     'path'            => $path,
                     'password'        => \Hash::make('12345'),
                     'class_number'    => $row['rkm_alhlk'],
