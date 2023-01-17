@@ -51,7 +51,7 @@ class ImportExportController extends Controller
 
     public function importFaceToFaceStudents()
     {
-        $study_type = 1; // 0 is online, 1 is face to face
+        $study_type = '1'; // 0 is online, 1 is face to face
 
         Excel::import(new UsersImport($study_type), request()->file('file'));
 
@@ -71,7 +71,7 @@ class ImportExportController extends Controller
     }
     public function importOnlineStudents()
     {
-        $study_type = 0; // 0 is online, 1 is face to face
+        $study_type = '0'; // 0 is online, 1 is face to face
 
         Excel::import(new UsersImport($study_type), request()->file('file'));
 

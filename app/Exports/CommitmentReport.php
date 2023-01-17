@@ -42,13 +42,23 @@ class CommitmentReport implements FromCollection, WithHeadings, WithStyles, Shou
                         END) AS user_section'),
                 DB::raw('IF(reports.sitting_status = 1, "غير ملتزم", "ملتزم")'),
                 DB::raw('IF(reports.camera_status = 1, "غير ملتزم", "ملتزم")'),
-                'reports.entry_time as reports_entry_time',
-                'reports.exit_time as reports_exit_time',
-                'users.login_time as users_login_time',
-                'users.exit_time as users_exit_time'
-            )
-            ->join('users', 'users.id', '=', 'reports.student_id')
-            ->whereBetween('reports.created_at', [$this->date_from, $this->date_to]);
+//                'reports.entry_time as reports_entry_time',
+//                'reports.exit_time as reports_exit_time',
+//                'users.login_time as users_login_time',
+//                'users.exit_time as users_exit_time'
+                DB::raw('TIME_FORMAT(reports.entry_time, "%h:%i:%p") as reports_entry_time'), //TIME_FORMAT("19:30:10", "%h %i %p")
+                DB::raw('TIME_FORMAT(reports.exit_time, "%h:%i:%p") as reports_exit_time'),
+                DB::raw('TIME_FORMAT(users.login_time, "%h:%i:%p") as users_login_time'),
+                DB::raw('TIME_FORMAT(users.exit_time, "%h:%i:%p") as users_exit_time')
+            )->join('users', function ($join) {
+                $join->on('users.id', '=', 'reports.student_id');
+
+                if (in_array('login_exit', $this->commitment_type)){
+                    $join->on('reports.entry_time', '<=', 'users.login_time')
+                        ->on('reports.exit_time', '<=', 'users.exit_time');
+                }
+
+            })->whereBetween('reports.created_at', [$this->date_from, $this->date_to]);
 
         if (in_array('camera', $this->commitment_type)){
             $reports->where('reports.camera_status', '=', '1');
@@ -57,12 +67,7 @@ class CommitmentReport implements FromCollection, WithHeadings, WithStyles, Shou
         if (in_array('sitting', $this->commitment_type)){
             $reports->where('reports.sitting_status', '=', '1');
         }
-
-//        if (in_array('login_exit', $this->commitment_type)){
-//            $reports->where('reports.entry_time', '<=', 'users.login_time as user_login_time')
-//                    ->where('reports.exit_time', '<=', 'users.exit_time as user_exit_time');
-//        }
-
+        
         if (!in_array('all', $this->students)){
             $reports->whereIn('reports.student_id', $this->students);
         }
