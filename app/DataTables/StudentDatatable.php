@@ -113,6 +113,9 @@ class StudentDatatable extends DataTable
             Column::make('login_time')
                 ->data('login_time')
                 ->title('وقت الدخول'),
+            Column::make('exit_time')
+                ->data('exit_time')
+                ->title('وقت الخروج'),
             Column::make('path')
                 ->data('path')
                 ->title('المسار')

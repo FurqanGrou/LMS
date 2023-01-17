@@ -100,11 +100,14 @@ class UserDatatable extends DataTable
                 ->title('رقم الطالب'),
             Column::make('name')
                 ->data('student_name')
-                ->title('اسم الطالب'),
+                ->title('اسم الطالب')
+                ->className('std-name'),
             Column::make('login_time')
                 ->data('login_time')
-                ->title('وقت الدخول')
-                ->className('std-name'),
+                ->title('وقت الدخول'),
+            Column::make('exit_time')
+                ->data('exit_time')
+                ->title('وقت الخروج'),
             Column::make('mail_status')
                 ->data('mail_status')
                 ->title('حالة الارسال')

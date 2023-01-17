@@ -119,6 +119,10 @@ class ClassStudentsDatatable extends DataTable
                 ->data('login_time')
                 ->title('وقت الدخول')
                 ->className('std-name font-weight-bold black'),
+            Column::make('exit_time')
+                ->data('exit_time')
+                ->title('وقت الخروج')
+                ->className('std-name font-weight-bold black'),
 //            Column::make('status')
 //                ->data('status')
 //                ->title('الحالة'),
