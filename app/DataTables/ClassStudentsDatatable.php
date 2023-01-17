@@ -28,7 +28,9 @@ class ClassStudentsDatatable extends DataTable
 
         $class_number = $this->class_number;
 
-        $students = User::query()->where('class_number', '=', $class_number);
+        $students = User::query()
+            ->select(['*', DB::raw('TIME_FORMAT(login_time, "%h:%i:%p") as login_time'), DB::raw('TIME_FORMAT(exit_time, "%h:%i:%p") as exit_time')])
+            ->where('class_number', '=', $class_number);
 
         if (auth()->guard('admin_web')->check()){
             $student_name = 'admins.students.btn.student_name';
@@ -52,19 +54,10 @@ class ClassStudentsDatatable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\App\AdDatatable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query()
     {
-
-//        $classes = Classes::join('classes_teachers', 'classes.class_number', '=', 'classes_teachers.class_number')
-//            ->join('teachers', 'teachers.teacher_number', '=', 'classes_teachers.teacher_number')
-//            ->where('teachers.teacher_number', '=', auth()->user()->teacher_number)
-//            ->select(['classes_teachers.teacher_number', 'classes.title']);
-
-
-//        $categories = Ad::select('id', 'is_featured', 'title', 'description', 'phone', 'price', 'currency_id', 'is_active', 'created_at')->orderBy('id', 'desc');
         return '';
     }
 
@@ -80,7 +73,6 @@ class ClassStudentsDatatable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-//                    ->parameters([$this->getBuilderParameters()]);
                     ->parameters([
                         'dom' => 'Bfrtip',
                         'lengthMenu' => [
@@ -89,8 +81,6 @@ class ClassStudentsDatatable extends DataTable
                         ],
                         'buttons' => [
                             ['extend' => 'pageLength', 'className' => 'dataTables_length'],
-//                            ['extend' => 'csv', 'title' => $this->filename(), 'className' => 'btn btn-primary', 'text' => '<i class="la la-file"></i> CSV File'],
-//                            ['extend' => 'excel', 'title' => $this->filename(), 'className' => 'btn btn-info', 'text' => '<i class="la la-print"></i> Export Excel'],
                         ],
 //                        'language' => ['url' => 'http://cdn.datatables.net/plug-ins/1.10.12/i18n/Arabic.json']
                     ])

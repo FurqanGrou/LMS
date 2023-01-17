@@ -21,7 +21,6 @@ class UserDatatable extends DataTable
      */
     public function dataTable($query)
     {
-
         return datatables($query)
             ->addColumn('student_name', 'admins.students.btn.student_name')
             ->addColumn('mail_status', 'admins.students.btn.mail_status')
@@ -34,25 +33,16 @@ class UserDatatable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\App\AdDatatable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query()
     {
-
-        $students = User::query();
+        $students = User::query()->select(['*', DB::raw('TIME_FORMAT(login_time, "%h:%i:%p") as login_time'), DB::raw('TIME_FORMAT(exit_time, "%h:%i:%p") as exit_time')]);
 
         if(!isHasUserType('super_admin')){
             $students = $students->where('study_type', '=', getUserType() == 'iksab' ? 1 : 0 );
         }
 
-//        $classes = Classes::join('classes_teachers', 'classes.class_number', '=', 'classes_teachers.class_number')
-//            ->join('teachers', 'teachers.teacher_number', '=', 'classes_teachers.teacher_number')
-//            ->where('teachers.teacher_number', '=', auth()->user()->teacher_number)
-//            ->select(['classes_teachers.teacher_number', 'classes.title']);
-
-
-//        $categories = Ad::select('id', 'is_featured', 'title', 'description', 'phone', 'price', 'currency_id', 'is_active', 'created_at')->orderBy('id', 'desc');
         return $students;
     }
 
@@ -68,7 +58,6 @@ class UserDatatable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
-//                    ->parameters([$this->getBuilderParameters()]);
             ->parameters([
                 'dom' => 'Bfrtip',
                 'lengthMenu' => [
