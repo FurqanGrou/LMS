@@ -67,7 +67,7 @@ class CommitmentReport implements FromCollection, WithHeadings, WithStyles, Shou
         if (in_array('sitting', $this->commitment_type)){
             $reports->where('reports.sitting_status', '=', '1');
         }
-        
+
         if (!in_array('all', $this->students)){
             $reports->whereIn('reports.student_id', $this->students);
         }
