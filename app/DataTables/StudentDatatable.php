@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -21,25 +22,17 @@ class StudentDatatable extends DataTable
      */
     public function dataTable($query)
     {
-
-        $student = auth()->user();
-
-        return datatables($student);
+        return datatables(auth()->user());
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\App\AdDatatable $model
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Contracts\Auth\Authenticatable
      */
     public function query()
     {
-
-        $student = auth()->user();
-
-//        $categories = Ad::select('id', 'is_featured', 'title', 'description', 'phone', 'price', 'currency_id', 'is_active', 'created_at')->orderBy('id', 'desc');
-        return $student;
+        return auth()->user();
     }
 
     /**
@@ -54,7 +47,6 @@ class StudentDatatable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-//                    ->parameters([$this->getBuilderParameters()]);
                     ->parameters([
                         'dom' => 'Bfrtip',
                         'lengthMenu' => [
@@ -90,15 +82,6 @@ class StudentDatatable extends DataTable
             Column::make('class_number')
                 ->data('class_number')
                 ->title('رقم الحلقة'),
-//            Column::make('father_phone')
-//                ->data('father_phone')
-//                ->title('رقم هاتف الأب'),
-//            Column::make('mother_phone')
-//                ->data('mother_phone')
-//                ->title('بريد الأب'),
-//            Column::make('mother_mail')
-//                ->data('mother_mail')
-//                ->title('بريد الأم'),
             Column::make('language')
                 ->data('language')
                 ->title('اللغة'),
@@ -130,6 +113,6 @@ class StudentDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'Ads_' . date('YmdHis');
+        return 'students_' . date('YmdHis');
     }
 }

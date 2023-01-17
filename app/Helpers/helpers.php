@@ -1194,13 +1194,13 @@ function getStudentTime($time, $type)
     $exit_period = substr($time, 13, 2);
 
     if ($type == 'login'){
-        if ($login_period == 'PM')
+        if ( ($login_period == 'PM' && $login_hour < 12) || ($login_period == 'AM' && $login_hour == 12) )
             return ($login_hour+12) . ":" . $login_minutes;
 
         return ($login_hour) . ":" . $login_minutes;
     }
 
-    if ($exit_period == 'PM')
+    if ( ($exit_period == 'PM' && $exit_hour < 12) || ($exit_period == 'AM' && $exit_hour == 12) )
         return ($exit_hour+12) . ":" . $exit_minutes;
 
     return ($exit_hour) . ":" . $exit_minutes;
