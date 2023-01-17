@@ -67,16 +67,7 @@ class CommitmentReport implements FromCollection, WithHeadings, WithStyles, Shou
         if (in_array('sitting', $this->commitment_type)){
             $reports->where('reports.sitting_status', '=', '1');
         }
-
-//        if (in_array('login_exit', $this->commitment_type)){
-//
-//            $reports->join('users as users2', function ($join) {
-//                $join->on('reports.entry_time', '<=', 'users2.login_time')
-//                    ->on('reports.exit_time', '<=', 'users2.exit_time');
-//            });
-//
-//        }
-
+        
         if (!in_array('all', $this->students)){
             $reports->whereIn('reports.student_id', $this->students);
         }
