@@ -47,8 +47,16 @@ class ClassesDataTable extends DataTable
             ->join('teachers', 'teachers.email', '=', 'classes_teachers.teacher_email')
             ->select(['classes.class_number', 'classes.title', 'classes.zoom_link', 'classes.path', 'classes.period', 'teachers.name as teacher_name']);
 
-        if(!isHasUserType('super_admin')){
-            $classes = $classes->where('classes.study_type', '=', getUserType() == 'iksab' ? 1 : 0 );
+        if(isHasUserType('furqan_group')){
+            return $classes->where('classes.study_type', '=', '0');
+        }
+
+        if(isHasUserType('iksab')){
+            return $classes->where('classes.study_type', '=', '1');
+        }
+
+        if(isHasUserType('egypt')){
+            return $classes->where('classes.study_type', '=', '2');
         }
 
         return $classes;
