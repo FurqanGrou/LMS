@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>جمعية إكساب المهارات اللغوية</title>
+        <title>مجموعة الفرقان لتعليم القرآن - مصر</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -81,12 +81,12 @@
 
             <div class="content">
                 <div class="title m-b-md" style="font-size: 70px;">
-                    جمعية إكساب المهارات اللغوية
+                     مجموعة الفرقان لتعليم القرآن الكريم - مصر
                 </div>
 
                 <div class="links">
-                    <a href="{{ url('dashboard-admins/face_to_face/login') }}">الإداريين</a>
-                    <a href="{{ url('dashboard-teachers/face_to_face/login') }}">المعلمين</a>
+                    <a href="{{ url('dashboard-admins/egypt/login') }}">الإداريين</a>
+                    <a href="{{ url('dashboard-teachers/egypt/login') }}">المعلمين</a>
 {{--                    <a href="{{ route('students.login.form') }}">الطلاب</a>--}}
                 </div>
             </div>

@@ -18,24 +18,16 @@
                 <ul class="menu-content">
                     <li>
 
-                        @if(isHasUserType('super_admin') || isHasUserType('furqan_group'))
-                            <a class="menu-item" href="{{ route('admins.import.online_students.view') }}" data-i18n="nav.templates.vert.classic_menu">
-                                <i class="ft-globe"></i>
-                                ادخال وتحديث بيانات طلاب - الاونلاين
-                            </a>
-                        @endif
-
-                        @if(isHasUserType('super_admin') || isHasUserType('iksab'))
-                            <a class="menu-item" href="{{ route('admins.import.face_students.view') }}" data-i18n="nav.templates.vert.classic_menu">
-                                <i class="ft-users"></i>
-                                ادخال وتحديث بيانات طلاب - الحضوري
-                            </a>
-                        @endif
+                        <a class="menu-item" href="{{ route('admins.import.students.view') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="ft-users"></i>
+                            ادخال وتحديث بيانات الطلاب
+                        </a>
 
                         <a class="menu-item" href="{{ route('admins.report.index') }}" data-i18n="nav.templates.vert.classic_menu">
                             <i class="la la-file-excel-o"></i>
                             تصدير التقارير اليومية
                         </a>
+
                         <a class="menu-item" href="{{ route('admins.monthly_scores.export') }}" data-i18n="nav.templates.vert.classic_menu">
                             <i class="la la-file-excel-o"></i>
                             تصدير التقارير الشهرية
@@ -121,19 +113,21 @@
                             الاذونات
                         </a>
                     </li>
-                    <li>
-                        <a class="menu-item" href="{{ route('admins.export-top-tracker-reports') }}" data-i18n="nav.templates.vert.classic_menu">
-                            حضور الموظفين - البصمة
-                        </a>
-                    </li>
+                    @if(isHasUserType('super_admin'))
+                        <li>
+                            <a class="menu-item" href="{{ route('admins.export-top-tracker-reports') }}" data-i18n="nav.templates.vert.classic_menu">
+                                حضور الموظفين - البصمة
+                            </a>
+                        </li>
+                        <li>
+                            <a class="menu-item" href="{{ route('admins.attendance.export') }}" data-i18n="nav.templates.vert.classic_menu">
+                                الحضور والانصراف - قديم
+                            </a>
+                        </li>
+                    @endif
                     <li>
                         <a class="menu-item" href="{{ route('admins.request_services.exams.export') }}" data-i18n="nav.templates.vert.classic_menu">
                             طلبات الاختبارات
-                        </a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="{{ route('admins.attendance.export') }}" data-i18n="nav.templates.vert.classic_menu">
-                            الحضور والانصراف - قديم
                         </a>
                     </li>
                 </ul>

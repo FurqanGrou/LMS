@@ -56,6 +56,7 @@
                                 <option value="super_admin">إداري عام</option>
                                 <option value="furqan_group">مجموعة الفرقان</option>
                                 <option value="iksab">إكساب</option>
+                                <option value="egypt">فرع مصر</option>
                             </select>
                         </div>
                     </div>
