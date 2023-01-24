@@ -23,7 +23,7 @@ class CommitmentReport implements FromCollection, WithHeadings, WithStyles, Shou
         $this->date_from = $request['date_from'];
         $this->date_to = $request['date_to'];
         $this->students = $request['students'];
-        $this->commitment_type = $request['commitment_type'];
+        $this->commitment_type = empty($request['commitment_type']) ? [] : $request['commitment_type'];
     }
 
     /**
@@ -42,10 +42,6 @@ class CommitmentReport implements FromCollection, WithHeadings, WithStyles, Shou
                         END) AS user_section'),
                 DB::raw('IF(reports.sitting_status = 1, "غير ملتزم", "ملتزم")'),
                 DB::raw('IF(reports.camera_status = 1, "غير ملتزم", "ملتزم")'),
-//                'reports.entry_time as reports_entry_time',
-//                'reports.exit_time as reports_exit_time',
-//                'users.login_time as users_login_time',
-//                'users.exit_time as users_exit_time'
                 DB::raw('TIME_FORMAT(reports.entry_time, "%h:%i:%p") as reports_entry_time'), //TIME_FORMAT("19:30:10", "%h %i %p")
                 DB::raw('TIME_FORMAT(reports.exit_time, "%h:%i:%p") as reports_exit_time'),
                 DB::raw('TIME_FORMAT(users.login_time, "%h:%i:%p") as users_login_time'),

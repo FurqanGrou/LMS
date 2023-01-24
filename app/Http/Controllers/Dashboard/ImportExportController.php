@@ -172,7 +172,7 @@ class ImportExportController extends Controller
             'date_from' => 'required|date',
             'date_to' => 'required|date',
             'students' => 'required',
-            'commitment_type' => 'required',
+            'commitment_type' => 'nullable',
         ]);
 
         return Excel::download(new CommitmentReport($request->except(['_token', '_method'])), 'commitment-report.xlsx');
