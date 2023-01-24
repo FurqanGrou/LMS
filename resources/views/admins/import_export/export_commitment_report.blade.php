@@ -44,7 +44,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">نوع الإلتزام</span>
                         </div>
-                        <select name="commitment_type[]" id="commitment_type" class="select2" multiple="multiple" required>
+                        <select name="commitment_type[]" id="commitment_type" class="select2" multiple="multiple">
                             <option value="camera">الكاميرا</option>
                             <option value="sitting">الجلسة</option>
                             <option value="login_exit">الدخول والخروج</option>
