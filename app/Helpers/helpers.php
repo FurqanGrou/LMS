@@ -949,6 +949,10 @@ function getReportMonth()
     return $date_filter;
 }
 
+function getMonthlyReportStatus($id){
+    return User::query()->find($id)->monthlyScores()->first()->mail_status ?? 0;
+}
+
 function clearCache()
 {
     Artisan::call('config:clear');
