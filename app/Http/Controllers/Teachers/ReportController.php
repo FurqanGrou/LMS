@@ -118,8 +118,10 @@ class ReportController extends Controller
                     'number_pages' => $this->getValidData($request->number_pages, 'number_pages'),
                     'listener_name' => $this->getValidData($request->listener_name, 'listener_name'),
                     'class_number' => getStudentDetails(request()->student_id)->class_number,
-                    'entry_time' => Carbon::parse($request->entry_time)->format('H:i'),
-                    'exit_time' => Carbon::parse($request->exit_time)->format('H:i'),
+
+                    'entry_time' => $request->entry_time ? Carbon::parse($request->entry_time)->format('H:i') : null,
+                    'exit_time' => $request->exit_time ? Carbon::parse($request->exit_time)->format('H:i') : null,
+
                     'sitting_status' => $request->sitting_status == 'true' ? '1' : '0',
                     'camera_status' => $request->camera_status == 'true' ? '1' : '0',
                     'mail_status' => 0,
