@@ -913,8 +913,10 @@
                         mistake = current_row.find('input[name="mistake[]"]').val(),
                         alert = current_row.find('input[name="alert[]"]').val(),
                         number_pages = current_row.find('input[name="number_pages[]"]').val(),
+
                         entry_time = current_row.find('input[name="entry_time[]"]').val(),
                         exit_time = current_row.find('input[name="exit_time[]"]').val(),
+
                         sitting_status = current_row.find('input[name="sitting_status[]"]').prop('checked'),
                         camera_status = current_row.find('input[name="camera_status[]"]').prop('checked'),
                         listener_name = current_row.find('input[name="listener_name[]"]').val();
@@ -927,8 +929,10 @@
                     current_row.find('input[name="daily_revision_to[]"]').attr('title', daily_revision_to);
                     current_row.find('input[name="mistake[]"]').attr('title', mistake);
                     current_row.find('input[name="alert[]"]').attr('title', alert);
+
                     current_row.find('input[name="entry_time[]"]').attr('title', entry_time);
                     current_row.find('input[name="exit_time[]"]').attr('title', exit_time);
+
                     current_row.find('input[name="number_pages[]"]').attr('title', number_pages);
                     current_row.find('input[name="listener_name[]"]').attr('title', listener_name);
 
@@ -950,8 +954,10 @@
                             'mistake': mistake,
                             'alert': alert,
                             'number_pages': number_pages,
+
                             'entry_time': entry_time,
                             'exit_time': exit_time,
+
                             'sitting_status': sitting_status,
                             'camera_status': camera_status,
                             'listener_name': listener_name,

@@ -245,10 +245,13 @@ class ReportController extends Controller
         //study_type (0 => furqan_group, 1 => iksab, 2 => egypt)
         if ($user_type == 'furqan_group'){
             $title = 'التقارير اليومية لطلاب الاونلاين';
+            $request['study_type'] = 0;
         }elseif($user_type == 'iksab'){
             $title = 'التقارير اليومية لطلاب الحضوري';
+            $request['study_type'] = 1;
         }elseif($user_type == 'egypt'){
             $title = 'التقارير اليومية لطلاب فرع مصر';
+            $request['study_type'] = 2;
         }else{
             $title = 'التقارير اليومية للطلاب';
         }
