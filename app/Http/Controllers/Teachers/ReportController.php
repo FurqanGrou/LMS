@@ -97,8 +97,8 @@ class ReportController extends Controller
     public function reportTableStore(Request $request)
     {
 
-        $student = User::query()->find($request->student_id);
-        $report = Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first();
+        $student = User::query()->where('id', '=', $request->student_id)->first();
+        $report  = Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first();
 
         if($request->type == 'lessons'){
             $report = Report::updateOrCreate(
