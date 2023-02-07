@@ -97,13 +97,14 @@ class ReportController extends Controller
     public function reportTableStore(Request $request)
     {
 
-        if($request->type == 'lessons'){
+        $report = Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first();
 
+        if($request->type == 'lessons'){
             $report = Report::updateOrCreate(
                 [
                     'student_id' => $request->student_id,
                     'date' => $request->date,
-                    'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
+                    'created_at' => $report->created_at ?? $request->created_at
                 ],
                 [
                     'new_lesson' => $this->getValidData($request->new_lesson, 'new_lesson'),
@@ -119,8 +120,8 @@ class ReportController extends Controller
                     'listener_name' => $this->getValidData($request->listener_name, 'listener_name'),
                     'class_number' => getStudentDetails(request()->student_id)->class_number,
 
-                    'entry_time' => $request->entry_time ? Carbon::parse($request->entry_time)->format('H:i') : null,
-                    'exit_time' => $request->exit_time ? Carbon::parse($request->exit_time)->format('H:i') : null,
+                    'entry_time' => $request->entry_time ? Carbon::parse($request->entry_time)->format('H:i') : Carbon::parse($report->student->entry_time)->format('H:i'),
+                    'exit_time' => $request->exit_time ? Carbon::parse($request->exit_time)->format('H:i') : Carbon::parse($report->student->exit_time)->format('H:i'),
 
                     'sitting_status' => $request->sitting_status == 'true' ? '1' : '0',
                     'camera_status' => $request->camera_status == 'true' ? '1' : '0',
@@ -142,7 +143,7 @@ class ReportController extends Controller
                     [
                         'student_id' => $request->student_id,
                         'date'       => $request->date,
-                        'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
+                        'created_at' => $report->created_at ?? $request->created_at
                     ],
                     [
                         'lesson_grade' => 'غ',
@@ -188,7 +189,7 @@ class ReportController extends Controller
                     [
                         'student_id' => $request->student_id,
                         'date' => $request->date,
-                        'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
+                        'created_at' => $report->created_at ?? $request->created_at
                     ],
                     [
                         'lesson_grade' => $default_grade['lesson_grade'],
@@ -215,7 +216,7 @@ class ReportController extends Controller
                     [
                         'student_id' => $request->student_id,
                         'date' => $request->date,
-                        'created_at' => Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first()->created_at ?? $request->created_at
+                        'created_at' => $report->created_at ?? $request->created_at
                     ],
                     [
                         'lesson_grade' => $this->getValidGrade($request->lesson_grade, 'lesson_grade') == 'غ' ? '' : $this->getValidGrade($request->lesson_grade, 'lesson_grade'),
