@@ -98,6 +98,7 @@ class ReportController extends Controller
     {
 
         $student = User::query()->where('id', '=', $request->student_id)->first();
+        dd($student);
         $report  = Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first();
 
         if($request->type == 'lessons'){
