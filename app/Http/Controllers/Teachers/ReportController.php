@@ -97,6 +97,7 @@ class ReportController extends Controller
     public function reportTableStore(Request $request)
     {
 
+        $student = User::query()->find($request->student_id);
         $report = Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first();
 
         if($request->type == 'lessons'){
@@ -120,8 +121,8 @@ class ReportController extends Controller
                     'listener_name' => $this->getValidData($request->listener_name, 'listener_name'),
                     'class_number' => getStudentDetails(request()->student_id)->class_number,
 
-                    'entry_time' => $request->entry_time ? Carbon::parse($request->entry_time)->format('H:i') : Carbon::parse($report->student->entry_time)->format('H:i'),
-                    'exit_time' => $request->exit_time ? Carbon::parse($request->exit_time)->format('H:i') : Carbon::parse($report->student->exit_time)->format('H:i'),
+                    'entry_time' => $request->entry_time ? Carbon::parse($request->entry_time)->format('H:i') : Carbon::parse(@$student->entry_time)->format('H:i'),
+                    'exit_time' => $request->exit_time ? Carbon::parse($request->exit_time)->format('H:i') : Carbon::parse(@$student->exit_time)->format('H:i'),
 
                     'sitting_status' => $request->sitting_status == 'true' ? '1' : '0',
                     'camera_status' => $request->camera_status == 'true' ? '1' : '0',
