@@ -148,6 +148,12 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
     Route::get('export-commitment-report', 'ImportExportController@exportCommitmentReport')->name('export.commitment-report.view');
     Route::post('export-commitment-report', 'ImportExportController@exportCommitmentReportStore')->name('export.commitment-report.store');
 
+    Route::get('import-dropout-dates', 'ImportExportController@importDropoutDates')->name('import-dropout-dates.view');
+    Route::post('import-dropout-dates', 'ImportExportController@importDropoutDatesStore')->name('import-dropout-dates.store');
+
+    // export regular students report
+    Route::get('export-regular-students-report', 'ImportExportController@exportRegularStudentsReport')->name('export.regular-students-report.view');
+
 });
 
 

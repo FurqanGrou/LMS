@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Dashboard;
 use App\Exports\CommitmentReport;
 use App\Exports\ExamRequestsExport;
 use App\Exports\MonthlyScoresExport;
+use App\Exports\RegularStudentsReport;
 use App\Http\Controllers\Controller;
 use App\Imports\ChapterImport;
 use App\Imports\ClassesTeachersImport;
+use App\Imports\DropoutDatesImport;
 use App\Imports\LessonImport;
 use App\Imports\LessonsAyatImport;
 use App\Imports\PartImport;
@@ -176,6 +178,23 @@ class ImportExportController extends Controller
         ]);
 
         return Excel::download(new CommitmentReport($request->except(['_token', '_method'])), 'commitment-report.xlsx');
+    }
+
+    public function importDropoutDates()
+    {
+        return view('admins.import_export.import_dropout_dates');
+    }
+
+    public function importDropoutDatesStore(Request $request)
+    {
+        Excel::import(new DropoutDatesImport(), $request->file);
+
+        return redirect()->back()->with('success', 'تم تحديث تواريخ انقطاع الطلاب بنجاح');
+    }
+
+    public function exportRegularStudentsReport()
+    {
+        return view('admins.import_export.export_regular_students_report');
     }
 
 }
