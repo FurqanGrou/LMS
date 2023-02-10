@@ -17,7 +17,6 @@ use App\Report;
 use App\Teacher;
 use App\User;
 use Carbon\Carbon;
-use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use \App\Imports\AssignHolidayImport;
 use Maatwebsite\Excel\Facades\Excel;

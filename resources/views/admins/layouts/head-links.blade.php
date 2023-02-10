@@ -46,7 +46,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/app-assets/vendors/css/cryptocoins/cryptocoins.css') }}">
     <!-- END Page Level CSS-->
 
-
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/assets/css/style-rtl.css') }}">
     <style>
@@ -166,5 +165,6 @@
     </style>
 
     @stack('css')
+
 
     <!-- END Custom CSS-->

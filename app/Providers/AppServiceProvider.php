@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\MonthlyScoresFile;
 use Carbon\Carbon;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
@@ -29,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrap();
+
         Carbon::setWeekendDays([
             Carbon::FRIDAY,
             Carbon::SATURDAY,

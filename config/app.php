@@ -173,7 +173,7 @@ return [
          */
 
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
+//        Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -244,7 +244,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Datatables' => Yajra\DataTables\Facades\DataTables::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
+//        'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
 
     ],

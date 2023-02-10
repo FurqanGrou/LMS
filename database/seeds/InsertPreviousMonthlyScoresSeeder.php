@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Imports\UsersImport;
 use App\Report;
 use App\Teacher;
