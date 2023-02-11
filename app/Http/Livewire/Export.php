@@ -35,10 +35,10 @@ class Export extends Component
             new RegularStudentsJob(['date_from' => $this->date_from, 'date_to' => $this->date_to, 'file_name' => $this->file_name]),
         ])->onQueue('export-regular-students')->dispatch();
 
-        $files =   Storage::allFiles('public/regular-students-reports');
+        // $files =   Storage::allFiles('public/regular-students-reports');
 
-        // Delete Files
-        Storage::delete($files);
+        // // Delete Files
+        // Storage::delete($files);
 
         $this->batchId = $batch->id;
     }
@@ -54,7 +54,7 @@ class Export extends Component
 
     public function updateExportProgress()
     {
-        $this->exportFinished = Storage::exists('public/regular-students-reports/' . $this->file_name);
+        $this->exportFinished = Storage::exists('public/' . $this->file_name);
 
         if ($this->exportFinished) {
             $this->exporting = false;
@@ -63,7 +63,7 @@ class Export extends Component
 
     public function downloadExport()
     {
-        return Storage::download('public/regular-students-reports/' . $this->file_name);
+        return Storage::download('public/' . $this->file_name);
     }
 
     public function render()
