@@ -27,6 +27,6 @@ class RegularStudentsJob implements ShouldQueue
      */
     public function handle()
     {
-        (new RegularStudentsReport($this->data))->queue('public/regular-students-reports/' . $this->data['file_name'])->onQueue('export-regular-students')->allOnQueue('export-regular-students');
+        (new RegularStudentsReport($this->data))->queue('public/' . $this->data['file_name'])->onQueue('export-regular-students')->allOnQueue('export-regular-students');
     }
 }
