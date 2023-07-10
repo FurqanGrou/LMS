@@ -147,6 +147,8 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
     Route::get('export-top-tracker-reports', 'TopTrackerController@exportTopTrackerIndex')->name('export-top-tracker-reports');
     Route::post('export-top-tracker-reports', 'TopTrackerController@exportReports')->name('export-top-tracker-reports');
 
+    Route::get('enable-teachers-update', 'AdminController@enableTeachersUpdate')->name('enable_teachers_update.index');
+    Route::post('enable-teachers-update', 'AdminController@enableTeachersUpdateStore')->name('enable_teachers_update.store');
 });
 
 Route::get('clear-cache', function (){

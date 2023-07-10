@@ -810,7 +810,16 @@ function disableRecord($date, $day)
 
     if(Auth::guard('teacher_web')->check()){
 
+        $previous_month    = Carbon::now()->subMonth();
         $teacher_email = auth()->user()->email;
+
+        if (auth()->user()->update_previous_month){
+            if( ($today->month == '1') && ($date->year == $today->subYear()) && ($previous_month->month == $date->month ) ){
+                return '';
+            }elseif( ($today->month != '1') && ($date->year == $today->year) && ($previous_month->month == $date->month ) ){
+                return '';
+            }
+        }
 
         $class_number = Cache::remember('get_class_number.' . request()->student_id, 60 * 60 * 24, function() {
             return \App\User::query()->find(request()->student_id)->class_number;
