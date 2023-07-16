@@ -70,12 +70,22 @@ class ReportsExport implements FromCollection, WithHeadings, WithStyles, ShouldA
             $reports->where('reports.mail_status', '=', $this->mail_status);
         }
 
-        //study_type (0 => furqan_group, 1 => iksab, 2 => egypt)
-        if (in_array($this->study_type, [0, 1, 2])){
-            $reports->where('users.study_type', '=', $this->study_type);
+        $user_type = auth()->user()->user_type;
+
+        if ($user_type == 'iksab' || ($user_type == 'super_admin' && $this->study_type == 1) ){
+            $reports->where('users.study_type', '=', '1');
+        }elseif($user_type == 'furqan_group' || ($user_type == 'super_admin' && $this->study_type == 0) ){
+            $reports->where('users.study_type', '=', '0');
         }
 
-        return $reports->get();
+        return $reports->get()->map(function ($report) {
+            return collect($report)->map(function ($value) {
+                if (strpos($value, '=') === 0) {
+                    return "'" . $value;
+                }
+                return $value;
+            })->toArray();
+        });
     }
 
     public function headings(): array

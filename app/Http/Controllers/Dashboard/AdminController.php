@@ -202,4 +202,32 @@ class AdminController extends Controller
 
         return response()->json(['status' => 'success'], 200);
     }
+
+    public function enableTeachersUpdate() {
+        $teachers = Teacher::query()->get();
+        return view('admins.settings.enable_teachers_update', compact('teachers'));
+    }
+
+    public function enableTeachersUpdateStore(Request $request)
+    {
+        Teacher::query()->update([
+            'update_previous_month' => '0',
+        ]);
+
+        if ($request->teachers_id == '-1') {
+            Teacher::query()->update([
+                'update_previous_month' => '1',
+            ]);
+        }else{
+            Teacher::query()->whereIn('id', $request->teachers_id)->update([
+                'update_previous_month' => '1',
+            ]);
+        }
+
+        session()->flash('success', 'تم التحديث بنجاح');
+
+        return redirect()->back();
+    }
+
+
 }

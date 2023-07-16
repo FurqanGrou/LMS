@@ -18,14 +18,12 @@ class DropoutStudentController extends Controller
     {
         return $dropoutStudentDatatable->render('admins.dropout_student.index');
     }
-
     public function show(User $user)
     {
         $studentDetailsDatatable = new DropoutStudentDetailsDatatable();
 
         return $studentDetailsDatatable->with(['student_id' => $user->id])->render('admins.dropout_student.show', ['student_name' => $user->name]);
     }
-
     public function sendAlert(Request $request)
     {
         $request->validate([

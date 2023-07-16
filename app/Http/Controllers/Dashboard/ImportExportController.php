@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Exports\CommitmentReport;
 use App\Exports\ExamRequestsExport;
 use App\Exports\MonthlyScoresExport;
+use App\Exports\OneTimeExport;
 use App\Exports\RegularStudentsReport;
 use App\Http\Controllers\Controller;
 use App\Imports\ChapterImport;
@@ -195,6 +196,13 @@ class ImportExportController extends Controller
     public function exportRegularStudentsReport()
     {
         return view('admins.import_export.export_regular_students_report');
+    }
+
+    public function exportOneTime()
+    {
+        $file_name = "2023-monthly-scores-all.xlsx";
+
+        return Excel::download(new OneTimeExport(), $file_name);
     }
 
 }

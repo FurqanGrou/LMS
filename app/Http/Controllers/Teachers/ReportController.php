@@ -98,7 +98,11 @@ class ReportController extends Controller
 
         $report  = Report::query()->where('student_id', '=', $request->student_id)->where('created_at', 'LIKE', $request->created_at . ' %')->first();
 
+        $current_month_year = Carbon::today()->format('Y-m-d');
+        $report_month_year = $request->created_at;
+
         if($request->type == 'lessons'){
+
             $report = Report::updateOrCreate(
                 [
                     'student_id' => $request->student_id,
@@ -125,6 +129,7 @@ class ReportController extends Controller
                     'sitting_status' => $request->sitting_status == 'true' ? '1' : '0',
                     'camera_status' => $request->camera_status == 'true' ? '1' : '0',
                     'mail_status' => 0,
+                    'teacher_updated_at' => ($current_month_year == $report_month_year) ? null : Carbon::now(),
                 ]
             );
         }
@@ -154,6 +159,7 @@ class ReportController extends Controller
                         'total' => $total,
                         'mail_status' => 0,
                         'class_number' => getStudentDetails(request()->student_id)->class_number,
+                        'teacher_updated_at' => ($current_month_year == $report_month_year) ? null : Carbon::now(),
                     ]
                 );
             }elseif($request->notes_to_parent == 'دوام 3 أيام' || $request->notes_to_parent == '3 days work'){
@@ -173,6 +179,7 @@ class ReportController extends Controller
                         'total' => $total,
                         'mail_status' => 0,
                         'class_number' => getStudentDetails(request()->student_id)->class_number,
+                        'teacher_updated_at' => ($current_month_year == $report_month_year) ? null : Carbon::now(),
                     ]
                 );
             }elseif($request->notes_to_parent == 'نشاط لا صفي' || $request->notes_to_parent == 'Extracurricular Activity'){
@@ -200,6 +207,7 @@ class ReportController extends Controller
                         'total' => $default_grade['lesson_grade'] + $default_grade['last_5_pages_grade'] + $default_grade['daily_revision_grade'] + $default_grade['behavior_grade'],
                         'mail_status' => 0,
                         'class_number' => getStudentDetails(request()->student_id)->class_number,
+                        'teacher_updated_at' => ($current_month_year == $report_month_year) ? null : Carbon::now(),
                     ]
                 );
             }else{
@@ -227,6 +235,7 @@ class ReportController extends Controller
                         'total' => $total,
                         'mail_status' => 0,
                         'class_number' => getStudentDetails(request()->student_id)->class_number,
+                        'teacher_updated_at' => ($current_month_year == $report_month_year) ? null : Carbon::now(),
                     ]
                 );
             }

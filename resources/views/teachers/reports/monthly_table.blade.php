@@ -344,15 +344,15 @@
                             </tr>
 
                             @for($day=1; $day < \Carbon\Carbon::create()->year($year)->month($month)->daysInMonth + 1; ++$day)
-                                <tr style="min-height: 45px;height: 45px;max-height: 45px;" class="{{ str_contains(\Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l') ,'Friday') ? 'custom-border' : ''  }} {{ getCurrentDayClass($now, $day) . ' ' .getTodayMailStatusClass($now, $day, request()->student_id) }}">
+                                <tr style="min-height: 45px;height: 45px;max-height: 45px;" class="{{ str_contains(\Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l') ,'Friday') ? 'custom-border' : ''  }} {{ getCurrentDayClass($day, $now) . ' ' .getTodayMailStatusClass($now, $day, request()->student_id) }}">
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;padding-left: 5px;padding-right: 5px;font-weight: bold">{{ $day }}</td>
-                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;padding-left: 5px;padding-right: 5px;background: #C6E0B4;font-weight: bold;font-size: 12px;color: black;" class="day-name {{ getCurrentDayClass($now, $day) }}">{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->translatedFormat('l') }}</td>
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;padding-left: 5px;padding-right: 5px;background: #C6E0B4;font-weight: bold;font-size: 12px;color: black;" class="day-name {{ getCurrentDayClass($day, $now) }}">{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->translatedFormat('l') }}</td>
 
                                     {{-- start new columns--}}
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 40px;">
                                         <ol class="switches">
                                             <li>
-                                                <input style="width: 100%;" id="sitting_status{{ $day }}" type="checkbox" checked name="sitting_status[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($now, $day) }} checkbox-icon">
+                                                <input style="width: 100%;" id="sitting_status{{ $day }}" type="checkbox" checked name="sitting_status[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($day, $now) }} checkbox-icon">
                                                 <label for="sitting_status{{ $day }}">
                                                     <span></span>
                                                 </label>
@@ -362,7 +362,7 @@
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 40px;">
                                         <ol class="switches">
                                             <li>
-                                                <input style="width: 100%;" id="camera_status{{ $day }}"  type="checkbox" checked name="camera_status[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($now, $day) }} checkbox-icon">
+                                                <input style="width: 100%;" id="camera_status{{ $day }}"  type="checkbox" checked name="camera_status[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($day, $now) }} checkbox-icon">
                                                 <label for="camera_status{{ $day }}">
                                                     <span></span>
                                                 </label>
@@ -370,17 +370,17 @@
                                         </ol>
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 40px;">
-                                        <input style="width: 100%;" type="time" name="entry_time[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="time" name="entry_time[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 30px;">
-                                        <input style="width: 100%;" type="time" name="exit_time[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="time" name="exit_time[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
                                     {{-- end new columns--}}
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;width: 100px">
                                         <input type="hidden" name="date" {{ disableRecord($now, $day) }} value="{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l d-m-Y') }}">
                                         <input type="hidden" name="created_at" {{ disableRecord($now, $day) }} value="{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('Y-m-d') }}">
 
-                                        <select name="new_lesson[]" {{ disableRecord($now, $day) }} id="new_lesson" class="{{ getCurrentDayClass($now, $day) }} select2 js-select2-tags" style="width: 100%;height: 100%">
+                                        <select name="new_lesson[]" {{ disableRecord($now, $day) }} id="new_lesson" class="{{ getCurrentDayClass($day, $now) }} select2 js-select2-tags" style="width: 100%;height: 100%">
                                             <option value=""></option>
                                             @foreach($new_lessons as $new_lesson)
                                                 <option value="{{ $new_lesson->name }}">{{ $new_lesson->name }}</option>
@@ -388,16 +388,16 @@
                                         </select>
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
-                                        <input style="width: 100%;" type="text" name="new_lesson_from[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="text" name="new_lesson_from[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
-                                        <input style="width: 100%;" type="text" name="new_lesson_to[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="text" name="new_lesson_to[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
-                                        <input style="width: 100%;" type="text" name="last_5_pages[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="text" name="last_5_pages[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
-                                        <select name="daily_revision[]" {{ disableRecord($now, $day) }} id="daily_revision" class="{{ getCurrentDayClass($now, $day) }} select2 js-select2-daily-revision-tags" style="width: 100%;height: 100%">
+                                        <select name="daily_revision[]" {{ disableRecord($now, $day) }} id="daily_revision" class="{{ getCurrentDayClass($day, $now) }} select2 js-select2-daily-revision-tags" style="width: 100%;height: 100%">
                                             <option value=""></option>
                                             @foreach($daily_revision as $revision)
                                                 <option value="{{ $revision->name }}">{{ $revision->name }}</option>
@@ -405,22 +405,22 @@
                                         </select>
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 30px;">
-                                        <input style="width: 100%;" type="text" name="daily_revision_from[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="text" name="daily_revision_from[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 30px;">
-                                        <input style="width: 100%;" type="text" name="daily_revision_to[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="text" name="daily_revision_to[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 25px;">
-                                        <input style="width: 100%;" type="text" name="mistake[]" value="" title="" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="text" name="mistake[]" value="" title="" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 25px;">
-                                        <input style="width: 100%;" type="text" name="alert[]" value="" title="" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="text" name="alert[]" value="" title="" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; width: 25px;">
-                                        <input style="width: 100%;" type="text" name="number_pages[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="text" name="number_pages[]" {{ disableRecord($now, $day) }} value="" title="" class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
-                                        <input style="width: 100%;" type="text" name="listener_name[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="text" name="listener_name[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
                                 </tr>
                                 @endfor
@@ -448,22 +448,22 @@
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;">
                                         <input type="hidden" name="date" {{ disableRecord($now, $day) }} value="{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('l d-m-Y') }}">
                                         <input type="hidden" name="created_at" {{ disableRecord($now, $day) }} value="{{ \Carbon\Carbon::createFromDate($now->year, $now->month, $day)->format('Y-m-d') }}">
-                                        <input style="width: 100%;" type="text" name="lesson_grade[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="text" name="lesson_grade[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; max-width: 50px">
-                                        <input style="width: 100%;" type="text" name="last_5_pages_grade[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="text" name="last_5_pages_grade[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; max-width: 50px">
-                                        <input style="width: 100%;" type="text" name="daily_revision_grade[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="text" name="daily_revision_grade[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
                                     <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px; max-width: 50px">
-                                        <input style="width: 100%;" type="text" name="behavior_grade[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($now, $day) }}">
+                                        <input style="width: 100%;" type="text" name="behavior_grade[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} value="" title="" class="{{ getCurrentDayClass($day, $now) }}">
                                     </td>
-                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;" class="{{ getCurrentDayClass($now, $day) }}">
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;" class="{{ getCurrentDayClass($day, $now) }}">
                                         <span class="total"></span>
                                     </td>
-                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;" class="{{ getCurrentDayClass($now, $day) }}">
-                                        <select name="notes_to_parent[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} id="" class="{{ getCurrentDayClass($now, $day) }} select2" style="width: 100%;height: 100%">
+                                    <td style="min-height: 45px;height: 45px;max-height: 45px; text-align:center;font-size:10px;" class="{{ getCurrentDayClass($day, $now) }}">
+                                        <select name="notes_to_parent[]" {{ disableRecord($now, $day) . ' ' . disableRecordGrade($now, $day) }} id="" class="{{ getCurrentDayClass($day, $now) }} select2" style="width: 100%;height: 100%">
                                             <option value=""></option>
                                             <option value="الطالب غائب">الطالب غائب</option>
                                             <option value="Absent Student">Absent Student</option>

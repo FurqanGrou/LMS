@@ -754,7 +754,7 @@ function getRate($percentage, $lang){
     return $message[$lang];
 }
 
-function getCurrentDayClass($now = null, $day)
+function getCurrentDayClass($day, $now = null)
 {
     if(is_null($now)){
         $now = Carbon::now();
@@ -810,16 +810,20 @@ function disableRecord($date, $day)
 
     if(Auth::guard('teacher_web')->check()){
 
+        $previous_month    = Carbon::now()->subMonth() ;
         $teacher_email = auth()->user()->email;
+
+        if (auth()->user()->update_previous_month){
+            if( ($today->month == '1') && ($date->year == $today->subYear()) && ($previous_month->month == $date->month ) ){
+                return '';
+            }elseif( ($today->month != '1') && ($date->year == $today->year) && ($previous_month->month == $date->month ) ){
+                return '';
+            }
+        }
 
         $class_number = Cache::remember('get_class_number.' . request()->student_id, 60 * 60 * 24, function() {
             return \App\User::query()->find(request()->student_id)->class_number;
         });
-
-//        $role = \App\ClassesTeachers::query()
-//                ->where('teacher_email', '=', $teacher_email)
-//                ->where('class_number', '=', $class_number)
-//                ->first()->role ?? '';
 
         $role =  Cache::remember('role.' . $teacher_email . $class_number, 60 * 60 * 24, function() use($teacher_email, $class_number) {
             return  \App\ClassesTeachers::query()
@@ -1209,3 +1213,4 @@ function getStudentTime($time, $type)
 
     return ($exit_hour) . ":" . $exit_minutes;
 }
+

@@ -28,10 +28,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a47350e6-8576-4c66-b281-f87cf7605acb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/livewire.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/livewire.php" afterDir="false" />
-    </list>
+    <list default="true" id="a47350e6-8576-4c66-b281-f87cf7605acb" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,11 +40,15 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/app/Report.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration">
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\laragon\bin\php\php-8.1.10-Win32-vs16-x64\php.exe">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
@@ -196,22 +197,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../freelancing/مشروع المدهون/backend" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
-    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;G:/Furqan Group/lms_reports_master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\Furqan Group\lms_hatim\resources\views\admins\settings" />
       <recent name="B:\Furqan Group\lms_hatim\storage\app\public\regular-students-reports" />
       <recent name="B:\Furqan Group\lms_hatim\app\Imports" />
       <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\import_export" />
       <recent name="B:\Furqan Group\lms_hatim\app\Exports" />
-      <recent name="B:\Furqan Group\lms_hatim\resources\views\admins\audits" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="B:\Furqan Group\lms_hatim\resources\views" />
@@ -607,7 +613,51 @@
       <workItem from="1676118649730" duration="6181000" />
       <workItem from="1676146429914" duration="6008000" />
       <workItem from="1676195460523" duration="88000" />
-      <workItem from="1676199982337" duration="2274000" />
+      <workItem from="1676199982337" duration="3491000" />
+      <workItem from="1676289526598" duration="703000" />
+      <workItem from="1676379614635" duration="1716000" />
+      <workItem from="1676560619119" duration="1980000" />
+      <workItem from="1676722685505" duration="1261000" />
+      <workItem from="1676878481696" duration="1490000" />
+      <workItem from="1676890355170" duration="1158000" />
+      <workItem from="1676968715414" duration="35000" />
+      <workItem from="1676995074336" duration="1857000" />
+      <workItem from="1677073945643" duration="602000" />
+      <workItem from="1677153252190" duration="41000" />
+      <workItem from="1677775257867" duration="693000" />
+      <workItem from="1678520456999" duration="682000" />
+      <workItem from="1678710922110" duration="11000" />
+      <workItem from="1678879589991" duration="708000" />
+      <workItem from="1679303957912" duration="618000" />
+      <workItem from="1679410930089" duration="683000" />
+      <workItem from="1680180545491" duration="3125000" />
+      <workItem from="1680825650582" duration="3026000" />
+      <workItem from="1680943817312" duration="33000" />
+      <workItem from="1681044662821" duration="642000" />
+      <workItem from="1681168487442" duration="2769000" />
+      <workItem from="1682527491878" duration="2334000" />
+      <workItem from="1682941986516" duration="1246000" />
+      <workItem from="1683063586079" duration="2671000" />
+      <workItem from="1683108764534" duration="73000" />
+      <workItem from="1684759182516" duration="3335000" />
+      <workItem from="1684918621894" duration="570000" />
+      <workItem from="1684943724188" duration="890000" />
+      <workItem from="1685278567711" duration="13000" />
+      <workItem from="1685362597944" duration="704000" />
+      <workItem from="1685452610963" duration="1385000" />
+      <workItem from="1685537723302" duration="40000" />
+      <workItem from="1685559534447" duration="795000" />
+      <workItem from="1685983280020" duration="1007000" />
+      <workItem from="1686729207988" duration="29000" />
+      <workItem from="1688204954915" duration="1527000" />
+      <workItem from="1688649897914" duration="3414000" />
+      <workItem from="1688764183769" duration="404000" />
+      <workItem from="1688831776822" duration="7694000" />
+      <workItem from="1688937045743" duration="536000" />
+      <workItem from="1688971905556" duration="2719000" />
+      <workItem from="1689009912258" duration="592000" />
+      <workItem from="1689014816497" duration="1692000" />
+      <workItem from="1689517627547" duration="312000" />
     </task>
     <servers />
   </component>
@@ -636,40 +686,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="488" y="46" key="#com.intellij.ide.util.MemberChooser" timestamp="1675963500703">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="488" y="46" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1675963500703" />
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1676054963164">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1676054963164" />
-    <state x="352" y="119" key="FileChooserDialogImpl" timestamp="1676108098263">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="352" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1676108098263" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1676158551385">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1676158551385" />
-    <state x="390" y="97" width="585" height="534" key="find.popup" timestamp="1676057358147">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="390" y="97" width="585" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1676057358147" />
-    <state x="526" y="125" key="refactoring.ChangeSignatureDialog" timestamp="1676014500904">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="526" y="125" key="refactoring.ChangeSignatureDialog/0.0.1366.728@0.0.1366.728" timestamp="1676014500904" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1673812307095">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1673812307095" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1676215400062">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1676215400062" />
   </component>
 </project>

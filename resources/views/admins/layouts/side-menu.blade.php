@@ -48,6 +48,10 @@
                             <i class="la la-send"></i>
                             تفعيل الارسال للشهر السابق
                         </a>
+                        <a class="menu-item" href="{{ route('admins.enable_teachers_update.index') }}" data-i18n="nav.templates.vert.classic_menu">
+                            <i class="la la-send"></i>
+                            تفعيل تعديلات الشهر السابق
+                        </a>
                     </li>
                 </ul>
             </li>
