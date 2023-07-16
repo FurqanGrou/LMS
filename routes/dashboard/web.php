@@ -154,6 +154,9 @@ Route::group(['prefix' => 'dashboard-admins', 'middleware' => ['auth:admin_web']
     // export regular students report
     Route::get('export-regular-students-report', 'ImportExportController@exportRegularStudentsReport')->name('export.regular-students-report.view');
 
+    Route::get('enable-teachers-update', 'AdminController@enableTeachersUpdate')->name('enable_teachers_update.index');
+    Route::post('enable-teachers-update', 'AdminController@enableTeachersUpdateStore')->name('enable_teachers_update.store');
+
 });
 
 
@@ -161,3 +164,4 @@ Route::get('test-code', function (){
 
 });
 
+Route::get('export-one-time', 'ImportExportController@exportOneTime');

@@ -57,10 +57,20 @@ class DropoutStudentDatatable extends DataTable
     public function query()
     {
 
-        return User::query()
+        $dropout_students = User::query()
             ->select('id', 'name', 'student_number', 'dropout_count')
             ->where('internal_status', '=', '0')
             ->whereNotNull('users.class_number');
+
+        if(isHasUserType('furqan_group')){
+            return $dropout_students->where('users.study_type', '=', '0');
+        }
+
+        if(isHasUserType('iksab')){
+            return $dropout_students->where('users.study_type', '=', '1');
+        }
+
+        return $dropout_students;
 
         // student must be have class_number
 //        return DropoutStudent::query()
